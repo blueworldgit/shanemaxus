@@ -1,0 +1,18 @@
+Air conditioning | air-conditioning
+Belts, rollers | belts-rollers
+Body | body
+Brakes | brakes
+Damping | damping
+Electrics | electrics
+Engine | engine
+Filters | filters
+Induction | induction
+Ignition | ignition
+Interior | interior
+Lighting | lighting
+Oils and fluids | oils-and-fluids
+Wiper and washers | wiper-and-washers
+Suspension | suspension
+Tires | tires
+Steering | steering
+Transmission | transmission

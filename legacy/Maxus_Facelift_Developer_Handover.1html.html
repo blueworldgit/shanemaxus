@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maxus Van Parts — Developer Handover Report</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; }
+  .container { max-width: 960px; margin: 0 auto; background: #fff; }
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; padding: 40px; }
+  .header h1 { font-size: 28px; margin-bottom: 8px; }
+  .header .subtitle { color: #F29F05; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+  .header .meta { font-size: 13px; color: rgba(255,255,255,0.7); }
+  .header .meta span { display: inline-block; margin-right: 20px; }
+  .header .meta a { color: #F29F05; text-decoration: none; }
+  .content { padding: 30px 40px 50px; }
+  h2 { font-size: 22px; color: #1a1a2e; margin: 35px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #F29F05; }
+  h2:first-child { margin-top: 0; }
+  h3 { font-size: 16px; color: #034C8C; margin: 25px 0 10px; }
+  h4 { font-size: 14px; color: #555; margin: 18px 0 8px; }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 0 0 12px 24px; }
+  li { margin-bottom: 4px; }
+  strong { color: #1a1a2e; }
+  code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-family: 'Consolas', 'Monaco', monospace; font-size: 12px; color: #BF3617; }
+  pre { background: #1a1a2e; color: #e0e0e0; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; font-size: 12px; line-height: 1.5; }
+  pre code { background: none; color: inherit; padding: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 13px; }
+  th { background: #1a1a2e; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+  tr:hover td { background: #fafafa; }
+  .callout { background: #fff8e6; border-left: 4px solid #F29F05; padding: 14px 18px; margin: 16px 0; border-radius: 0 6px 6px 0; }
+  .callout-danger { background: #fef2f2; border-left-color: #BF3617; }
+  .callout-info { background: #eff6ff; border-left-color: #034C8C; }
+  .callout strong { display: block; margin-bottom: 4px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+  .badge-green { background: #dcfce7; color: #166534; }
+  .badge-red { background: #fef2f2; color: #991b1b; }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-orange { background: #fff7ed; color: #9a3412; }
+  .flow-diagram { background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin: 16px 0; font-family: monospace; font-size: 13px; white-space: pre; line-height: 1.8; overflow-x: auto; }
+  .section-num { color: #F29F05; font-weight: 700; margin-right: 4px; }
+  .toc { background: #f8f8f8; border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+  .toc h3 { color: #1a1a2e; margin: 0 0 12px; }
+  .toc ol { margin: 0; padding-left: 20px; }
+  .toc li { margin-bottom: 4px; }
+  .toc a { color: #034C8C; text-decoration: none; }
+  .toc a:hover { color: #F29F05; }
+  hr { border: none; border-top: 1px solid #eee; margin: 30px 0; }
+  .footer { background: #1a1a2e; color: rgba(255,255,255,0.5); padding: 20px 40px; font-size: 12px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="subtitle">Developer Handover Report</div>
+  <h1>Maxus Van Parts — Homepage Facelift</h1>
+  <div class="meta">
+    <span>Date: <strong style="color:#fff">11 March 2026</strong></span>
+    <span>Prepared by: <strong style="color:#fff">Jason Pink (ACS)</strong></span><br>
+    <span>Dev site: <a href="https://shane.maxusvanparts.co.uk/">shane.maxusvanparts.co.uk</a></span>
+    <span>Reference: <a href="https://maxusvanparts.acstestweb.co.uk/">maxusvanparts.acstestweb.co.uk</a></span>
+    <span>Server: acswebhosting4 (80.95.207.10)</span>
+  </div>
+</div>
+
+<div class="content">
+
+<div class="toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#overview">Project Overview</a></li>
+    <li><a href="#access">Server &amp; Access</a></li>
+    <li><a href="#code">Where ALL the Code Lives</a></li>
+    <li><a href="#db">Database Changes Made</a></li>
+    <li><a href="#sections">Code Structure — Section by Section</a></li>
+    <li><a href="#categories">WooCommerce Category Structure</a></li>
+    <li><a href="#flow">User Navigation Flow</a></li>
+    <li><a href="#issues">Known Issues &amp; Limitations</a></li>
+    <li><a href="#deploy">Deploy Process</a></li>
+    <li><a href="#deps">External Dependencies</a></li>
+    <li><a href="#changelog">Changelog</a></li>
+    <li><a href="#files">Files Summary</a></li>
+  </ol>
+</div>
+
+<!-- ============================================ -->
+<h2 id="overview"><span class="section-num">1.</span> Project Overview</h2>
+
+<p>The goal was to transform the homepage and navigation of <code>shane.maxusvanparts.co.uk</code> to match the design and functionality of <code>maxusvanparts.acstestweb.co.uk</code> (the source/reference site), while keeping the existing WooCommerce database structure intact.</p>
+
+<h3>What was built</h3>
+<ul>
+  <li>Homepage visual facelift (hero banner, vehicle carousel, Why Us section, custom footer)</li>
+  <li>Vehicle landing pages at <code>/vehicle/{slug}/</code> with organic DB-driven category grids</li>
+  <li>Department pages at <code>/department/{slug}/</code> aggregating vehicles by part category</li>
+  <li>VIN lookup (17-character VIN &rarr; vehicle identification)</li>
+  <li>Registration lookup (UK plate &rarr; vehicle identification via external API)</li>
+  <li>Replacement search bar (Model / Year / VIN / Registration)</li>
+  <li>Header dropdown lookup panels on nav menu items</li>
+</ul>
+
+<h3>What was NOT changed</h3>
+<ul>
+  <li>No WooCommerce products, categories, or core data were modified</li>
+  <li>No existing database tables or structures were altered</li>
+  <li>No plugins were added or removed</li>
+  <li>The existing Mobex parent theme was not touched</li>
+</ul>
+
+<!-- ============================================ -->
+<h2 id="access"><span class="section-num">2.</span> Server &amp; Access</h2>
+
+<table>
+  <tr><th>Item</th><th>Value</th></tr>
+  <tr><td>Server</td><td>acswebhosting4 <code>80.95.207.10</code> (Plesk)</td></tr>
+  <tr><td>SSH</td><td><code>ssh serveradmin@80.95.207.10</code> (sudo available)</td></tr>
+  <tr><td>Document root</td><td><code>/var/www/vhosts/maxusvanparts.co.uk/shane.maxusvanparts.co.uk/</code></td></tr>
+  <tr><td>WP file owner</td><td><code>maxusvanparts.co.uk_utsg9tlvo8m</code></td></tr>
+  <tr><td>WP table prefix</td><td><code>sQrrjq_</code></td></tr>
+  <tr><td>PHP version</td><td>8.1 (<code>/opt/plesk/php/8.1/bin/php</code>)</td></tr>
+  <tr><td>WP-CLI</td><td><code>sudo PATH=/opt/plesk/php/8.1/bin:$PATH wp --path=... --allow-root</code></td></tr>
+  <tr><td>Source site root</td><td><code>/var/www/vhosts/acstestweb.co.uk/maxusvanparts.acstestweb.co.uk/</code></td></tr>
+</table>
+
+<!-- ============================================ -->
+<h2 id="code"><span class="section-num">3.</span> Where ALL the Code Lives</h2>
+
+<div class="callout callout-info">
+  <strong>Everything is in ONE file:</strong>
+  <code>wp-content/themes/mobex-child/functions.php</code>
+</div>
+
+<ul>
+  <li><strong>Lines 1&ndash;106:</strong> Original child theme code (parent style enqueue, theme mod repair, REST API endpoint)</li>
+  <li><strong>Lines 107&ndash;2232:</strong> All facelift code (10 sections &mdash; see Section 5 below)</li>
+</ul>
+
+<p>There are <strong>no additional plugins, templates, JS files, or CSS files</strong>. All custom CSS, HTML, PHP, and JavaScript is injected via WordPress hooks (<code>wp_head</code>, <code>wp_footer</code>, <code>init</code>, <code>template_redirect</code>, <code>pre_get_posts</code>, <code>wp_ajax_*</code>).</p>
+
+<h4>Backups on server</h4>
+<ul>
+  <li><code>functions.php.bak</code> &mdash; Original child theme (3.3KB)</li>
+  <li><code>functions.php.bak2</code> &mdash; Pre-facelift version (27KB)</li>
+</ul>
+
+<h4>Local development copy</h4>
+<ul>
+  <li><code>C:\Users\JasonPink\maxusfacelift_functions.php</code> &mdash; Contains ONLY lines 107+ (the facelift code)</li>
+</ul>
+
+<!-- ============================================ -->
+<h2 id="db"><span class="section-num">4.</span> Database Changes Made</h2>
+
+<p>Only <strong>two types</strong> of DB changes were made. No products, categories, or WooCommerce tables were modified.</p>
+
+<h3>4a. Term Meta (vehicle mapping)</h3>
+
+<p>Added 4 meta fields to each of the 18 VIN categories under Maxus (parent term 3590):</p>
+
+<table>
+  <tr><th>Meta Key</th><th>Purpose</th><th>Example Value</th></tr>
+  <tr><td><code>vehicle_model</code></td><td>Human-readable name</td><td>Deliver 9 FWD LUX</td></tr>
+  <tr><td><code>vehicle_year</code></td><td>Year range</td><td>2021-2024</td></tr>
+  <tr><td><code>vehicle_image</code></td><td>Vehicle photo URL</td><td><code>https://maxusvanparts.acstestweb.co.uk/wp-content/uploads/vehicles/Deliver-9-FWD-LUX-LH---2021-2024.png</code></td></tr>
+  <tr><td><code>vehicle_slug</code></td><td>URL slug for landing page</td><td>deliver-9-fwd-lux</td></tr>
+</table>
+
+<p>Stored in <code>sQrrjq_termmeta</code> table. The 18 VIN terms are all children of term_id 3590 (Maxus) in the <code>product_cat</code> taxonomy.</p>
+
+<h4>Full VIN-to-Vehicle Mapping</h4>
+<table>
+  <tr><th>term_id</th><th>VIN Serial</th><th>Model</th><th>Year</th><th>Slug</th></tr>
+  <tr><td>3591</td><td>LSFAL11A4PA157987</td><td>Deliver 9 RWD LUX</td><td>2023-2024</td><td>deliver-9-rwd-lux</td></tr>
+  <tr><td>4021</td><td>LSFAL11A5MA087816</td><td>Deliver 9 RWD Chassis</td><td>2021-2024</td><td>deliver-9-rwd-chassis</td></tr>
+  <tr><td>4213</td><td>LSFAM11C4RA133898</td><td>T60 Diesel</td><td>2024-2026</td><td>t60-diesel-1</td></tr>
+  <tr><td>5317</td><td>LSFAM11C6RA133899</td><td>T60 Diesel</td><td>2024-2026</td><td>t60-diesel-2</td></tr>
+  <tr><td>5874</td><td>LSFAM11C6RA144501</td><td>New T60 Diesel</td><td>2024-2026</td><td>new-t60-diesel</td></tr>
+  <tr><td>4408</td><td>LSFAM120XNA160733</td><td>T90 EV</td><td>2022-2026</td><td>t90-ev</td></tr>
+  <tr><td>7101</td><td>LSH14C4C5NA129710</td><td>E Deliver 3</td><td>2020-2026</td><td>e-deliver-3</td></tr>
+  <tr><td>5511</td><td>LSH14J4C0RV121632</td><td>E Deliver 7</td><td>2024-2026</td><td>e-deliver-7</td></tr>
+  <tr><td>4741</td><td>LSH14J4CXMA165329</td><td>E Deliver 9</td><td>2021-2026</td><td>e-deliver-9</td></tr>
+  <tr><td>5666</td><td>LSH14J7C0SA082498</td><td>New Deliver 9 Diesel</td><td>2025-2026</td><td>new-deliver-9-diesel</td></tr>
+  <tr><td>4921</td><td>LSH14J7C2MA122115</td><td>Deliver 9 RWD STD</td><td>2021-2024</td><td>deliver-9-rwd-std</td></tr>
+  <tr><td>5124</td><td>LSH14J7C3RV123225</td><td>Deliver 7</td><td>2024-2026</td><td>deliver-7</td></tr>
+  <tr><td>6069</td><td>LSH14J7C4RV123458</td><td>Deliver 7 High Roof Diesel</td><td>2024-2026</td><td>deliver-7-high-roof-diesel</td></tr>
+  <tr><td>3789</td><td>LSH14J7C7MA114771</td><td>Deliver 9 FWD STD</td><td>2021-2024</td><td>deliver-9-fwd-std</td></tr>
+  <tr><td>6262</td><td>LSH14J7C9RV123360</td><td>Deliver 7 Low Roof Diesel</td><td>2024-2026</td><td>deliver-7-low-roof-diesel</td></tr>
+  <tr><td>6455</td><td>LSH14J7CXMA114599</td><td>Deliver 9 FWD LUX</td><td>2021-2024</td><td>deliver-9-fwd-lux</td></tr>
+  <tr><td>6669</td><td>LSH14JTC6FA621119</td><td>A80 Chassis</td><td>2015-2020</td><td>a80-chassis</td></tr>
+  <tr><td>6862</td><td>LSKG5GL16KA060062</td><td>V80 Van</td><td>2016-2020</td><td>v80-van</td></tr>
+</table>
+
+<h3>4b. Menu Item URLs</h3>
+
+<p><strong>Header menu</strong> (term_id 505, location <code>header-menu</code>):<br>
+Replaced 7 default Mobex menu items with: Vehicles, VIN Lookup, Registration Lookup, News, About, Contact, Trade Account.</p>
+
+<p><strong>Sidebar department menu</strong> (18 items, menu-item-8676 through 8780):<br>
+Updated all from <code>href="#"</code> to <code>/department/{slug}/</code> URLs:</p>
+
+<table>
+  <tr><th>menu-item-id</th><th>Department</th><th>URL</th></tr>
+  <tr><td>8676</td><td>Air conditioning</td><td>/department/air-conditioning/</td></tr>
+  <tr><td>8682</td><td>Belts, rollers</td><td>/department/belts-rollers/</td></tr>
+  <tr><td>8688</td><td>Body</td><td>/department/body/</td></tr>
+  <tr><td>8694</td><td>Brakes</td><td>/department/brakes/</td></tr>
+  <tr><td>8700</td><td>Damping</td><td>/department/damping/</td></tr>
+  <tr><td>8706</td><td>Electrics</td><td>/department/electrics/</td></tr>
+  <tr><td>8712</td><td>Engine</td><td>/department/engine/</td></tr>
+  <tr><td>8718</td><td>Filters</td><td>/department/filters/</td></tr>
+  <tr><td>8724</td><td>Induction</td><td>/department/induction/</td></tr>
+  <tr><td>8730</td><td>Ignition</td><td>/department/ignition/</td></tr>
+  <tr><td>8736</td><td>Interior</td><td>/department/interior/</td></tr>
+  <tr><td>8742</td><td>Lighting</td><td>/department/lighting/</td></tr>
+  <tr><td>8748</td><td>Oils and fluids</td><td>/department/oils-and-fluids/</td></tr>
+  <tr><td>8756</td><td>Wiper and washers</td><td>/department/wiper-and-washers/</td></tr>
+  <tr><td>8762</td><td>Suspension</td><td>/department/suspension/</td></tr>
+  <tr><td>8768</td><td>Tires</td><td>/department/tires/</td></tr>
+  <tr><td>8774</td><td>Steering</td><td>/department/steering/</td></tr>
+  <tr><td>8780</td><td>Transmission</td><td>/department/transmission/</td></tr>
+</table>
+
+<h3>4c. Rewrite Rules</h3>
+
+<p>Flushed into <code>sQrrjq_options</code> (option <code>rewrite_rules</code>):</p>
+
+<table>
+  <tr><th>Pattern</th><th>Target</th></tr>
+  <tr><td><code>^vehicle/([^/]+)/?$</code></td><td><code>index.php?mvp_vehicle=$matches[1]</code></td></tr>
+  <tr><td><code>^department/([^/]+)/?$</code></td><td><code>index.php?mvp_department=$matches[1]</code></td></tr>
+  <tr><td><code>^department/([^/]+)/([^/]+)/?$</code></td><td><code>index.php?mvp_department=$matches[1]&amp;mvp_dept_vehicle=$matches[2]</code></td></tr>
+</table>
+
+<div class="callout">
+  <strong>Important:</strong> If the functions.php code is removed or the theme is switched, these rewrite rules will be lost on the next flush. They must be re-flushed after any deployment that includes the rewrite registration code.
+</div>
+
+<!-- ============================================ -->
+<h2 id="sections"><span class="section-num">5.</span> Code Structure &mdash; Section by Section</h2>
+
+<p>All code is in <code>functions.php</code> starting at line 107:</p>
+
+<table>
+  <tr><th>Section</th><th>Lines</th><th>Hook</th><th>Description</th></tr>
+  <tr><td><strong>1. CSS</strong></td><td>107&ndash;437</td><td><code>wp_head</code> p999</td><td>Hides 8 Elementor sections, styles hero/carousel/Why Us/footer/products. Responsive breakpoints at 1024/768/480px.</td></tr>
+  <tr><td><strong>2. Hero + Carousel</strong></td><td>443&ndash;500</td><td><code>wp_footer</code> p1</td><td>JS injects hero banner (van photo) + horizontal scrollable vehicle carousel. DB-driven from term meta. Carousel cards link to <code>/vehicle/{slug}/</code>.</td></tr>
+  <tr><td><strong>3. Why Use Us</strong></td><td>507&ndash;547</td><td><code>wp_footer</code> p5</td><td>6-card grid with SVG icons: OEM Parts, Direct From Maxus, Prices, Delivery, Support, Returns.</td></tr>
+  <tr><td><strong>4. Footer</strong></td><td>552&ndash;637</td><td><code>wp_footer</code> p10</td><td>Dark navy footer (#1a1a2e), 6-column grid: About, Links, Vehicles, Support, Contact, Newsletter.</td></tr>
+  <tr><td><strong>5. Vehicle Pages</strong></td><td>639&ndash;899</td><td><code>init</code> + <code>template_redirect</code></td><td>Rewrite rules + template for <code>/vehicle/{slug}/</code>. Looks up VIN by <code>vehicle_slug</code> meta, renders category grid. Cards link to <code>/department/</code>.</td></tr>
+  <tr><td><strong>5b. Department Pages</strong></td><td>900+</td><td><code>init</code> + <code>template_redirect</code></td><td>Rewrite rules + template for <code>/department/{slug}/</code>. Iterates all VINs, finds matching child categories, renders vehicle cards linking to WooCommerce.</td></tr>
+  <tr><td><strong>6. Vehicle Data Helper</strong></td><td>~1050+</td><td>Function</td><td><code>mvp_get_vehicle_vins()</code> &mdash; reads all VIN term meta, returns array keyed by slug.</td></tr>
+  <tr><td><strong>7. VIN Lookup</strong></td><td>~1060+</td><td><code>wp_ajax_*</code></td><td>AJAX: validates 17-char VIN, exact match &rarr; pattern match &rarr; year narrowing. Returns <code>shop_url</code>.</td></tr>
+  <tr><td><strong>8. Reg Lookup</strong></td><td>~1130+</td><td><code>wp_ajax_*</code></td><td>AJAX: calls checkcardetails.co.uk API, decodes make/model/year/fuel, matches to vehicle. Electric/diesel aware.</td></tr>
+  <tr><td><strong>9. Header Panel</strong></td><td>~1200+</td><td><code>wp_footer</code> p20</td><td>Dropdown panel on nav menu items (VIN/Reg/full mode). Hover+click. Orange #F29F05 background.</td></tr>
+  <tr><td><strong>10. Search Bar</strong></td><td>~1885+</td><td><code>wp_footer</code> p25</td><td>Replaces Elementor 6-dropdown filter. Model/Year/VIN/Reg in single row. Red #BF3617 button. Mobile toggle.</td></tr>
+</table>
+
+<h3>Section 5: Vehicle Landing Pages &mdash; How It Works</h3>
+<ol>
+  <li><code>mvp_vehicle_rewrite_rules()</code> &mdash; Registers URL pattern <code>^vehicle/([^/]+)/?$</code></li>
+  <li><code>mvp_vehicle_query_vars()</code> &mdash; Registers <code>mvp_vehicle</code> query var</li>
+  <li><code>mvp_vehicle_prevent_404()</code> &mdash; Prevents WP from setting 404 on vehicle pages</li>
+  <li><code>mvp_vehicle_template_redirect()</code> &mdash; Looks up VIN term by <code>vehicle_slug</code> meta, loads child categories</li>
+  <li><code>mvp_vehicle_render_full_page()</code> &mdash; Outputs <code>get_header()</code>, custom HTML/CSS, <code>get_footer()</code></li>
+</ol>
+
+<p><strong>Category images</strong> use convention: <code>https://maxusvanparts.acstestweb.co.uk/wp-content/uploads/categories/{Category_Name}.png</code> (spaces replaced with underscores)</p>
+
+<h3>Section 7: VIN Lookup &mdash; Matching Logic</h3>
+<ol>
+  <li>Validates: 17 characters, starts with &ldquo;LS&rdquo; (Maxus manufacturer code)</li>
+  <li><strong>Exact match</strong> &mdash; full VIN matches a known VIN serial exactly</li>
+  <li><strong>Pattern match</strong> &mdash; first 8 characters (vehicle pattern), finds all VINs with same prefix</li>
+  <li><strong>Year narrowing</strong> &mdash; VIN position 10 = model year (A=2010, B=2011, &hellip; M=2021, N=2022, &hellip; S=2025)</li>
+</ol>
+
+<h3>Section 8: Registration Lookup &mdash; Flow</h3>
+<ol>
+  <li>Calls <code>checkcardetails.co.uk</code> API with registration plate</li>
+  <li>Extracts make, model, year, fuel type from response</li>
+  <li>Validates it&rsquo;s a Maxus/LDV/SAIC/MG vehicle</li>
+  <li>Matches model name to vehicle database using keyword matching</li>
+  <li>Handles electric vs diesel distinction (fuel type &ldquo;Electricity&rdquo; &rarr; E Deliver variants)</li>
+</ol>
+
+<!-- ============================================ -->
+<h2 id="categories"><span class="section-num">6.</span> WooCommerce Category Structure</h2>
+
+<div class="flow-diagram">Maxus (term 3590, 35,330 products)
+&#9500;&#9472;&#9472; LSFAL11A4PA157987 (term 3591, Deliver 9 RWD LUX)
+&#9474;   &#9500;&#9472;&#9472; Brakes (slug: brakes, 250 products)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Front Brakes (66)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Rear Brakes (20)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Brake Pipes (62)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Brake Modulator (28)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Brake Apply (26)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Brake Pedal (14)
+&#9474;   &#9474;   &#9492;&#9472;&#9472; Park Brake (34)
+&#9474;   &#9500;&#9472;&#9472; Steering
+&#9474;   &#9500;&#9472;&#9472; Suspension
+&#9474;   &#9500;&#9472;&#9472; Air Intake System
+&#9474;   &#9500;&#9472;&#9472; ... (~48 categories per VIN)
+&#9474;   &#9492;&#9472;&#9472; Wiper and Washer
+&#9500;&#9472;&#9472; LSFAL11A5MA087816 (Deliver 9 RWD Chassis)
+&#9500;&#9472;&#9472; ... (16 more VINs)
+&#9492;&#9472;&#9472; LSKG5GL16KA060062 (V80 Van)</div>
+
+<div class="callout callout-info">
+  <strong>Category slug pattern:</strong>
+  The first VIN's categories often have clean slugs (e.g. <code>brakes</code>). Subsequent VINs have VIN-appended slugs (e.g. <code>brakes-lsh14j7cxma114599</code>). Category <em>names</em> are clean across all VINs. Our department page matching uses <code>sanitize_title($cat-&gt;name)</code> which works regardless of slug format.
+</div>
+
+<!-- ============================================ -->
+<h2 id="flow"><span class="section-num">7.</span> User Navigation Flow</h2>
+
+<div class="flow-diagram"><strong>HOMEPAGE</strong>
+&#9500;&#9472;&#9472; Vehicle Carousel &#8594; click card &#8594; /vehicle/{slug}/
+&#9500;&#9472;&#9472; Search Bar &#8594; select model &#8594; /vehicle/{slug}/
+&#9500;&#9472;&#9472; Search Bar &#8594; enter VIN &#8594; AJAX &#8594; /vehicle/{slug}/
+&#9500;&#9472;&#9472; Search Bar &#8594; enter reg &#8594; AJAX &#8594; /vehicle/{slug}/
+&#9500;&#9472;&#9472; Sidebar Depts &#8594; click "Brakes" &#8594; /department/brakes/
+&#9492;&#9472;&#9472; Header Menu &#8594; hover VIN/Reg &#8594; dropdown &#8594; /vehicle/{slug}/
+
+<strong>VEHICLE PAGE</strong> (/vehicle/deliver-9-fwd-lux/)
+&#9500;&#9472;&#9472; Shows all part categories for this vehicle
+&#9492;&#9472;&#9472; Click "Brakes" &#8594; /department/brakes/
+
+<strong>DEPARTMENT PAGE</strong> (/department/brakes/)
+&#9500;&#9472;&#9472; Shows all vehicles with a "Brakes" category
+&#9492;&#9472;&#9472; Click vehicle &#8594; /product-category/maxus/{vin}/brakes/
+
+<strong>WOOCOMMERCE CATEGORY PAGE</strong>
+&#9492;&#9472;&#9472; Standard product listing for that vehicle's brakes</div>
+
+<!-- ============================================ -->
+<h2 id="issues"><span class="section-num">8.</span> Known Issues &amp; Limitations</h2>
+
+<h3>8a. Miscategorized Products <span class="badge badge-red">Pre-existing Data Issue</span></h3>
+
+<p>Some products are assigned to incorrect categories in the database. For example, &ldquo;BALL ASSEMBLY-FRONT SUSPENSION UPPER CONTROL ARM&rdquo; (a suspension part) is categorised under <strong>Brakes &gt; Front Brakes</strong> for several VINs but correctly under <strong>Suspension &gt; Front Suspension</strong> for others.</p>
+
+<div class="callout callout-danger">
+  <strong>Affected VINs (wrong category):</strong> LSH14J7CXMA114599, LSH14J7C9RV123360, LSH14J7C4RV123458<br>
+  <strong>Correct on:</strong> LSFAM11C6RA144501<br><br>
+  This is an upstream data import issue. Our code filters correctly by category &mdash; the category assignments themselves are wrong for some products.
+</div>
+
+<h3>8b. Sidebar Department Names Don&rsquo;t Match DB Categories <span class="badge badge-orange">Partial Match</span></h3>
+
+<table>
+  <tr><th>Sidebar Name</th><th>Matches DB?</th><th>Actual DB Categories</th></tr>
+  <tr><td>Brakes</td><td><span class="badge badge-green">YES</span></td><td>Brakes</td></tr>
+  <tr><td>Steering</td><td><span class="badge badge-green">YES</span></td><td>Steering</td></tr>
+  <tr><td>Suspension</td><td><span class="badge badge-green">YES</span></td><td>Suspension</td></tr>
+  <tr><td>Body</td><td><span class="badge badge-red">NO</span></td><td>Body Lower Structure, Body Upper Structure, Body Window, etc.</td></tr>
+  <tr><td>Engine</td><td><span class="badge badge-red">NO</span></td><td>Emission Exhaust System, Power Generation, etc.</td></tr>
+  <tr><td>Electrics</td><td><span class="badge badge-red">NO</span></td><td>Body Interior and Exterior Electronics, Power and Signaldistribution</td></tr>
+  <tr><td>Filters</td><td><span class="badge badge-red">NO</span></td><td>No direct match</td></tr>
+  <tr><td>Interior</td><td><span class="badge badge-red">NO</span></td><td>Interior Trim, Interior Lamp, Interior Acoustic Syetem</td></tr>
+  <tr><td>Lighting</td><td><span class="badge badge-red">NO</span></td><td>Front Lamp, Rear Lamp, Interior Lamp</td></tr>
+  <tr><td>All others</td><td><span class="badge badge-red">NO</span></td><td>Various technical OEM names</td></tr>
+</table>
+
+<p><strong>Fix options:</strong></p>
+<ol>
+  <li>Update sidebar menu item names/slugs to match actual DB category names</li>
+  <li>Add fuzzy/partial matching logic in the department page code</li>
+  <li>Create a mapping table (sidebar name &rarr; list of DB category names)</li>
+</ol>
+
+<h3>8c. Duplicate SKUs Across VINs <span class="badge badge-orange">Scaling Concern</span></h3>
+
+<p>The same physical part (same SKU) exists as separate WooCommerce products under different VIN categories. This creates:</p>
+<ul>
+  <li><strong>Scale concern:</strong> Adding another brand (e.g. MG) will multiply product count significantly</li>
+  <li><strong>Google SEO concern:</strong> SKU searches could land on any VIN&rsquo;s version. The page needs to show vehicle compatibility.</li>
+</ul>
+
+<div class="callout">
+  <strong>Recommendation:</strong> Consider whether a single-product-per-SKU approach with vehicle compatibility attributes would be more sustainable long-term, especially for multi-brand scaling.
+</div>
+
+<h3>8d. Vehicle Images Hosted on Source Site <span class="badge badge-blue">Pre Go-Live</span></h3>
+
+<p>All vehicle and category images reference the source site&rsquo;s uploads. These must be copied to production before go-live:</p>
+<ul>
+  <li><code>https://maxusvanparts.acstestweb.co.uk/wp-content/uploads/vehicles/</code></li>
+  <li><code>https://maxusvanparts.acstestweb.co.uk/wp-content/uploads/categories/</code></li>
+</ul>
+
+<h3>8e. Rewrite Rules Need Flushing After Deploy <span class="badge badge-blue">Operational</span></h3>
+
+<p>WordPress stores rewrite rules in the DB. If lost, re-flush:</p>
+<pre><code>flush_rewrite_rules();
+// or via WP-CLI:
+wp rewrite flush</code></pre>
+
+<!-- ============================================ -->
+<h2 id="deploy"><span class="section-num">9.</span> Deploy Process</h2>
+
+<pre><code># 1. Edit the facelift code locally
+code C:\Users\JasonPink\maxusfacelift_functions.php
+
+# 2. Get the original child theme header (lines 1-106)
+ssh serveradmin@80.95.207.10 "sudo head -106 /path/to/functions.php" > /tmp/mobex_child_head.php
+
+# 3. Combine original header + facelift code
+cat /tmp/mobex_child_head.php /path/to/maxusfacelift_functions.php > /tmp/mobex_child_new.php
+
+# 4. Upload and replace
+scp /tmp/mobex_child_new.php serveradmin@80.95.207.10:/tmp/
+ssh serveradmin@80.95.207.10 'sudo cp /tmp/mobex_child_new.php /path/to/functions.php \
+  && sudo chown USER:GROUP /path/to/functions.php'
+
+# 5. Flush rewrite rules (if rewrite rules changed)
+wp rewrite flush</code></pre>
+
+<!-- ============================================ -->
+<h2 id="deps"><span class="section-num">10.</span> External Dependencies</h2>
+
+<table>
+  <tr><th>Dependency</th><th>Purpose</th><th>Notes</th></tr>
+  <tr><td>checkcardetails.co.uk API</td><td>Registration plate lookup</td><td>API key in functions.php section 8</td></tr>
+  <tr><td>Source site image URLs</td><td>Vehicle + category photos</td><td>Must migrate to production uploads</td></tr>
+  <tr><td>Google Fonts (Oswald)</td><td>Hero banner typography</td><td>Loaded via CSS @import</td></tr>
+  <tr><td>Mobex parent theme</td><td>Base WooCommerce theme</td><td>Must remain active</td></tr>
+  <tr><td>Elementor + Elementor Pro</td><td>Page builder</td><td>Homepage relies on specific element IDs</td></tr>
+</table>
+
+<!-- ============================================ -->
+<h2 id="changelog"><span class="section-num">11.</span> Changelog (11 March 2026)</h2>
+
+<ol>
+  <li><strong>Homepage CSS injection</strong> &mdash; Hid 7 Elementor sections, added hero/carousel/footer/product styles</li>
+  <li><strong>Hero banner + vehicle carousel</strong> &mdash; JS-injected, DB-driven from term meta</li>
+  <li><strong>Why Use Us section</strong> &mdash; 6-card SVG icon grid</li>
+  <li><strong>Custom footer</strong> &mdash; Dark navy, 6-column layout</li>
+  <li><strong>Header menu items</strong> &mdash; Replaced 7 menu items to match target navigation</li>
+  <li><strong>Vehicle term meta</strong> &mdash; Added 4 meta fields to 18 VIN terms</li>
+  <li><strong>Vehicle landing pages</strong> &mdash; <code>/vehicle/{slug}/</code> with rewrite rules + custom template</li>
+  <li><strong>VIN lookup AJAX</strong> &mdash; 17-char VIN identification with exact/pattern/year matching</li>
+  <li><strong>Registration lookup AJAX</strong> &mdash; UK plate &rarr; checkcardetails API &rarr; vehicle matching</li>
+  <li><strong>Header dropdown panels</strong> &mdash; Hover/click panels on nav menu items</li>
+  <li><strong>Department pages</strong> &mdash; <code>/department/{slug}/</code> with cross-vehicle category aggregation</li>
+  <li><strong>Rewrite rules flush</strong> &mdash; Fixed 404s on vehicle/department pages</li>
+  <li><strong>Sidebar department menu URLs</strong> &mdash; Updated 18 items from <code>#</code> to <code>/department/</code> URLs</li>
+  <li><strong>Vehicle search bar</strong> &mdash; Replaced 6-dropdown filter with Model/Year/VIN/Reg bar</li>
+</ol>
+
+<!-- ============================================ -->
+<h2 id="files"><span class="section-num">12.</span> Files Summary</h2>
+
+<table>
+  <tr><th>Location</th><th>File</th><th>Purpose</th></tr>
+  <tr><td>Server (live)</td><td><code>wp-content/themes/mobex-child/functions.php</code></td><td>All facelift code (line 107+)</td></tr>
+  <tr><td>Server (backup)</td><td><code>functions.php.bak2</code></td><td>Pre-facelift original</td></tr>
+  <tr><td>Local</td><td><code>C:\Users\JasonPink\maxusfacelift_functions.php</code></td><td>Facelift code only (for editing)</td></tr>
+  <tr><td>Local</td><td><code>C:\Users\JasonPink\maxusfacelift_progress.md</code></td><td>Development log</td></tr>
+  <tr><td>Local</td><td><code>C:\Users\JasonPink\Maxus_Facelift_Developer_Handover.html</code></td><td>This report</td></tr>
+  <tr><td>Comparison server</td><td><code>/opt/maxusfacelift/compare.py</code></td><td>Visual comparison tool (192.168.10.213)</td></tr>
+  <tr><td>Comparison server</td><td><code>/opt/maxusfacelift/reports/</code></td><td>HTML reports with visual diffs</td></tr>
+  <tr><td>Comparison server</td><td><code>/opt/maxusfacelift/changelog.log</code></td><td>DB change log</td></tr>
+</table>
+
+</div>
+
+<div class="footer">
+  Maxus Van Parts &mdash; Developer Handover Report &mdash; Generated 11 March 2026 &mdash; Anglia Computer Solutions
+</div>
+
+</div>
+</body>
+</html>

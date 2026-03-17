@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxus Van Parts – Department Category Mapping</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f4f6f9;
+            color: #222;
+            padding: 40px 20px 80px;
+        }
+
+        header {
+            max-width: 960px;
+            margin: 0 auto 40px;
+            border-bottom: 3px solid #d32f2f;
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #d32f2f;
+        }
+
+        header p {
+            margin-top: 6px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .grid {
+            max-width: 960px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: #d32f2f;
+            color: #fff;
+            padding: 14px 18px;
+        }
+
+        .card-header h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .card-header .slug {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            margin-top: 3px;
+            font-family: monospace;
+        }
+
+        .card-body {
+            padding: 14px 18px;
+        }
+
+        .card-body ul {
+            list-style: none;
+        }
+
+        .card-body ul li {
+            font-size: 0.85rem;
+            color: #444;
+            padding: 4px 0;
+            border-bottom: 1px solid #f0f0f0;
+            line-height: 1.4;
+        }
+
+        .card-body ul li:last-child {
+            border-bottom: none;
+        }
+
+        footer {
+            max-width: 960px;
+            margin: 40px auto 0;
+            font-size: 0.8rem;
+            color: #999;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Sidebar mapping</h1>
+
+    <p>As our wordpress site has a more simplified sidebar structure, this document maps each sidebar section to the corresponding Oscar DB product categories. Very loose based on my limited understanding of automobiles please pass over to the client. I will change the mappings in the db as needed.</p> 
+
+</header>
+
+<div class="grid">
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Air Conditioning</h2>
+            <div class="slug">air-conditioning</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Air conditioning compressor</li>
+                <li>Coolant Plumbing and Hardware</li>
+                <li>Coolant Plumbing and Hardware-EV</li>
+                <li>Coolant Plumbing and Hardware-FCV</li>
+                <li>Coolant Plumbing and Hardware-PHEV</li>
+                <li>Coolant Pump And Inl and Otlt TubeThermostat-EURO 5-6</li>
+                <li>Coolant Pump And InlandOtltTube-D20</li>
+                <li>CoolantPlumbingandHardware</li>
+                <li>CoolantPumpAndInlandOtltTubeThermostat-EURO 4</li>
+                <li>Front Interior HVAC Airflow</li>
+                <li>FrontInteriorHVACAirflow</li>
+                <li>FrontInteriorHVACAirflow-Left rudder</li>
+                <li>FrontInteriorHVACAirflow-Right rudder</li>
+                <li>Rear Interior Airflow</li>
+                <li>Refrigerant Plumbing and Hardware</li>
+                <li>Refrigerant Plumbing and Hardware-Electric vehicle</li>
+                <li>Refrigerant Plumbing and Hardware-FCV</li>
+                <li>Refrigerant Plumbing and Hardware-PHEV</li>
+                <li>RefrigerantPlumbingandHardware</li>
+                <li>Interior Heating Pipe</li>
+                <li>Interior Heating Pipe-FCV</li>
+                <li>InteriorHeatingPipeFront</li>
+                <li>InteriorHeatingPipeRear</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Belts &amp; Rollers</h2>
+            <div class="slug">belts-rollers</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Safety Belts</li>
+                <li>Seat Belts</li>
+                <li>SAFETY BELTDRIVER、COPILOT</li>
+                <li>Side PanelandRoof Safety Belt</li>
+                <li>Second Row Seat Belts</li>
+                <li>Third Row Safety Belts</li>
+                <li>TimingDrive</li>
+                <li>Timing Drive-D20</li>
+                <li>DamperPulleyGearDrive</li>
+                <li>AccessoryAccessory Drive-EURO 5-6</li>
+                <li>AccessoryAccessoryDrive-EURO 4</li>
+                <li>AccessoryandAccessory Drive-D20</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Body</h2>
+            <div class="slug">body</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Body Attachment / BodyAttachment</li>
+                <li>Body Exterior Trim / BodyExteriorTrim</li>
+                <li>Body Interior and Exterior Electronics</li>
+                <li>Body Lower Structure / BodyLowerStructure</li>
+                <li>Body Lower Structure Garnish Trim</li>
+                <li>BodyUpperStructureGarnishTrim</li>
+                <li>Body accessories harness / BodyHarness</li>
+                <li>Outer Framing (left &amp; right side)</li>
+                <li>Inner Framing (left &amp; right side)</li>
+                <li>Roof Framing / RoofFraming</li>
+                <li>Rear Framing / Frame</li>
+                <li>Frame to Body Mounts</li>
+                <li>Fenders</li>
+                <li>Front Bumper / FrontBumper</li>
+                <li>Rear Bumper / RearBumper</li>
+                <li>Rear Panel</li>
+                <li>Front Side Closure / FrontSideClosure</li>
+                <li>Rear Side Closure / SideClosureGarnishTrim</li>
+                <li>Grille / Hood / Hood Lock</li>
+                <li>Endgate / Mud Guard / MudGuard</li>
+                <li>Wheelhouse Liner</li>
+                <li>Exterior Emblem-Decal-Nameplate</li>
+                <li>Window / SideWindows / Front-RearWindow</li>
+                <li>Assist Step</li>
+                <li>On Vehicle Attachments / On Vehicle Tools</li>
+                <li>Sound Insulation / Heat Insulation</li>
+                <li>Roof Trim / RoofTrim</li>
+                <li>Baffle Plate-Ware</li>
+                <li>MerchandiseTetherTreatment</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Brakes</h2>
+            <div class="slug">brakes</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Brake Apply / BrakeApplyandPlumbing</li>
+                <li>Brake Modulator / BrakeModulator</li>
+                <li>Brake Pedal / BrakePedals</li>
+                <li>Brake Pipes / Brake PipesABS / Brake PipesESP</li>
+                <li>BrakePlumbing</li>
+                <li>Front Brakes / FrontBrakeCorner</li>
+                <li>Rear Brakes / RearBrakeCorner</li>
+                <li>Park Brake (Left &amp; Right Hand)</li>
+                <li>Mechanical Parking Brakes</li>
+                <li>Rear Electric Parking Brakes</li>
+                <li>Rear Mechanical Brakes</li>
+                <li>Rear Disc Brake Corner</li>
+                <li>REAR AXLE ASM-BRK</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Damping</h2>
+            <div class="slug">damping</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Front Shock Absorber / FrontShockAbsorber</li>
+                <li>Rear Shock Absorber / RearShockAbsorber</li>
+                <li>Five Bar Linkage Spiral Spring Rear Suspension</li>
+                <li>Rear Leaf-spring Suspension</li>
+                <li>Powertrain Mounts</li>
+                <li>Powertrain Mounts-Electric vehicle</li>
+                <li>PowertrainMounts5MT</li>
+                <li>PowertrainMounts6MT-6AMT-9AT</li>
+                <li>PowertrainMounts6MT-AMT</li>
+                <li>EPT Mounts</li>
+                <li>Frame to Body Mounts</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Electrics</h2>
+            <div class="slug">electrics</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Air Bag Control Unit / AirBag / FrontAirBag</li>
+                <li>Antenna</li>
+                <li>Auxiliary Information Electronics</li>
+                <li>Battery and electric drive system</li>
+                <li>Battery and Electrical Energy Storage</li>
+                <li>Battery Harness / Battery Harnesses / BatteryCable</li>
+                <li>Body accessories harness / BodyHarness</li>
+                <li>Chassis Harness / ChassisHarness</li>
+                <li>Clusters</li>
+                <li>Door Harness / Door Wire Harnesses</li>
+                <li>Door Switches / Accessory Switches</li>
+                <li>Engine Compartment Fuse Box</li>
+                <li>Engine Management / EngineManagement</li>
+                <li>EPT System</li>
+                <li>Fusebox (Cabin &amp; Engine Compartment)</li>
+                <li>GroundDistribution</li>
+                <li>High Voltage Harness (EV, PHEV, FCV)</li>
+                <li>Infotainment System</li>
+                <li>Instrument Panel Harness</li>
+                <li>LightingSwitch</li>
+                <li>Motor controller and accessories</li>
+                <li>Electric Vehicle Control Unit</li>
+                <li>Multi-Function Column Switch</li>
+                <li>Park Distance Control System</li>
+                <li>Passive Entry Passive Start</li>
+                <li>Player / PowerInverter</li>
+                <li>POWER BATTERY ASM / power battery-EV</li>
+                <li>Power Outlet and Cigarette Lighter</li>
+                <li>Charging and Energy Storage</li>
+                <li>Sensor Harnesses (D20, EURO 4/5/6)</li>
+                <li>Vehicle Date Recorder</li>
+                <li>Vehicle Tele-Communication</li>
+                <li>Window Lift Switch</li>
+                <li>RoofHarness / SchoolbusElectronics</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Engine</h2>
+            <div class="slug">engine</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Engine ASM (D20, EURO 5-6)</li>
+                <li>Engine Accessory (D20, EURO 5-6)</li>
+                <li>Engine Management</li>
+                <li>Crankshaft Rod (D20 &amp; variants)</li>
+                <li>Cylinder Block &amp; Accessories</li>
+                <li>Cylinder Head</li>
+                <li>DamperPulleyGearDrive</li>
+                <li>EGR ASM (D20, EURO 4/5-6)</li>
+                <li>Emission &amp; Exhaust System</li>
+                <li>Exhaust Elbow &amp; Turbocharger (all variants)</li>
+                <li>Fuel Heating System</li>
+                <li>Fuel Plumbing and Hardware</li>
+                <li>Fuel System / Fuel Tank and Canister</li>
+                <li>Head Cover &amp; PCV</li>
+                <li>Intake &amp; Exhaust Manifold (all variants)</li>
+                <li>Lubricant</li>
+                <li>Oil Cooler &amp; Filter (all variants)</li>
+                <li>Oil Pumps &amp; Vacuum Pumps</li>
+                <li>SHAFT-BALANCER-D20</li>
+                <li>Sump &amp; Oil Suction Pipe (all variants)</li>
+                <li>Timing Drive</li>
+                <li>Urea system (D20, Euro VI)</li>
+                <li>Air Cleaner / Air Filter</li>
+                <li>Accessory Drive (all variants)</li>
+                <li>Coolant Pump &amp; Thermostat (all variants)</li>
+                <li>JE11 / XE11 engine sub-assembly codes</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Filters</h2>
+            <div class="slug">filters</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Air Filter / Air Cleaner / AirCleaner</li>
+                <li>Coarse Filter and HardwareCuba</li>
+                <li>Oil Cooler And Filter (EURO 5-6, D20, EURO 4)</li>
+                <li>Fuel Tank and Canister / FuelTankandCanister</li>
+                <li>Lubricant</li>
+                <li>Urea system (D20, Euro VI)</li>
+                <li>TNK FIL DR</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Induction</h2>
+            <div class="slug">induction</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Air Cleaner / Air Filter</li>
+                <li>Coarse Filter and HardwareCuba</li>
+                <li>Intake and Exhaust Manifold (EURO 4, EURO 5-6, D20)</li>
+                <li>EGR ASM (D20, EURO 4, EURO 5-6)</li>
+                <li>Exhaust Elbow &amp; Turbocharger (all variants)</li>
+                <li>JE11CG001 / XE11CG001 – MANIFOLD ASM-INT</li>
+                <li>JE11CU001 – LP-EGR intake pipe</li>
+                <li>JE11CS001 / XE11CS001 – EGR ASM</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Ignition</h2>
+            <div class="slug">ignition</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Ignition Switch and Key / IgnitionSwitchandKey</li>
+                <li>Engine Management / EngineManagement</li>
+                <li>Accessory Switch / Accessory Switches</li>
+                <li>Passive Entry Passive Start</li>
+                <li>Clusters</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Interior</h2>
+            <div class="slug">interior</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Driver Seat (LH &amp; RH, all variants)</li>
+                <li>Front Manual Seats (LH, RH)</li>
+                <li>Front Electrical Seats (LH, RH)</li>
+                <li>Front Double Seats / FRT DBL SEAT</li>
+                <li>Rear Row Seat / Rear Roll Double Seat</li>
+                <li>Second Row Seats</li>
+                <li>Third Row Safety Belts</li>
+                <li>Safety Belts / Seat Belts</li>
+                <li>Floor Console / Floor Trim</li>
+                <li>Door Trim (Front &amp; Rear)</li>
+                <li>Door Switches</li>
+                <li>Side Sliding Door &amp; Hardware</li>
+                <li>Infotainment System / Player</li>
+                <li>Instrument Panel &amp; Crossmember (LHD &amp; RHD)</li>
+                <li>Interior Lamp</li>
+                <li>Power Outlet and Cigarette Lighter</li>
+                <li>Window Lift Switch</li>
+                <li>Speaker</li>
+                <li>Roof Trim</li>
+                <li>Side Trim</li>
+                <li>Sound Insulation / Heat Insulation</li>
+                <li>Assist Step</li>
+                <li>Seat layout reference codes (JE421 series)</li>
+                <li>Schoolbus seat configurations</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Lighting</h2>
+            <div class="slug">lighting</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Front Lamp / FrontLamp</li>
+                <li>Interior Lamp / InteriorLamp</li>
+                <li>Rear Lamp / RearLamp</li>
+                <li>LightingSwitch</li>
+                <li>LSH14C4C5NA129710</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Oils &amp; Fluids</h2>
+            <div class="slug">oils-and-fluids</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Fluids and Lubrications / FluidsandLubrications</li>
+                <li>Lubricant</li>
+                <li>Urea system</li>
+                <li>Urea system-D20</li>
+                <li>Urea system-Euro VI</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Wiper &amp; Washers</h2>
+            <div class="slug">wiper-and-washers</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Wiper (LHD &amp; RHD)</li>
+                <li>Front Wiper</li>
+                <li>Front Washer</li>
+                <li>Washer / Washer System</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Suspension</h2>
+            <div class="slug">suspension</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Front Suspension / FrontSuspension</li>
+                <li>Rear Suspension / RearSuspension</li>
+                <li>Front Sub-frame / FrontSub-frame</li>
+                <li>Front Shock Absorber / FrontShockAbsorber</li>
+                <li>Rear Shock Absorber / RearShockAbsorber</li>
+                <li>Five Bar Linkage Spiral Spring Rear Suspension</li>
+                <li>Rear Leaf-spring Suspension</li>
+                <li>Front Drive Axle</li>
+                <li>Front Half Shaft / Front Half Shafts</li>
+                <li>Rear Axle (Front drive vehicle)</li>
+                <li>Rear Drive Axle</li>
+                <li>Rear Drive Axle (YUE JIN)</li>
+                <li>Rear Driven Axle</li>
+                <li>Rear Electric Drive Axle</li>
+                <li>REAR AXLE ASM-BRK</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Tires</h2>
+            <div class="slug">tires</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>TireWheelsWheelTrim / TireWheelTrim</li>
+                <li>Spare Tire Device / SpareTireBracket</li>
+                <li>Wheelhouse Liner / WheelhouseLiner</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Steering</h2>
+            <div class="slug">steering</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Steering Column / SteeringColumn</li>
+                <li>Steering Wheel and AirBag / SteeringWheel</li>
+                <li>PowerSteeringPlumbingandPipe</li>
+                <li>Redirector (Left &amp; Right Hand)</li>
+                <li>Electric Redirector (Left-Right Hand)</li>
+                <li>Multi-Function Column Switch</li>
+                <li>Air Bag Control Unit / AirBag / FrontAirBag</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Transmission</h2>
+            <div class="slug">transmission</div>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Clutch Apply (5MT, 6MT, PHEV variants)</li>
+                <li>CLUTCH HOUSING (6MT, 6AMT)</li>
+                <li>Differential (SAGW 6AMT/6MT, WIA 6MT)</li>
+                <li>Manual transmission assembly</li>
+                <li>Propeller Shaft / Propshaft</li>
+                <li>Transfer Case (Part time 4WD, torque on demand)</li>
+                <li>Transmission accessory (5MT, 6MT, SAGW 6AMT)</li>
+                <li>Transmission assembly (6AT, 8AT, SAGW-6MT)</li>
+                <li>Transmission body (5MT, 6MT, WIA)</li>
+                <li>Transmission Differential (6MT variants)</li>
+                <li>Transmission Gear / Shaft / Fork assemblies</li>
+                <li>Transmission Operating Mechanism (all variants)</li>
+                <li>Transmission Shift Actuation (MT, AMT, AT, EV)</li>
+                <li>Transmission shell &amp; Bearing assemblies</li>
+                <li>Transmission Oil Cooler and Plumbing Hardware</li>
+                <li>The internal parts of reduction</li>
+                <li>Power assembly installation</li>
+                <li>QE121 sealing &amp; kit reference codes</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>Maxus Van Parts &mdash; Department Category Mapping &mdash; March 2026</p>
+</footer>
+
+</body>
+</html>

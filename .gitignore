@@ -1,0 +1,12 @@
+# Exclude the uploads directory
+wp-content/uploads/
+wp-content/ai1wm-backups/
+
+# Exclude sensitive files
+wp-config.php
+.htaccess
+*.log
+
+# Block database dumps
+*.sql
+*.gz

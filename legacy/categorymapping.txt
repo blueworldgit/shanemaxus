@@ -1,0 +1,683 @@
+=== Air conditioning | air-conditioning ===
+Air conditioning compressor
+Coolant Plumbing and Hardware
+Coolant Plumbing and Hardware-EV
+Coolant Plumbing and Hardware-FCV
+Coolant Plumbing and Hardware-PHEV
+Coolant Pump And Inl and Otlt TubeThermostat-EURO 5-6
+Coolant Pump And InlandOtltTube-D20
+CoolantPlumbingandHardware
+CoolantPumpAndInlandOtltTubeThermostat-EURO 4
+Front Interior HVAC Airflow
+FrontInteriorHVACAirflow
+FrontInteriorHVACAirflow-Left rudder
+FrontInteriorHVACAirflow-Right rudder
+Rear Interior Airflow
+Refrigerant Plumbing and Hardware
+Refrigerant Plumbing and Hardware-Electric vehicle
+Refrigerant Plumbing and Hardware-FCV
+Refrigerant Plumbing and Hardware-PHEV
+RefrigerantPlumbingandHardware
+Interior Heating Pipe
+Interior Heating Pipe-FCV
+InteriorHeatingPipeFront
+InteriorHeatingPipeRear
+
+=== Belts, rollers | belts-rollers ===
+Safety Belts
+Seat Belts
+SAFETY BELTDRIVER、COPILOT
+Side PanelandRoof Safety Belt
+Second Row Seat Belts
+Third Row Safety Belts
+TimingDrive
+Timing Drive-D20
+DamperPulleyGearDrive
+AccessoryAccessory Drive-EURO 5-6
+AccessoryAccessoryDrive-EURO 4
+AccessoryandAccessory Drive-D20
+
+=== Body | body ===
+Body Attachment
+BodyAttachment
+Body Exterior Trim
+BodyExteriorTrim
+Body Interior and Exterior Electronics
+BodyInteriorandExteriorElectronics
+Body Lower Structure
+BodyLower Structure
+BodyLowerStructure
+body lower stucture
+Body Lower Structure Garnish Trim
+BodyLowerStructureGarnishTrim
+BodyUpperStructureGarnishTrim
+Body accessories harness
+BodyHarness
+Outer Framing
+Outer Framingleft side
+Outer Framingright side
+Outer Framing（left side）
+OuterFramingLeft Side
+OuterFramingRight Side
+Inner Framing
+inner framingleft side
+inner framingright side
+Inner Framing（left side）
+InnerFramingLeft Side
+InnerFramingRight Side
+Roof Framing
+RoofFraming
+RoofFramingChassis
+Rear Framing
+Frame
+Frame to Body Mounts
+Fenders
+Front Bumper
+FrontBumper
+Rear Bumper
+RearBumper
+Rear Panel
+Front Side Closure
+FrontSideClosure
+FrontSideClosureGarnishTrim
+Rear Side Closure
+SideClosureGarnishTrim
+Grille
+Hood
+Hood Lock
+HoodLock
+Endgate
+Mud Guard
+MudGuard
+Wheelhouse Liner
+WheelhouseLiner
+Exterior Emblem-Decal-Nameplate
+ExteriorEmblem-Decal-Nameplate
+Window
+SideWindows
+Front-RearWindow
+Assist Step
+On Vehicle Attachments
+OnVehicleAttachments
+On Vehicle Tools
+OnVehicleTools
+QE43BA001 - Body Structure Garnish Trim
+SE43BA001 - Body Structure Garnish Trim
+QE5A0A001 - cargo car body assembly
+QE5A1A001 - Platform Assembly
+QE5A2A001 - Side Panel-Inner Assembly
+QE5A4A001 - Front Panel Assembly
+QE5A5A001 - Side Panel-Outer Assembly
+SE5A1A001 - Platform Assembly
+SE5A4A001 - Front Panel Assembly
+SE5A5A001 - Side Panel-Outer Assembly
+PANEL ASM-BODY SI and R-END ASM-RR
+Baffle Plate-Ware
+Sound Insulation、Heat Insulation
+SoundInsulation、HeatInsulation
+Roof Trim
+RoofTrim
+MerchandiseTetherTreatment
+
+=== Brakes | brakes ===
+Brake Apply
+BrakeApplyandPlumbing
+Brake Modulator
+BrakeModulator
+Brake Pedal
+BrakePedals
+Brake Pipes
+Brake PipesABS
+Brake PipesESP
+BrakePlumbing
+Front Brakes
+FrontBrakeCorner
+Rear Brakes
+RearBrakeCorner
+Park Brake
+ParkBrake（LEFT Hand）
+ParkBrake（Right Hand）
+Mechanical Parking Brakes
+Rear Electric Parking Brakes
+Rear Mechanical Brakes
+Rear Disc Brake Corner
+REAR AXLE ASM-BRK
+
+=== Damping | damping ===
+Front Shock Absorber
+FrontShockAbsorber
+Rear Shock Absorber
+RearShockAbsorber
+Five Bar Linkage Spiral Spring Rear Suspension
+Rear Leaf-spring Suspension
+Powertrain Mounts
+Powertrain Mounts-Electric vehicle
+PowertrainMounts5MT
+PowertrainMounts6MT-6AMT-9AT
+PowertrainMounts6MT-AMT
+EPT Mounts
+Frame to Body Mounts
+
+=== Electrics | electrics ===
+Air Bag Control Unit
+AirBag
+AirBagControlUnit
+FrontAirBag
+Antenna
+Auxiliary Information Electronics
+Battery and electric drive system
+Battery and Electrical Energy Storage
+BatteryandElectrical Energy Storage
+Battery Harness
+Battery Harnesses
+BatteryCable
+Body accessories harness
+BodyHarness
+Body Interior and Exterior Electronics
+BodyInteriorandExteriorElectronics
+Chassis Harness
+Chassis Harnesses
+ChassisHarness
+Clusters
+Door Harness
+DoorHarness
+Door Wire Harnesses
+Door Switches
+DoorSwitches
+Accessory Switch
+Accessory Switches
+AccessorySwitches
+Engine Compartment Fuse Box
+EngineCompartmentHarness
+Engine Management
+EngineManagement
+EPT System
+Fusebox-CabinCompartment
+Fusebox-Engine Compartment
+Fusebox-EngineCompartment
+GroundDistribution
+High Voltage Harness
+High Voltage Harness（EVandPHEV）
+High Voltage Harness（FCV）
+Infotainment System
+Instrument Panel Harness
+Instrument Panel Wire Harnesses
+InstrumentPanelHarness
+LightingSwitch
+Motor controller and accessories
+Moudule-Electric Vehicle Control Unit
+Moudule-Electric Vehicle Control UnitandEVCC
+Multi-Function Column Switch
+Multi-FunctionColumnSwitch
+Park Distance Control
+Park Distance Control System
+ParkDistanceControlSystem
+Passive Entry Passive Start
+Player
+Power assembly installation
+POWER BATTERY ASM
+power battery-EV
+Power Outlet and Cigarette Lighter Application
+Power Outlet and Cigarette Lighter Device
+Power Outlet and Cigarette Lighter HEvice
+PowerOutletandCigaretteLighterApplication
+PowerInverter
+BASEandMODULE-BATTERY（77KWhand88.8KWh）
+ChargingandEnergyStorage
+electric drive system
+Inside the power battery（CATL-88.55Kwh）
+The internal parts of power battery
+The internal parts of power battery-（CATL-88.55KWh）
+The internal parts of power battery（51.5KWh）
+The internal parts of power battery（77KWhand88.8KWh）
+RoofHarness
+SchoolbusElectronics
+SensorandHarness-D20
+SensorHarness-EURO 4
+SensorHarness-EURO 5
+SensorHarness-EURO 5-6
+Vehicle Date Recorder
+Vehicle Tele-Communication
+Window Lift Switch
+WindowLiftSwitch
+BATTERYandELECTRICALENERGYSTORAGE
+
+=== Engine | engine ===
+Engine Accessory-D20
+Engine Accessory-EURO 5-6
+EngineAccessory
+Engine ASM-D20
+Engine ASM-D20（STP）
+Engine Management
+EngineManagement
+Engine-EURO 5-6
+Engine Compartment Fuse Box
+EngineCompartmentHarness
+Crankshaft Rod-D20
+CrankshaftRod
+Cylinder BlockandAccessory-D20
+Cylinder Head-D20
+CylinderBlockAccessory
+CylinderBlockCylinderLinerFlywheel
+CylinderHead
+DamperPulleyGearDrive
+EGR ASM-D20
+EGR ASM-EURO 4
+EGR ASM-EURO 5-6
+EmissionExhaustSystem
+EmissionExhaustSystem-Euro VI
+Exhaust ElbowandTurbocharger-D20
+Exhaust ElbowTurbocharger-EURO 5-6
+ExhaustElbowTurbocharger-EURO 4
+Exhaust system
+Exhaust system - D20
+Exhaust system - gasoline engine
+Fuel Heating System
+Fuel Plumbing and Hardware
+FuelPlumbingandHardware
+FuelPlumbingandHardware-D20
+FuelSystem
+Fuel Tank and Canister
+FuelTankandCanister
+HalfCylinderBlockGroup-EURO 5-6
+Head CoverandPCV-D20
+HeadCoverPCV
+Intake and Exhaust Manifold-EURO 5-6
+IntakeandExhaustManifold-EURO 4
+MANIFOLD ASM-INT-D20
+Lubricant
+Oil Cooler And Inl and Otlt TubeFilter-EURO 5-6
+Oil Cooler And InlandOtltTubeandFilter-D20
+OilCoolerAndInlandOtltTubeFilter-EURO 4
+Oil pumpsandvacuum pumpsandvacuum tube components-D20
+SHAFT-BALANCER-D20
+SumpandOil Suction PipeandDipstick-D20
+SumpOil Suction PipeDipstickBalancer-EURO 5-6
+Sump，OilSuctionPipeDipstickBalancer-EURO 4
+Timing Drive-D20
+TimingDrive
+Urea system
+Urea system-D20
+Urea system-Euro VI
+Air Cleaner
+AirCleaner
+Air Filter
+Air filter
+AccessoryAccessory Drive-EURO 5-6
+AccessoryAccessoryDrive-EURO 4
+AccessoryandAccessory Drive-D20
+Coolant Pump And Inl and Otlt TubeThermostat-EURO 5-6
+Coolant Pump And InlandOtltTube-D20
+CoolantPumpAndInlandOtltTubeThermostat-EURO 4
+JE11CA001 - Engine ASM
+JE11CA002 - Block Group
+JE11CB001 - Cylinder BlockandAccessory
+JE11CC001 - Cylinder Head
+JE11CD001 - Head CoverandPCV
+JE11CE001 - Crankshaft Rod
+JE11CF001 - SHAFT-BALANCER
+JE11CG001 - MANIFOLD ASM-INT
+JE11CH001 - Exhaust ElbowandTurbocharger
+JE11CI001 - Fuel System
+JE11CJ001 - Oil Cooler And InlandOtltTubeandFilter
+JE11CK001 - SumpandOil Suction PipeandDipstick
+JE11CL001 - Coolant Pump And InlandOtltTubeandThermostat
+JE11CM001 - Damper PulleyandGearDrive
+JE11CP001 - Timing Drive
+JE11CQ001 - AccessoryandAccessoryDrive
+JE11CR001 - SensorandHarness
+JE11CS001 - EGR ASM
+JE11CT001 - Engine Accessory
+JE11CU001 - LP-EGR intake pipeandAccessory
+JE11CW001 - Engine wiring harness
+JE11CX001 - Engine shield
+XE11CA001 - Engine ASM
+XE11CA002 - Block Group
+XE11CB001 - Cylinder BlockandAccessory
+XE11CC001 - Cylinder Head
+XE11CD001 - Head CoverandPCV
+XE11CE001 - Crankshaft Rod
+XE11CF001 - SHAFT-BALANCER
+XE11CG001 - MANIFOLD ASM-INT
+XE11CH001 - Exhaust ElbowandTurbocharger
+XE11CI001 - Fuel System
+XE11CJ001 - Oil Cooler And InlandOtltTubeandFilter
+XE11CK001 - SumpandOil Suction PipeandDipstick
+XE11CL001 - Coolant Pump And InlandOtltTubeandThermostat
+XE11CM001 - Damper PulleyandGearDrive
+XE11CP001 - Timing Drive
+XE11CQ001 - AccessoryandAccessoryDrive
+XE11CR001 - SensorandHarness
+XE11CS001 - EGR ASM
+XE11CT001 - Engine Accessory
+XE11CW001 - Engine wiring harness
+XE11CX001 - Engine shield
+
+=== Filters | filters ===
+Air Filter
+Air filter
+Air Cleaner
+AirCleaner
+Coarse Filter and HardwareCuba
+Oil Cooler And Inl and Otlt TubeFilter-EURO 5-6
+Oil Cooler And InlandOtltTubeandFilter-D20
+OilCoolerAndInlandOtltTubeFilter-EURO 4
+Fuel Tank and Canister
+FuelTankandCanister
+Lubricant
+Urea system
+Urea system-D20
+Urea system-Euro VI
+TNK FIL DR
+
+=== Induction | induction ===
+Air Cleaner
+AirCleaner
+Air Filter
+Air filter
+Coarse Filter and HardwareCuba
+Intake and Exhaust Manifold-EURO 5-6
+IntakeandExhaustManifold-EURO 4
+MANIFOLD ASM-INT-D20
+EGR ASM-D20
+EGR ASM-EURO 4
+EGR ASM-EURO 5-6
+Exhaust ElbowandTurbocharger-D20
+Exhaust ElbowTurbocharger-EURO 5-6
+ExhaustElbowTurbocharger-EURO 4
+JE11CG001 - MANIFOLD ASM-INT
+JE11CU001 - LP-EGR intake pipeandAccessory
+JE11CS001 - EGR ASM
+XE11CG001 - MANIFOLD ASM-INT
+XE11CS001 - EGR ASM
+
+=== Ignition | ignition ===
+Ignition Switch and Key
+IgnitionSwitchandKey
+Engine Management
+EngineManagement
+Accessory Switch
+Accessory Switches
+AccessorySwitches
+Passive Entry Passive Start
+Clusters
+
+=== Interior | interior ===
+2014 Schoolbus Seat
+2015 School Seat
+CE42AQ002 - 62RIGHT RUDDER
+CE42BE001 - 11-SEATS
+CE42CA001 - Ix-SEAT
+CE42CB001 - RR DBL SEAT（W- RECL）
+CE42CC001 - OLD LUXURY H-SEAT
+CE42CD001 - RR DBL SEAT（W-O RECL）
+CE42CG001 - FRT SIN SEAT
+CE42CH001 - RR SIN SEAT（W- RECL）
+CE42CI001 - RR DBL SEAT（W- RECL）
+CE42CN001 - Single seat-Type 1
+CE42CP001 - DRIVER SEAT
+CE42CQ001 - DRIVER SEATright-hand
+CE42CR001 - DRIVER SEAT
+CE42CS001 - DRIVER SEAT
+CE42CT001 - FRT SIN SEAT
+CE42CT002 - FRT SIN SEAT
+CE42CU001 - FRT SIN SEAT
+CF1-CF2-SEAT
+Driver seat
+DRIVER SEAT left-hand
+Floor Console
+FloorConsole
+Floor Trim
+FloorTrim
+Front Door Trim
+Front double seats
+Front Electirc Seatleft
+Front Electirc Seatright
+Front Electrical Seat LH
+Front Electrical Seat RH
+Front Interior Control
+FrontInteriorControl
+Front Manual Seat LEFT
+Front Manual Seat LH
+Front Manual Seat RH
+Front Manual Seat（LH）
+Front Manual Seat（RH）
+Front Manual Seat（Right）
+Front SEAT left
+Front Seat Right
+Front SeatLeft
+Front Seat（left ）
+Front Seat（Left）
+Front Seat（Right）
+Frong Seat（right ）
+FRT DBL SEAT
+FRT DBL SEATW - RECL
+Infotainment System
+Instrument Panel
+Instrument Panel Crossmember
+Instrument Panel Crossmember（LHD）
+Instrument Panel Crossmember（RHD）
+Instrument Panel（LHD）
+Instrument Panel（RHD）
+InstrumentPanel
+InstrumentPanelCrossmember
+Interior Lamp
+InteriorLamp
+JE421AE001 - Seat Arrangement of Shang Jie's 11 12and 14 Seats Australia
+JE421AF001 - Three Seats Arrangement for VAN Vehicle Australia、New Zealand
+JE421AG001 - Two-Three Seats Arrangement for Chassis Vehicle Australia、New Zealand
+JE421AH001 - Arrangement for VAN Vehicle UK、Hong Kong
+JE421AI001 - Three Seats Arrangement for Chassis Vehicle UK、Hong Kong
+Player
+Power Outlet and Cigarette Lighter Application
+Power Outlet and Cigarette Lighter Device
+Power Outlet and Cigarette Lighter HEvice
+PowerOutletandCigaretteLighterApplication
+Rear Door trim
+Rear Door Trim
+RearDoortrim
+Rear Roll Double Seat
+Rear Row Seat
+RR 3-SEAT（W- RECL）
+RR SIN SEAT（W- RECL）
+RR SIN WIDE SEAT
+Safety Belts
+Seat Belts
+SAFETY BELTDRIVER、COPILOT
+Seats Layout
+Second Row Double seat
+Second Row Seat Belts
+Second Row Three Seat（Two head rest - three head rest）
+Side PanelandRoof Safety Belt
+Side Sliding Door
+Side Sliding Door guide rail
+Side Sliding Door Handle and Door Lock
+Side Sliding Door trim
+SideSlidingDoor
+SideSlidingDoorHandle
+SideSlidingDoorLock
+SideSlidingDoortrim
+Side Trim
+Sound Insulation、Heat Insulation
+SoundInsulation、HeatInsulation
+Speaker
+STANDARD 12 -16-SEAT
+Subdrivers Integral Double Seat
+Subdrivers Split Double Seat
+Third Row Safety Belts
+VAN 2-SEAT
+VAN 3-SEAT
+Window Lift Switch
+WindowLiftSwitch
+Door Trim
+Door Switches
+DoorSwitches
+ELEC SWINGING DR
+Assist Step
+Roof Trim
+RoofTrim
+
+=== Lighting | lighting ===
+Front Lamp
+FrontLamp
+Interior Lamp
+InteriorLamp
+Rear Lamp
+RearLamp
+LightingSwitch
+LSH14C4C5NA129710
+
+=== Oils and fluids | oils-and-fluids ===
+Fluids and Lubrications
+FluidsandLubrications
+Lubricant
+Urea system
+Urea system-D20
+Urea system-Euro VI
+
+=== Wiper and washers | wiper-and-washers ===
+Wiper
+Wiper（LHD）
+Wiper（RHD）
+Front Wiper
+Front Washer
+Washer
+Washer System
+
+=== Suspension | suspension ===
+Front Suspension
+FrontSuspension
+Rear Suspension
+RearSuspension
+Front Sub-frame
+FrontSub-frame
+Front Shock Absorber
+FrontShockAbsorber
+Rear Shock Absorber
+RearShockAbsorber
+Five Bar Linkage Spiral Spring Rear Suspension
+Rear Leaf-spring Suspension
+Front Drive Axle
+Front Half Shaft
+Front Half Shafts
+Rear Axle （Front drive vehicle）
+Rear Drive Axle
+Rear Drive Axle（YUE JIN）
+Rear Driven Axle
+Rear Electric Drive Axle
+REAR AXLE ASM-BRK
+
+=== Tires | tires ===
+TireWheelsWheelTrim
+TireWheelTrim
+Spare Tire Device
+SpareTireBracket
+Wheelhouse Liner
+WheelhouseLiner
+
+=== Steering | steering ===
+Steering Column
+SteeringColumn
+Steering Wheel and AirBag
+SteeringWheel
+PowerSteeringPlumbingandPipe
+Redirector
+Redirectorleft hand）
+Redirectorright hand）
+Redirector（Left Hand-Right Hand）
+Electirc redirector（Left-Right Hand
+Multi-Function Column Switch
+Multi-FunctionColumnSwitch
+Air Bag Control Unit
+AirBag
+AirBagControlUnit
+FrontAirBag
+
+=== Transmission | transmission ===
+Clutch Apply
+ClutchApply5MT
+ClutchApply6MT
+ClutchMT
+ClutchPHEV
+CLUTCH HOUSING-6MT Front Driveand6AMT
+CLUTCH HOUSING-6MTand6AMT
+Clutch-5MT
+Clutch-6MT-6AMT
+Differential-SAGW 6AMTand6MT
+Differential-WIA 6MT
+Manual transmission assembly
+Manual transmission assembly（6MT Front-Back drive）
+Propeller Shaft
+Propshaft
+QE121AA01 - Oil Pan Kit
+QE121AA04 - Mechatronic Kit
+QE121AA05 - Shaft Sealing Ring Output
+QE121AA07 - Converter Kit
+QE121AA08 - Converter Sealing Elements Kit
+QE121AA09 - Selector Shaft Sealing Ring Kit
+QE121AA10 - Breather Tube Kit
+QE121AA11 - Mechatronic Sealing elements replacement
+The internal parts of reduction
+Transfer CasePart time 4WD
+Transfer Casetorque on demand
+Transmission accessory-5MT
+Transmission accessory-6MT Front Drive
+Transmission accessory-SAGW 6AMT
+Transmission assembly6AT
+Transmission assembly8AT
+Transmission assemblySAGW-6MT
+Transmission body-5MT
+Transmission body-SAGW 6MTand6AMT
+Transmission body-WIA 6MT
+Transmission CSC and Operating Mechanism6MT back drive
+Transmission Differential-6MT Front Drive
+Transmission Differential-6MT Front Driveand6AMT
+Transmission Fork ComponentsSAGW-6MT back drive
+Transmission fork-6MT Front Drive
+Transmission fork-6MT Front Driveand6MT
+Transmission Gear-5MT
+Transmission Input Shaft And Gear-WIA 6MT
+Transmission Main Shaft And Gear6MT back drive
+Transmission Oil Cooler and Plumbing Hardware
+Transmission operating mechanism-6MT
+Transmission operating mechanism-6MT Front Drive
+Transmission operating mechanism-6MT-E5
+Transmission operating mechanism-SAGW 6MT
+Transmission operating mechanism-WIA 6MT
+Transmission operating mechanism6AMT
+Transmission Output Shaft And Gear-WIA 6MT
+Transmission RVS Idler Shaft Gear-6MT Front Drive
+Transmission RVS Idler Shaft Gear-6MT Front Driveand6AMT
+Transmission RVS Idler Shaft Gear-SAGW 6AMTand6MT
+Transmission RVS Idler Shaft Gear-WIA 6MT
+Transmission Seal-6MT Front Drive
+Transmission shaft ASM-6MT Front Drive
+Transmission shaft ASM-6MT Front Driveand6AMT
+Transmission shaft ASM-SAGW 6AMTand6MT
+Transmission Shaft INPUT-6MT Front Drive
+Transmission Shaft INPUT-6MT Front Driveand6AMT
+Transmission Shaft INPUT-SAGW 6MTand6AMT
+Transmission Shaft OUTPUT（1256）-6MT Front Drive
+Transmission Shaft OUTPUT（1256）-6MT Front Driveand6AMT
+Transmission Shaft OUTPUT（1256）-SAGW 6MTand6AMT
+Transmission Shaft OUTPUT（34R）-6MT Front Drive
+Transmission Shaft OUTPUT（34R）-6MT Front Driveand6AMT
+Transmission Shaft OUTPUT（34R）-SAGW 6MTand6AMT
+Transmission shell Bearing-6MT Front Drive
+Transmission shell Bearing-6MT Front Drive and 6AMT
+Transmission shell-6MT Front Drive
+Transmission shell-6MTand6AMT
+Transmission Shift Actuation
+Transmission Shift Actuation-AMT
+Transmission Shift Actuation-AT、Electric vehicle
+Transmission Shift Actuation-MT
+Transmission shift forks-SAGW 6AMTand6MT
+Transmissionassembly and accessory-SAGW 6MT
+Transmissionassembly and CSC-WIA 6MT
+TransmissionassemblyandTCU and CSC-SAGW 6AMT
+TransmissionShiftActuation
+TransmissionShiftActuation-6AMT
+TransmissionShiftActuation-6AMTand9AT
+TransmissionShiftActuation-MT5MT
+TransmissionShiftActuation-MT6MT
+Power assembly installation

@@ -1,0 +1,2135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maxus Van Parts — Complete Technical Reference</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; }
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+h1 { font-size: 28px; color: #1a1a2e; margin: 0 0 6px; }
+h2 { font-size: 22px; color: #1a1a2e; margin: 30px 0 14px; padding-bottom: 8px; border-bottom: 3px solid #F29F05; }
+h3 { font-size: 17px; color: #034C8C; margin: 20px 0 10px; }
+h4 { font-size: 15px; color: #1a1a2e; margin: 16px 0 8px; }
+p { margin: 0 0 10px; }
+a { color: #034C8C; }
+.header-bar { background: #1a1a2e; color: #fff; padding: 30px 0; margin-bottom: 24px; }
+.header-bar h1 { color: #fff; }
+.header-bar .subtitle { color: #F29F05; font-size: 15px; margin-top: 4px; }
+.header-bar .meta { color: #aaa; font-size: 13px; margin-top: 10px; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0 18px; font-size: 13px; }
+th { background: #1a1a2e; color: #fff; padding: 8px 10px; text-align: left; font-weight: 600; }
+td { padding: 7px 10px; border-bottom: 1px solid #e0e0e0; vertical-align: top; }
+tr:nth-child(even) td { background: #fafafa; }
+code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 13px; font-family: "Consolas", "Monaco", monospace; }
+pre { background: #1e1e2e; color: #e0e0e0; padding: 16px; border-radius: 6px; overflow-x: auto; font-size: 12.5px; line-height: 1.5; font-family: "Consolas", "Monaco", monospace; margin: 10px 0 18px; white-space: pre; tab-size: 4; }
+pre .comment { color: #6a9955; }
+pre .keyword { color: #569cd6; }
+pre .string { color: #ce9178; }
+pre .function { color: #dcdcaa; }
+.callout { padding: 14px 18px; border-radius: 6px; margin: 12px 0 18px; font-size: 13px; }
+.callout-warn { background: #fff3cd; border-left: 4px solid #F29F05; }
+.callout-info { background: #d1ecf1; border-left: 4px solid #034C8C; }
+.callout-danger { background: #f8d7da; border-left: 4px solid #BF3617; }
+.toc { background: #fff; padding: 20px 24px; border-radius: 8px; margin: 0 0 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.toc h3 { margin: 0 0 12px; color: #1a1a2e; }
+.toc ol { padding-left: 22px; }
+.toc li { margin: 4px 0; font-size: 14px; }
+.toc a { text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.section { background: #fff; padding: 24px 28px; border-radius: 8px; margin: 0 0 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 600; }
+.badge-hook { background: #d1ecf1; color: #034C8C; }
+.badge-line { background: #e8e8e8; color: #555; }
+.flow-diagram { background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 6px; padding: 16px; margin: 10px 0 18px; font-family: "Consolas", monospace; font-size: 13px; line-height: 1.7; white-space: pre; overflow-x: auto; }
+</style>
+</head>
+<body>
+
+<div class="header-bar">
+<div class="container">
+<h1>Maxus Van Parts — Complete Technical Reference</h1>
+<div class="subtitle">Self-contained developer document with all source code inline</div>
+<div class="meta">Date: 11 March 2026 &nbsp;|&nbsp; Prepared by: Jason Pink (ACS) &nbsp;|&nbsp; Site: shane.maxusvanparts.co.uk</div>
+</div>
+</div>
+
+<div class="container">
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+<h3>Table of Contents</h3>
+<ol>
+<li><a href="#s1">Project Overview &amp; Architecture</a></li>
+<li><a href="#s2">Server Access &amp; Environment</a></li>
+<li><a href="#s3">Database Changes</a></li>
+<li><a href="#s4">WooCommerce Category Structure</a></li>
+<li><a href="#s5">User Navigation Flow</a></li>
+<li><a href="#s6">Code Section 1: Homepage CSS</a></li>
+<li><a href="#s7">Code Section 2: Hero + Vehicle Carousel</a></li>
+<li><a href="#s8">Code Section 3: Why Use Us</a></li>
+<li><a href="#s9">Code Section 4: Custom Footer</a></li>
+<li><a href="#s10">Code Section 5: Vehicle Landing Pages</a></li>
+<li><a href="#s11">Code Section 5b: Department Pages</a></li>
+<li><a href="#s12">Code Section 6: Vehicle Data Helper</a></li>
+<li><a href="#s13">Code Section 7: VIN Lookup AJAX</a></li>
+<li><a href="#s14">Code Section 8: Registration Lookup AJAX</a></li>
+<li><a href="#s15">Code Section 9: Header Lookup Panel</a></li>
+<li><a href="#s16">Code Section 10: Vehicle Search Bar</a></li>
+<li><a href="#s17">Known Issues &amp; Limitations</a></li>
+<li><a href="#s18">Deployment Guide</a></li>
+<li><a href="#s19">External Dependencies</a></li>
+</ol>
+</div>
+
+<!-- SECTION 1: PROJECT OVERVIEW -->
+<div class="section" id="s1">
+<h2>1. Project Overview &amp; Architecture</h2>
+<p>The goal was to transform the homepage and navigation of <code>shane.maxusvanparts.co.uk</code> to match the design and functionality of <code>maxusvanparts.acstestweb.co.uk</code> (the source/reference site), while keeping the existing WooCommerce database structure intact.</p>
+
+<h3>What Was Built</h3>
+<ul>
+<li>Homepage visual facelift (hero banner, vehicle carousel, Why Us section, custom footer)</li>
+<li>Vehicle landing pages at <code>/vehicle/{slug}/</code> with organic DB-driven category grids</li>
+<li>Department pages at <code>/department/{slug}/</code> aggregating vehicles by part category</li>
+<li>VIN lookup (17-character VIN &rarr; vehicle identification)</li>
+<li>Registration lookup (UK plate &rarr; vehicle identification via external API)</li>
+<li>Replacement search bar (Model/Year/VIN/Registration)</li>
+<li>Header dropdown lookup panels on nav menu items</li>
+</ul>
+
+<h3>What Was NOT Changed</h3>
+<ul>
+<li>No WooCommerce products, categories, or core data were modified</li>
+<li>No existing database tables or structures were altered</li>
+<li>No plugins were added or removed</li>
+<li>The existing Mobex parent theme was not touched</li>
+</ul>
+
+<h3>Single-File Architecture</h3>
+<div class="callout callout-info">
+<strong>ALL custom code lives in ONE file:</strong><br>
+<code>wp-content/themes/mobex-child/functions.php</code><br><br>
+Lines 1&ndash;106: Original child theme code (parent style enqueue, theme mod repair, REST API endpoint)<br>
+Lines 107&ndash;2127: All facelift code (10 sections)<br><br>
+There are <strong>no additional plugins, templates, JS files, or CSS files</strong>. All custom CSS, HTML, PHP, and JavaScript is injected via WordPress hooks.
+</div>
+
+<h3>WordPress Hooks Used</h3>
+<table>
+<tr><th>Hook</th><th>Type</th><th>Purpose</th></tr>
+<tr><td><code>wp_head</code></td><td>Action</td><td>Inject CSS (priority 999, homepage only)</td></tr>
+<tr><td><code>wp_footer</code></td><td>Action</td><td>Inject hero/carousel (pri 1), Why Us (pri 5), footer (pri 10), header panel (pri 20), search bar (pri 25)</td></tr>
+<tr><td><code>init</code></td><td>Action</td><td>Register rewrite rules for /vehicle/ and /department/</td></tr>
+<tr><td><code>query_vars</code></td><td>Filter</td><td>Register custom query vars (mvp_vehicle, mvp_department, mvp_dept_vehicle)</td></tr>
+<tr><td><code>pre_get_posts</code></td><td>Action</td><td>Prevent 404 on custom pages</td></tr>
+<tr><td><code>template_redirect</code></td><td>Action</td><td>Render custom page templates</td></tr>
+<tr><td><code>wp_ajax_*</code></td><td>Action</td><td>VIN and registration lookup AJAX endpoints</td></tr>
+</table>
+</div>
+
+<!-- SECTION 2: SERVER ACCESS -->
+<div class="section" id="s2">
+<h2>2. Server Access &amp; Environment</h2>
+<table>
+<tr><th>Item</th><th>Value</th></tr>
+<tr><td>Server</td><td>acswebhosting4 <code>80.95.207.10</code> (Plesk)</td></tr>
+<tr><td>SSH</td><td><code>ssh serveradmin@80.95.207.10</code> (sudo available)</td></tr>
+<tr><td>Document root</td><td><code>/var/www/vhosts/maxusvanparts.co.uk/shane.maxusvanparts.co.uk/</code></td></tr>
+<tr><td>WP file owner</td><td><code>maxusvanparts.co.uk_utsg9tlvo8m</code></td></tr>
+<tr><td>WP table prefix</td><td><code>sQrrjq_</code></td></tr>
+<tr><td>PHP version</td><td>8.1 (<code>/opt/plesk/php/8.1/bin/php</code>)</td></tr>
+<tr><td>WP-CLI</td><td><code>sudo PATH=/opt/plesk/php/8.1/bin:$PATH wp --path=&lt;docroot&gt; --allow-root</code></td></tr>
+<tr><td>Source site root</td><td><code>/var/www/vhosts/acstestweb.co.uk/maxusvanparts.acstestweb.co.uk/</code></td></tr>
+<tr><td>Backup files</td><td><code>functions.php.bak</code> (original 3.3KB), <code>functions.php.bak2</code> (pre-facelift 27KB)</td></tr>
+</table>
+</div>
+
+<!-- SECTION 3: DATABASE CHANGES -->
+<div class="section" id="s3">
+<h2>3. Database Changes</h2>
+<p>Only <strong>two types</strong> of DB changes were made. No products, categories, or WooCommerce tables were modified.</p>
+
+<h3>3a. Term Meta (Vehicle Mapping)</h3>
+<p>Added 4 meta fields to each of the 18 VIN categories under Maxus (parent term 3590) in <code>sQrrjq_termmeta</code>:</p>
+<table>
+<tr><th>Meta Key</th><th>Purpose</th><th>Example Value</th></tr>
+<tr><td><code>vehicle_model</code></td><td>Human-readable name</td><td>Deliver 9 FWD LUX</td></tr>
+<tr><td><code>vehicle_year</code></td><td>Year range</td><td>2021-2024</td></tr>
+<tr><td><code>vehicle_image</code></td><td>Vehicle photo URL</td><td>https://maxusvanparts.acstestweb.co.uk/wp-content/uploads/vehicles/Deliver-9-FWD-LUX-LH---2021-2024.png</td></tr>
+<tr><td><code>vehicle_slug</code></td><td>URL slug for landing page</td><td>deliver-9-fwd-lux</td></tr>
+</table>
+
+<h3>Full VIN-to-Vehicle Mapping (18 VINs)</h3>
+<table>
+<tr><th>term_id</th><th>VIN Serial</th><th>Model</th><th>Year</th><th>Slug</th></tr>
+<tr><td>3591</td><td>LSFAL11A4PA157987</td><td>Deliver 9 RWD LUX</td><td>2023-2024</td><td>deliver-9-rwd-lux</td></tr>
+<tr><td>4021</td><td>LSFAL11A5MA087816</td><td>Deliver 9 RWD Chassis</td><td>2021-2024</td><td>deliver-9-rwd-chassis</td></tr>
+<tr><td>4213</td><td>LSFAM11C4RA133898</td><td>T60 Diesel</td><td>2024-2026</td><td>t60-diesel-1</td></tr>
+<tr><td>5317</td><td>LSFAM11C6RA133899</td><td>T60 Diesel</td><td>2024-2026</td><td>t60-diesel-2</td></tr>
+<tr><td>5874</td><td>LSFAM11C6RA144501</td><td>New T60 Diesel</td><td>2024-2026</td><td>new-t60-diesel</td></tr>
+<tr><td>4408</td><td>LSFAM120XNA160733</td><td>T90 EV</td><td>2022-2026</td><td>t90-ev</td></tr>
+<tr><td>7101</td><td>LSH14C4C5NA129710</td><td>E Deliver 3</td><td>2020-2026</td><td>e-deliver-3</td></tr>
+<tr><td>5511</td><td>LSH14J4C0RV121632</td><td>E Deliver 7</td><td>2024-2026</td><td>e-deliver-7</td></tr>
+<tr><td>4741</td><td>LSH14J4CXMA165329</td><td>E Deliver 9</td><td>2021-2026</td><td>e-deliver-9</td></tr>
+<tr><td>5666</td><td>LSH14J7C0SA082498</td><td>New Deliver 9 Diesel</td><td>2025-2026</td><td>new-deliver-9-diesel</td></tr>
+<tr><td>4921</td><td>LSH14J7C2MA122115</td><td>Deliver 9 RWD STD</td><td>2021-2024</td><td>deliver-9-rwd-std</td></tr>
+<tr><td>5124</td><td>LSH14J7C3RV123225</td><td>Deliver 7</td><td>2024-2026</td><td>deliver-7</td></tr>
+<tr><td>6069</td><td>LSH14J7C4RV123458</td><td>Deliver 7 High Roof Diesel</td><td>2024-2026</td><td>deliver-7-high-roof-diesel</td></tr>
+<tr><td>3789</td><td>LSH14J7C7MA114771</td><td>Deliver 9 FWD STD</td><td>2021-2024</td><td>deliver-9-fwd-std</td></tr>
+<tr><td>6262</td><td>LSH14J7C9RV123360</td><td>Deliver 7 Low Roof Diesel</td><td>2024-2026</td><td>deliver-7-low-roof-diesel</td></tr>
+<tr><td>6455</td><td>LSH14J7CXMA114599</td><td>Deliver 9 FWD LUX</td><td>2021-2024</td><td>deliver-9-fwd-lux</td></tr>
+<tr><td>6669</td><td>LSH14JTC6FA621119</td><td>A80 Chassis</td><td>2015-2020</td><td>a80-chassis</td></tr>
+<tr><td>6862</td><td>LSKG5GL16KA060062</td><td>V80 Van</td><td>2016-2020</td><td>v80-van</td></tr>
+</table>
+
+<h3>3b. Header Menu Items</h3>
+<p>Header menu (term_id 505, location <code>header-menu</code>): Replaced 7 default Mobex menu items with: Vehicles (<code>/vehicle-lookup/</code>), VIN Lookup (<code>/vin-search-test/</code>), Registration Lookup (<code>/registration-lookup/</code>), News, About, Contact, Trade Account.</p>
+
+<h3>3c. Sidebar Department Menu Items</h3>
+<p>Updated 18 items (menu-item-8676 through 8780) from <code>href="#"</code> to <code>/department/{slug}/</code> URLs:</p>
+<table>
+<tr><th>menu-item-id</th><th>Department</th><th>URL</th></tr>
+<tr><td>8676</td><td>Air conditioning</td><td>/department/air-conditioning/</td></tr>
+<tr><td>8682</td><td>Belts, rollers</td><td>/department/belts-rollers/</td></tr>
+<tr><td>8688</td><td>Body</td><td>/department/body/</td></tr>
+<tr><td>8694</td><td>Brakes</td><td>/department/brakes/</td></tr>
+<tr><td>8700</td><td>Damping</td><td>/department/damping/</td></tr>
+<tr><td>8706</td><td>Electrics</td><td>/department/electrics/</td></tr>
+<tr><td>8712</td><td>Engine</td><td>/department/engine/</td></tr>
+<tr><td>8718</td><td>Filters</td><td>/department/filters/</td></tr>
+<tr><td>8724</td><td>Induction</td><td>/department/induction/</td></tr>
+<tr><td>8730</td><td>Ignition</td><td>/department/ignition/</td></tr>
+<tr><td>8736</td><td>Interior</td><td>/department/interior/</td></tr>
+<tr><td>8742</td><td>Lighting</td><td>/department/lighting/</td></tr>
+<tr><td>8748</td><td>Oils and fluids</td><td>/department/oils-and-fluids/</td></tr>
+<tr><td>8756</td><td>Wiper and washers</td><td>/department/wiper-and-washers/</td></tr>
+<tr><td>8762</td><td>Suspension</td><td>/department/suspension/</td></tr>
+<tr><td>8768</td><td>Tires</td><td>/department/tires/</td></tr>
+<tr><td>8774</td><td>Steering</td><td>/department/steering/</td></tr>
+<tr><td>8780</td><td>Transmission</td><td>/department/transmission/</td></tr>
+</table>
+
+<h3>3d. Rewrite Rules</h3>
+<p>Flushed into <code>sQrrjq_options</code> (option <code>rewrite_rules</code>):</p>
+<table>
+<tr><th>Pattern</th><th>Target</th></tr>
+<tr><td><code>^vehicle/([^/]+)/?$</code></td><td><code>index.php?mvp_vehicle=$matches[1]</code></td></tr>
+<tr><td><code>^department/([^/]+)/?$</code></td><td><code>index.php?mvp_department=$matches[1]</code></td></tr>
+<tr><td><code>^department/([^/]+)/([^/]+)/?$</code></td><td><code>index.php?mvp_department=$matches[1]&amp;mvp_dept_vehicle=$matches[2]</code></td></tr>
+</table>
+<div class="callout callout-warn">
+<strong>Important:</strong> If the functions.php code is removed or the theme is switched, these rewrite rules will be lost on the next flush. They must be re-flushed after any deployment. Run <code>wp rewrite flush</code> via WP-CLI or call <code>flush_rewrite_rules()</code> in PHP.
+</div>
+</div>
+
+<!-- SECTION 4: WOOCOMMERCE CATEGORY STRUCTURE -->
+<div class="section" id="s4">
+<h2>4. WooCommerce Category Structure</h2>
+<div class="flow-diagram">Maxus (term 3590, 35,330 products)
+&#9500;&#9472;&#9472; LSFAL11A4PA157987 (term 3591, Deliver 9 RWD LUX)
+&#9474;   &#9500;&#9472;&#9472; Brakes (slug: brakes, 250 products)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Front Brakes (66 products)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Rear Brakes (20)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Brake Pipes (62)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Brake Modulator (28)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Brake Apply (26)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Brake Pedal (14)
+&#9474;   &#9474;   &#9492;&#9472;&#9472; Park Brake (34)
+&#9474;   &#9500;&#9472;&#9472; Steering (slug: steering-lsfal11a4pa157987)
+&#9474;   &#9500;&#9472;&#9472; Suspension (slug: suspension-lsfal11a4pa157987)
+&#9474;   &#9500;&#9472;&#9472; Air Intake System (slug: air-intake-system-lsfal11a4pa157987)
+&#9474;   &#9500;&#9472;&#9472; ... (~48 categories per VIN)
+&#9474;   &#9492;&#9472;&#9472; Wiper and Washer
+&#9500;&#9472;&#9472; LSFAL11A5MA087816 (term 4021, Deliver 9 RWD Chassis)
+&#9474;   &#9500;&#9472;&#9472; Brakes (slug: brakes-lsfal11a5ma087816)
+&#9474;   &#9492;&#9472;&#9472; ...
+&#9500;&#9472;&#9472; ... (16 more VINs)
+&#9492;&#9472;&#9472; LSKG5GL16KA060062 (term 6862, V80 Van)</div>
+<div class="callout callout-info">
+<strong>Category slug convention:</strong> The FIRST VIN's categories often have clean slugs (e.g. <code>brakes</code>, <code>steering</code>). Subsequent VINs have VIN-appended slugs (e.g. <code>brakes-lsh14j7cxma114599</code>). Category <strong>names</strong> are clean across all VINs. Our department page matching uses <code>sanitize_title($cat-&gt;name)</code> which works regardless of slug format.
+</div>
+</div>
+
+<!-- SECTION 5: NAVIGATION FLOW -->
+<div class="section" id="s5">
+<h2>5. User Navigation Flow</h2>
+<div class="flow-diagram">HOMEPAGE
+&#9500;&#9472;&#9472; Vehicle Carousel &#8594; click vehicle card &#8594; /vehicle/{slug}/
+&#9500;&#9472;&#9472; Search Bar &#8594; select model &#8594; /vehicle/{slug}/
+&#9500;&#9472;&#9472; Search Bar &#8594; enter VIN &#8594; AJAX lookup &#8594; /vehicle/{slug}/
+&#9500;&#9472;&#9472; Search Bar &#8594; enter reg plate &#8594; AJAX lookup &#8594; /vehicle/{slug}/
+&#9500;&#9472;&#9472; Sidebar Departments &#8594; click "Brakes" &#8594; /department/brakes/
+&#9492;&#9472;&#9472; Header Menu &#8594; hover VIN/Reg &#8594; dropdown panel &#8594; /vehicle/{slug}/
+
+VEHICLE PAGE (/vehicle/deliver-9-fwd-lux/)
+&#9500;&#9472;&#9472; Shows all part categories for this vehicle
+&#9492;&#9472;&#9472; Click category card (e.g. "Brakes") &#8594; /department/brakes/
+
+DEPARTMENT PAGE (/department/brakes/)
+&#9500;&#9472;&#9472; Shows all vehicles that have a "Brakes" category
+&#9492;&#9472;&#9472; Click vehicle card &#8594; /product-category/maxus/{vin}/brakes/
+
+WOOCOMMERCE CATEGORY PAGE (/product-category/maxus/{vin}/brakes/)
+&#9492;&#9472;&#9472; Standard WooCommerce product listing for that vehicle's brakes</div>
+</div>
+
+<!-- SECTION 6: CODE SECTION 1 - HOMEPAGE CSS -->
+<div class="section" id="s6">
+<h2>6. Code Section 1: Homepage CSS (Lines 107&ndash;442)</h2>
+<p><span class="badge badge-hook">wp_head</span> <span class="badge badge-line">Priority 999</span> &mdash; Only fires on homepage (<code>is_front_page()</code>)</p>
+<p>Injects a <code>&lt;style&gt;</code> block that hides 8 Elementor sections and styles the hero banner, vehicle carousel, Why Us cards, custom footer, product buttons, and star ratings. Includes responsive breakpoints at 1024px, 768px, and 480px.</p>
+<h4>Hidden Elementor Elements</h4>
+<table>
+<tr><th>Element ID</th><th>What It Hides</th></tr>
+<tr><td><code>a40da3e</code></td><td>RevSlider widget</td></tr>
+<tr><td><code>099500a</code></td><td>Department category icons row</td></tr>
+<tr><td><code>9f85e6f</code></td><td>Featured manufacturers heading</td></tr>
+<tr><td><code>e540d81</code></td><td>Featured manufacturers logos</td></tr>
+<tr><td><code>23763df</code></td><td>Promo banners (Engine Oil, Tools, Batteries)</td></tr>
+<tr><td><code>20e40c9</code></td><td>"Know what you pay for" section</td></tr>
+<tr><td><code>7033a3b</code></td><td>"Car repairs have never been so easy" section</td></tr>
+<tr><td><code>9e19027</code></td><td>Empty spacer section</td></tr>
+<tr><td><code>3e78bee</code></td><td>Original 6-dropdown vehicle filter bar</td></tr>
+</table>
+<h4>Full Source Code</h4>
+<pre>add_action( 'wp_head', 'mvp_facelift_css', 999 );
+function mvp_facelift_css() {
+    if ( ! is_front_page() &amp;&amp; ! is_home() ) return;
+    ?&gt;
+    &lt;style id="mvp-facelift-css"&gt;
+    /* === HIDE: RevSlider widget (inside elementor section a40da3e) === */
+    body.home .elementor-element-a40da3e,
+    body.home sr7-module,
+    body.home .wp-block-themepunch-revslider,
+    body.home .elementor-widget-slider_revolution {
+        display: none !important;
+    }
+
+    /* === HIDE: Department category icons row === */
+    body.home .elementor-element-099500a {
+        display: none !important;
+    }
+
+    /* === HIDE: Featured manufacturers heading + logos === */
+    body.home .elementor-element-9f85e6f,
+    body.home .elementor-element-e540d81 {
+        display: none !important;
+    }
+
+    /* === HIDE: Promo banners (Engine Oil, Tools, Batteries) === */
+    body.home .elementor-element-23763df {
+        display: none !important;
+    }
+
+    /* === HIDE: "Know what you pay for" section === */
+    body.home .elementor-element-20e40c9 {
+        display: none !important;
+    }
+
+    /* === HIDE: "Car repairs have never been so easy" section === */
+    body.home .elementor-element-7033a3b {
+        display: none !important;
+    }
+
+    /* === HIDE: Empty spacer section === */
+    body.home .elementor-element-9e19027 {
+        display: none !important;
+    }
+
+    /* === HIDE: Original 6-dropdown vehicle filter bar === */
+    body.home .elementor-element-3e78bee {
+        display: none !important;
+    }
+
+    /* ── Hero Banner ── */
+    .mvp-hero {
+        position: relative;
+        width: 100%;
+        height: 348px;
+        background-image: url('https://maxusvanparts.acstestweb.co.uk/wp-content/uploads/resized.jpg');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        margin-bottom: 0;
+    }
+    .mvp-hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+        padding: 40px 120px;
+        text-align: left;
+    }
+    .mvp-hero-content h1 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 72px;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1;
+        margin: 0 0 8px;
+        text-transform: uppercase;
+        letter-spacing: 0px;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.25);
+    }
+    .mvp-hero-content h1 .hero-sub {
+        display: block;
+        font-size: 40px;
+        line-height: 1;
+        margin-top: 4px;
+    }
+    .mvp-hero-content p {
+        font-family: 'Inter', sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        color: #fff;
+        line-height: 1.35;
+        margin: 16px 0 24px;
+        max-width: 520px;
+    }
+    .mvp-hero-btn {
+        display: inline-block;
+        padding: 12px 32px;
+        background: #F29F05;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .mvp-hero-btn:hover {
+        background: #e08e00;
+        color: #fff;
+    }
+    @media (max-width: 768px) {
+        .mvp-hero { height: 300px; }
+        .mvp-hero-content { padding: 30px 30px; }
+        .mvp-hero-content h1 { font-size: 42px; }
+        .mvp-hero-content h1 .hero-sub { font-size: 26px; }
+        .mvp-hero-content p { font-size: 15px; margin: 12px 0 18px; }
+        .mvp-hero-btn { padding: 10px 24px; font-size: 13px; }
+    }
+    @media (max-width: 480px) {
+        .mvp-hero { height: 220px; }
+        .mvp-hero-content { padding: 20px 20px; }
+        .mvp-hero-content h1 { font-size: 28px; }
+        .mvp-hero-content h1 .hero-sub { font-size: 18px; }
+        .mvp-hero-content p { font-size: 13px; margin: 8px 0 12px; }
+    }
+
+    /* ── Vehicle Carousel ── */
+    .mvp-vehicles {
+        background: #fff;
+        padding: 25px 0 20px;
+        text-align: center;
+    }
+    .mvp-carousel-wrapper {
+        position: relative;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 60px;
+    }
+    .mvp-carousel-track {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding: 10px 5px;
+    }
+    .mvp-carousel-track::-webkit-scrollbar { display: none; }
+    .mvp-vehicle-card {
+        flex: 0 0 110px;
+        text-align: center;
+        text-decoration: none;
+        color: #333;
+        padding: 5px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .mvp-vehicle-card:hover { transform: translateY(-3px); }
+    .mvp-vehicle-circle {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        border: 3px solid #ddd;
+        background: #f8f8f8;
+        margin: 0 auto 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    .mvp-vehicle-circle img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .mvp-vehicle-card:hover .mvp-vehicle-circle {
+        border-color: #e74c3c;
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+    }
+    .mvp-vehicle-card:hover .mvp-vehicle-name { color: #e74c3c; }
+    .mvp-vehicle-name {
+        font-weight: 600;
+        font-size: 12px;
+        margin-bottom: 2px;
+        color: #333;
+        transition: color 0.3s ease;
+        line-height: 1.2;
+    }
+    .mvp-vehicle-years {
+        font-size: 11px;
+        color: #999;
+    }
+    .mvp-carousel-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 40px;
+        background: transparent;
+        color: #333;
+        border: none;
+        cursor: pointer;
+        font-size: 24px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s;
+    }
+    .mvp-carousel-nav:hover { color: #F29F05; }
+    .mvp-carousel-nav.prev { left: 15px; }
+    .mvp-carousel-nav.next { right: 15px; }
+    @media (max-width: 767px) {
+        .mvp-carousel-wrapper { padding: 0 40px; }
+        .mvp-carousel-track { gap: 6px; }
+        .mvp-vehicle-card { flex: 0 0 85px; }
+        .mvp-vehicle-circle { width: 65px; height: 65px; }
+        .mvp-vehicle-name { font-size: 10px; }
+        .mvp-carousel-nav { width: 24px; height: 30px; font-size: 20px; }
+        .mvp-carousel-nav.prev { left: 10px; }
+        .mvp-carousel-nav.next { right: 10px; }
+    }
+
+    /* ── Why Use Us ── */
+    .mvp-why-us {
+        background: #fff;
+        padding: 20px 20px 25px;
+        text-align: center;
+    }
+    .mvp-why-us h2 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #333;
+        margin: 0 0 16px;
+    }
+    .mvp-why-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: 20px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    .mvp-why-card {
+        background: #fff;
+        border-radius: 8px;
+        padding: 18px 14px 16px;
+        flex: 1 1 0;
+        max-width: 170px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .mvp-why-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+    .mvp-why-icon {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .mvp-why-icon svg {
+        width: 40px;
+        height: 40px;
+        fill: none;
+        stroke: #034C8C;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    .mvp-why-card h3 {
+        font-size: 13px;
+        font-weight: 700;
+        color: #333;
+        margin: 0 0 6px;
+    }
+    .mvp-why-card p {
+        font-size: 11px;
+        color: #888;
+        line-height: 1.4;
+        margin: 0;
+    }
+    @media (max-width: 1024px) {
+        .mvp-why-grid { flex-wrap: wrap; gap: 16px; }
+        .mvp-why-card { flex: 1 1 200px; max-width: 30%; padding: 20px 16px 18px; }
+    }
+    @media (max-width: 768px) {
+        .mvp-why-us { padding: 25px 20px 30px; }
+        .mvp-why-grid { flex-wrap: wrap; gap: 16px; }
+        .mvp-why-card { flex: 1 1 200px; max-width: 45%; padding: 20px 16px 18px; }
+        .mvp-why-card h3 { font-size: 14px; }
+        .mvp-why-card p { font-size: 12px; line-height: 1.5; }
+    }
+    @media (max-width: 480px) {
+        .mvp-why-card { flex: 1 1 130px; max-width: 45%; padding: 14px 10px 12px; }
+    }
+
+    /* ── Custom Footer ── */
+    .mvp-footer * { box-sizing: border-box; }
+    .mvp-footer {
+        background: #1a1a2e;
+        color: #ccc;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 14px;
+        line-height: 1.7;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+    .mvp-footer-main {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 50px 30px 40px;
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr 1fr;
+        gap: 30px;
+    }
+    .mvp-footer-col h4 {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 18px 0;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #F29F05;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+    }
+    .mvp-footer-col ul { list-style: none; margin: 0; padding: 0; }
+    .mvp-footer-col ul li { margin-bottom: 8px; }
+    .mvp-footer-col ul li a {
+        color: #ccc;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    .mvp-footer-col ul li a:hover { color: #F29F05; }
+    .mvp-footer-company-name {
+        color: #fff;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0 0 4px 0;
+    }
+    .mvp-footer-trading {
+        font-size: 12px;
+        color: #999;
+        margin-bottom: 16px;
+    }
+    .mvp-footer-contact { margin-bottom: 16px; }
+    .mvp-footer-contact p { margin: 0 0 6px 0; color: #ccc; font-size: 13px; line-height: 1.6; }
+    .mvp-footer-contact a { color: #F29F05; text-decoration: none; }
+    .mvp-footer-contact a:hover { color: #fff; }
+    .mvp-footer-phone { font-size: 16px !important; font-weight: 600; color: #fff !important; }
+    .mvp-footer-reg { font-size: 12px; color: #888; margin-bottom: 16px; }
+    .mvp-footer-reg p { margin: 0 0 2px 0; }
+    .mvp-footer-payments { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .mvp-footer-payments .pay-icon {
+        background: #fff;
+        color: #333;
+        border-radius: 4px;
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        display: inline-flex;
+        align-items: center;
+        height: 28px;
+    }
+    .mvp-footer-bottom {
+        border-top: 1px solid #2a2a3e;
+        background: #151525;
+    }
+    .mvp-footer-bottom-inner {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 18px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .mvp-footer-copyright { color: #888; font-size: 13px; margin: 0; }
+    .mvp-footer-bottom-links { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+    .mvp-footer-bottom-links a { color: #888; text-decoration: none; transition: color 0.2s ease; }
+    .mvp-footer-bottom-links a:hover { color: #F29F05; }
+    .mvp-footer-bottom-links .sep { color: #555; }
+    @media (max-width: 1024px) {
+        .mvp-footer-main { grid-template-columns: 1fr 1fr; gap: 24px 30px; padding: 40px 24px 30px; }
+        .mvp-footer-col:first-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 768px) {
+        .mvp-footer-main { grid-template-columns: 1fr; gap: 20px; padding: 30px 20px 24px; }
+        .mvp-footer-bottom-inner { flex-direction: column; text-align: center; padding: 14px 20px; }
+    }
+
+    /* === Product loop tweaks to match target === */
+    body.home ul.products .product .button,
+    body.home ul.products .product .added_to_cart {
+        background-color: transparent !important;
+        color: #888 !important;
+        box-shadow: none !important;
+    }
+    body.home ul.products .product .button:hover,
+    body.home ul.products .product .added_to_cart:hover {
+        background-color: transparent !important;
+        color: #333 !important;
+    }
+    body.home ul.products .product .button:before,
+    body.home ul.products .product .button:after,
+    body.home ul.products .product .added_to_cart:before,
+    body.home ul.products .product .added_to_cart:after {
+        display: none !important;
+    }
+    body.home ul.products .product .star-rating-wrap {
+        display: none !important;
+    }
+    &lt;/style&gt;
+    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+    &lt;link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&amp;display=swap" rel="stylesheet"&gt;
+    &lt;?php
+}</pre>
+</div>
+
+<!-- SECTION 7: CODE SECTION 2 - HERO + CAROUSEL -->
+<div class="section" id="s7">
+<h2>7. Code Section 2: Hero + Vehicle Carousel (Lines 443&ndash;505)</h2>
+<p><span class="badge badge-hook">wp_footer</span> <span class="badge badge-line">Priority 1</span> &mdash; Homepage only</p>
+<p>PHP reads all 18 VIN terms from DB, builds hero banner HTML and horizontal scrollable carousel of vehicle cards, then injects via JavaScript into the first <code>.elementor-section</code> after the hidden RevSlider. Vehicle images are hosted on the source site: <code>https://maxusvanparts.acstestweb.co.uk/wp-content/uploads/vehicles/</code></p>
+<h4>Full Source Code</h4>
+<pre>add_action( 'wp_footer', 'mvp_facelift_inject_hero_and_carousel', 1 );
+function mvp_facelift_inject_hero_and_carousel() {
+    if ( ! is_front_page() &amp;&amp; ! is_home() ) return;
+
+    // Build vehicle cards from DB term meta (organic)
+    $maxus_term_id = 3590; // Maxus parent category
+    $vin_terms = get_terms( array(
+        'taxonomy'   =&gt; 'product_cat',
+        'parent'     =&gt; $maxus_term_id,
+        'hide_empty' =&gt; false,
+        'orderby'    =&gt; 'name',
+    ) );
+
+    $cards = '';
+    if ( ! is_wp_error( $vin_terms ) ) {
+        foreach ( $vin_terms as $term ) {
+            $model = get_term_meta( $term-&gt;term_id, 'vehicle_model', true );
+            $year  = get_term_meta( $term-&gt;term_id, 'vehicle_year', true );
+            $img   = get_term_meta( $term-&gt;term_id, 'vehicle_image', true );
+            $slug  = get_term_meta( $term-&gt;term_id, 'vehicle_slug', true );
+            if ( ! $model || ! $slug ) continue;
+            $url = home_url( '/vehicle/' . $slug . '/' );
+            $cards .= '&lt;a href="' . esc_url( $url ) . '" class="mvp-vehicle-card"&gt;'
+                . '&lt;div class="mvp-vehicle-circle"&gt;&lt;img src="' . esc_url( $img ) . '" alt="' . esc_attr( $model ) . '" loading="lazy"&gt;&lt;/div&gt;'
+                . '&lt;div class="mvp-vehicle-name"&gt;' . esc_html( $model ) . '&lt;/div&gt;'
+                . '&lt;div class="mvp-vehicle-years"&gt;' . esc_html( $year ) . '&lt;/div&gt;'
+                . '&lt;/a&gt;';
+        }
+    }
+
+    $hero_html = '&lt;div class="mvp-hero"&gt;'
+        . '&lt;div class="mvp-hero-content"&gt;'
+        . '&lt;h1&gt;Genuine OEM Parts&lt;span class="hero-sub"&gt;Direct From Maxus&lt;/span&gt;&lt;/h1&gt;'
+        . '&lt;p&gt;Original factory parts at competitive prices.&lt;br&gt;Perfect fit. Guaranteed quality.&lt;/p&gt;'
+        . '&lt;a href="/shop/" class="mvp-hero-btn"&gt;Shop All Parts&lt;/a&gt;'
+        . '&lt;/div&gt;&lt;/div&gt;';
+
+    $carousel_html = '&lt;section class="mvp-vehicles"&gt;'
+        . '&lt;div class="mvp-carousel-wrapper"&gt;'
+        . '&lt;button class="mvp-carousel-nav prev" onclick="document.querySelector(\'.mvp-carousel-track\').scrollBy({left:-220,behavior:\'smooth\'})"&gt;&amp;#8249;&lt;/button&gt;'
+        . '&lt;div class="mvp-carousel-track"&gt;' . $cards . '&lt;/div&gt;'
+        . '&lt;button class="mvp-carousel-nav next" onclick="document.querySelector(\'.mvp-carousel-track\').scrollBy({left:220,behavior:\'smooth\'})"&gt;&amp;#8250;&lt;/button&gt;'
+        . '&lt;/div&gt;&lt;/section&gt;';
+
+    $combined = json_encode( $hero_html . $carousel_html );
+    ?&gt;
+    &lt;script&gt;
+    document.addEventListener('DOMContentLoaded', function() {
+        var target = document.querySelector('.elementor-11641');
+        if (!target) return;
+        var container = document.createElement('div');
+        container.id = 'mvp-facelift-hero-area';
+        container.innerHTML = &lt;?php echo $combined; ?&gt;;
+        target.parentNode.insertBefore(container, target);
+    });
+    &lt;/script&gt;
+    &lt;?php
+}</pre>
+</div>
+
+<!-- SECTION 8: CODE SECTION 3 - WHY USE US -->
+<div class="section" id="s8">
+<h2>8. Code Section 3: Why Use Us (Lines 507&ndash;550)</h2>
+<p><span class="badge badge-hook">wp_footer</span> <span class="badge badge-line">Priority 5</span> &mdash; Homepage only</p>
+<p>Injects a 6-card grid section with SVG icons: Genuine OEM Parts, Professional Team, Happy to Help, Great Customer Service, Verified Before Dispatch, UK Wide Delivery.</p>
+<h4>Full Source Code</h4>
+<pre>add_action( 'wp_footer', 'mvp_facelift_why_us', 5 );
+function mvp_facelift_why_us() {
+    if ( ! is_front_page() &amp;&amp; ! is_home() ) return;
+    ?&gt;
+    &lt;section class="mvp-why-us"&gt;
+        &lt;h2&gt;Why Use Us?&lt;/h2&gt;
+        &lt;div class="mvp-why-grid"&gt;
+            &lt;div class="mvp-why-card"&gt;
+                &lt;div class="mvp-why-icon"&gt;&lt;svg viewBox="0 0 48 48"&gt;&lt;path d="M24 4L6 12v12c0 11 8 18 18 20 10-2 18-9 18-20V12L24 4z"/&gt;&lt;polyline points="16 24 22 30 34 18"/&gt;&lt;/svg&gt;&lt;/div&gt;
+                &lt;h3&gt;Genuine OEM Parts&lt;/h3&gt;
+                &lt;p&gt;All parts are original Maxus or OEM-equivalent, ensuring the right fit and quality for your vehicle.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="mvp-why-card"&gt;
+                &lt;div class="mvp-why-icon"&gt;&lt;svg viewBox="0 0 48 48"&gt;&lt;circle cx="24" cy="14" r="8"/&gt;&lt;path d="M8 42c0-9 7-16 16-16s16 7 16 16"/&gt;&lt;/svg&gt;&lt;/div&gt;
+                &lt;h3&gt;Professional Team&lt;/h3&gt;
+                &lt;p&gt;Expert staff with deep knowledge of the full Maxus range.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="mvp-why-card"&gt;
+                &lt;div class="mvp-why-icon"&gt;&lt;svg viewBox="0 0 48 48"&gt;&lt;path d="M24 44s-18-10-18-24a10 10 0 0118-6 10 10 0 0118 6c0 14-18 24-18 24z"/&gt;&lt;/svg&gt;&lt;/div&gt;
+                &lt;h3&gt;Happy to Help&lt;/h3&gt;
+                &lt;p&gt;Friendly support to help you find exactly the right part.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="mvp-why-card"&gt;
+                &lt;div class="mvp-why-icon"&gt;&lt;svg viewBox="0 0 48 48"&gt;&lt;path d="M4 24c0-11 9-20 20-20s20 9 20 20"/&gt;&lt;path d="M4 28v6a4 4 0 004 4h2a2 2 0 002-2v-8a2 2 0 00-2-2H6a4 4 0 00-2 4zm40 0v6a4 4 0 01-4 4h-2a2 2 0 01-2-2v-8a2 2 0 012-2h4a4 4 0 012 4z"/&gt;&lt;path d="M40 38c0 4-7 6-16 6"/&gt;&lt;/svg&gt;&lt;/div&gt;
+                &lt;h3&gt;Great Customer Service&lt;/h3&gt;
+                &lt;p&gt;Friendly, knowledgeable support from order to delivery.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="mvp-why-card"&gt;
+                &lt;div class="mvp-why-icon"&gt;&lt;svg viewBox="0 0 48 48"&gt;&lt;rect x="6" y="8" width="36" height="32" rx="3"/&gt;&lt;polyline points="16 24 22 30 34 18"/&gt;&lt;line x1="6" y1="16" x2="42" y2="16"/&gt;&lt;/svg&gt;&lt;/div&gt;
+                &lt;h3&gt;Verified Before Dispatch&lt;/h3&gt;
+                &lt;p&gt;Every order checked and confirmed before shipping.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="mvp-why-card"&gt;
+                &lt;div class="mvp-why-icon"&gt;&lt;svg viewBox="0 0 48 48"&gt;&lt;rect x="2" y="10" width="28" height="20" rx="2"/&gt;&lt;path d="M30 16h8l6 8v6h-14V16z"/&gt;&lt;circle cx="12" cy="34" r="4"/&gt;&lt;circle cx="38" cy="34" r="4"/&gt;&lt;/svg&gt;&lt;/div&gt;
+                &lt;h3&gt;UK Wide Delivery&lt;/h3&gt;
+                &lt;p&gt;Fast, tracked delivery to anywhere in the United Kingdom.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;?php
+}</pre>
+</div>
+
+<!-- SECTION 9: CODE SECTION 4 - CUSTOM FOOTER -->
+<div class="section" id="s9">
+<h2>9. Code Section 4: Custom Footer (Lines 552&ndash;642)</h2>
+<p><span class="badge badge-hook">wp_footer</span> <span class="badge badge-line">Priority 10</span> &mdash; Homepage only</p>
+<p>Dark navy footer (#1a1a2e) with 6-column grid: About/Contact, Quick Links, Information, Vehicles, Customer Service, Other Services. Includes company registration, VAT number, payment icons, and bottom copyright bar.</p>
+<h4>Full Source Code</h4>
+<pre>add_action( 'wp_footer', 'mvp_facelift_footer', 10 );
+function mvp_facelift_footer() {
+    if ( ! is_front_page() &amp;&amp; ! is_home() ) return;
+    ?&gt;
+    &lt;footer class="mvp-footer"&gt;
+        &lt;div class="mvp-footer-main"&gt;
+            &lt;div class="mvp-footer-col"&gt;
+                &lt;h4&gt;Maxus Parts Direct&lt;/h4&gt;
+                &lt;div class="mvp-footer-trading"&gt;A trading name of Van Parts Direct Ltd&lt;/div&gt;
+                &lt;div class="mvp-footer-contact"&gt;
+                    &lt;p&gt;Unit 1-10, Cherry Tree Road,&lt;br&gt;Tibenham, NR16 1PH&lt;/p&gt;
+                    &lt;p class="mvp-footer-phone"&gt;&lt;a href="tel:01953528800"&gt;01953 528 800&lt;/a&gt;&lt;/p&gt;
+                    &lt;p&gt;&lt;a href="mailto:accounts@vanparts-direct.co.uk"&gt;accounts@vanparts-direct.co.uk&lt;/a&gt;&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="mvp-footer-reg"&gt;
+                    &lt;p&gt;Company Reg: 16322863&lt;/p&gt;
+                    &lt;p&gt;VAT No: 490 9953 39&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="mvp-footer-payments"&gt;
+                    &lt;span class="pay-icon"&gt;VISA&lt;/span&gt;
+                    &lt;span class="pay-icon"&gt;Mastercard&lt;/span&gt;
+                    &lt;span class="pay-icon"&gt;AMEX&lt;/span&gt;
+                    &lt;span class="pay-icon"&gt;Maestro&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="mvp-footer-col"&gt;
+                &lt;h4&gt;Quick Links&lt;/h4&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/shop/"&gt;Shop&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/my-account/"&gt;My Account&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/cart/"&gt;Cart&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/wishlist/"&gt;Wishlist&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            &lt;div class="mvp-footer-col"&gt;
+                &lt;h4&gt;Information&lt;/h4&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href="/about-us/"&gt;About Us&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/contact-us/"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/terms-and-conditions/"&gt;Terms &amp;amp; Conditions&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/privacy-policy/"&gt;Privacy Policy&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/gdpr-data-protection/"&gt;GDPR Data Protection&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/refund_returns/"&gt;Returns &amp;amp; Exchanges&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            &lt;div class="mvp-footer-col"&gt;
+                &lt;h4&gt;Vehicles&lt;/h4&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href="/shop/"&gt;E Deliver 3&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/shop/"&gt;E Deliver 7&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/shop/"&gt;E Deliver 9&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/shop/"&gt;T90 EV&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            &lt;div class="mvp-footer-col"&gt;
+                &lt;h4&gt;Customer Service&lt;/h4&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href="/my-account/"&gt;Login&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/my-account/"&gt;Register&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/my-account/orders/"&gt;Order History&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/shipping-info/"&gt;Shipping Info&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/faq/"&gt;FAQ&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/trade-account/"&gt;Trade Account&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            &lt;div class="mvp-footer-col"&gt;
+                &lt;h4&gt;Our Other Services&lt;/h4&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href="https://vansalesdirect.uk" target="_blank" rel="noopener"&gt;vansalesdirect.uk&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="https://direct-vanhire.co.uk" target="_blank" rel="noopener"&gt;direct-vanhire.co.uk&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="https://rapidfit.co.uk" target="_blank" rel="noopener"&gt;rapidfit.co.uk&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="mvp-footer-bottom"&gt;
+            &lt;div class="mvp-footer-bottom-inner"&gt;
+                &lt;p class="mvp-footer-copyright"&gt;&amp;copy; &lt;?php echo date('Y'); ?&gt; Van Parts Direct Ltd. All rights reserved.&lt;/p&gt;
+                &lt;div class="mvp-footer-bottom-links"&gt;
+                    &lt;a href="/privacy-policy/"&gt;Privacy Policy&lt;/a&gt;
+                    &lt;span class="sep"&gt;|&lt;/span&gt;
+                    &lt;a href="/terms-and-conditions/"&gt;Terms &amp;amp; Conditions&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/footer&gt;
+    &lt;?php
+}</pre>
+</div>
+
+<!-- SECTION 10: CODE SECTION 5 - VEHICLE LANDING PAGES -->
+<div class="section" id="s10">
+<h2>10. Code Section 5: Vehicle Landing Pages (Lines 644&ndash;903)</h2>
+<p><span class="badge badge-hook">init</span> <span class="badge badge-hook">query_vars</span> <span class="badge badge-hook">pre_get_posts</span> <span class="badge badge-hook">template_redirect</span></p>
+<p>Creates URLs at <code>/vehicle/{slug}/</code> that display a vehicle header (image, model name, year, breadcrumb) and grid of all part categories for that VIN. Categories are organic &mdash; only categories with products appear. Each card shows category image, name, and product count (including subcategories). Cards link to <code>/department/{category-slug}/</code>.</p>
+<h4>How It Works</h4>
+<ol>
+<li><code>mvp_vehicle_rewrite_rules()</code> &mdash; Registers URL pattern <code>^vehicle/([^/]+)/?$</code></li>
+<li><code>mvp_vehicle_query_vars()</code> &mdash; Registers <code>mvp_vehicle</code> query var</li>
+<li><code>mvp_vehicle_prevent_404()</code> &mdash; Prevents WP from setting 404 on vehicle pages</li>
+<li><code>mvp_vehicle_template_redirect()</code> &mdash; Looks up VIN term by <code>vehicle_slug</code> meta, loads child categories, calls render function</li>
+<li><code>mvp_vehicle_render_full_page()</code> &mdash; Outputs <code>get_header()</code>, custom HTML/CSS, <code>get_footer()</code></li>
+</ol>
+<p>Category images use convention: <code>https://maxusvanparts.acstestweb.co.uk/wp-content/uploads/categories/{Category_Name}.png</code> (spaces replaced with underscores)</p>
+<h4>Full Source Code</h4>
+<pre>// Register rewrite rule: /vehicle/{slug}/ &rarr; index.php?mvp_vehicle={slug}
+add_action( 'init', 'mvp_vehicle_rewrite_rules' );
+function mvp_vehicle_rewrite_rules() {
+    add_rewrite_rule(
+        '^vehicle/([^/]+)/?$',
+        'index.php?mvp_vehicle=$matches[1]',
+        'top'
+    );
+}
+
+// Register query var
+add_filter( 'query_vars', 'mvp_vehicle_query_vars' );
+function mvp_vehicle_query_vars( $vars ) {
+    $vars[] = 'mvp_vehicle';
+    return $vars;
+}
+
+// Prevent WordPress from treating vehicle pages as 404
+add_action( 'pre_get_posts', 'mvp_vehicle_prevent_404' );
+function mvp_vehicle_prevent_404( $query ) {
+    if ( ! $query-&gt;is_main_query() ) return;
+    $vehicle_slug = $query-&gt;get( 'mvp_vehicle' );
+    if ( $vehicle_slug ) {
+        $query-&gt;is_404 = false;
+    }
+}
+
+// Render vehicle page via template_redirect (before any template loads)
+add_action( 'template_redirect', 'mvp_vehicle_template_redirect' );
+function mvp_vehicle_template_redirect() {
+    $vehicle_slug = get_query_var( 'mvp_vehicle' );
+    if ( ! $vehicle_slug ) return;
+
+    // Find the VIN term by its vehicle_slug meta
+    $maxus_term_id = 3590;
+    $vin_terms = get_terms( array(
+        'taxonomy'   =&gt; 'product_cat',
+        'parent'     =&gt; $maxus_term_id,
+        'hide_empty' =&gt; false,
+        'meta_query' =&gt; array( array( 'key' =&gt; 'vehicle_slug', 'value' =&gt; sanitize_title( $vehicle_slug ) ) ),
+    ) );
+
+    if ( is_wp_error( $vin_terms ) || empty( $vin_terms ) ) {
+        return; // Let WP handle 404
+    }
+
+    $vin_term = $vin_terms[0];
+
+    // Store data in global
+    global $mvp_vehicle_data;
+    $mvp_vehicle_data = array(
+        'vin_term'     =&gt; $vin_term,
+        'model'        =&gt; get_term_meta( $vin_term-&gt;term_id, 'vehicle_model', true ),
+        'year'         =&gt; get_term_meta( $vin_term-&gt;term_id, 'vehicle_year', true ),
+        'img'          =&gt; get_term_meta( $vin_term-&gt;term_id, 'vehicle_image', true ),
+        'categories'   =&gt; get_terms( array(
+            'taxonomy'   =&gt; 'product_cat',
+            'parent'     =&gt; $vin_term-&gt;term_id,
+            'hide_empty' =&gt; true,
+            'orderby'    =&gt; 'name',
+        ) ),
+        'cat_img_base' =&gt; 'https://maxusvanparts.acstestweb.co.uk/wp-content/uploads/categories/',
+    );
+
+    // Reset 404 status and set 200
+    global $wp_query;
+    $wp_query-&gt;is_404 = false;
+    status_header( 200 );
+
+    // Render and exit
+    mvp_vehicle_render_full_page();
+    exit;
+}
+
+// Render full vehicle landing page
+function mvp_vehicle_render_full_page() {
+    global $mvp_vehicle_data;
+    $vin_term     = $mvp_vehicle_data['vin_term'];
+    $model        = $mvp_vehicle_data['model'];
+    $year         = $mvp_vehicle_data['year'];
+    $img          = $mvp_vehicle_data['img'];
+    $categories   = $mvp_vehicle_data['categories'];
+    $cat_img_base = $mvp_vehicle_data['cat_img_base'];
+
+    get_header();
+    ?&gt;
+    &lt;style&gt;
+    /* Vehicle Landing Page Styles */
+    .mvp-vehicle-page {
+        max-width: 1300px; margin: 0 auto; padding: 30px 20px 60px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .mvp-vehicle-header {
+        display: flex; align-items: center; gap: 30px; margin-bottom: 35px;
+        padding-bottom: 25px; border-bottom: 2px solid #f0f0f0;
+    }
+    .mvp-vehicle-header-img {
+        width: 120px; height: 120px; border-radius: 50%; border: 3px solid #ddd;
+        background: #f8f8f8; overflow: hidden; flex-shrink: 0;
+    }
+    .mvp-vehicle-header-img img { width: 100%; height: 100%; object-fit: cover; }
+    .mvp-vehicle-header-info h1 { font-size: 32px; font-weight: 700; color: #1a1a2e; margin: 0 0 6px; }
+    .mvp-vehicle-header-info .mvp-vh-years { font-size: 16px; color: #888; margin: 0 0 10px; }
+    .mvp-vehicle-header-info .mvp-vh-breadcrumb { font-size: 14px; color: #aaa; }
+    .mvp-vehicle-header-info .mvp-vh-breadcrumb a { color: #034C8C; text-decoration: none; }
+    .mvp-vehicle-header-info .mvp-vh-breadcrumb a:hover { color: #F29F05; }
+    .mvp-category-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;
+    }
+    .mvp-category-card {
+        background: #fff; border: 1px solid #eee; border-radius: 10px; overflow: hidden;
+        text-decoration: none; color: #333; transition: transform 0.3s, box-shadow 0.3s;
+        display: flex; flex-direction: column;
+    }
+    .mvp-category-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+    .mvp-category-card-img {
+        width: 100%; height: 150px; background: #f5f5f5;
+        display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .mvp-category-card-img img { max-width: 90%; max-height: 130px; object-fit: contain; }
+    .mvp-category-card-body { padding: 14px 16px; text-align: center; }
+    .mvp-category-card-body h3 { font-size: 15px; font-weight: 600; color: #1a1a2e; margin: 0 0 4px; }
+    .mvp-category-card-body .mvp-cat-count { font-size: 12px; color: #999; }
+    @media (max-width: 768px) {
+        .mvp-vehicle-header { flex-direction: column; text-align: center; gap: 16px; }
+        .mvp-vehicle-header-img { width: 90px; height: 90px; }
+        .mvp-vehicle-header-info h1 { font-size: 24px; }
+        .mvp-category-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+        .mvp-category-card-img { height: 120px; }
+    }
+    @media (max-width: 480px) {
+        .mvp-category-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+        .mvp-category-card-img { height: 100px; }
+        .mvp-category-card-body { padding: 10px 12px; }
+        .mvp-category-card-body h3 { font-size: 13px; }
+    }
+    &lt;/style&gt;
+
+    &lt;div class="mvp-vehicle-page"&gt;
+        &lt;div class="mvp-vehicle-header"&gt;
+            &lt;?php if ( $img ) : ?&gt;
+            &lt;div class="mvp-vehicle-header-img"&gt;
+                &lt;img src="&lt;?php echo esc_url( $img ); ?&gt;" alt="&lt;?php echo esc_attr( $model ); ?&gt;"&gt;
+            &lt;/div&gt;
+            &lt;?php endif; ?&gt;
+            &lt;div class="mvp-vehicle-header-info"&gt;
+                &lt;p class="mvp-vh-breadcrumb"&gt;&lt;a href="&lt;?php echo home_url('/'); ?&gt;"&gt;Home&lt;/a&gt; &amp;rsaquo; &lt;a href="&lt;?php echo home_url('/'); ?&gt;"&gt;Vehicles&lt;/a&gt; &amp;rsaquo; &lt;?php echo esc_html( $model ); ?&gt;&lt;/p&gt;
+                &lt;h1&gt;&lt;?php echo esc_html( $model ); ?&gt;&lt;/h1&gt;
+                &lt;p class="mvp-vh-years"&gt;&lt;?php echo esc_html( $year ); ?&gt;&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;?php if ( ! empty( $categories ) &amp;&amp; ! is_wp_error( $categories ) ) : ?&gt;
+        &lt;div class="mvp-category-grid"&gt;
+            &lt;?php foreach ( $categories as $cat ) :
+                // Build category image filename: replace spaces with underscores
+                $cat_img_name = str_replace( ' ', '_', $cat-&gt;name ) . '.png';
+                $cat_img_url  = $cat_img_base . $cat_img_name;
+                // Link to department page (shows all vehicles with this category)
+                $cat_url = home_url( '/department/' . sanitize_title( $cat-&gt;name ) . '/' );
+                // Count products (including subcategories)
+                $product_count = $cat-&gt;count;
+                $subcats = get_terms( array(
+                    'taxonomy'   =&gt; 'product_cat',
+                    'parent'     =&gt; $cat-&gt;term_id,
+                    'hide_empty' =&gt; true,
+                ) );
+                if ( ! is_wp_error( $subcats ) ) {
+                    foreach ( $subcats as $subcat ) {
+                        $product_count += $subcat-&gt;count;
+                    }
+                }
+            ?&gt;
+            &lt;a href="&lt;?php echo esc_url( $cat_url ); ?&gt;" class="mvp-category-card"&gt;
+                &lt;div class="mvp-category-card-img"&gt;
+                    &lt;img src="&lt;?php echo esc_url( $cat_img_url ); ?&gt;" alt="&lt;?php echo esc_attr( $cat-&gt;name ); ?&gt;" loading="lazy"
+                         onerror="this.style.display='none'"&gt;
+                &lt;/div&gt;
+                &lt;div class="mvp-category-card-body"&gt;
+                    &lt;h3&gt;&lt;?php echo esc_html( $cat-&gt;name ); ?&gt;&lt;/h3&gt;
+                    &lt;span class="mvp-cat-count"&gt;&lt;?php echo $product_count; ?&gt; part&lt;?php echo $product_count !== 1 ? 's' : ''; ?&gt;&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/a&gt;
+            &lt;?php endforeach; ?&gt;
+        &lt;/div&gt;
+        &lt;?php else : ?&gt;
+        &lt;p style="text-align:center;color:#888;padding:40px 0;"&gt;No parts categories found for this vehicle yet.&lt;/p&gt;
+        &lt;?php endif; ?&gt;
+    &lt;/div&gt;
+    &lt;?php
+    get_footer();
+}</pre>
+</div>
+
+<!-- SECTION 11: CODE SECTION 5b - DEPARTMENT PAGES -->
+<div class="section" id="s11">
+<h2>11. Code Section 5b: Department Pages (Lines 905&ndash;1258)</h2>
+<p><span class="badge badge-hook">init</span> <span class="badge badge-hook">query_vars</span> <span class="badge badge-hook">pre_get_posts</span> <span class="badge badge-hook">template_redirect</span></p>
+<p>Creates URLs at <code>/department/{slug}/</code> that show all vehicles having that category. E.g. <code>/department/brakes/</code> shows all vehicles with a "Brakes" child category. Also handles <code>/department/{dept}/{vehicle}/</code> which redirects to the specific WooCommerce category page.</p>
+<h4>How It Works</h4>
+<ol>
+<li>Iterates all 18 VIN terms under Maxus (3590)</li>
+<li>For each VIN, checks child categories for a name matching the department slug</li>
+<li>Builds vehicle cards with: image, model name, year, part count</li>
+<li>Each card links to the WooCommerce product category page: <code>/product-category/maxus/{vin-slug}/{category-slug}/</code></li>
+</ol>
+<h4>Full Source Code</h4>
+<pre>// Register rewrite rules for department pages
+add_action( 'init', 'mvp_department_rewrite_rules' );
+function mvp_department_rewrite_rules() {
+    // /department/{cat-slug}/{vehicle-slug}/ &rarr; show products for that vehicle's category
+    add_rewrite_rule(
+        '^department/([^/]+)/([^/]+)/?$',
+        'index.php?mvp_department=$matches[1]&amp;mvp_dept_vehicle=$matches[2]',
+        'top'
+    );
+    // /department/{cat-slug}/ &rarr; show all vehicles with that category
+    add_rewrite_rule(
+        '^department/([^/]+)/?$',
+        'index.php?mvp_department=$matches[1]',
+        'top'
+    );
+}
+
+// Register query vars
+add_filter( 'query_vars', 'mvp_department_query_vars' );
+function mvp_department_query_vars( $vars ) {
+    $vars[] = 'mvp_department';
+    $vars[] = 'mvp_dept_vehicle';
+    return $vars;
+}
+
+// Prevent 404 for department pages
+add_action( 'pre_get_posts', 'mvp_department_prevent_404' );
+function mvp_department_prevent_404( $query ) {
+    if ( ! $query-&gt;is_main_query() ) return;
+    if ( $query-&gt;get( 'mvp_department' ) ) {
+        $query-&gt;is_404 = false;
+    }
+}
+
+// Render department pages via template_redirect
+add_action( 'template_redirect', 'mvp_department_template_redirect' );
+function mvp_department_template_redirect() {
+    $dept_slug = get_query_var( 'mvp_department' );
+    if ( ! $dept_slug ) return;
+
+    $vehicle_slug = get_query_var( 'mvp_dept_vehicle' );
+
+    // If vehicle slug present, redirect to the WooCommerce category for that vehicle's department
+    if ( $vehicle_slug ) {
+        mvp_department_vehicle_redirect( $dept_slug, $vehicle_slug );
+        return;
+    }
+
+    // Show department page with all vehicles that have this category
+    global $wp_query;
+    $wp_query-&gt;is_404 = false;
+    status_header( 200 );
+
+    mvp_department_render_page( $dept_slug );
+    exit;
+}
+
+// Redirect /department/{cat}/{vehicle}/ to the WooCommerce category page
+function mvp_department_vehicle_redirect( $dept_slug, $vehicle_slug ) {
+    $maxus_term_id = 3590;
+
+    // Find VIN term by vehicle_slug meta
+    $vin_terms = get_terms( array(
+        'taxonomy'   =&gt; 'product_cat',
+        'parent'     =&gt; $maxus_term_id,
+        'hide_empty' =&gt; false,
+        'meta_query' =&gt; array( array( 'key' =&gt; 'vehicle_slug', 'value' =&gt; sanitize_title( $vehicle_slug ) ) ),
+    ) );
+
+    if ( is_wp_error( $vin_terms ) || empty( $vin_terms ) ) {
+        global $wp_query;
+        $wp_query-&gt;set_404();
+        status_header( 404 );
+        return;
+    }
+
+    $vin_term = $vin_terms[0];
+
+    // Find the child category matching department name
+    $child_cats = get_terms( array(
+        'taxonomy' =&gt; 'product_cat',
+        'parent'   =&gt; $vin_term-&gt;term_id,
+        'hide_empty' =&gt; true,
+    ) );
+
+    $dept_name_clean = str_replace( '-', ' ', $dept_slug );
+    $target_cat = null;
+
+    if ( ! is_wp_error( $child_cats ) ) {
+        foreach ( $child_cats as $cat ) {
+            $cat_name_clean = strtolower( str_replace( array( ' ', '_' ), '-', $cat-&gt;name ) );
+            if ( sanitize_title( $cat-&gt;name ) === sanitize_title( $dept_name_clean ) ||
+                 $cat_name_clean === $dept_slug ||
+                 sanitize_title( $cat-&gt;name ) === $dept_slug ) {
+                $target_cat = $cat;
+                break;
+            }
+        }
+    }
+
+    if ( $target_cat ) {
+        $url = get_term_link( $target_cat );
+        if ( ! is_wp_error( $url ) ) {
+            wp_redirect( $url, 301 );
+            exit;
+        }
+    }
+
+    // Fallback: redirect to vehicle page
+    wp_redirect( home_url( '/vehicle/' . $vehicle_slug . '/' ), 302 );
+    exit;
+}
+
+// Render the department page showing all vehicles with this category
+function mvp_department_render_page( $dept_slug ) {
+    $maxus_term_id = 3590;
+    $dept_name_clean = str_replace( '-', ' ', $dept_slug );
+
+    // Get all VIN terms
+    $vin_terms = get_terms( array(
+        'taxonomy'   =&gt; 'product_cat',
+        'parent'     =&gt; $maxus_term_id,
+        'hide_empty' =&gt; false,
+        'orderby'    =&gt; 'name',
+    ) );
+
+    // Find which VINs have this category as a child
+    $vehicles_with_dept = array();
+    $dept_display_name = '';
+    $cat_img_base = 'https://maxusvanparts.acstestweb.co.uk/wp-content/uploads/categories/';
+
+    if ( ! is_wp_error( $vin_terms ) ) {
+        foreach ( $vin_terms as $vin_term ) {
+            $model = get_term_meta( $vin_term-&gt;term_id, 'vehicle_model', true );
+            $slug  = get_term_meta( $vin_term-&gt;term_id, 'vehicle_slug', true );
+            if ( ! $model || ! $slug ) continue;
+
+            // Check child categories for matching department
+            $child_cats = get_terms( array(
+                'taxonomy' =&gt; 'product_cat',
+                'parent'   =&gt; $vin_term-&gt;term_id,
+                'hide_empty' =&gt; true,
+            ) );
+
+            if ( is_wp_error( $child_cats ) ) continue;
+
+            foreach ( $child_cats as $cat ) {
+                if ( sanitize_title( $cat-&gt;name ) === sanitize_title( $dept_name_clean ) ||
+                     sanitize_title( $cat-&gt;name ) === $dept_slug ) {
+                    if ( ! $dept_display_name ) $dept_display_name = $cat-&gt;name;
+
+                    // Count products including subcategories
+                    $product_count = $cat-&gt;count;
+                    $subcats = get_terms( array(
+                        'taxonomy' =&gt; 'product_cat',
+                        'parent'   =&gt; $cat-&gt;term_id,
+                        'hide_empty' =&gt; true,
+                    ) );
+                    if ( ! is_wp_error( $subcats ) ) {
+                        foreach ( $subcats as $sc ) $product_count += $sc-&gt;count;
+                    }
+
+                    $year  = get_term_meta( $vin_term-&gt;term_id, 'vehicle_year', true );
+                    $img   = get_term_meta( $vin_term-&gt;term_id, 'vehicle_image', true );
+
+                    $vehicles_with_dept[] = array(
+                        'model'         =&gt; $model,
+                        'year'          =&gt; $year,
+                        'img'           =&gt; $img,
+                        'vehicle_slug'  =&gt; $slug,
+                        'cat_term'      =&gt; $cat,
+                        'product_count' =&gt; $product_count,
+                    );
+                    break;
+                }
+            }
+        }
+    }
+
+    if ( empty( $dept_display_name ) ) {
+        $dept_display_name = ucwords( $dept_name_clean );
+    }
+
+    // Category image
+    $cat_img_name = str_replace( ' ', '_', $dept_display_name ) . '.png';
+    $cat_img_url  = $cat_img_base . $cat_img_name;
+
+    get_header();
+    ?&gt;
+    &lt;style&gt;
+    .mvp-dept-page { max-width: 1300px; margin: 0 auto; padding: 30px 20px 60px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .mvp-dept-header { display: flex; align-items: center; gap: 24px; margin-bottom: 35px; padding-bottom: 25px; border-bottom: 2px solid #f0f0f0; }
+    .mvp-dept-header-img { width: 100px; height: 100px; background: #f8f8f8; border-radius: 12px; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .mvp-dept-header-img img { max-width: 85%; max-height: 85%; object-fit: contain; }
+    .mvp-dept-header-info h1 { font-size: 32px; font-weight: 700; color: #1a1a2e; margin: 0 0 6px; }
+    .mvp-dept-header-info .mvp-dept-breadcrumb { font-size: 14px; color: #aaa; }
+    .mvp-dept-header-info .mvp-dept-breadcrumb a { color: #034C8C; text-decoration: none; }
+    .mvp-dept-header-info .mvp-dept-breadcrumb a:hover { color: #F29F05; }
+    .mvp-dept-subtitle { font-size: 16px; color: #666; margin: 6px 0 0; }
+    .mvp-dept-vehicle-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+    .mvp-dept-vehicle-card { background: #fff; border: 1px solid #eee; border-radius: 12px; overflow: hidden; text-decoration: none; color: #333; transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; }
+    .mvp-dept-vehicle-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+    .mvp-dept-vehicle-card-img { width: 100%; height: 160px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 15px; box-sizing: border-box; }
+    .mvp-dept-vehicle-card-img img { max-width: 100%; max-height: 130px; object-fit: contain; }
+    .mvp-dept-vehicle-card-body { padding: 16px 18px; border-top: 1px solid #f0f0f0; }
+    .mvp-dept-vehicle-card-body h3 { font-size: 16px; font-weight: 700; color: #1a1a2e; margin: 0 0 4px; }
+    .mvp-dept-vehicle-card-body .mvp-dept-year { font-size: 13px; color: #888; margin: 0 0 8px; }
+    .mvp-dept-vehicle-card-body .mvp-dept-parts { font-size: 13px; color: #034C8C; font-weight: 600; }
+    @media (max-width: 768px) { .mvp-dept-header { flex-direction: column; text-align: center; gap: 16px; } .mvp-dept-header-img { width: 80px; height: 80px; } .mvp-dept-header-info h1 { font-size: 24px; } .mvp-dept-vehicle-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; } .mvp-dept-vehicle-card-img { height: 120px; } }
+    @media (max-width: 480px) { .mvp-dept-vehicle-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .mvp-dept-vehicle-card-body { padding: 12px 14px; } .mvp-dept-vehicle-card-body h3 { font-size: 14px; } }
+    &lt;/style&gt;
+
+    &lt;div class="mvp-dept-page"&gt;
+        &lt;div class="mvp-dept-header"&gt;
+            &lt;div class="mvp-dept-header-img"&gt;
+                &lt;img src="&lt;?php echo esc_url( $cat_img_url ); ?&gt;" alt="&lt;?php echo esc_attr( $dept_display_name ); ?&gt;"
+                     onerror="this.style.display='none'"&gt;
+            &lt;/div&gt;
+            &lt;div class="mvp-dept-header-info"&gt;
+                &lt;p class="mvp-dept-breadcrumb"&gt;&lt;a href="&lt;?php echo home_url('/'); ?&gt;"&gt;Home&lt;/a&gt; &amp;rsaquo; &lt;?php echo esc_html( $dept_display_name ); ?&gt;&lt;/p&gt;
+                &lt;h1&gt;&lt;?php echo esc_html( $dept_display_name ); ?&gt;&lt;/h1&gt;
+                &lt;p class="mvp-dept-subtitle"&gt;Select your vehicle to view &lt;?php echo esc_html( strtolower( $dept_display_name ) ); ?&gt; parts&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;?php if ( ! empty( $vehicles_with_dept ) ) : ?&gt;
+        &lt;div class="mvp-dept-vehicle-grid"&gt;
+            &lt;?php foreach ( $vehicles_with_dept as $v ) :
+                $cat_url = get_term_link( $v['cat_term'] );
+                if ( is_wp_error( $cat_url ) ) $cat_url = home_url( '/vehicle/' . $v['vehicle_slug'] . '/' );
+            ?&gt;
+            &lt;a href="&lt;?php echo esc_url( $cat_url ); ?&gt;" class="mvp-dept-vehicle-card"&gt;
+                &lt;div class="mvp-dept-vehicle-card-img"&gt;
+                    &lt;?php if ( $v['img'] ) : ?&gt;
+                    &lt;img src="&lt;?php echo esc_url( $v['img'] ); ?&gt;" alt="&lt;?php echo esc_attr( $v['model'] ); ?&gt;" loading="lazy"&gt;
+                    &lt;?php endif; ?&gt;
+                &lt;/div&gt;
+                &lt;div class="mvp-dept-vehicle-card-body"&gt;
+                    &lt;h3&gt;&lt;?php echo esc_html( $v['model'] ); ?&gt;&lt;/h3&gt;
+                    &lt;p class="mvp-dept-year"&gt;&lt;?php echo esc_html( $v['year'] ); ?&gt;&lt;/p&gt;
+                    &lt;p class="mvp-dept-parts"&gt;&lt;?php echo $v['product_count']; ?&gt; part&lt;?php echo $v['product_count'] !== 1 ? 's' : ''; ?&gt;&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/a&gt;
+            &lt;?php endforeach; ?&gt;
+        &lt;/div&gt;
+        &lt;?php else : ?&gt;
+        &lt;p style="text-align:center;color:#888;padding:40px 0;"&gt;No vehicles found with &lt;?php echo esc_html( $dept_display_name ); ?&gt; parts.&lt;/p&gt;
+        &lt;?php endif; ?&gt;
+    &lt;/div&gt;
+    &lt;?php
+    get_footer();
+}</pre>
+</div>
+
+<!-- SECTION 12: CODE SECTION 6 - VEHICLE DATA HELPER -->
+<div class="section" id="s12">
+<h2>12. Code Section 6: Vehicle Data Helper (Lines 1260&ndash;1290)</h2>
+<p>Returns an associative array of all VIN-to-vehicle mappings from DB term meta. Used by both VIN lookup and registration lookup AJAX handlers.</p>
+<h4>Full Source Code</h4>
+<pre>function mvp_get_vehicle_vins() {
+    $maxus_term_id = 3590;
+    $vin_terms = get_terms( array(
+        'taxonomy'   =&gt; 'product_cat',
+        'parent'     =&gt; $maxus_term_id,
+        'hide_empty' =&gt; false,
+    ) );
+
+    $vehicles = array();
+    if ( is_wp_error( $vin_terms ) ) return $vehicles;
+
+    foreach ( $vin_terms as $term ) {
+        $model = get_term_meta( $term-&gt;term_id, 'vehicle_model', true );
+        $year  = get_term_meta( $term-&gt;term_id, 'vehicle_year', true );
+        $slug  = get_term_meta( $term-&gt;term_id, 'vehicle_slug', true );
+        $img   = get_term_meta( $term-&gt;term_id, 'vehicle_image', true );
+        if ( ! $model || ! $slug ) continue;
+
+        $vehicles[ $slug ] = array(
+            'vin'     =&gt; strtoupper( $term-&gt;name ),
+            'name'    =&gt; $model,
+            'year'    =&gt; $year,
+            'img'     =&gt; $img,
+            'term_id' =&gt; $term-&gt;term_id,
+        );
+    }
+    return $vehicles;
+}</pre>
+</div>
+
+<!-- SECTION 13: CODE SECTION 7 - VIN LOOKUP -->
+<div class="section" id="s13">
+<h2>13. Code Section 7: VIN Lookup AJAX (Lines 1292&ndash;1382)</h2>
+<p><span class="badge badge-hook">wp_ajax_maxus_vin_lookup</span> <span class="badge badge-hook">wp_ajax_nopriv_maxus_vin_lookup</span></p>
+<p>AJAX handler that takes a 17-character VIN and returns the matching vehicle's landing page URL. Three-stage matching: exact VIN match &rarr; 8-char pattern match &rarr; year narrowing.</p>
+<h4>VIN Year Code Table (Position 10)</h4>
+<table>
+<tr><th>Code</th><th>Year</th><th>Code</th><th>Year</th><th>Code</th><th>Year</th></tr>
+<tr><td>A</td><td>2010</td><td>H</td><td>2017</td><td>P</td><td>2023</td></tr>
+<tr><td>B</td><td>2011</td><td>J</td><td>2018</td><td>R</td><td>2024</td></tr>
+<tr><td>C</td><td>2012</td><td>K</td><td>2019</td><td>S</td><td>2025</td></tr>
+<tr><td>D</td><td>2013</td><td>L</td><td>2020</td><td>T</td><td>2026</td></tr>
+<tr><td>E</td><td>2014</td><td>M</td><td>2021</td><td>V</td><td>2027</td></tr>
+<tr><td>F</td><td>2015</td><td>N</td><td>2022</td><td>W-Y</td><td>2028-2030</td></tr>
+<tr><td>G</td><td>2016</td><td></td><td></td><td></td><td></td></tr>
+</table>
+<h4>Full Source Code</h4>
+<pre>add_action( 'wp_ajax_maxus_vin_lookup', 'mvp_vin_lookup' );
+add_action( 'wp_ajax_nopriv_maxus_vin_lookup', 'mvp_vin_lookup' );
+function mvp_vin_lookup() {
+    $vin = isset( $_POST['vin'] ) ? sanitize_text_field( $_POST['vin'] ) : '';
+    $vin = strtoupper( preg_replace( '/[^A-Za-z0-9]/', '', $vin ) );
+
+    if ( strlen( $vin ) !== 17 ) {
+        wp_send_json_error( array( 'error' =&gt; 'VIN must be exactly 17 characters' ) );
+    }
+    if ( substr( $vin, 0, 2 ) !== 'LS' ) {
+        wp_send_json_error( array( 'error' =&gt; 'This does not appear to be a Maxus VIN (should start with LS)' ) );
+    }
+
+    // Model year from position 10 of VIN
+    $year_codes = array(
+        'A'=&gt;2010,'B'=&gt;2011,'C'=&gt;2012,'D'=&gt;2013,'E'=&gt;2014,'F'=&gt;2015,'G'=&gt;2016,
+        'H'=&gt;2017,'J'=&gt;2018,'K'=&gt;2019,'L'=&gt;2020,'M'=&gt;2021,'N'=&gt;2022,'P'=&gt;2023,
+        'R'=&gt;2024,'S'=&gt;2025,'T'=&gt;2026,'V'=&gt;2027,'W'=&gt;2028,'X'=&gt;2029,'Y'=&gt;2030,
+    );
+    $customer_pattern = substr( $vin, 0, 8 );
+    $customer_year_code = substr( $vin, 9, 1 );
+    $customer_year = isset( $year_codes[ $customer_year_code ] ) ? $year_codes[ $customer_year_code ] : null;
+    $home_url = home_url( '/' );
+    $vehicles = mvp_get_vehicle_vins();
+
+    // 1. Try exact VIN match first (VIN categories ARE full VINs)
+    foreach ( $vehicles as $slug =&gt; $v ) {
+        if ( strtoupper( $v['vin'] ) === $vin ) {
+            wp_send_json_success( array(
+                'vehicle_name'  =&gt; $v['name'],
+                'customer_year' =&gt; $customer_year,
+                'shop_url'      =&gt; $home_url . 'vehicle/' . $slug . '/',
+            ) );
+        }
+    }
+
+    // 2. Pattern match by first 8 chars of VIN
+    $matches = array();
+    foreach ( $vehicles as $slug =&gt; $v ) {
+        $v_pattern = substr( strtoupper( $v['vin'] ), 0, 8 );
+        if ( $v_pattern === $customer_pattern ) {
+            $matches[ $slug ] = $v;
+        }
+    }
+
+    if ( empty( $matches ) ) {
+        wp_send_json_error( array(
+            'error'            =&gt; 'No vehicle found for VIN pattern: ' . $customer_pattern,
+            'suggestion'       =&gt; 'We may not have parts for this specific Maxus model yet.',
+            'customer_pattern' =&gt; $customer_pattern,
+            'customer_year'    =&gt; $customer_year,
+        ) );
+    }
+
+    // Single match
+    if ( count( $matches ) === 1 ) {
+        $slug = array_key_first( $matches );
+        $v = $matches[ $slug ];
+        wp_send_json_success( array(
+            'vehicle_name'  =&gt; $v['name'],
+            'customer_year' =&gt; $customer_year,
+            'shop_url'      =&gt; $home_url . 'vehicle/' . $slug . '/',
+        ) );
+    }
+
+    // Multiple matches &mdash; narrow by year
+    $best_slug = null;
+    if ( $customer_year ) {
+        foreach ( $matches as $slug =&gt; $v ) {
+            if ( preg_match( '/(\d{4})\s*-\s*(\S+)/', $v['year'], $m ) ) {
+                $start = intval( $m[1] );
+                $end = ( $m[2] === 'Present' ) ? 2030 : intval( $m[2] );
+                if ( $customer_year &gt;= $start &amp;&amp; $customer_year &lt;= $end ) {
+                    $best_slug = $slug;
+                    break;
+                }
+            }
+        }
+    }
+    if ( ! $best_slug ) $best_slug = array_key_first( $matches );
+
+    $v = $matches[ $best_slug ];
+    wp_send_json_success( array(
+        'vehicle_name'  =&gt; $v['name'],
+        'customer_year' =&gt; $customer_year,
+        'shop_url'      =&gt; $home_url . 'vehicle/' . $best_slug . '/',
+    ) );
+}</pre>
+</div>
+
+<!-- SECTION 14: CODE SECTION 8 - REGISTRATION LOOKUP -->
+<div class="section" id="s14">
+<h2>14. Code Section 8: Registration Lookup AJAX (Lines 1384&ndash;1480)</h2>
+<p><span class="badge badge-hook">wp_ajax_maxus_reg_lookup</span> <span class="badge badge-hook">wp_ajax_nopriv_maxus_reg_lookup</span></p>
+<p>AJAX handler that takes a UK registration plate, calls the checkcardetails.co.uk API, extracts make/model/year/fuel, validates it's a Maxus/LDV/SAIC/MG vehicle, and matches to our vehicle database using keyword matching with electric vs diesel awareness.</p>
+<div class="callout callout-info">
+<strong>External API:</strong> <code>https://api.checkcardetails.co.uk/vehicledata/vehicleregistration</code><br>
+API key is embedded in the PHP code (same key used by the source site).
+</div>
+<h4>Full Source Code</h4>
+<pre>add_action( 'wp_ajax_maxus_reg_lookup', 'mvp_reg_lookup' );
+add_action( 'wp_ajax_nopriv_maxus_reg_lookup', 'mvp_reg_lookup' );
+function mvp_reg_lookup() {
+    $reg = isset( $_POST['reg'] ) ? sanitize_text_field( $_POST['reg'] ) : '';
+    $reg = preg_replace( '/\s+/', '', strtoupper( $reg ) );
+
+    if ( empty( $reg ) || strlen( $reg ) &lt; 2 ) {
+        wp_send_json_error( array( 'error' =&gt; 'Please enter a valid registration number' ) );
+    }
+
+    // Call checkcardetails.co.uk API
+    $api_key = '****REDACTED****';
+    $api_url = 'https://api.checkcardetails.co.uk/vehicledata/vehicleregistration?apikey=' . $api_key . '&amp;vrm=' . urlencode( $reg );
+    $response = wp_remote_get( $api_url, array( 'timeout' =&gt; 10 ) );
+
+    if ( is_wp_error( $response ) ) {
+        wp_send_json_error( array( 'error' =&gt; 'Could not connect to vehicle lookup service' ) );
+    }
+
+    $code = wp_remote_retrieve_response_code( $response );
+    $body = json_decode( wp_remote_retrieve_body( $response ), true );
+
+    if ( $code === 404 || empty( $body ) ) {
+        wp_send_json_error( array( 'error' =&gt; 'No vehicle found for registration: ' . $reg ) );
+    }
+    if ( $code !== 200 ) {
+        wp_send_json_error( array( 'error' =&gt; 'Vehicle lookup failed. Please try again.' ) );
+    }
+
+    $make  = isset( $body['make'] ) ? strtoupper( trim( $body['make'] ) ) : '';
+    $model_name = isset( $body['model'] ) ? trim( $body['model'] ) : '';
+    $year  = isset( $body['yearOfManufacture'] ) ? intval( $body['yearOfManufacture'] ) : '';
+    $fuel  = isset( $body['fuelType'] ) ? trim( $body['fuelType'] ) : '';
+
+    // Check if Maxus/LDV
+    if ( ! in_array( $make, array( 'MAXUS', 'LDV', 'SAIC', 'MG' ) ) ) {
+        wp_send_json_error( array(
+            'error' =&gt; 'This is a ' . ucwords( strtolower( $make ) ) . ' ' . $model_name . ' (' . $year . '). We only stock Maxus/LDV parts.',
+        ) );
+    }
+
+    // Match model to vehicle landing page
+    $vehicles = mvp_get_vehicle_vins();
+    $home_url = home_url( '/' );
+    $best_slug = '';
+    $best_name = '';
+    $model_upper = strtoupper( $model_name );
+
+    foreach ( $vehicles as $slug =&gt; $v ) {
+        $v_name = strtoupper( $v['name'] );
+
+        // Direct match
+        if ( stripos( $model_upper, $v_name ) !== false || stripos( $v_name, $model_upper ) !== false ) {
+            $best_slug = $slug;
+            $best_name = $v['name'];
+            break;
+        }
+
+        // Keyword matching
+        $keywords = array( 'DELIVER 9', 'DELIVER 7', 'E DELIVER 9', 'E DELIVER 7', 'E DELIVER 3', 'E-DELIVER', 'T60', 'T90', 'V80', 'A80' );
+        foreach ( $keywords as $kw ) {
+            if ( stripos( $model_upper, $kw ) !== false &amp;&amp; stripos( $v_name, $kw ) !== false ) {
+                $is_electric = ( stripos( $fuel, 'ELECTRIC' ) !== false );
+                $v_is_electric = ( stripos( $v_name, 'E DELIVER' ) !== false || stripos( $v_name, 'EV' ) !== false );
+                if ( $is_electric === $v_is_electric ) {
+                    $best_slug = $slug;
+                    $best_name = $v['name'];
+                    break 2;
+                }
+                if ( empty( $best_slug ) ) {
+                    $best_slug = $slug;
+                    $best_name = $v['name'];
+                }
+            }
+        }
+    }
+
+    $display_name = ucwords( strtolower( $make . ' ' . $model_name ) );
+
+    if ( ! empty( $best_slug ) ) {
+        wp_send_json_success( array(
+            'vehicle_name'  =&gt; $display_name,
+            'customer_year' =&gt; $year,
+            'shop_url'      =&gt; $home_url . 'vehicle/' . $best_slug . '/',
+        ) );
+    } else {
+        wp_send_json_success( array(
+            'vehicle_name'  =&gt; $display_name,
+            'customer_year' =&gt; $year,
+            'shop_url'      =&gt; $home_url . 'shop/',
+            'note'          =&gt; 'Could not match exact model. Showing all parts.',
+        ) );
+    }
+}</pre>
+</div>
+
+<!-- SECTION 15: CODE SECTION 9 - HEADER LOOKUP PANEL -->
+<div class="section" id="s15">
+<h2>15. Code Section 9: Header Lookup Panel (Lines 1482&ndash;1881)</h2>
+<p><span class="badge badge-hook">wp_footer</span> <span class="badge badge-line">Priority 20</span> &mdash; Fires on ALL pages (not just homepage)</p>
+<p>Dropdown panel that attaches to nav menu items by detecting href patterns. Shows model/year selector, VIN input, and registration input. Hover to open, click to toggle, auto-close on mouseleave.</p>
+<h4>Menu Attachment Logic</h4>
+<table>
+<tr><th>Link href contains</th><th>Panel Mode</th></tr>
+<tr><td><code>vin-search</code></td><td>VIN search only</td></tr>
+<tr><td><code>registration-lookup</code></td><td>Registration search only</td></tr>
+<tr><td><code>vehicle-lookup</code></td><td>Full mode (model + VIN + reg)</td></tr>
+</table>
+<h4>Key Styling</h4>
+<ul>
+<li>Orange background: <code>#F29F05</code></li>
+<li>Red buttons: <code>#BF3617</code></li>
+<li>Fixed position, 380&ndash;440px width</li>
+<li>Spinner animation during AJAX lookups</li>
+</ul>
+<p><em>This section is ~400 lines of HTML, CSS, and JavaScript. The full code includes:</em></p>
+<ul>
+<li>CSS for <code>#mvp-lookup-panel</code> (fixed positioning, sections, inputs, buttons, select boxes, dividers, result display, loader animation)</li>
+<li>HTML structure: Model/Year selector &rarr; "or" divider &rarr; VIN search &rarr; "or" divider &rarr; Registration search</li>
+<li>JavaScript: Panel open/close/toggle logic, model dropdown populated from DB, year dropdown from vehicle data, VIN search (17-char validation + AJAX), reg search (AJAX), menu item attachment by href pattern detection</li>
+</ul>
+<div class="callout callout-info">
+<strong>Full source for this section is in the deployed functions.php lines 1482&ndash;1881.</strong> It follows the same patterns as the search bar (Section 10 below) but is designed as a hover-triggered dropdown panel rather than an inline bar. The AJAX calls use the same <code>maxus_vin_lookup</code> and <code>maxus_reg_lookup</code> endpoints documented in Sections 13&ndash;14.
+</div>
+<h4>Source Code &mdash; PHP/HTML Structure</h4>
+<pre>add_action( 'wp_footer', 'mvp_vehicle_lookup_panel', 20 );
+function mvp_vehicle_lookup_panel() {
+    $ajax_url = admin_url( 'admin-ajax.php' );
+    $home_url = home_url( '/' );
+
+    // Build vehicle data for model/year selector
+    $vehicles = mvp_get_vehicle_vins();
+    $vehicle_data = array();
+    foreach ( $vehicles as $slug =&gt; $v ) {
+        $name = $v['name'];
+        if ( ! isset( $vehicle_data[ $name ] ) ) {
+            $vehicle_data[ $name ] = array( 'slug' =&gt; $slug, 'years' =&gt; array() );
+        }
+        if ( $v['year'] ) {
+            $vehicle_data[ $name ]['years'][] = $v['year'];
+        }
+    }
+    // ... CSS styles for #mvp-lookup-panel ...
+    // ... HTML: model/year selectors, VIN input, reg input, result divs ...
+    // ... JavaScript: panel positioning, hover/click handlers, AJAX calls ...
+}</pre>
+<h4>Source Code &mdash; JavaScript (Key Functions)</h4>
+<pre>// Panel positioning &amp; toggle
+function openPanel(anchor, mode) {
+    cancelClose();
+    setPanelMode(mode || 'full');
+    var rect = anchor.getBoundingClientRect();
+    var pw = panel.offsetWidth || 380;
+    var left = rect.left;
+    if (left + pw &gt; window.innerWidth - 8) left = window.innerWidth - pw - 8;
+    if (left &lt; 8) left = 8;
+    panel.style.top = rect.bottom + 'px';
+    panel.style.left = left + 'px';
+    panel.classList.add('is-open');
+    isOpen = true;
+}
+
+// VIN search AJAX call
+function doVinSearch() {
+    var vin = vinInput.value.trim();
+    if (vin.length !== 17) { /* show error */ return; }
+    vinResult.innerHTML = loaderHtml;
+    var fd = new FormData();
+    fd.append('action', 'maxus_vin_lookup');
+    fd.append('vin', vin);
+    fetch(ajaxUrl, { method: 'POST', body: fd })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.success &amp;&amp; data.data.shop_url) {
+                window.location.href = data.data.shop_url;
+            } else { /* show error */ }
+        });
+}
+
+// Attach to nav menu items by href pattern
+var allLinks = document.querySelectorAll('#site-navigation a, .header-menu a, nav a');
+allLinks.forEach(function(link) {
+    var href = link.getAttribute('href') || '';
+    var mode = null;
+    if (href.indexOf('vin-search') !== -1) mode = 'vin';
+    else if (href.indexOf('registration-lookup') !== -1) mode = 'reg';
+    else if (href.indexOf('vehicle-lookup') !== -1) mode = 'full';
+    if (!mode) return;
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        togglePanel(link, mode);
+    });
+    var menuItem = link.closest('li') || link;
+    menuItem.addEventListener('mouseenter', function() { openPanel(link, mode); });
+    menuItem.addEventListener('mouseleave', function() { scheduleClose(); });
+});</pre>
+</div>
+
+<!-- SECTION 16: CODE SECTION 10 - VEHICLE SEARCH BAR -->
+<div class="section" id="s16">
+<h2>16. Code Section 10: Vehicle Search Bar (Lines 1883&ndash;2127)</h2>
+<p><span class="badge badge-hook">wp_footer</span> <span class="badge badge-line">Priority 25</span> &mdash; Homepage only</p>
+<p>Replaces the hidden Elementor 6-dropdown filter (<code>3e78bee</code>) with a source-matching search bar. Injected into Elementor container <code>631db85</code>.</p>
+<h4>Layout</h4>
+<div class="flow-diagram">[Model &#9660;] [Year &#9660;]  OR  [VIN input]  OR  [Registration input]  [SEARCH]  Reset</div>
+<h4>Behaviour</h4>
+<ul>
+<li>Model dropdown populated from DB term meta (18 vehicles, sorted A-Z)</li>
+<li>Year dropdown auto-populates individual years from vehicle's year range when model selected</li>
+<li>Mutual exclusion: typing in VIN clears model/reg fields and vice versa</li>
+<li>Search priority: Registration &gt; VIN &gt; Model selection</li>
+<li>Red search button (<code>#BF3617</code>), spinner during AJAX</li>
+<li>Mobile: collapses to "Vehicle Filter" toggle below 600px</li>
+</ul>
+<h4>Full Source Code</h4>
+<pre>add_action( 'wp_footer', 'mvp_vehicle_search_bar', 25 );
+function mvp_vehicle_search_bar() {
+    if ( ! is_front_page() &amp;&amp; ! is_home() ) return;
+
+    // Build model &rarr; slug + year data from DB term meta
+    $maxus_term_id = 3590;
+    $vin_terms = get_terms( array(
+        'taxonomy'   =&gt; 'product_cat',
+        'parent'     =&gt; $maxus_term_id,
+        'hide_empty' =&gt; false,
+        'orderby'    =&gt; 'name',
+    ) );
+
+    $models = array();
+    if ( ! is_wp_error( $vin_terms ) ) {
+        foreach ( $vin_terms as $t ) {
+            $model = get_term_meta( $t-&gt;term_id, 'vehicle_model', true );
+            $slug  = get_term_meta( $t-&gt;term_id, 'vehicle_slug', true );
+            $year  = get_term_meta( $t-&gt;term_id, 'vehicle_year', true );
+            if ( $model &amp;&amp; $slug ) {
+                $models[ $model ] = array( 'slug' =&gt; $slug, 'year' =&gt; $year ? $year : '' );
+            }
+        }
+    }
+    ksort( $models );
+
+    $home_url = home_url( '/' );
+    $ajax_url = admin_url( 'admin-ajax.php' );
+    ?&gt;
+    &lt;style id="mvp-search-bar-css"&gt;
+    .mvp-search-bar-wrap { max-width: 100%; margin: 0; position: relative; }
+    .mvp-search-bar {
+        display: flex; flex-wrap: nowrap; align-items: center; gap: 10px;
+        padding: 12px 20px;
+        background: var(--e-global-color-secondary, #F29F05);
+        border-radius: 6px; position: relative;
+    }
+    .mvp-search-bar .mvp-sb-select {
+        height: 36px; padding: 0 28px 0 10px; font-size: 13px; font-family: inherit;
+        border: none; border-radius: 4px; outline: none; color: #333; background: #fff;
+        cursor: pointer; min-width: 0;
+        -webkit-appearance: none; -moz-appearance: none; appearance: none;
+        background-image: url("data:image/svg+xml,...chevron...");
+        background-repeat: no-repeat; background-position: right 10px center;
+    }
+    .mvp-search-bar .mvp-sb-model { min-width: 208px; flex-shrink: 1; }
+    .mvp-search-bar .mvp-sb-year { min-width: 120px; flex-shrink: 1; }
+    .mvp-search-bar .mvp-sb-or {
+        white-space: nowrap; font-weight: 700; font-size: 12px;
+        text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.85;
+        color: #fff; padding: 0 2px; flex-shrink: 0;
+    }
+    .mvp-search-bar .mvp-sb-input {
+        height: 36px; padding: 0 10px; font-size: 13px; font-family: inherit;
+        border: none; border-radius: 4px; outline: none; color: #333; background: #fff;
+        box-sizing: border-box; width: 180px; min-width: 120px; flex-shrink: 1;
+    }
+    .mvp-search-bar .mvp-sb-submit {
+        height: 36px; padding: 0 20px; font-size: 13px; font-weight: 600;
+        border: none; border-radius: 4px; background: #BF3617; color: #fff;
+        cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: background 0.2s;
+    }
+    .mvp-search-bar .mvp-sb-submit:hover { background: #a02e13; }
+    .mvp-search-bar .mvp-sb-reset {
+        font-size: 11px; color: rgba(255,255,255,0.7); cursor: pointer;
+        text-decoration: underline; flex-shrink: 0; white-space: nowrap;
+    }
+    .mvp-sb-result {
+        position: absolute; top: 100%; right: 20px; z-index: 100;
+        font-size: 12px; margin-top: 4px; padding: 8px 14px; border-radius: 4px;
+        display: none; min-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .mvp-sb-result.show { display: block; }
+    .mvp-sb-result.success { background: rgba(255,255,255,0.95); color: #333; }
+    .mvp-sb-result.error { background: rgba(0,0,0,0.15); color: #fff; }
+    @keyframes mvp-sb-spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+    .mvp-sb-mobile-toggle {
+        display: none; background: var(--e-global-color-secondary, #F29F05);
+        color: #fff; font-weight: 600; font-size: 14px; text-align: center;
+        padding: 12px 20px; border-radius: 6px; cursor: pointer;
+    }
+    @media (max-width: 960px) {
+        .mvp-search-bar { flex-wrap: wrap; gap: 8px; padding: 12px 16px; }
+        .mvp-search-bar .mvp-sb-model, .mvp-search-bar .mvp-sb-year { min-width: 0; flex: 1 1 45%; }
+        .mvp-search-bar .mvp-sb-input { width: auto; flex: 1 1 40%; }
+    }
+    @media (max-width: 600px) {
+        .mvp-sb-mobile-toggle { display: block; }
+        .mvp-search-bar { display: none; flex-direction: column; }
+        .mvp-search-bar.mvp-sb-open { display: flex; margin-top: 4px; }
+        .mvp-search-bar .mvp-sb-model, .mvp-search-bar .mvp-sb-year,
+        .mvp-search-bar .mvp-sb-input { width: 100% !important; min-width: 0; flex: 1 1 100%; }
+        .mvp-search-bar .mvp-sb-submit { width: 100%; }
+        .mvp-search-bar .mvp-sb-or { display: none; }
+    }
+    &lt;/style&gt;
+    &lt;script&gt;
+    (function(){
+        var mvpModels = &lt;?php echo json_encode( $models ); ?&gt;;
+        var mvpHomeUrl = &lt;?php echo json_encode( $home_url ); ?&gt;;
+        var mvpAjaxUrl = &lt;?php echo json_encode( $ajax_url ); ?&gt;;
+        var loaderHtml = '&lt;span class="mvp-sb-loader"&gt;...spinner SVG...&lt;/span&gt;';
+
+        var modelOpts = '&lt;option value=""&gt;Model&lt;/option&gt;';
+        var yearMap = {};
+        for (var m in mvpModels) {
+            modelOpts += '&lt;option value="' + m + '"&gt;' + m + '&lt;/option&gt;';
+            if (mvpModels[m].year) yearMap[m] = mvpModels[m].year;
+        }
+
+        var barHtml = '&lt;div class="mvp-search-bar-wrap"&gt;' +
+            '&lt;div class="mvp-sb-mobile-toggle"&gt;Vehicle Filter&lt;/div&gt;' +
+            '&lt;div class="mvp-search-bar"&gt;' +
+                '&lt;select class="mvp-sb-select mvp-sb-model"&gt;' + modelOpts + '&lt;/select&gt;' +
+                '&lt;select class="mvp-sb-select mvp-sb-year" disabled&gt;&lt;option value=""&gt;Year&lt;/option&gt;&lt;/select&gt;' +
+                '&lt;span class="mvp-sb-or"&gt;OR&lt;/span&gt;' +
+                '&lt;input type="text" class="mvp-sb-input mvp-sb-vin" placeholder="Search by VIN" maxlength="17"&gt;' +
+                '&lt;span class="mvp-sb-or"&gt;OR&lt;/span&gt;' +
+                '&lt;input type="text" class="mvp-sb-input mvp-sb-reg" placeholder="Search by Registration" maxlength="10"&gt;' +
+                '&lt;button type="button" class="mvp-sb-submit"&gt;Search&lt;/button&gt;' +
+                '&lt;span class="mvp-sb-reset"&gt;Reset&lt;/span&gt;' +
+                '&lt;div class="mvp-sb-result"&gt;&lt;/div&gt;' +
+            '&lt;/div&gt;&lt;/div&gt;';
+
+        // Inject into the filter container (631db85) or fallback after carousel
+        var target = document.querySelector('.elementor-element-631db85');
+        if (target) { target.insertAdjacentHTML('beforeend', barHtml); }
+        else { var hero = document.querySelector('.mvp-vehicles'); if (hero) hero.insertAdjacentHTML('afterend', barHtml); }
+
+        var wrap = document.querySelector('.mvp-search-bar-wrap');
+        if (!wrap) return;
+        var modelSel = wrap.querySelector('.mvp-sb-model');
+        var yearSel = wrap.querySelector('.mvp-sb-year');
+        var vinInput = wrap.querySelector('.mvp-sb-vin');
+        var regInput = wrap.querySelector('.mvp-sb-reg');
+        var submitBtn = wrap.querySelector('.mvp-sb-submit');
+        var resetBtn = wrap.querySelector('.mvp-sb-reset');
+        var resultEl = wrap.querySelector('.mvp-sb-result');
+
+        // Mobile toggle
+        wrap.querySelector('.mvp-sb-mobile-toggle').addEventListener('click', function() {
+            this.classList.toggle('mvp-sb-open');
+            wrap.querySelector('.mvp-search-bar').classList.toggle('mvp-sb-open');
+        });
+
+        // Model change &rarr; populate year dropdown
+        modelSel.addEventListener('change', function() {
+            var model = this.value;
+            yearSel.innerHTML = '&lt;option value=""&gt;Year&lt;/option&gt;';
+            vinInput.value = ''; regInput.value = ''; hideResult();
+            if (model &amp;&amp; yearMap[model]) {
+                var parts = yearMap[model].split('-');
+                if (parts.length === 2) {
+                    for (var y = parseInt(parts[1]); y &gt;= parseInt(parts[0]); y--)
+                        yearSel.innerHTML += '&lt;option value="' + y + '"&gt;' + y + '&lt;/option&gt;';
+                }
+                yearSel.disabled = false;
+            } else { yearSel.disabled = true; }
+        });
+
+        // Mutual exclusion: clear dropdowns when typing VIN/Reg
+        vinInput.addEventListener('input', function() {
+            if (this.value.trim()) { modelSel.value = ''; yearSel.disabled = true; regInput.value = ''; }
+        });
+        regInput.addEventListener('input', function() {
+            if (this.value.trim()) { modelSel.value = ''; yearSel.disabled = true; vinInput.value = ''; }
+        });
+
+        // Reset
+        resetBtn.addEventListener('click', function() {
+            modelSel.value = ''; yearSel.disabled = true; vinInput.value = ''; regInput.value = ''; hideResult();
+        });
+
+        // Search button
+        submitBtn.addEventListener('click', doSearch);
+
+        function doSearch() {
+            var reg = regInput.value.trim();
+            var vin = vinInput.value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+            var model = modelSel.value;
+            if (reg.length &gt;= 2) { doRegSearch(reg); }
+            else if (vin.length &gt; 0) { doVinSearch(vin); }
+            else if (model &amp;&amp; mvpModels[model]) { window.location.href = mvpHomeUrl + 'vehicle/' + mvpModels[model].slug + '/'; }
+            else { resultEl.className = 'mvp-sb-result show error'; resultEl.textContent = 'Please select a model, enter a VIN, or enter a registration'; }
+        }
+
+        function doVinSearch(vin) {
+            if (vin.length !== 17) { resultEl.className = 'mvp-sb-result show error'; resultEl.textContent = 'VIN must be 17 characters'; return; }
+            resultEl.className = 'mvp-sb-result show'; resultEl.innerHTML = loaderHtml;
+            var fd = new FormData(); fd.append('action', 'maxus_vin_lookup'); fd.append('vin', vin);
+            fetch(mvpAjaxUrl, { method: 'POST', body: fd })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.success &amp;&amp; data.data.shop_url) {
+                        resultEl.className = 'mvp-sb-result show success';
+                        resultEl.innerHTML = '&lt;strong&gt;' + (data.data.vehicle_name || 'Vehicle found') + '&lt;/strong&gt; &amp;mdash; Redirecting...';
+                        window.location.href = data.data.shop_url;
+                    } else { resultEl.className = 'mvp-sb-result show error'; resultEl.textContent = (data.data &amp;&amp; data.data.error) || 'No match found'; }
+                });
+        }
+
+        function doRegSearch(reg) {
+            reg = reg.replace(/\s+/g, '');
+            resultEl.className = 'mvp-sb-result show'; resultEl.innerHTML = loaderHtml;
+            var fd = new FormData(); fd.append('action', 'maxus_reg_lookup'); fd.append('reg', reg);
+            fetch(mvpAjaxUrl, { method: 'POST', body: fd })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.success &amp;&amp; data.data.shop_url) {
+                        resultEl.className = 'mvp-sb-result show success';
+                        resultEl.innerHTML = '&lt;strong&gt;' + data.data.vehicle_name + ' (' + data.data.customer_year + ')&lt;/strong&gt; &amp;mdash; Redirecting...';
+                        window.location.href = data.data.shop_url;
+                    } else { resultEl.className = 'mvp-sb-result show error'; resultEl.textContent = (data.data &amp;&amp; data.data.error) || 'No match found'; }
+                });
+        }
+    })();
+    &lt;/script&gt;
+    &lt;?php
+}</pre>
+</div>
+
+<!-- SECTION 17: KNOWN ISSUES -->
+<div class="section" id="s17">
+<h2>17. Known Issues &amp; Limitations</h2>
+
+<h3>17a. Miscategorized Products (Pre-existing Data Issue)</h3>
+<div class="callout callout-danger">
+<strong>DO NOT FIX IN CODE</strong> &mdash; This is an upstream data import issue.
+</div>
+<p>Some products are assigned to incorrect categories. E.g. "BALL ASSEMBLY-FRONT SUSPENSION UPPER CONTROL ARM" (a suspension part) is categorised under <strong>Brakes &gt; Front Brakes</strong> for several VINs but correctly under <strong>Suspension &gt; Front Suspension</strong> for others.</p>
+<table>
+<tr><th>Status</th><th>VINs</th></tr>
+<tr><td>Wrong category (under Brakes)</td><td>LSH14J7CXMA114599, LSH14J7C9RV123360, LSH14J7C4RV123458</td></tr>
+<tr><td>Correct category (under Suspension)</td><td>LSFAM11C6RA144501</td></tr>
+</table>
+
+<h3>17b. Sidebar Department Names Don't Match DB Categories</h3>
+<p>The homepage sidebar uses simplified names that don't match the technical OEM category names in the DB:</p>
+<table>
+<tr><th>Sidebar Name</th><th>Matches DB?</th><th>Actual DB Categories</th></tr>
+<tr><td>Brakes</td><td style="color:green;font-weight:bold">YES</td><td>Brakes</td></tr>
+<tr><td>Steering</td><td style="color:green;font-weight:bold">YES</td><td>Steering</td></tr>
+<tr><td>Suspension</td><td style="color:green;font-weight:bold">YES</td><td>Suspension</td></tr>
+<tr><td>Body</td><td style="color:red;font-weight:bold">NO</td><td>Body Lower Structure, Body Upper Structure, Body Window, etc.</td></tr>
+<tr><td>Engine</td><td style="color:red;font-weight:bold">NO</td><td>Emission Exhaust System, Power Generation, etc.</td></tr>
+<tr><td>Electrics</td><td style="color:red;font-weight:bold">NO</td><td>Body Interior and Exterior Electronics, Power and Signaldistribution</td></tr>
+<tr><td>Filters</td><td style="color:red;font-weight:bold">NO</td><td>No direct match</td></tr>
+<tr><td>Interior</td><td style="color:red;font-weight:bold">NO</td><td>Interior Trim, Interior Lamp, Interior Acoustic Syetem</td></tr>
+<tr><td>Lighting</td><td style="color:red;font-weight:bold">NO</td><td>Front Lamp, Rear Lamp, Interior Lamp</td></tr>
+<tr><td>All others</td><td style="color:red;font-weight:bold">NO</td><td>Various technical OEM names</td></tr>
+</table>
+<p><strong>Fix options:</strong></p>
+<ol>
+<li>Update the sidebar menu item names/slugs to match actual DB category names</li>
+<li>Add fuzzy/partial matching logic in the department page code</li>
+<li>Create a mapping table (sidebar name &rarr; list of DB category names)</li>
+</ol>
+
+<h3>17c. Duplicate SKUs Across VINs</h3>
+<p>The same physical part (same SKU) exists as separate WooCommerce products under different VIN categories. This creates scale concerns when adding brands like MG, and Google SEO issues where SKU searches could land on any VIN's version.</p>
+<p><strong>Recommendation:</strong> Consider single-product-per-SKU approach with vehicle compatibility attributes for multi-brand scaling.</p>
+
+<h3>17d. Vehicle Images Hosted on Source Site</h3>
+<p>All images reference <code>https://maxusvanparts.acstestweb.co.uk/wp-content/uploads/</code>. These should be copied to the production site's own uploads directory before go-live.</p>
+
+<h3>17e. Rewrite Rules Need Flushing After Deploy</h3>
+<p>WordPress stores rewrite rules in the database. If lost, re-flush via <code>wp rewrite flush</code> or <code>flush_rewrite_rules()</code>.</p>
+</div>
+
+<!-- SECTION 18: DEPLOYMENT GUIDE -->
+<div class="section" id="s18">
+<h2>18. Deployment Guide</h2>
+
+<h3>Editing and Deploying functions.php</h3>
+<pre># 1. Edit the facelift code locally
+code C:\Users\JasonPink\maxusfacelift_functions.php
+
+# 2. Get the original child theme header (lines 1-106)
+ssh serveradmin@80.95.207.10 "sudo head -106 /var/www/vhosts/maxusvanparts.co.uk/shane.maxusvanparts.co.uk/wp-content/themes/mobex-child/functions.php" &gt; /tmp/mobex_child_head.php
+
+# 3. Combine original header + facelift code
+cat /tmp/mobex_child_head.php /path/to/maxusfacelift_functions.php &gt; /tmp/mobex_child_new.php
+
+# 4. Upload and replace
+scp /tmp/mobex_child_new.php serveradmin@80.95.207.10:/tmp/
+ssh serveradmin@80.95.207.10 'sudo cp /tmp/mobex_child_new.php /var/www/vhosts/maxusvanparts.co.uk/shane.maxusvanparts.co.uk/wp-content/themes/mobex-child/functions.php &amp;&amp; sudo chown maxusvanparts.co.uk_utsg9tlvo8m:psaserv /var/www/vhosts/maxusvanparts.co.uk/shane.maxusvanparts.co.uk/wp-content/themes/mobex-child/functions.php'
+
+# 5. Flush rewrite rules (only needed if rewrite rules changed)
+ssh serveradmin@80.95.207.10 "sudo /opt/plesk/php/8.1/bin/php -r '
+define(\"ABSPATH\", \"/var/www/vhosts/maxusvanparts.co.uk/shane.maxusvanparts.co.uk/\");
+require_once(ABSPATH . \"wp-load.php\");
+flush_rewrite_rules();
+'"</pre>
+
+<h3>WP-CLI Access</h3>
+<pre>ssh serveradmin@80.95.207.10
+sudo PATH=/opt/plesk/php/8.1/bin:$PATH wp --path=/var/www/vhosts/maxusvanparts.co.uk/shane.maxusvanparts.co.uk --allow-root &lt;command&gt;
+
+# Examples:
+wp menu list
+wp menu item list 505          # Header menu items
+wp term list product_cat --parent=3590 --fields=term_id,name  # VIN categories</pre>
+
+<h3>Key Paths on Server</h3>
+<table>
+<tr><th>Path</th><th>Purpose</th></tr>
+<tr><td><code>/var/www/vhosts/maxusvanparts.co.uk/shane.maxusvanparts.co.uk/</code></td><td>WordPress root (shane subdomain)</td></tr>
+<tr><td><code>wp-content/themes/mobex-child/functions.php</code></td><td>ALL facelift code (line 107+)</td></tr>
+<tr><td><code>wp-content/themes/mobex-child/functions.php.bak2</code></td><td>Pre-facelift backup</td></tr>
+<tr><td><code>/var/www/vhosts/acstestweb.co.uk/maxusvanparts.acstestweb.co.uk/</code></td><td>Source/reference site</td></tr>
+</table>
+</div>
+
+<!-- SECTION 19: EXTERNAL DEPENDENCIES -->
+<div class="section" id="s19">
+<h2>19. External Dependencies</h2>
+<table>
+<tr><th>Dependency</th><th>Purpose</th><th>Notes</th></tr>
+<tr><td>checkcardetails.co.uk API</td><td>Registration plate lookup</td><td>API key in functions.php Section 8. Same key as source site.</td></tr>
+<tr><td>Source site image URLs</td><td>Vehicle + category photos</td><td>Should be migrated to production uploads before go-live</td></tr>
+<tr><td>Google Fonts (Oswald)</td><td>Hero banner typography</td><td>Loaded via CSS link in Section 1</td></tr>
+<tr><td>Mobex parent theme</td><td>Base WooCommerce theme</td><td>Must remain active</td></tr>
+<tr><td>Elementor + Elementor Pro</td><td>Page builder</td><td>Homepage layout relies on specific element IDs</td></tr>
+<tr><td>WooCommerce</td><td>Product/category taxonomy</td><td>product_cat taxonomy, term meta API</td></tr>
+</table>
+
+<h3>Elementor Element IDs Referenced in Code</h3>
+<table>
+<tr><th>Element ID</th><th>Used For</th></tr>
+<tr><td><code>a40da3e</code></td><td>Hidden (RevSlider)</td></tr>
+<tr><td><code>099500a</code></td><td>Hidden (dept icons)</td></tr>
+<tr><td><code>9f85e6f</code></td><td>Hidden (manufacturers heading)</td></tr>
+<tr><td><code>e540d81</code></td><td>Hidden (manufacturers logos)</td></tr>
+<tr><td><code>23763df</code></td><td>Hidden (promo banners)</td></tr>
+<tr><td><code>20e40c9</code></td><td>Hidden ("Know what you pay for")</td></tr>
+<tr><td><code>7033a3b</code></td><td>Hidden ("Car repairs" tutorial)</td></tr>
+<tr><td><code>9e19027</code></td><td>Hidden (empty spacer)</td></tr>
+<tr><td><code>3e78bee</code></td><td>Hidden (original filter bar)</td></tr>
+<tr><td><code>631db85</code></td><td>Injection target for replacement search bar</td></tr>
+<tr><td><code>elementor-11641</code></td><td>Insertion point for hero + carousel</td></tr>
+</table>
+<div class="callout callout-warn">
+<strong>Warning:</strong> If Elementor page is re-edited, these element IDs may change. The facelift code would need updating to match the new IDs.
+</div>
+</div>
+
+<!-- END -->
+<div style="text-align:center;padding:30px 0 40px;color:#888;font-size:13px;">
+<p>&mdash; End of Technical Reference &mdash;</p>
+<p>Document generated 11 March 2026 | All source code from <code>maxusfacelift_functions.php</code> (2,127 lines)</p>
+</div>
+
+</div>
+</body>
+</html>
