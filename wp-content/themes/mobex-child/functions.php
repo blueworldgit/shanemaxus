@@ -5,6 +5,56 @@ function mobex_enovathemes_child_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'mobex_enovathemes_child_scripts' );
 
+// Replace product SKU with original_sku meta field ONLY for frontend display
+// This does NOT affect order processing, inventory, or any backend operations
+add_filter( 'woocommerce_product_get_sku', 'mvp_use_original_sku_on_frontend', 10, 2 );
+add_filter( 'woocommerce_product_variation_get_sku', 'mvp_use_original_sku_on_frontend', 10, 2 );
+function mvp_use_original_sku_on_frontend( $sku, $product ) {
+    // Skip if in admin area
+    if ( is_admin() ) {
+        return $sku;
+    }
+    
+    // Skip during AJAX requests (checkout, cart updates, etc.)
+    if ( wp_doing_ajax() ) {
+        return $sku;
+    }
+    
+    // Skip during REST API requests (order processing, inventory sync, etc.)
+    if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+        return $sku;
+    }
+    
+    // Skip during cron jobs
+    if ( wp_doing_cron() ) {
+        return $sku;
+    }
+    
+    // Skip during any order/cart processing to ensure backend operations use real SKU
+    $wc_actions = array(
+        'woocommerce_checkout_process',
+        'woocommerce_checkout_order_processed',
+        'woocommerce_new_order',
+        'woocommerce_order_status_changed',
+        'woocommerce_add_to_cart',
+        'woocommerce_cart_item_removed',
+        'woocommerce_update_cart_action_cart_updated',
+    );
+    foreach ( $wc_actions as $action ) {
+        if ( did_action( $action ) || doing_action( $action ) ) {
+            return $sku;
+        }
+    }
+    
+    // Only replace for display purposes on frontend
+    $original_sku = get_post_meta( $product->get_id(), 'original_sku', true );
+    if ( $original_sku ) {
+        return $original_sku;
+    }
+    
+    return $sku;
+}
+
 add_action('after_switch_theme', 'mobex_child_repair_theme_mods_and_kirki_css');
 add_action('admin_init', 'mobex_child_repair_theme_mods_and_kirki_css_once');
 
@@ -974,21 +1024,13 @@ function mvp_vehicle_render_full_page() {
                 // Build category image filename: replace spaces with underscores
                 $cat_img_name = str_replace( ' ', '_', $cat->name ) . '.png';
                 $cat_img_url  = $cat_img_base . $cat_img_name;
-                // Link to department page (shows all vehicles with this category)
-                $cat_url = home_url( '/department/' . sanitize_title( $cat->name ) . '/' );
-                // Count products (including subcategories)
-                $product_count = $cat->count;
-                // Also count products in child categories
-                $subcats = get_terms( array(
-                    'taxonomy'   => 'product_cat',
-                    'parent'     => $cat->term_id,
-                    'hide_empty' => true,
-                ) );
-                if ( ! is_wp_error( $subcats ) ) {
-                    foreach ( $subcats as $subcat ) {
-                        $product_count += $subcat->count;
-                    }
+                // Link directly to the WooCommerce category archive for this vehicle's category
+                $cat_url = get_term_link( $cat );
+                if ( is_wp_error( $cat_url ) ) {
+                    $cat_url = home_url( '/department/' . sanitize_title( $cat->name ) . '/' );
                 }
+                // WordPress counts already include all descendant products
+                $product_count = $cat->count;
             ?>
             <a href="<?php echo esc_url( $cat_url ); ?>" class="mvp-category-card">
                 <div class="mvp-category-card-img">
@@ -3431,4 +3473,146 @@ function mvp_vehicle_sticky_notice_bar() {
     }
     </script>
     <?php
+}
+
+// ============================================================
+// DYNAMIC SEO META TAGS & JSON-LD SCHEMA FOR PRODUCT PAGES
+// ============================================================
+
+/**
+ * Inject dynamic SEO meta tags and JSON-LD schema for product pages.
+ * Outputs original_sku (Oscar part number) and vehicle model for Google indexing.
+ */
+add_action( 'wp_head', 'mvp_inject_product_seo_meta', 1 );
+function mvp_inject_product_seo_meta() {
+    // Only run on single product pages
+    if ( ! is_product() ) {
+        return;
+    }
+
+    global $post;
+    if ( ! $post ) {
+        return;
+    }
+
+    // Get the product object
+    $product = wc_get_product( $post->ID );
+    if ( ! $product ) {
+        return;
+    }
+
+    // Get original_sku (Oscar part number)
+    $original_sku = get_post_meta( $product->get_id(), 'original_sku', true );
+    if ( ! $original_sku ) {
+        // Fallback to WordPress SKU if original_sku doesn't exist
+        $original_sku = $product->get_sku();
+    }
+
+    // Get product name
+    $product_name = $product->get_name();
+
+    // Get vehicle model from the product's VIN category
+    $vehicle_models = array();
+    $categories = get_the_terms( $product->get_id(), 'product_cat' );
+    
+    if ( $categories && ! is_wp_error( $categories ) ) {
+        $maxus_term_id = 3590; // Maxus parent category
+        
+        foreach ( $categories as $cat ) {
+            // Check if this category is a VIN (direct child of Maxus)
+            if ( $cat->parent === $maxus_term_id ) {
+                $vehicle_model = get_term_meta( $cat->term_id, 'vehicle_model', true );
+                $vehicle_year  = get_term_meta( $cat->term_id, 'vehicle_year', true );
+                
+                if ( $vehicle_model ) {
+                    $display_model = $vehicle_model;
+                    if ( $vehicle_year ) {
+                        $display_model .= ' (' . $vehicle_year . ')';
+                    }
+                    $vehicle_models[] = $display_model;
+                }
+            }
+        }
+    }
+
+    // Build meta description
+    $description = $product_name;
+    if ( ! empty( $vehicle_models ) ) {
+        $description .= ' for ' . implode( ', ', $vehicle_models );
+    }
+    $description .= '. Part Number: ' . $original_sku;
+    
+    // Add short description if available
+    $short_desc = $product->get_short_description();
+    if ( $short_desc ) {
+        $short_desc = wp_strip_all_tags( $short_desc );
+        $short_desc = substr( $short_desc, 0, 100 );
+        $description .= '. ' . $short_desc;
+    }
+
+    // Get product price
+    $price = $product->get_price();
+    $currency = get_woocommerce_currency();
+
+    // Get product image
+    $image_url = wp_get_attachment_image_url( $product->get_image_id(), 'full' );
+
+    // Get product URL
+    $product_url = get_permalink( $product->get_id() );
+
+    // Get availability
+    $availability = $product->is_in_stock() ? 'InStock' : 'OutOfStock';
+
+    // Output meta tags
+    echo "\n<!-- Dynamic Product SEO Meta Tags -->\n";
+    echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
+    
+    // Output JSON-LD Schema for Product
+    echo '<script type="application/ld+json">' . "\n";
+    $schema = array(
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        'name' => $product_name,
+        'sku' => $original_sku,
+        'description' => $description,
+        'url' => $product_url,
+    );
+
+    // Add image if available
+    if ( $image_url ) {
+        $schema['image'] = $image_url;
+    }
+
+    // Add offers (price info)
+    if ( $price ) {
+        $schema['offers'] = array(
+            '@type' => 'Offer',
+            'price' => $price,
+            'priceCurrency' => $currency,
+            'availability' => 'https://schema.org/' . $availability,
+            'url' => $product_url,
+        );
+    }
+
+    // Add vehicle model as additionalProperty if available
+    if ( ! empty( $vehicle_models ) ) {
+        $schema['additionalProperty'] = array();
+        foreach ( $vehicle_models as $model ) {
+            $schema['additionalProperty'][] = array(
+                '@type' => 'PropertyValue',
+                'name' => 'Vehicle Model',
+                'value' => $model,
+            );
+        }
+    }
+
+    // Add brand (Maxus)
+    $schema['brand'] = array(
+        '@type' => 'Brand',
+        'name' => 'Maxus',
+    );
+
+    echo wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT );
+    echo "\n" . '</script>' . "\n";
+    echo "<!-- End Dynamic Product SEO -->\n";
 }

@@ -1,3 +1,38 @@
-http://localhost/shanemaxus/shanemaxus/vehicle/e-deliver-9/
+add_action('wp_head', 'inject_dynamic_auto_meta', 1);
 
-click side closures
+function inject_dynamic_auto_meta() {
+    global $wpdb;
+
+    // 1. Get the unique identifier from the URL (e.g., ://yoursite.com)
+    $part_id = isset($_GET['pid']) ? intval($_GET['pid']) : 0;
+
+    if ($part_id > 0) {
+        // 2. Query your custom WordPress table
+        // Change 'wp_custom_parts' to your actual table name
+        $row = $wpdb->get_row($wpdb->prepare(
+            "SELECT sku, vehicle_model FROM {$wpdb->prefix}custom_parts WHERE id = %d", 
+            $part_id
+        ));
+
+        if ($row) {
+            $sku = esc_attr($row->sku);
+            $model = esc_attr($row->vehicle_model);
+
+            // 3. Inject the Meta Tags
+            echo "\n<!-- Dynamic SEO Start -->\n";
+            echo '<meta name="description" content="Find ' . $model . ' parts. SKU: ' . $sku . ' available now.">' . "\n";
+            
+            // 4. Inject JSON-LD Schema (Highly recommended for Google indexing)
+            echo '<script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "' . $model . ' Part",
+              "sku": "' . $sku . '",
+              "model": "' . $model . '"
+            }
+            </script>' . "\n";
+            echo "<!-- Dynamic SEO End -->\n";
+        }
+    }
+}
