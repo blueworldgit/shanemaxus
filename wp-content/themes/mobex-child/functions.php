@@ -3385,7 +3385,7 @@ function mvp_vehicle_sticky_notice_bar() {
         line-height: 1.4;
         flex-wrap: wrap;
         position: relative;
-        z-index: 99999;
+        z-index: 100;
         box-sizing: border-box;
     }
     #mvp-vehicle-bar .mvp-bar-label {
