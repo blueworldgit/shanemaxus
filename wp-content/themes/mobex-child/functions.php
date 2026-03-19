@@ -1045,6 +1045,17 @@ function mvp_vehicle_render_full_page() {
             <?php endforeach; ?>
         </div>
         <?php else : ?>
+            <?php
+            // No child categories - check if products are directly in this VIN category
+            if ( $vin_term->count > 0 ) :
+                // Products exist directly in VIN category - redirect to it
+                $vin_cat_url = get_term_link( $vin_term );
+                if ( ! is_wp_error( $vin_cat_url ) ) {
+                    wp_redirect( $vin_cat_url, 302 );
+                    exit;
+                }
+            endif;
+            ?>
         <p style="text-align:center;color:#888;padding:40px 0;">No parts categories found for this vehicle yet.</p>
         <?php endif; ?>
     </div>
@@ -3615,4 +3626,196 @@ function mvp_inject_product_seo_meta() {
     echo wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT );
     echo "\n" . '</script>' . "\n";
     echo "<!-- End Dynamic Product SEO -->\n";
+}
+/**
+ * Custom REST API: query and update products by original_sku meta
+ * Namespace: custom/v1
+ * Routes:
+ *   GET  /wp-json/custom/v1/products-by-sku?original_sku=B00004124
+ *   POST /wp-json/custom/v1/products-by-sku  body: { original_sku, price }
+ *   GET  /wp-json/custom/v1/products-by-sku/test
+ */
+add_action( 'rest_api_init', function () {
+
+    // --- GET: look up products by original_sku ---
+    register_rest_route( 'custom/v1', '/products-by-sku', array(
+        'methods'             => 'GET',
+        'callback'            => 'cvone_get_products_by_original_sku',
+        'permission_callback' => 'cvone_auth_check',
+        'args'                => array(
+            'original_sku' => array(
+                'required'          => true,
+                'sanitize_callback' => 'sanitize_text_field',
+            ),
+        ),
+    ) );
+
+    // --- POST: update price for products with original_sku ---
+    register_rest_route( 'custom/v1', '/products-by-sku', array(
+        'methods'             => 'POST',
+        'callback'            => 'cvone_update_price_by_original_sku',
+        'permission_callback' => 'cvone_auth_check',
+    ) );
+
+    // --- GET /test: verify endpoint and meta query work ---
+    register_rest_route( 'custom/v1', '/products-by-sku/test', array(
+        'methods'             => 'GET',
+        'callback'            => 'cvone_test_endpoint',
+        'permission_callback' => 'cvone_auth_check',
+    ) );
+} );
+
+/**
+ * Require WooCommerce API key auth (consumer key / secret passed as Basic Auth).
+ * Returns true if the request is authenticated as a WC API user with edit_products cap.
+ */
+function cvone_auth_check( WP_REST_Request $request ) {
+    return current_user_can( 'edit_products' );
+}
+
+/**
+ * Query the postmeta table directly for original_sku matches.
+ * Returns all post IDs (products + variations) that have original_sku = $sku.
+ */
+function cvone_query_ids_by_original_sku( $sku ) {
+    global $wpdb;
+    $sku = sanitize_text_field( $sku );
+    $ids = $wpdb->get_col( $wpdb->prepare(
+        "SELECT post_id
+           FROM {$wpdb->postmeta}
+          WHERE meta_key   = 'original_sku'
+            AND meta_value = %s",
+        $sku
+    ) );
+    return array_map( 'intval', $ids );
+}
+
+/**
+ * GET /wp-json/custom/v1/products-by-sku?original_sku=B00004124
+ */
+function cvone_get_products_by_original_sku( WP_REST_Request $request ) {
+    $sku  = $request->get_param( 'original_sku' );
+    $ids  = cvone_query_ids_by_original_sku( $sku );
+
+    if ( empty( $ids ) ) {
+        return new WP_REST_Response( array(
+            'found'        => 0,
+            'original_sku' => $sku,
+            'products'     => array(),
+        ), 200 );
+    }
+
+    $results = array();
+    foreach ( $ids as $post_id ) {
+        $post        = get_post( $post_id );
+        $wc_sku      = get_post_meta( $post_id, '_sku', true );
+        $parent_id   = $post ? (int) $post->post_parent : 0;
+        $results[]   = array(
+            'id'           => $post_id,
+            'parent_id'    => $parent_id,
+            'type'         => ( $parent_id > 0 ) ? 'variation' : 'product',
+            'wc_sku'       => $wc_sku,
+            'original_sku' => $sku,
+            'status'       => $post ? $post->post_status : 'unknown',
+        );
+    }
+
+    return new WP_REST_Response( array(
+        'found'        => count( $results ),
+        'original_sku' => $sku,
+        'products'     => $results,
+    ), 200 );
+}
+
+/**
+ * POST /wp-json/custom/v1/products-by-sku
+ * Body (JSON): { "original_sku": "B00004124", "price": "1.33" }
+ */
+function cvone_update_price_by_original_sku( WP_REST_Request $request ) {
+    $sku   = sanitize_text_field( $request->get_param( 'original_sku' ) );
+    $price = $request->get_param( 'price' );
+
+    if ( ! $sku ) {
+        return new WP_Error( 'missing_sku', 'original_sku is required', array( 'status' => 400 ) );
+    }
+    if ( ! is_numeric( $price ) || (float) $price <= 0 ) {
+        return new WP_Error( 'invalid_price', 'price must be a positive number', array( 'status' => 400 ) );
+    }
+
+    $price_str = number_format( (float) $price, 2, '.', '' );
+    $ids       = cvone_query_ids_by_original_sku( $sku );
+
+    if ( empty( $ids ) ) {
+        return new WP_REST_Response( array(
+            'updated'      => 0,
+            'original_sku' => $sku,
+            'message'      => 'No products found with that original_sku',
+        ), 200 );
+    }
+
+    $updated = array();
+    $failed  = array();
+
+    foreach ( $ids as $post_id ) {
+        // Update WooCommerce price meta directly
+        $ok1 = update_post_meta( $post_id, '_price',         $price_str );
+        $ok2 = update_post_meta( $post_id, '_regular_price', $price_str );
+
+        // Clear the transient/object cache for this product
+        $parent_id = (int) get_post_field( 'post_parent', $post_id );
+        wc_delete_product_transients( $parent_id > 0 ? $parent_id : $post_id );
+
+        if ( $ok1 !== false || $ok2 !== false ) {
+            $updated[] = array(
+                'id'        => $post_id,
+                'parent_id' => $parent_id,
+                'price'     => $price_str,
+            );
+        } else {
+            $failed[] = $post_id;
+        }
+    }
+
+    return new WP_REST_Response( array(
+        'original_sku' => $sku,
+        'price'        => $price_str,
+        'updated'      => count( $updated ),
+        'failed'       => count( $failed ),
+        'products'     => $updated,
+        'failed_ids'   => $failed,
+    ), 200 );
+}
+
+/**
+ * GET /wp-json/custom/v1/products-by-sku/test
+ * Runs a test query against postmeta to confirm original_sku meta exists on the site.
+ */
+function cvone_test_endpoint( WP_REST_Request $request ) {
+    global $wpdb;
+
+    // Count how many products have the original_sku meta key at all
+    $total_with_meta = (int) $wpdb->get_var(
+        "SELECT COUNT(*) FROM {$wpdb->postmeta} WHERE meta_key = 'original_sku'"
+    );
+
+    // Grab up to 5 example values
+    $examples = $wpdb->get_results(
+        "SELECT post_id, meta_value
+           FROM {$wpdb->postmeta}
+          WHERE meta_key = 'original_sku'
+          LIMIT 5",
+        ARRAY_A
+    );
+
+    // Try a specific lookup for B00004124 as a known test SKU
+    $test_sku  = 'B00004124';
+    $test_ids  = cvone_query_ids_by_original_sku( $test_sku );
+
+    return new WP_REST_Response( array(
+        'status'                        => 'ok',
+        'total_with_original_sku_meta'  => $total_with_meta,
+        'example_values'                => $examples,
+        'test_sku'                      => $test_sku,
+        'test_sku_post_ids'             => $test_ids,
+    ), 200 );
 }
