@@ -3666,11 +3666,37 @@ add_action( 'rest_api_init', function () {
 } );
 
 /**
- * Require WooCommerce API key auth (consumer key / secret passed as Basic Auth).
- * Returns true if the request is authenticated as a WC API user with edit_products cap.
+ * Authenticate via WC consumer key/secret (Basic Auth or query-string).
+ * WC's own auth sets the user for wc/v3 routes but NOT custom namespaces,
+ * so we validate the key directly against the woocommerce_api_keys table.
  */
 function cvone_auth_check( WP_REST_Request $request ) {
-    return current_user_can( 'edit_products' );
+    // If WC auth has already set a user, check capability
+    if ( is_user_logged_in() && current_user_can( 'edit_products' ) ) {
+        return true;
+    }
+    // Validate WC consumer key directly from query params or Basic Auth header
+    $ck = $request->get_param( 'consumer_key' );
+    $cs = $request->get_param( 'consumer_secret' );
+    if ( ! $ck ) {
+        // Try Basic Auth header (consumer_key as username, consumer_secret as password)
+        $ck = isset( $_SERVER['PHP_AUTH_USER'] ) ? $_SERVER['PHP_AUTH_USER'] : '';
+        $cs = isset( $_SERVER['PHP_AUTH_PW'] )   ? $_SERVER['PHP_AUTH_PW']   : '';
+    }
+    if ( $ck && $cs ) {
+        global $wpdb;
+        $keys = $wpdb->get_row( $wpdb->prepare(
+            "SELECT user_id, permissions, consumer_secret
+               FROM {$wpdb->prefix}woocommerce_api_keys
+              WHERE consumer_key = %s",
+            wc_api_hash( $ck )
+        ) );
+        if ( $keys && hash_equals( $keys->consumer_secret, $cs ) ) {
+            wp_set_current_user( $keys->user_id );
+            return current_user_can( 'edit_products' );
+        }
+    }
+    return false;
 }
 
 /**
