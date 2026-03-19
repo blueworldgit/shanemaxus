@@ -1853,6 +1853,9 @@ function mvp_department_template_redirect() {
     $dept_slug = get_query_var( 'mvp_department' );
     if ( ! $dept_slug ) return;
 
+    // Add Vary header so caches (Cloudflare) know response depends on cookies
+    header( 'Vary: Cookie', false );
+
     $vehicle_slug = get_query_var( 'mvp_dept_vehicle' );
 
     // If vehicle slug present, show intermediate category page for that vehicle+department
@@ -1865,6 +1868,8 @@ function mvp_department_template_redirect() {
     if ( ! $vehicle_slug && ! empty( $_COOKIE['mvp_vehicle_slug'] ) ) {
         $cookie_slug = sanitize_title( wp_unslash( $_COOKIE['mvp_vehicle_slug'] ) );
         if ( $cookie_slug ) {
+            // Add nocache header to prevent caching of redirect
+            header( 'Cache-Control: no-cache, must-revalidate, max-age=0', false );
             $redirect_url = home_url( '/department/' . $dept_slug . '/' . $cookie_slug . '/' );
             wp_redirect( $redirect_url, 302 );
             exit;
