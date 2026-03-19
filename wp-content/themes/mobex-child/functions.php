@@ -3846,3 +3846,29 @@ function cvone_test_endpoint( WP_REST_Request $request ) {
         'test_sku_post_ids'             => $test_ids,
     ), 200 );
 }
+
+/**
+ * Diagnostic: Check if functions.php is loaded and cache status
+ */
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'custom/v1', '/diagnostic', array(
+        'methods'             => 'GET',
+        'callback'            => 'cvone_diagnostic',
+        'permission_callback' => '__return_true',
+    ) );
+} );
+
+function cvone_diagnostic() {
+    $functions_file = get_stylesheet_directory() . '/functions.php';
+    $file_mtime = file_exists( $functions_file ) ? filemtime( $functions_file ) : 0;
+    
+    return new WP_REST_Response( array(
+        'functions_php_modified' => $file_mtime > 0 ? date( 'Y-m-d H:i:s', $file_mtime ) : 'not found',
+        'functions_php_modified_timestamp' => $file_mtime,
+        'wordpress_time' => current_time( 'mysql' ),
+        'php_version' => phpversion(),
+        'opcache_enabled' => function_exists( 'opcache_get_status' ) && opcache_get_status() !== false,
+        'test_cookie_value' => isset( $_COOKIE['mvp_vehicle_slug'] ) ? $_COOKIE['mvp_vehicle_slug'] : 'not set',
+        'diagnostic_added' => 'March 19, 2026 - Cookie issue investigation',
+    ), 200 );
+}

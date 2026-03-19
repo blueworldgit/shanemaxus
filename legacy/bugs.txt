@@ -1,38 +1,5 @@
-add_action('wp_head', 'inject_dynamic_auto_meta', 1);
-
-function inject_dynamic_auto_meta() {
-    global $wpdb;
-
-    // 1. Get the unique identifier from the URL (e.g., ://yoursite.com)
-    $part_id = isset($_GET['pid']) ? intval($_GET['pid']) : 0;
-
-    if ($part_id > 0) {
-        // 2. Query your custom WordPress table
-        // Change 'wp_custom_parts' to your actual table name
-        $row = $wpdb->get_row($wpdb->prepare(
-            "SELECT sku, vehicle_model FROM {$wpdb->prefix}custom_parts WHERE id = %d", 
-            $part_id
-        ));
-
-        if ($row) {
-            $sku = esc_attr($row->sku);
-            $model = esc_attr($row->vehicle_model);
-
-            // 3. Inject the Meta Tags
-            echo "\n<!-- Dynamic SEO Start -->\n";
-            echo '<meta name="description" content="Find ' . $model . ' parts. SKU: ' . $sku . ' available now.">' . "\n";
-            
-            // 4. Inject JSON-LD Schema (Highly recommended for Google indexing)
-            echo '<script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "Product",
-              "name": "' . $model . ' Part",
-              "sku": "' . $sku . '",
-              "model": "' . $model . '"
-            }
-            </script>' . "\n";
-            echo "<!-- Dynamic SEO End -->\n";
-        }
-    }
-}
+	consentid:ZmlnZVQ0WlJSMFdQdnV1dExyVnY4RGN0ME9OZTJ1MVU,consent:yes,action:yes,necessary:yes,functional:yes,analytics:yes,performance:yes,advertisement:yes	maxusvanparts.acstestweb.co.uk	/	2027-03-07T12:11:37.000Z	170			Strict			Medium	
+mvp_vehicle_model	E%20Deliver%203	shane.maxusvanparts.co.uk	/	2026-04-18T08:04:00.000Z	32		✓	Lax			Medium	
+mvp_vehicle_serial	lsh14c4c5na129710	shane.maxusvanparts.co.uk	/	2026-04-18T08:04:00.000Z	35		✓	Lax			Medium	
+mvp_vehicle_slug	e-deliver-3	shane.maxusvanparts.co.uk	/	2026-04-18T08:04:00.000Z	27		✓	Lax			Medium	
+mvp_vehicle_year	2020-2026	shane.maxusvanparts.co.uk	/	2026-04-18T08:04:00.000Z	25	
