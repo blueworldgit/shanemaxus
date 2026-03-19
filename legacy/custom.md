@@ -262,6 +262,56 @@ function cvone_test_endpoint( WP_REST_Request $request ) {
 
 ---
 
+## Troubleshooting: Route Not Found (404)
+
+### Site & API credentials for testing
+
+| | |
+|---|---|
+| **Site URL** | `https://shane.maxusvanparts.co.uk` |
+| **Consumer Key** | `ck_f1afc5dfb58879e9f5cb2a00e2d0a80c3d72275c` |
+| **Consumer Secret** | `cs_4d5dd541b8f50d4c562462bd4fc0c1c814c7c4b3` |
+| **Auth method** | Query-string params `consumer_key` + `consumer_secret` (NOT Basic Auth — WP intercepts Basic Auth before custom routes can handle it) |
+
+**Direct browser test** (GET, no tools needed — paste into browser address bar):
+```
+https://shane.maxusvanparts.co.uk/wp-json/custom/v1/products-by-sku/test?consumer_key=ck_f1afc5dfb58879e9f5cb2a00e2d0a80c3d72275c&consumer_secret=cs_4d5dd541b8f50d4c562462bd4fc0c1c814c7c4b3
+```
+
+**Check route is registered** (also paste into browser):
+```
+https://shane.maxusvanparts.co.uk/wp-json/custom/v1
+```
+Should show `products-by-sku` and `products-by-sku/test` in the routes. If only `products-not-in-category` appears, the PHP block was not saved.
+
+---
+
+If `/wp-json/custom/v1/products-by-sku` returns 404, check the registered routes:
+
+```
+GET /wp-json
+```
+
+Look for `/custom/v1/products-by-sku` in the `routes` list. If it's **missing** but `/custom/v1` namespace is present (showing only `/custom/v1/products-not-in-category`), it means the `products-by-sku` block was **not saved** into `functions.php`.
+
+**Known issue (March 2026)**: When the theme was first edited, only the old `products-not-in-category` route was preserved. The new `products-by-sku` block was not included. Re-insert the full PHP block below into `functions.php` — leave the existing `products-not-in-category` route untouched, just append the new block alongside it.
+
+To verify the route is live after inserting:
+```powershell
+.\env\Scripts\python.exe -c "
+import requests, json
+from config import WORDPRESS_URL
+ck = 'ck_f1afc5dfb58879e9f5cb2a00e2d0a80c3d72275c'
+cs = 'cs_4d5dd541b8f50d4c562462bd4fc0c1c814c7c4b3'
+r = requests.get(WORDPRESS_URL.rstrip('/')+'/wp-json', params={'consumer_key':ck,'consumer_secret':cs}, timeout=15)
+routes = [k for k in r.json().get('routes', {}).keys() if 'products-by-sku' in k]
+print('products-by-sku routes:', routes)
+"
+```
+Expected output: `products-by-sku routes: ['/custom/v1/products-by-sku', '/custom/v1/products-by-sku/test']`
+
+---
+
 ## Testing After Insertion
 
 Run from `c:\pythonstuff\wpimport` once the code is in place:

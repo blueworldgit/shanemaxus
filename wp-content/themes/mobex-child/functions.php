@@ -3627,6 +3627,7 @@ function mvp_inject_product_seo_meta() {
     echo "\n" . '</script>' . "\n";
     echo "<!-- End Dynamic Product SEO -->\n";
 }
+
 /**
  * Custom REST API: query and update products by original_sku meta
  * Namespace: custom/v1
