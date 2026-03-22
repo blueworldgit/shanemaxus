@@ -3656,6 +3656,249 @@ function mvp_inject_product_seo_meta() {
     echo "<!-- End Dynamic Product SEO -->\n";
 }
 
+// ============================================================
+// 13. COMPONENT DIAGRAM — SVG + PARTS TABLE ON LEAF CATEGORY PAGES
+// ============================================================
+
+/**
+ * On a leaf product_cat page (depth >= 3 below Maxus) that has component_svg_code
+ * and component_parts_json term meta set, render an interactive SVG diagram
+ * alongside a parts table grouped by call_out_order.
+ * Clicking a callout number in the SVG highlights the matching row(s), and vice versa.
+ */
+add_action( 'woocommerce_before_shop_loop', 'mvp_render_component_diagram', 5 );
+function mvp_render_component_diagram() {
+    if ( ! is_tax( 'product_cat' ) ) return;
+
+    $term = get_queried_object();
+    if ( ! ( $term instanceof WP_Term ) ) return;
+
+    // Must be at least 3 levels below Maxus root (Maxus > VIN > mid-category > leaf)
+    $maxus_id  = mvp_get_maxus_term_id();
+    $ancestors = get_ancestors( $term->term_id, 'product_cat', 'taxonomy' );
+    if ( count( $ancestors ) < 3 || ! in_array( $maxus_id, $ancestors, true ) ) return;
+
+    $svg_code   = get_term_meta( $term->term_id, 'component_svg_code',   true );
+    $parts_json = get_term_meta( $term->term_id, 'component_parts_json', true );
+    if ( ! $svg_code || ! $parts_json ) return;
+
+    $parts = json_decode( $parts_json, true );
+    if ( ! is_array( $parts ) || empty( $parts ) ) return;
+
+    // Build lookup: original_sku (uppercase) -> product post
+    // The import stores original_sku = JSON part_number (e.g. "C00157255")
+    $products_by_sku = array();
+    $loop = new WP_Query( array(
+        'post_type'      => 'product',
+        'post_status'    => 'publish',
+        'posts_per_page' => 500,
+        'tax_query'      => array( array(
+            'taxonomy' => 'product_cat',
+            'field'    => 'term_id',
+            'terms'    => $term->term_id,
+        ) ),
+    ) );
+    foreach ( $loop->posts as $p ) {
+        $sku = get_post_meta( $p->ID, 'original_sku', true );
+        if ( $sku ) {
+            $products_by_sku[ strtoupper( trim( $sku ) ) ] = $p;
+        }
+    }
+
+    // Group parts by call_out_order
+    $grouped = array();
+    foreach ( $parts as $part ) {
+        $order = (int) ( $part['call_out_order'] ?? 0 );
+        $grouped[ $order ][] = $part;
+    }
+    ksort( $grouped );
+
+    $uid = 'mvp-cd-' . $term->term_id;
+    ?>
+    <div class="mvp-component-diagram" id="<?php echo esc_attr( $uid ); ?>">
+
+        <div class="mvp-cd-svg-wrap">
+            <?php
+            // SVG originates from the Oscar EPC database via our own import pipeline —
+            // not user-submitted. Direct output is appropriate here.
+            echo $svg_code; // phpcs:ignore WordPress.Security.EscapeOutput
+            ?>
+        </div>
+
+        <div class="mvp-cd-table-wrap">
+            <table class="mvp-cd-table">
+                <thead>
+                    <tr>
+                        <th class="mvp-cd-th-num">#</th>
+                        <th>Part No.</th>
+                        <th>Description</th>
+                        <th class="mvp-cd-th-qty">Qty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ( $grouped as $callout_num => $group_parts ) : ?>
+                    <tr class="mvp-cd-row" data-callout="<?php echo esc_attr( $callout_num ); ?>">
+                        <td class="mvp-cd-num"><?php echo esc_html( $callout_num ); ?></td>
+                        <td class="mvp-cd-part-col">
+                        <?php foreach ( $group_parts as $i => $part ) :
+                            $sku_key = strtoupper( trim( $part['part_number'] ?? '' ) );
+                            $prod    = $products_by_sku[ $sku_key ] ?? null;
+                        ?>
+                            <div class="mvp-cd-part-line<?php echo $i > 0 ? ' mvp-cd-sep' : ''; ?>">
+                                <?php if ( $prod ) : ?>
+                                    <a href="<?php echo esc_url( get_permalink( $prod->ID ) ); ?>">
+                                        <?php echo esc_html( $part['part_number'] ); ?>
+                                    </a>
+                                <?php else : ?>
+                                    <?php echo esc_html( $part['part_number'] ); ?>
+                                <?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
+                        </td>
+                        <td class="mvp-cd-desc-col">
+                        <?php foreach ( $group_parts as $i => $part ) : ?>
+                            <div class="mvp-cd-part-line<?php echo $i > 0 ? ' mvp-cd-sep' : ''; ?>">
+                                <?php echo esc_html( $part['usage_name'] ); ?>
+                            </div>
+                        <?php endforeach; ?>
+                        </td>
+                        <td class="mvp-cd-qty-col">
+                        <?php foreach ( $group_parts as $i => $part ) :
+                            $qty = (float) ( $part['unit_qty'] ?? 1 );
+                        ?>
+                            <div class="mvp-cd-part-line<?php echo $i > 0 ? ' mvp-cd-sep' : ''; ?>">
+                                &times;<?php echo esc_html( $qty == (int) $qty ? (int) $qty : $qty ); ?>
+                            </div>
+                        <?php endforeach; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <style>
+    .mvp-component-diagram {
+        display: flex;
+        gap: 24px;
+        margin: 0 0 32px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+    .mvp-cd-svg-wrap {
+        flex: 0 1 45%;
+        min-width: 280px;
+        border: 1px solid #dde3e9;
+        background: #fff;
+        border-radius: 6px;
+        overflow: auto;
+        max-height: 600px;
+    }
+    .mvp-cd-svg-wrap svg {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .mvp-cd-table-wrap {
+        flex: 1 1 320px;
+        overflow-x: auto;
+    }
+    .mvp-cd-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #fff;
+        border: 1px solid #dde3e9;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .mvp-cd-table thead th {
+        background: #1a2d4a;
+        color: #fff;
+        padding: 10px 14px;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .03em;
+    }
+    .mvp-cd-th-num  { width: 42px; text-align: center; }
+    .mvp-cd-th-qty  { width: 52px; }
+    .mvp-cd-table tbody tr {
+        border-bottom: 1px solid #edf0f4;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+    .mvp-cd-table tbody tr:last-child { border-bottom: none; }
+    .mvp-cd-table tbody tr:hover   { background: #f5f8ff; }
+    .mvp-cd-table tbody tr.mvp-cd-active { background: #fff3cd; }
+    .mvp-cd-table td { padding: 9px 14px; vertical-align: top; }
+    .mvp-cd-num {
+        font-weight: 700;
+        font-size: 15px;
+        color: #1a2d4a;
+        text-align: center;
+    }
+    .mvp-cd-qty-col { text-align: center; }
+    .mvp-cd-sep { border-top: 1px dashed #ddd; padding-top: 4px; margin-top: 4px; }
+    .mvp-cd-part-col a { color: #1a2d4a; font-weight: 600; text-decoration: underline; }
+    .mvp-cd-part-col a:hover { color: #F29F05; }
+    @media (max-width: 700px) {
+        .mvp-cd-svg-wrap { flex: 0 0 100%; max-height: none; }
+    }
+    </style>
+
+    <script>
+    (function () {
+        var wrap = document.getElementById('<?php echo esc_js( $uid ); ?>');
+        if (!wrap) return;
+        var rows = Array.from(wrap.querySelectorAll('.mvp-cd-row'));
+        var svg  = wrap.querySelector('svg');
+
+        function activate(num) {
+            var n = String(num);
+            rows.forEach(function (r) {
+                r.classList.toggle('mvp-cd-active', r.dataset.callout === n);
+            });
+            if (svg) {
+                svg.querySelectorAll('text').forEach(function (t) {
+                    var match = t.textContent.trim() === n;
+                    t.style.fill       = match ? '#F29F05' : '';
+                    t.style.fontWeight = match ? 'bold'   : '';
+                });
+            }
+        }
+
+        // Table row click → highlight SVG callout
+        rows.forEach(function (row) {
+            row.addEventListener('click', function () {
+                activate(row.dataset.callout);
+            });
+        });
+
+        // SVG text click → highlight row + scroll into view
+        if (svg) {
+            svg.querySelectorAll('text').forEach(function (t) {
+                var n = t.textContent.trim();
+                if (/^\d+$/.test(n)) {
+                    t.style.cursor = 'pointer';
+                    t.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        activate(n);
+                        var match = rows.find(function (r) { return r.dataset.callout === n; });
+                        if (match) match.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    });
+                }
+            });
+        }
+    })();
+    </script>
+    <?php
+}
+
+
 /**
  * Custom REST API: query and update products by original_sku meta
  * Namespace: custom/v1
@@ -3898,5 +4141,71 @@ function cvone_diagnostic() {
         'opcache_enabled' => function_exists( 'opcache_get_status' ) && opcache_get_status() !== false,
         'test_cookie_value' => isset( $_COOKIE['mvp_vehicle_slug'] ) ? $_COOKIE['mvp_vehicle_slug'] : 'not set',
         'diagnostic_added' => 'March 19, 2026 - Cookie issue investigation',
+    ), 200 );
+}
+
+// ============================================================
+// 14. COMPONENT DIAGRAM — REST ENDPOINT TO SAVE TERM META
+// ============================================================
+// POST /wp-json/custom/v1/set-component-meta
+// Body (JSON): { "term_id": 4356, "svg_code": "...", "parts_json": "[...]" }
+// Auth: WC Consumer Key / Consumer Secret via HTTP Basic Auth.
+
+// Secret shared between this endpoint and the import script.
+// Change this value if you need to rotate it.
+define( 'MVP_COMPONENT_API_SECRET', 'mvp-comp-2026-xK9pLq' );
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'custom/v1', '/set-component-meta', array(
+        'methods'             => 'POST',
+        'callback'            => 'mvp_set_component_meta',
+        'permission_callback' => 'mvp_set_component_meta_permission',
+        'args'                => array(
+            'term_id'    => array( 'required' => true,  'type' => 'integer' ),
+            'svg_code'   => array( 'required' => false, 'type' => 'string'  ),
+            'parts_json' => array( 'required' => false, 'type' => 'string'  ),
+            'secret'     => array( 'required' => true,  'type' => 'string'  ),
+        ),
+    ) );
+} );
+
+function mvp_set_component_meta_permission( WP_REST_Request $request ) {
+    $secret = $request->get_param( 'secret' );
+    return hash_equals( MVP_COMPONENT_API_SECRET, (string) $secret );
+}
+
+function mvp_set_component_meta( WP_REST_Request $request ) {
+    $term_id = (int) $request->get_param( 'term_id' );
+
+    // Verify the term exists and is a product_cat
+    $term = get_term( $term_id, 'product_cat' );
+    if ( ! $term || is_wp_error( $term ) ) {
+        return new WP_Error( 'invalid_term', 'Term not found or not a product_cat.', array( 'status' => 404 ) );
+    }
+
+    $updated = array();
+
+    $svg_code = $request->get_param( 'svg_code' );
+    if ( $svg_code !== null ) {
+        update_term_meta( $term_id, 'component_svg_code', $svg_code );
+        $updated[] = 'component_svg_code';
+    }
+
+    $parts_json = $request->get_param( 'parts_json' );
+    if ( $parts_json !== null ) {
+        // Validate it's parseable JSON
+        $decoded = json_decode( $parts_json, true );
+        if ( ! is_array( $decoded ) ) {
+            return new WP_Error( 'invalid_json', 'parts_json must be a valid JSON array.', array( 'status' => 400 ) );
+        }
+        update_term_meta( $term_id, 'component_parts_json', $parts_json );
+        $updated[] = 'component_parts_json';
+    }
+
+    return new WP_REST_Response( array(
+        'success' => true,
+        'term_id' => $term_id,
+        'term_name' => $term->name,
+        'updated'   => $updated,
     ), 200 );
 }
