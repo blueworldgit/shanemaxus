@@ -10,3 +10,7 @@ wp-config.php
 # Block database dumps
 *.sql
 *.gz
+
+# EPC vehicle parts data (large HTML source files and generated JSON)
+legacy/epcdata/
+legacy/epcdata_json/
