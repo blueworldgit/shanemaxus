@@ -1813,6 +1813,17 @@ function mvp_dept_get_display_names() {
 // 5b. DEPARTMENT PAGES — /department/{slug}/ and /department/{slug}/{vehicle-slug}/
 // ============================================================
 
+// Auto-flush rewrite rules when theme version changes (e.g. after deployment).
+// Bump MVp_REWRITE_VERSION whenever new rewrite rules are added.
+define( 'MVP_REWRITE_VERSION', '3' );
+add_action( 'init', 'mvp_maybe_flush_rewrite_rules', 99 );
+function mvp_maybe_flush_rewrite_rules() {
+    if ( get_option( 'mvp_rewrite_version' ) !== MVP_REWRITE_VERSION ) {
+        flush_rewrite_rules( false );
+        update_option( 'mvp_rewrite_version', MVP_REWRITE_VERSION, false );
+    }
+}
+
 // Register rewrite rules for department pages
 add_action( 'init', 'mvp_department_rewrite_rules' );
 function mvp_department_rewrite_rules() {
