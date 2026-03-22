@@ -606,7 +606,7 @@ function mvp_facelift_inject_hero_and_carousel() {
     if ( ! is_front_page() && ! is_home() ) return;
 
     // Build vehicle cards from DB term meta (organic)
-    $maxus_term_id = 3590; // Maxus parent category
+    $maxus_term_id = mvp_get_maxus_term_id();
     $vin_terms = get_terms( array(
         'taxonomy'   => 'product_cat',
         'parent'     => $maxus_term_id,
@@ -798,6 +798,18 @@ function mvp_facelift_footer() {
 }
 
 // ============================================================
+// 4b. MAXUS ROOT TERM HELPER — resolves by slug, not hardcoded ID
+// ============================================================
+
+function mvp_get_maxus_term_id() {
+    static $id = null;
+    if ( $id !== null ) return $id;
+    $term = get_term_by( 'slug', 'maxus', 'product_cat' );
+    $id   = ( $term && ! is_wp_error( $term ) ) ? (int) $term->term_id : 0;
+    return $id;
+}
+
+// ============================================================
 // 5. VEHICLE LANDING PAGES — Rewrite rules + template
 // ============================================================
 
@@ -835,7 +847,7 @@ function mvp_vehicle_template_redirect() {
     if ( ! $vehicle_slug ) return;
 
     // Find the VIN term by its vehicle_slug meta
-    $maxus_term_id = 3590;
+    $maxus_term_id = mvp_get_maxus_term_id();
     $vin_terms = get_terms( array(
         'taxonomy'   => 'product_cat',
         'parent'     => $maxus_term_id,
@@ -1898,7 +1910,7 @@ function mvp_department_template_redirect() {
 
 // Render an intermediate category-listing page for /department/{cat}/{vehicle}/
 function mvp_department_vehicle_redirect( $dept_slug, $vehicle_slug ) {
-    $maxus_term_id = 3590;
+    $maxus_term_id = mvp_get_maxus_term_id();
 
     // Find VIN term by vehicle_slug meta
     $vin_terms = get_terms( array(
@@ -2163,7 +2175,7 @@ function mvp_department_vehicle_redirect( $dept_slug, $vehicle_slug ) {
 
 // Render the department page showing all vehicles with this category
 function mvp_department_render_page( $dept_slug ) {
-    $maxus_term_id = 3590;
+    $maxus_term_id = mvp_get_maxus_term_id();
 
     // Resolve display name and allowed category list from map
     $slug_map      = mvp_dept_get_slug_map();
@@ -2408,7 +2420,7 @@ function mvp_department_render_page( $dept_slug ) {
 // 6. VEHICLE DATA HELPER — Returns all VIN-to-vehicle mappings
 // ============================================================
 function mvp_get_vehicle_vins() {
-    $maxus_term_id = 3590;
+    $maxus_term_id = mvp_get_maxus_term_id();
     $vin_terms = get_terms( array(
         'taxonomy'   => 'product_cat',
         'parent'     => $maxus_term_id,
@@ -3038,7 +3050,7 @@ function mvp_vehicle_search_bar() {
     if ( ! is_front_page() && ! is_home() ) return;
 
     // Build model → slug + year data from DB term meta
-    $maxus_term_id = 3590;
+    $maxus_term_id = mvp_get_maxus_term_id();
     $vin_terms = get_terms( array(
         'taxonomy'   => 'product_cat',
         'parent'     => $maxus_term_id,
@@ -3386,7 +3398,7 @@ add_action( 'wp_footer', 'mvp_set_vehicle_cookies_from_product_cat' );
 function mvp_set_vehicle_cookies_from_product_cat() {
     if ( ! is_tax( 'product_cat' ) ) return;
 
-    $maxus_term_id = 3590;
+    $maxus_term_id = mvp_get_maxus_term_id();
     $queried = get_queried_object();
     if ( ! ( $queried instanceof WP_Term ) ) return;
 
@@ -3543,7 +3555,7 @@ function mvp_inject_product_seo_meta() {
     $categories = get_the_terms( $product->get_id(), 'product_cat' );
     
     if ( $categories && ! is_wp_error( $categories ) ) {
-        $maxus_term_id = 3590; // Maxus parent category
+        $maxus_term_id = mvp_get_maxus_term_id();
         
         foreach ( $categories as $cat ) {
             // Check if this category is a VIN (direct child of Maxus)
