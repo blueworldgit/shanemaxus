@@ -4209,3 +4209,115 @@ function mvp_set_component_meta( WP_REST_Request $request ) {
         'updated'   => $updated,
     ), 200 );
 }
+
+
+// ============================================================
+// 15. SUBCATEGORY GRID — MID-LEVEL CATEGORY PAGES
+// ============================================================
+
+/**
+ * On mid-level category pages (Maxus > VIN > mid-category), show the
+ * leaf sub-categories as clickable cards instead of a flat product listing.
+ * Depth detected by ancestor count: exactly 2 ancestors = [VIN, Maxus].
+ */
+add_action( 'woocommerce_before_shop_loop', 'mvp_render_midlevel_subcat_grid', 4 );
+function mvp_render_midlevel_subcat_grid() {
+    if ( ! is_tax( 'product_cat' ) ) return;
+
+    $term = get_queried_object();
+    if ( ! ( $term instanceof WP_Term ) ) return;
+
+    $maxus_id  = mvp_get_maxus_term_id();
+    $ancestors = get_ancestors( $term->term_id, 'product_cat', 'taxonomy' );
+
+    // Mid-level: exactly 2 ancestors = [VIN-id, Maxus-id]
+    if ( count( $ancestors ) !== 2 || ! in_array( $maxus_id, $ancestors, true ) ) return;
+
+    $children = get_terms( array(
+        'taxonomy'   => 'product_cat',
+        'parent'     => $term->term_id,
+        'hide_empty' => false,
+        'orderby'    => 'name',
+        'order'      => 'ASC',
+    ) );
+
+    if ( is_wp_error( $children ) || empty( $children ) ) return;
+
+    // Suppress the product loop, result count, and sort order that follow
+    remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count',    20 );
+    remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+    wc_set_loop_prop( 'total', 0 );
+    add_filter( 'woocommerce_product_loop_start', '__return_empty_string' );
+    add_filter( 'woocommerce_product_loop_end',   '__return_empty_string' );
+    remove_all_actions( 'woocommerce_after_shop_loop' );
+    remove_action( 'woocommerce_no_products_found', 'wc_no_products_found' );
+
+    ?>
+    <div class="mvp-subcat-grid">
+        <?php foreach ( $children as $child ) :
+            $link  = get_term_link( $child );
+            $count = (int) $child->count;
+        ?>
+        <a class="mvp-subcat-card" href="<?php echo esc_url( $link ); ?>">
+            <span class="mvp-subcat-icon">&#9741;</span>
+            <span class="mvp-subcat-name"><?php echo esc_html( $child->name ); ?></span>
+            <?php if ( $count > 0 ) : ?>
+            <span class="mvp-subcat-count"><?php echo esc_html( $count ); ?> part<?php echo $count !== 1 ? 's' : ''; ?></span>
+            <?php endif; ?>
+        </a>
+        <?php endforeach; ?>
+    </div>
+
+    <style>
+    .mvp-subcat-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin: 0 0 40px;
+    }
+    .mvp-subcat-card {
+        flex: 1 1 200px;
+        max-width: 260px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #1a2d4a;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        padding: 32px 20px;
+        text-align: center;
+        transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+        box-shadow: 0 2px 8px rgba(0,0,0,.14);
+    }
+    .mvp-subcat-card:hover {
+        background: #F29F05;
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0,0,0,.18);
+    }
+    .mvp-subcat-icon {
+        font-size: 28px;
+        line-height: 1;
+        opacity: 0.7;
+    }
+    .mvp-subcat-name {
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: .01em;
+        line-height: 1.3;
+    }
+    .mvp-subcat-count {
+        font-size: 12px;
+        opacity: 0.75;
+        font-weight: 400;
+    }
+    @media (max-width: 600px) {
+        .mvp-subcat-card { flex: 1 1 140px; max-width: none; padding: 22px 14px; }
+        .mvp-subcat-name { font-size: 14px; }
+    }
+    </style>
+    <?php
+}
