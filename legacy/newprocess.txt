@@ -1,0 +1,4 @@
+
+python step1_create_leaf_cats.py lsfam11c4ra133898 --dry-run
+python step2_upload_svgs.py lsfam11c4ra133898
+python step3_attach_products.py lsfam11c4ra133898 

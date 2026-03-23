@@ -1,0 +1,1037 @@
+{
+  "serial": "LSFAL11A5MA087816",
+  "vin_cat_id": 4021,
+  "categories": [
+    {
+      "json_title": "air intake system",
+      "mid_cat_id": 4063,
+      "components": [
+        {
+          "json_title": "JE140A001 - Air filter",
+          "leaf_name": "Air filter",
+          "leaf_cat_id": 4170
+        }
+      ]
+    },
+    {
+      "json_title": "airbag",
+      "mid_cat_id": 4056,
+      "components": [
+        {
+          "json_title": "JE471A001 - Steering Wheel and AirBag",
+          "leaf_name": "Steering Wheel and AirBag",
+          "leaf_cat_id": 4165
+        }
+      ]
+    },
+    {
+      "json_title": "antenna",
+      "mid_cat_id": 4022,
+      "components": [
+        {
+          "json_title": "JE741A001 - Antenna",
+          "leaf_name": "Antenna",
+          "leaf_cat_id": 7493
+        }
+      ]
+    },
+    {
+      "json_title": "body interior & exterior electronics",
+      "mid_cat_id": 4059,
+      "components": [
+        {
+          "json_title": "JE830A001 - Body Interior & Exterior Electronics",
+          "leaf_name": "Body Interior & Exterior Electronics",
+          "leaf_cat_id": 7494
+        }
+      ]
+    },
+    {
+      "json_title": "body lower exterior trim",
+      "mid_cat_id": 4031,
+      "components": [
+        {
+          "json_title": "JE644A001 - Mud Guard",
+          "leaf_name": "Mud Guard",
+          "leaf_cat_id": 4173
+        }
+      ]
+    },
+    {
+      "json_title": "body lower structure",
+      "mid_cat_id": 4032,
+      "components": [
+        {
+          "json_title": "JE510A001 - body lower stucture",
+          "leaf_name": "body lower stucture",
+          "leaf_cat_id": 4207
+        }
+      ]
+    },
+    {
+      "json_title": "body upper exterior trim",
+      "mid_cat_id": 4036,
+      "components": [
+        {
+          "json_title": "JE691A001 - Body Exterior Trim",
+          "leaf_name": "Body Exterior Trim",
+          "leaf_cat_id": 4159
+        }
+      ]
+    },
+    {
+      "json_title": "body upper structure",
+      "mid_cat_id": 4041,
+      "components": [
+        {
+          "json_title": "JE526A001 - Baffle Plate-Ware",
+          "leaf_name": "Baffle Plate-Ware",
+          "leaf_cat_id": 4104
+        },
+        {
+          "json_title": "JE522A001 - Outer Framing(left side)",
+          "leaf_name": "Outer Framing(left side)",
+          "leaf_cat_id": 7495
+        },
+        {
+          "json_title": "JE522B001 - Outer Framing(right side)",
+          "leaf_name": "Outer Framing(right side)",
+          "leaf_cat_id": 7496
+        },
+        {
+          "json_title": "JE524A001 - Rear Panel",
+          "leaf_name": "Rear Panel",
+          "leaf_cat_id": 4096
+        },
+        {
+          "json_title": "JE523A001 - Roof Framing",
+          "leaf_name": "Roof Framing",
+          "leaf_cat_id": 4091
+        },
+        {
+          "json_title": "JE521A001 - inner framing(left side)",
+          "leaf_name": "inner framing(left side)",
+          "leaf_cat_id": 7497
+        },
+        {
+          "json_title": "JE521B001 - inner framing(right side)",
+          "leaf_name": "inner framing(right side)",
+          "leaf_cat_id": 7498
+        }
+      ]
+    },
+    {
+      "json_title": "body window",
+      "mid_cat_id": 4046,
+      "components": [
+        {
+          "json_title": "JE611A001 - Window",
+          "leaf_name": "Window",
+          "leaf_cat_id": 4103
+        }
+      ]
+    },
+    {
+      "json_title": "brakes",
+      "mid_cat_id": 4049,
+      "components": [
+        {
+          "json_title": "JE244A001 - Brake Apply",
+          "leaf_name": "Brake Apply",
+          "leaf_cat_id": 4114
+        },
+        {
+          "json_title": "JE245A001 - Brake Modulator",
+          "leaf_name": "Brake Modulator",
+          "leaf_cat_id": 4117
+        },
+        {
+          "json_title": "JE246A001 - Brake Pedal",
+          "leaf_name": "Brake Pedal",
+          "leaf_cat_id": 4122
+        },
+        {
+          "json_title": "JE247A001 - Brake Pipes",
+          "leaf_name": "Brake Pipes",
+          "leaf_cat_id": 4125
+        },
+        {
+          "json_title": "JE241A001 - Front Brakes",
+          "leaf_name": "Front Brakes",
+          "leaf_cat_id": 4106
+        },
+        {
+          "json_title": "JE243A001 - Park Brake",
+          "leaf_name": "Park Brake",
+          "leaf_cat_id": 4113
+        },
+        {
+          "json_title": "JE242A001 - Rear Brakes",
+          "leaf_name": "Rear Brakes",
+          "leaf_cat_id": 4107
+        }
+      ]
+    },
+    {
+      "json_title": "bumpers,fascia & grille",
+      "mid_cat_id": 4052,
+      "components": [
+        {
+          "json_title": "JE621A001 - Front Bumper",
+          "leaf_name": "Front Bumper",
+          "leaf_cat_id": 4126
+        },
+        {
+          "json_title": "JE623A001 - Grille",
+          "leaf_name": "Grille",
+          "leaf_cat_id": 4128
+        },
+        {
+          "json_title": "JE625A001 - Wheelhouse Liner",
+          "leaf_name": "Wheelhouse Liner",
+          "leaf_cat_id": 4132
+        }
+      ]
+    },
+    {
+      "json_title": "charging & energystorage",
+      "mid_cat_id": 4055,
+      "components": [
+        {
+          "json_title": "JE843A001 - Battery&Electrical Energy Storage",
+          "leaf_name": "Battery&Electrical Energy Storage",
+          "leaf_cat_id": 7499
+        },
+        {
+          "json_title": "JE844A002 - PowerInverter",
+          "leaf_name": "PowerInverter",
+          "leaf_cat_id": 4138
+        }
+      ]
+    },
+    {
+      "json_title": "chassis structure",
+      "mid_cat_id": 4066,
+      "components": [
+        {
+          "json_title": "JE251A001 - Front Sub-frame",
+          "leaf_name": "Front Sub-frame",
+          "leaf_cat_id": 4142
+        },
+        {
+          "json_title": "JE255A001 - Spare Tire Device",
+          "leaf_name": "Spare Tire Device",
+          "leaf_cat_id": 4145
+        }
+      ]
+    },
+    {
+      "json_title": "communicate",
+      "mid_cat_id": 4026,
+      "components": [
+        {
+          "json_title": "JE751A001 - Vehicle Tele-Communication",
+          "leaf_name": "Vehicle Tele-Communication",
+          "leaf_cat_id": 4147
+        }
+      ]
+    },
+    {
+      "json_title": "customer switches",
+      "mid_cat_id": 4024,
+      "components": [
+        {
+          "json_title": "JE726A001 - Accessory Switches",
+          "leaf_name": "Accessory Switches",
+          "leaf_cat_id": 4162
+        },
+        {
+          "json_title": "JE725A001 - Ignition Switch and Key",
+          "leaf_name": "Ignition Switch and Key",
+          "leaf_cat_id": 4160
+        },
+        {
+          "json_title": "JE723A001 - Multi-Function Column Switch",
+          "leaf_name": "Multi-Function Column Switch",
+          "leaf_cat_id": 4154
+        },
+        {
+          "json_title": "JE821A001 - Passive Entry Passive Start",
+          "leaf_name": "Passive Entry Passive Start",
+          "leaf_cat_id": 4167
+        },
+        {
+          "json_title": "JE721A001 - Window Lift Switch",
+          "leaf_name": "Window Lift Switch",
+          "leaf_cat_id": 4153
+        }
+      ]
+    },
+    {
+      "json_title": "driver information",
+      "mid_cat_id": 4034,
+      "components": [
+        {
+          "json_title": "JE711A001 - Clusters",
+          "leaf_name": "Clusters",
+          "leaf_cat_id": 4174
+        },
+        {
+          "json_title": "JE716A001 - Vehicle Date Recorder",
+          "leaf_name": "Vehicle Date Recorder",
+          "leaf_cat_id": 4177
+        }
+      ]
+    },
+    {
+      "json_title": "emission exhaust system",
+      "mid_cat_id": 4038,
+      "components": [
+        {
+          "json_title": "JE160A001 - Exhaust system",
+          "leaf_name": "Exhaust system",
+          "leaf_cat_id": 4182
+        }
+      ]
+    },
+    {
+      "json_title": "entertainment",
+      "mid_cat_id": 4042,
+      "components": [
+        {
+          "json_title": "JE731A001 - Infotainment System",
+          "leaf_name": "Infotainment System",
+          "leaf_cat_id": 4185
+        },
+        {
+          "json_title": "JE732A001 - Speaker",
+          "leaf_name": "Speaker",
+          "leaf_cat_id": 4189
+        }
+      ]
+    },
+    {
+      "json_title": "front closures front end sheetmetal",
+      "mid_cat_id": 4044,
+      "components": [
+        {
+          "json_title": "JE572A001 - Fenders",
+          "leaf_name": "Fenders",
+          "leaf_cat_id": 4201
+        },
+        {
+          "json_title": "JE571B001 - Hood Lock",
+          "leaf_name": "Hood Lock",
+          "leaf_cat_id": 4196
+        },
+        {
+          "json_title": "JE571A001 - Hood",
+          "leaf_name": "Hood",
+          "leaf_cat_id": 4192
+        }
+      ]
+    },
+    {
+      "json_title": "front lamp",
+      "mid_cat_id": 4060,
+      "components": [
+        {
+          "json_title": "JE650A001 - Front Lamp",
+          "leaf_name": "Front Lamp",
+          "leaf_cat_id": 7500
+        }
+      ]
+    },
+    {
+      "json_title": "frontexterior hvac airflow",
+      "mid_cat_id": 4050,
+      "components": [
+        {
+          "json_title": "JE340A001 - Front End Exterior Airflow",
+          "leaf_name": "Front End Exterior Airflow",
+          "leaf_cat_id": 4206
+        }
+      ]
+    },
+    {
+      "json_title": "frontinterior hvac airflow",
+      "mid_cat_id": 4058,
+      "components": [
+        {
+          "json_title": "JE322A001 - Front Interior Control",
+          "leaf_name": "Front Interior Control",
+          "leaf_cat_id": 4212
+        },
+        {
+          "json_title": "JE321A001 - Front Interior HVAC Airflow",
+          "leaf_name": "Front Interior HVAC Airflow",
+          "leaf_cat_id": 4211
+        }
+      ]
+    },
+    {
+      "json_title": "fuel storage & handling",
+      "mid_cat_id": 4064,
+      "components": [
+        {
+          "json_title": "JE183A001 - Fuel Plumbing & Hardware",
+          "leaf_name": "Fuel Plumbing & Hardware",
+          "leaf_cat_id": 7501
+        },
+        {
+          "json_title": "JE181A001 - Fuel Tank & Canister",
+          "leaf_name": "Fuel Tank & Canister",
+          "leaf_cat_id": 7502
+        },
+        {
+          "json_title": "JE184A001 - Urea system",
+          "leaf_name": "Urea system",
+          "leaf_cat_id": 4080
+        }
+      ]
+    },
+    {
+      "json_title": "hvac & powertrain coolingin",
+      "mid_cat_id": 4025,
+      "components": [
+        {
+          "json_title": "JE313A003 - Coolant Plumbing & Hardware--EV",
+          "leaf_name": "Coolant Plumbing & Hardware--EV",
+          "leaf_cat_id": 7503
+        },
+        {
+          "json_title": "JE313A004 - Coolant Plumbing & Hardware-PHEV",
+          "leaf_name": "Coolant Plumbing & Hardware-PHEV",
+          "leaf_cat_id": 7504
+        },
+        {
+          "json_title": "JE313A001 - Coolant Plumbing & Hardware",
+          "leaf_name": "Coolant Plumbing & Hardware",
+          "leaf_cat_id": 7505
+        },
+        {
+          "json_title": "JE312A002 - Refrigerant Plumbing & Hardware-Electric vehicle",
+          "leaf_name": "Refrigerant Plumbing & Hardware-Electric vehicle",
+          "leaf_cat_id": 7506
+        },
+        {
+          "json_title": "JE312A003 - Refrigerant Plumbing & Hardware-FCV",
+          "leaf_name": "Refrigerant Plumbing & Hardware-FCV",
+          "leaf_cat_id": 7507
+        },
+        {
+          "json_title": "JE312A004 - Refrigerant Plumbing & Hardware-PHEV",
+          "leaf_name": "Refrigerant Plumbing & Hardware-PHEV",
+          "leaf_cat_id": 7508
+        },
+        {
+          "json_title": "JE312A001 - Refrigerant Plumbing & Hardware",
+          "leaf_name": "Refrigerant Plumbing & Hardware",
+          "leaf_cat_id": 7509
+        }
+      ]
+    },
+    {
+      "json_title": "instrument panel & console",
+      "mid_cat_id": 4028,
+      "components": [
+        {
+          "json_title": "JE412A001 - Instrument Panel Crossmember（LHD）",
+          "leaf_name": "Instrument Panel Crossmember（LHD）",
+          "leaf_cat_id": 4191
+        },
+        {
+          "json_title": "JE412A002 - Instrument Panel Crossmember（RHD）",
+          "leaf_name": "Instrument Panel Crossmember（RHD）",
+          "leaf_cat_id": 4195
+        },
+        {
+          "json_title": "JE411A001 - Instrument Panel（LHD）",
+          "leaf_name": "Instrument Panel（LHD）",
+          "leaf_cat_id": 4179
+        },
+        {
+          "json_title": "JE411A002 - Instrument Panel（RHD）",
+          "leaf_name": "Instrument Panel（RHD）",
+          "leaf_cat_id": 4187
+        }
+      ]
+    },
+    {
+      "json_title": "interior acoustic syetem",
+      "mid_cat_id": 4033,
+      "components": [
+        {
+          "json_title": "JE451A001 - Sound Insulation、Heat Insulation",
+          "leaf_name": "Sound Insulation、Heat Insulation",
+          "leaf_cat_id": 4198
+        }
+      ]
+    },
+    {
+      "json_title": "interior lamp",
+      "mid_cat_id": 4039,
+      "components": [
+        {
+          "json_title": "JE440A001 - InteriorLamp",
+          "leaf_name": "InteriorLamp",
+          "leaf_cat_id": 4202
+        }
+      ]
+    },
+    {
+      "json_title": "interior trim",
+      "mid_cat_id": 4043,
+      "components": [
+        {
+          "json_title": "JE437A001 - Floor Trim",
+          "leaf_name": "Floor Trim",
+          "leaf_cat_id": 4079
+        },
+        {
+          "json_title": "JE432A001 - Front Door Trim",
+          "leaf_name": "Front Door Trim",
+          "leaf_cat_id": 4069
+        },
+        {
+          "json_title": "JE436A001 - Roof Trim",
+          "leaf_name": "Roof Trim",
+          "leaf_cat_id": 4070
+        },
+        {
+          "json_title": "JE431A001 - Side Trim",
+          "leaf_name": "Side Trim",
+          "leaf_cat_id": 4208
+        }
+      ]
+    },
+    {
+      "json_title": "mounts",
+      "mid_cat_id": 4047,
+      "components": [
+        {
+          "json_title": "JE261A001 - Power assembly installation",
+          "leaf_name": "Power assembly installation",
+          "leaf_cat_id": 4082
+        },
+        {
+          "json_title": "JE261A002 - Powertrain Mounts-Electric vehicle",
+          "leaf_name": "Powertrain Mounts-Electric vehicle",
+          "leaf_cat_id": 4089
+        }
+      ]
+    },
+    {
+      "json_title": "on vehicle attachments&tools",
+      "mid_cat_id": 4053,
+      "components": [
+        {
+          "json_title": "JE919A001 - Fluids and Lubrications",
+          "leaf_name": "Fluids and Lubrications",
+          "leaf_cat_id": 4099
+        },
+        {
+          "json_title": "JE911A001 - On Vehicle Attachments",
+          "leaf_name": "On Vehicle Attachments",
+          "leaf_cat_id": 4093
+        },
+        {
+          "json_title": "JE917A001 - On Vehicle Tools",
+          "leaf_name": "On Vehicle Tools",
+          "leaf_cat_id": 4097
+        }
+      ]
+    },
+    {
+      "json_title": "power & signaldistribution",
+      "mid_cat_id": 4061,
+      "components": [
+        {
+          "json_title": "JE869A001 - Battery Harnesses",
+          "leaf_name": "Battery Harnesses",
+          "leaf_cat_id": 4203
+        },
+        {
+          "json_title": "JE865A001 - Chassis Harnesses",
+          "leaf_name": "Chassis Harnesses",
+          "leaf_cat_id": 4190
+        },
+        {
+          "json_title": "JE864A001 - Door  Wire Harnesses",
+          "leaf_name": "Door  Wire Harnesses",
+          "leaf_cat_id": 4186
+        },
+        {
+          "json_title": "JE867A001 - Engine Compartment Fuse Box",
+          "leaf_name": "Engine Compartment Fuse Box",
+          "leaf_cat_id": 4194
+        },
+        {
+          "json_title": "JE861A001 - EngineCompartmentHarness",
+          "leaf_name": "EngineCompartmentHarness",
+          "leaf_cat_id": 4178
+        },
+        {
+          "json_title": "JE863A001 - Instrument Panel  Wire Harnesses",
+          "leaf_name": "Instrument Panel  Wire Harnesses",
+          "leaf_cat_id": 4184
+        },
+        {
+          "json_title": "JE868A001 - Power Outlet & Cigarette Lighter HEvice",
+          "leaf_name": "Power Outlet & Cigarette Lighter HEvice",
+          "leaf_cat_id": 7510
+        }
+      ]
+    },
+    {
+      "json_title": "power generation",
+      "mid_cat_id": 4057,
+      "components": [
+        {
+          "json_title": "JE11CQ001 - Accessory&AccessoryDrive",
+          "leaf_name": "Accessory&AccessoryDrive",
+          "leaf_cat_id": 7511
+        },
+        {
+          "json_title": "JE11CQ001 - Accessory&AccessoryDrive",
+          "leaf_name": "Accessory&AccessoryDrive",
+          "leaf_cat_id": 7511
+        },
+        {
+          "json_title": "JE11CA002 - Block Group",
+          "leaf_name": "Block Group",
+          "leaf_cat_id": 7512
+        },
+        {
+          "json_title": "JE11CL001 - Coolant Pump And Inl&OtltTube&Thermostat",
+          "leaf_name": "Coolant Pump And Inl&OtltTube&Thermostat",
+          "leaf_cat_id": 7513
+        },
+        {
+          "json_title": "JE11CE001 - Crankshaft Rod",
+          "leaf_name": "Crankshaft Rod",
+          "leaf_cat_id": 7514
+        },
+        {
+          "json_title": "JE11CB001 - Cylinder Block&Accessory",
+          "leaf_name": "Cylinder Block&Accessory",
+          "leaf_cat_id": 7515
+        },
+        {
+          "json_title": "JE11CC001 - Cylinder Head",
+          "leaf_name": "Cylinder Head",
+          "leaf_cat_id": 7516
+        },
+        {
+          "json_title": "JE11CM001 - Damper Pulley&GearDrive",
+          "leaf_name": "Damper Pulley&GearDrive",
+          "leaf_cat_id": 7517
+        },
+        {
+          "json_title": "JE11CS001 - EGR ASM",
+          "leaf_name": "EGR ASM",
+          "leaf_cat_id": 7518
+        },
+        {
+          "json_title": "JE11CA001 - Engine ASM",
+          "leaf_name": "Engine ASM",
+          "leaf_cat_id": 7519
+        },
+        {
+          "json_title": "JE11CT001 - Engine Accessory",
+          "leaf_name": "Engine Accessory",
+          "leaf_cat_id": 7520
+        },
+        {
+          "json_title": "JE11CX001 - Engine shield",
+          "leaf_name": "Engine shield",
+          "leaf_cat_id": 7521
+        },
+        {
+          "json_title": "JE11CW001 - Engine wiring harness",
+          "leaf_name": "Engine wiring harness",
+          "leaf_cat_id": 7522
+        },
+        {
+          "json_title": "JE11CH001 - Exhaust Elbow&Turbocharger",
+          "leaf_name": "Exhaust Elbow&Turbocharger",
+          "leaf_cat_id": 7523
+        },
+        {
+          "json_title": "JE11CI001 - Fuel System",
+          "leaf_name": "Fuel System",
+          "leaf_cat_id": 7524
+        },
+        {
+          "json_title": "JE11CD001 - Head Cover&PCV",
+          "leaf_name": "Head Cover&PCV",
+          "leaf_cat_id": 7525
+        },
+        {
+          "json_title": "JE11CU001 - LP-EGR intake pipe&Accessory",
+          "leaf_name": "LP-EGR intake pipe&Accessory",
+          "leaf_cat_id": 7526
+        },
+        {
+          "json_title": "JE11CG001 - MANIFOLD ASM-INT",
+          "leaf_name": "MANIFOLD ASM-INT",
+          "leaf_cat_id": 7527
+        },
+        {
+          "json_title": "JE11CJ001 - Oil Cooler And Inl&OtltTube&Filter",
+          "leaf_name": "Oil Cooler And Inl&OtltTube&Filter",
+          "leaf_cat_id": 7528
+        },
+        {
+          "json_title": "JE11CF001 - SHAFT-BALANCER",
+          "leaf_name": "SHAFT-BALANCER",
+          "leaf_cat_id": 7529
+        },
+        {
+          "json_title": "JE11CR001 - Sensor&Harness",
+          "leaf_name": "Sensor&Harness",
+          "leaf_cat_id": 7530
+        },
+        {
+          "json_title": "JE11CK001 - Sump&Oil Suction Pipe&Dipstick",
+          "leaf_name": "Sump&Oil Suction Pipe&Dipstick",
+          "leaf_cat_id": 7531
+        },
+        {
+          "json_title": "JE11CP001 - Timing Drive",
+          "leaf_name": "Timing Drive",
+          "leaf_cat_id": 7532
+        }
+      ]
+    },
+    {
+      "json_title": "power transmission",
+      "mid_cat_id": 4029,
+      "components": [
+        {
+          "json_title": "JE122A001 - Clutch(MT)",
+          "leaf_name": "Clutch(MT)",
+          "leaf_cat_id": 7533
+        },
+        {
+          "json_title": "JE122A002 - Clutch(PHEV)",
+          "leaf_name": "Clutch(PHEV)",
+          "leaf_cat_id": 7534
+        },
+        {
+          "json_title": "JE121A001 - Manual transmission assembly（6MT Front/Back drive）",
+          "leaf_name": "Manual transmission assembly（6MT Front/Back drive）",
+          "leaf_cat_id": 7535
+        },
+        {
+          "json_title": "JE123A001 - Propeller Shaft",
+          "leaf_name": "Propeller Shaft",
+          "leaf_cat_id": 4110
+        },
+        {
+          "json_title": "JE125A002 - Rear  Axle （Front drive vehicle）",
+          "leaf_name": "Rear  Axle （Front drive vehicle）",
+          "leaf_cat_id": 4112
+        },
+        {
+          "json_title": "JE125A003 - Rear Drive Axle（YUE JIN）",
+          "leaf_name": "Rear Drive Axle（YUE JIN）",
+          "leaf_cat_id": 4116
+        },
+        {
+          "json_title": "JE125A001 - Rear Drive Axle",
+          "leaf_name": "Rear Drive Axle",
+          "leaf_cat_id": 4109
+        },
+        {
+          "json_title": "JE125A004 - Rear Electric  Drive Axle",
+          "leaf_name": "Rear Electric  Drive Axle",
+          "leaf_cat_id": 4121
+        },
+        {
+          "json_title": "JE121B001 - Transmission CSC and  Operating Mechanism(6MT back drive)",
+          "leaf_name": "Transmission CSC and  Operating Mechanism(6MT back drive)",
+          "leaf_cat_id": 7536
+        },
+        {
+          "json_title": "JE121C001 - Transmission Fork Components(SAGW-6MT back drive)",
+          "leaf_name": "Transmission Fork Components(SAGW-6MT back drive)",
+          "leaf_cat_id": 7537
+        },
+        {
+          "json_title": "JE121D001 - Transmission Main Shaft And Gear(6MT back drive)",
+          "leaf_name": "Transmission Main Shaft And Gear(6MT back drive)",
+          "leaf_cat_id": 7538
+        }
+      ]
+    },
+    {
+      "json_title": "powertrain control&diagnostic",
+      "mid_cat_id": 4065,
+      "components": [
+        {
+          "json_title": "JE131A001 - Engine Management",
+          "leaf_name": "Engine Management",
+          "leaf_cat_id": 4205
+        }
+      ]
+    },
+    {
+      "json_title": "powertrain driver interface",
+      "mid_cat_id": 4023,
+      "components": [
+        {
+          "json_title": "JE151A001 - Accelerator Pedal",
+          "leaf_name": "Accelerator Pedal",
+          "leaf_cat_id": 4210
+        },
+        {
+          "json_title": "JE153A001 - Clutch Apply",
+          "leaf_name": "Clutch Apply",
+          "leaf_cat_id": 4081
+        },
+        {
+          "json_title": "JE152A002 - Transmission Shift Actuation-AMT",
+          "leaf_name": "Transmission Shift Actuation-AMT",
+          "leaf_cat_id": 4071
+        },
+        {
+          "json_title": "JE152A003 - Transmission Shift Actuation-AT、Electric vehicle",
+          "leaf_name": "Transmission Shift Actuation-AT、Electric vehicle",
+          "leaf_cat_id": 4075
+        },
+        {
+          "json_title": "JE152A001 - Transmission Shift Actuation-MT",
+          "leaf_name": "Transmission Shift Actuation-MT",
+          "leaf_cat_id": 4157
+        }
+      ]
+    },
+    {
+      "json_title": "rear lamp",
+      "mid_cat_id": 4040,
+      "components": [
+        {
+          "json_title": "JE660A001 - Rear Lamp",
+          "leaf_name": "Rear Lamp",
+          "leaf_cat_id": 7539
+        }
+      ]
+    },
+    {
+      "json_title": "rear view mirror",
+      "mid_cat_id": 4045,
+      "components": [
+        {
+          "json_title": "JE580A001 - Rear View Mirror",
+          "leaf_name": "Rear View Mirror",
+          "leaf_cat_id": 7540
+        }
+      ]
+    },
+    {
+      "json_title": "rearinterior hvac airflow",
+      "mid_cat_id": 4035,
+      "components": [
+        {
+          "json_title": "JE334A002 - Interior Heating Pipe-FCV",
+          "leaf_name": "Interior Heating Pipe-FCV",
+          "leaf_cat_id": 4129
+        },
+        {
+          "json_title": "JE334A001 - Interior Heating Pipe",
+          "leaf_name": "Interior Heating Pipe",
+          "leaf_cat_id": 4124
+        },
+        {
+          "json_title": "JE331A001 - Rear Interior Airflow",
+          "leaf_name": "Rear Interior Airflow",
+          "leaf_cat_id": 4120
+        }
+      ]
+    },
+    {
+      "json_title": "safety belt",
+      "mid_cat_id": 4051,
+      "components": [
+        {
+          "json_title": "JE460A001 - Side Panel&Roof Safety Belt",
+          "leaf_name": "Side Panel&Roof Safety Belt",
+          "leaf_cat_id": 7541
+        }
+      ]
+    },
+    {
+      "json_title": "safety&avoidance",
+      "mid_cat_id": 4048,
+      "components": [
+        {
+          "json_title": "JE811A001 - Air Bag Control Unit",
+          "leaf_name": "Air Bag Control Unit",
+          "leaf_cat_id": 4133
+        }
+      ]
+    },
+    {
+      "json_title": "seats",
+      "mid_cat_id": 4054,
+      "components": [
+        {
+          "json_title": "JE421AH001 - Arrangement for VAN Vehicle (UK、Hong Kong)",
+          "leaf_name": "Arrangement for VAN Vehicle (UK、Hong Kong)",
+          "leaf_cat_id": 7542
+        },
+        {
+          "json_title": "JE421B002 - Frong Seat（right ）",
+          "leaf_name": "Frong Seat（right ）",
+          "leaf_cat_id": 4158
+        },
+        {
+          "json_title": "JE421B004 - Front Seat（Left）",
+          "leaf_name": "Front Seat（Left）",
+          "leaf_cat_id": 4168
+        },
+        {
+          "json_title": "JE421B003 - Front Seat（Right）",
+          "leaf_name": "Front Seat（Right）",
+          "leaf_cat_id": 4163
+        },
+        {
+          "json_title": "JE421B001 - Front Seat（left ）",
+          "leaf_name": "Front Seat（left ）",
+          "leaf_cat_id": 4155
+        },
+        {
+          "json_title": "JE421AE001 - Seat Arrangement of Shang Jie's 11 12and 14 Seats (Australia)",
+          "leaf_name": "Seat Arrangement of Shang Jie's 11 12and 14 Seats (Australia)",
+          "leaf_cat_id": 7543
+        },
+        {
+          "json_title": "JE421B005 - Subdrivers Integral Double Seat",
+          "leaf_name": "Subdrivers Integral Double Seat",
+          "leaf_cat_id": 4171
+        },
+        {
+          "json_title": "JE421B006 - Subdrivers Split Double Seat",
+          "leaf_name": "Subdrivers Split Double Seat",
+          "leaf_cat_id": 4175
+        },
+        {
+          "json_title": "JE421AI001 - Three Seats Arrangement for Chassis Vehicle (UK、Hong Kong)",
+          "leaf_name": "Three Seats Arrangement for Chassis Vehicle (UK、Hong Kong)",
+          "leaf_cat_id": 7544
+        },
+        {
+          "json_title": "JE421AF001 - Three Seats Arrangement for VAN Vehicle (Australia、New Zealand)",
+          "leaf_name": "Three Seats Arrangement for VAN Vehicle (Australia、New Zealand)",
+          "leaf_cat_id": 7545
+        },
+        {
+          "json_title": "JE421AG001 - Two/Three Seats Arrangement for Chassis Vehicle (Australia、New Zealand)",
+          "leaf_name": "Two/Three Seats Arrangement for Chassis Vehicle (Australia、New Zealand)",
+          "leaf_cat_id": 7546
+        }
+      ]
+    },
+    {
+      "json_title": "side closures",
+      "mid_cat_id": 4062,
+      "components": [
+        {
+          "json_title": "JE551C001 - Front Door Electric Glass Regulator",
+          "leaf_name": "Front Door Electric Glass Regulator",
+          "leaf_cat_id": 4188
+        },
+        {
+          "json_title": "JE551B001 - Front Door Handle and Lock",
+          "leaf_name": "Front Door Handle and Lock",
+          "leaf_cat_id": 4183
+        },
+        {
+          "json_title": "JE551A001 - Front Side Closure",
+          "leaf_name": "Front Side Closure",
+          "leaf_cat_id": 4180
+        },
+        {
+          "json_title": "JE557A001 - TNK FIL DR",
+          "leaf_name": "TNK FIL DR",
+          "leaf_cat_id": 4193
+        }
+      ]
+    },
+    {
+      "json_title": "steering",
+      "mid_cat_id": 4067,
+      "components": [
+        {
+          "json_title": "JE215A001 - Redirector",
+          "leaf_name": "Redirector",
+          "leaf_cat_id": 4200
+        },
+        {
+          "json_title": "JE214A001 - Steering Column",
+          "leaf_name": "Steering Column",
+          "leaf_cat_id": 4199
+        }
+      ]
+    },
+    {
+      "json_title": "suspension",
+      "mid_cat_id": 4027,
+      "components": [
+        {
+          "json_title": "JE224A001 - Front Shock Absorber",
+          "leaf_name": "Front Shock Absorber",
+          "leaf_cat_id": 4077
+        },
+        {
+          "json_title": "JE221A001 - Front Suspension",
+          "leaf_name": "Front Suspension",
+          "leaf_cat_id": 4204
+        },
+        {
+          "json_title": "JE225A001 - Rear Shock Absorber",
+          "leaf_name": "Rear Shock Absorber",
+          "leaf_cat_id": 4068
+        },
+        {
+          "json_title": "JE222A001 - Rear Suspension",
+          "leaf_name": "Rear Suspension",
+          "leaf_cat_id": 4209
+        }
+      ]
+    },
+    {
+      "json_title": "tire,wheels,wheel trim",
+      "mid_cat_id": 4030,
+      "components": [
+        {
+          "json_title": "JE230A001 - Tire,Wheel,Trim",
+          "leaf_name": "Tire,Wheel,Trim",
+          "leaf_cat_id": 7547
+        }
+      ]
+    },
+    {
+      "json_title": "wiper & washer",
+      "mid_cat_id": 4037,
+      "components": [
+        {
+          "json_title": "JE682A001 - Washer System",
+          "leaf_name": "Washer System",
+          "leaf_cat_id": 4092
+        },
+        {
+          "json_title": "JE681A001 - Wiper（LHD）",
+          "leaf_name": "Wiper（LHD）",
+          "leaf_cat_id": 4084
+        },
+        {
+          "json_title": "JE681A002 - Wiper（RHD）",
+          "leaf_name": "Wiper（RHD）",
+          "leaf_cat_id": 4088
+        }
+      ]
+    }
+  ]
+}
