@@ -4415,6 +4415,35 @@ function mvp_set_component_meta( WP_REST_Request $request ) {
 // ============================================================
 
 /**
+ * On mid-level category pages with exactly 1 leaf child, skip straight to the leaf.
+ */
+add_action( 'template_redirect', 'mvp_midlevel_single_child_redirect' );
+function mvp_midlevel_single_child_redirect() {
+    if ( ! is_tax( 'product_cat' ) ) return;
+
+    $term = get_queried_object();
+    if ( ! ( $term instanceof WP_Term ) ) return;
+
+    $maxus_id  = mvp_get_maxus_term_id();
+    $ancestors = get_ancestors( $term->term_id, 'product_cat', 'taxonomy' );
+
+    // Only act on mid-level: exactly 2 ancestors = [VIN-id, Maxus-id]
+    if ( count( $ancestors ) !== 2 || ! in_array( $maxus_id, $ancestors, true ) ) return;
+
+    $children = get_terms( array(
+        'taxonomy'   => 'product_cat',
+        'parent'     => $term->term_id,
+        'hide_empty' => false,
+        'number'     => 2, // only need to know if count is 1
+    ) );
+
+    if ( ! is_wp_error( $children ) && count( $children ) === 1 ) {
+        wp_redirect( get_term_link( $children[0] ), 302 );
+        exit;
+    }
+}
+
+/**
  * On mid-level category pages (Maxus > VIN > mid-category), show the
  * leaf sub-categories as clickable cards instead of a flat product listing.
  * Depth detected by ancestor count: exactly 2 ancestors = [VIN, Maxus].
