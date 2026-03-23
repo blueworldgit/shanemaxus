@@ -3919,6 +3919,10 @@ add_action( 'rest_api_init', function () {
                 'required'          => true,
                 'sanitize_callback' => 'sanitize_text_field',
             ),
+            'vehicle_serial' => array(
+                'required'          => false,
+                'sanitize_callback' => 'sanitize_text_field',
+            ),
         ),
     ) );
 
@@ -3977,19 +3981,37 @@ function cvone_auth_check( WP_REST_Request $request ) {
 }
 
 /**
- * Query the postmeta table directly for original_sku matches.
- * Returns all post IDs (products + variations) that have original_sku = $sku.
+ * Query the postmeta table directly for original_sku (+ optional vehicle_serial) matches.
+ * Returns all post IDs (products + variations) that match.
  */
-function cvone_query_ids_by_original_sku( $sku ) {
+function cvone_query_ids_by_original_sku( $sku, $vehicle_serial = '' ) {
     global $wpdb;
-    $sku = sanitize_text_field( $sku );
-    $ids = $wpdb->get_col( $wpdb->prepare(
-        "SELECT post_id
-           FROM {$wpdb->postmeta}
-          WHERE meta_key   = 'original_sku'
-            AND meta_value = %s",
-        $sku
-    ) );
+    $sku            = sanitize_text_field( $sku );
+    $vehicle_serial = sanitize_text_field( $vehicle_serial );
+
+    if ( $vehicle_serial ) {
+        // Narrow to posts that have BOTH original_sku AND vehicle_serial meta
+        $ids = $wpdb->get_col( $wpdb->prepare(
+            "SELECT pm1.post_id
+               FROM {$wpdb->postmeta} pm1
+               JOIN {$wpdb->postmeta} pm2 ON pm2.post_id = pm1.post_id
+              WHERE pm1.meta_key   = 'original_sku'
+                AND pm1.meta_value = %s
+                AND pm2.meta_key   = 'vehicle_serial'
+                AND pm2.meta_value = %s",
+            $sku,
+            $vehicle_serial
+        ) );
+    } else {
+        $ids = $wpdb->get_col( $wpdb->prepare(
+            "SELECT post_id
+               FROM {$wpdb->postmeta}
+              WHERE meta_key   = 'original_sku'
+                AND meta_value = %s",
+            $sku
+        ) );
+    }
+
     return array_map( 'intval', $ids );
 }
 
@@ -3997,8 +4019,9 @@ function cvone_query_ids_by_original_sku( $sku ) {
  * GET /wp-json/custom/v1/products-by-sku?original_sku=B00004124
  */
 function cvone_get_products_by_original_sku( WP_REST_Request $request ) {
-    $sku  = $request->get_param( 'original_sku' );
-    $ids  = cvone_query_ids_by_original_sku( $sku );
+    $sku            = $request->get_param( 'original_sku' );
+    $vehicle_serial = (string) $request->get_param( 'vehicle_serial' );
+    $ids            = cvone_query_ids_by_original_sku( $sku, $vehicle_serial );
 
     if ( empty( $ids ) ) {
         return new WP_REST_Response( array(
