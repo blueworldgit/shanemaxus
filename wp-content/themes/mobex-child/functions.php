@@ -3718,11 +3718,18 @@ function mvp_render_component_diagram() {
     <div class="mvp-component-diagram" id="<?php echo esc_attr( $uid ); ?>">
 
         <div class="mvp-cd-svg-wrap">
+            <div class="mvp-cd-zoom-controls" aria-label="Zoom controls">
+                <button class="mvp-cd-zoom-btn" data-action="out" aria-label="Zoom out">&#8722;</button>
+                <button class="mvp-cd-zoom-btn" data-action="reset" aria-label="Reset zoom">&#8635;</button>
+                <button class="mvp-cd-zoom-btn" data-action="in" aria-label="Zoom in">&#43;</button>
+            </div>
+            <div class="mvp-cd-svg-inner">
             <?php
             // SVG originates from the Oscar EPC database via our own import pipeline —
             // not user-submitted. Direct output is appropriate here.
             echo $svg_code; // phpcs:ignore WordPress.Security.EscapeOutput
             ?>
+            </div>
         </div>
 
         <div class="mvp-cd-table-wrap">
@@ -3793,13 +3800,47 @@ function mvp_render_component_diagram() {
         border: 1px solid #dde3e9;
         background: #fff;
         border-radius: 6px;
-        overflow: auto;
-        max-height: 600px;
+        overflow: hidden;
+        max-height: 640px;
+        display: flex;
+        flex-direction: column;
     }
-    .mvp-cd-svg-wrap svg {
+    .mvp-cd-zoom-controls {
+        display: flex;
+        gap: 6px;
+        padding: 6px 8px;
+        background: #f4f6f8;
+        border-bottom: 1px solid #dde3e9;
+        flex-shrink: 0;
+    }
+    .mvp-cd-zoom-btn {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #bbc5d0;
+        border-radius: 4px;
+        background: #fff;
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #1a2d4a;
+        transition: background 0.15s;
+    }
+    .mvp-cd-zoom-btn:hover { background: #e8edf2; }
+    .mvp-cd-svg-inner {
+        overflow: auto;
+        flex: 1;
+        max-height: 600px;
+        cursor: grab;
+    }
+    .mvp-cd-svg-inner svg {
         width: 100%;
         height: auto;
         display: block;
+        transform-origin: top left;
+        transition: transform 0.2s;
     }
     .mvp-cd-table-wrap {
         flex: 1 1 320px;
@@ -3854,9 +3895,32 @@ function mvp_render_component_diagram() {
     (function () {
         var wrap = document.getElementById('<?php echo esc_js( $uid ); ?>');
         if (!wrap) return;
-        var rows = Array.from(wrap.querySelectorAll('.mvp-cd-row'));
-        var svg  = wrap.querySelector('svg');
+        var rows   = Array.from(wrap.querySelectorAll('.mvp-cd-row'));
+        var svg    = wrap.querySelector('svg');
+        var inner  = wrap.querySelector('.mvp-cd-svg-inner');
+        var scale  = 1;
+        var STEP   = 0.2;
+        var MIN    = 0.4;
+        var MAX    = 4;
 
+        // ── Zoom controls ────────────────────────────────────────────────
+        wrap.querySelectorAll('.mvp-cd-zoom-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var action = btn.dataset.action;
+                if (action === 'in')    scale = Math.min(MAX, +(scale + STEP).toFixed(2));
+                if (action === 'out')   scale = Math.max(MIN, +(scale - STEP).toFixed(2));
+                if (action === 'reset') scale = 1;
+                if (svg) svg.style.transform = scale === 1 ? '' : 'scale(' + scale + ')';
+                // Expand inner height when zoomed so scrolling works
+                if (inner && svg) {
+                    inner.style.height = scale > 1
+                        ? (svg.getBoundingClientRect().height * scale + 40) + 'px'
+                        : '';
+                }
+            });
+        });
+
+        // ── Callout highlighting ─────────────────────────────────────────
         function activate(num) {
             var n = String(num);
             rows.forEach(function (r) {
