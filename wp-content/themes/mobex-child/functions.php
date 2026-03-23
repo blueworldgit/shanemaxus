@@ -3939,6 +3939,13 @@ add_action( 'rest_api_init', function () {
         'callback'            => 'cvone_test_endpoint',
         'permission_callback' => 'cvone_auth_check',
     ) );
+
+    // --- POST /products-by-skus-bulk: look up many SKUs in one query ---
+    register_rest_route( 'custom/v1', '/products-by-skus-bulk', array(
+        'methods'             => 'POST',
+        'callback'            => 'cvone_bulk_products_by_original_sku',
+        'permission_callback' => 'cvone_auth_check',
+    ) );
 } );
 
 /**
@@ -4016,8 +4023,55 @@ function cvone_query_ids_by_original_sku( $sku, $vehicle_serial = '' ) {
 }
 
 /**
- * GET /wp-json/custom/v1/products-by-sku?original_sku=B00004124
+ * POST /wp-json/custom/v1/products-by-skus-bulk
+ * Body (JSON): { "skus": ["C00371126", ...], "secret": "..." }
+ * Returns: { "C00371126": {id, parent_id, type, wc_sku, status}, ... }
+ * SKUs with no match are omitted from the response.
  */
+function cvone_bulk_products_by_original_sku( WP_REST_Request $request ) {
+    global $wpdb;
+
+    $body = $request->get_json_params();
+    $skus = isset( $body['skus'] ) ? (array) $body['skus'] : array();
+
+    if ( empty( $skus ) ) {
+        return new WP_Error( 'missing_skus', 'No SKUs provided', array( 'status' => 400 ) );
+    }
+
+    // Sanitise and de-duplicate
+    $skus = array_values( array_unique( array_map( 'sanitize_text_field', $skus ) ) );
+
+    // Build a single IN (...) query
+    $placeholders = implode( ',', array_fill( 0, count( $skus ), '%s' ) );
+    // phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
+    $rows = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT post_id, meta_value AS original_sku
+               FROM {$wpdb->postmeta}
+              WHERE meta_key   = 'original_sku'
+                AND meta_value IN ($placeholders)",
+            ...$skus
+        )
+    );
+
+    $result = array();
+    foreach ( $rows as $row ) {
+        $post      = get_post( (int) $row->post_id );
+        if ( ! $post ) continue;
+        $parent_id = (int) $post->post_parent;
+        $result[ $row->original_sku ] = array(
+            'id'           => (int) $row->post_id,
+            'parent_id'    => $parent_id,
+            'type'         => ( $parent_id > 0 ) ? 'variation' : 'product',
+            'wc_sku'       => get_post_meta( (int) $row->post_id, '_sku', true ),
+            'status'       => $post->post_status,
+        );
+    }
+
+    return new WP_REST_Response( $result, 200 );
+}
+
+
 function cvone_get_products_by_original_sku( WP_REST_Request $request ) {
     $sku            = $request->get_param( 'original_sku' );
     $vehicle_serial = (string) $request->get_param( 'vehicle_serial' );
