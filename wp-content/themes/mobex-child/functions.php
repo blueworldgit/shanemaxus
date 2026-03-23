@@ -3947,6 +3947,11 @@ function cvone_auth_check( WP_REST_Request $request ) {
     if ( is_user_logged_in() && current_user_can( 'edit_products' ) ) {
         return true;
     }
+    // Accept the same shared secret used by the component-meta endpoint
+    $secret = $request->get_param( 'secret' );
+    if ( $secret && defined( 'MVP_COMPONENT_API_SECRET' ) && hash_equals( MVP_COMPONENT_API_SECRET, (string) $secret ) ) {
+        return true;
+    }
     // Validate WC consumer key directly from query params or Basic Auth header
     $ck = $request->get_param( 'consumer_key' );
     $cs = $request->get_param( 'consumer_secret' );
