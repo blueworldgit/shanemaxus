@@ -3701,7 +3701,11 @@ function mvp_render_component_diagram() {
     foreach ( $loop->posts as $p ) {
         $sku = get_post_meta( $p->ID, 'original_sku', true );
         if ( $sku ) {
-            $products_by_sku[ strtoupper( trim( $sku ) ) ] = $p;
+            $wc_product = wc_get_product( $p->ID );
+            $products_by_sku[ strtoupper( trim( $sku ) ) ] = array(
+                'post'       => $p,
+                'wc_product' => $wc_product,
+            );
         }
     }
 
@@ -3739,7 +3743,8 @@ function mvp_render_component_diagram() {
                         <th class="mvp-cd-th-num">#</th>
                         <th>Part No.</th>
                         <th>Description</th>
-                        <th class="mvp-cd-th-qty">Qty</th>
+                        <th class="mvp-cd-th-price">Price</th>
+                        <th class="mvp-cd-th-cart"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -3748,8 +3753,10 @@ function mvp_render_component_diagram() {
                         <td class="mvp-cd-num"><?php echo esc_html( $callout_num ); ?></td>
                         <td class="mvp-cd-part-col">
                         <?php foreach ( $group_parts as $i => $part ) :
-                            $sku_key = strtoupper( trim( $part['part_number'] ?? '' ) );
-                            $prod    = $products_by_sku[ $sku_key ] ?? null;
+                            $sku_key    = strtoupper( trim( $part['part_number'] ?? '' ) );
+                            $entry      = $products_by_sku[ $sku_key ] ?? null;
+                            $prod       = $entry ? $entry['post']       : null;
+                            $wc_product = $entry ? $entry['wc_product'] : null;
                         ?>
                             <div class="mvp-cd-part-line<?php echo $i > 0 ? ' mvp-cd-sep' : ''; ?>">
                                 <?php if ( $prod ) : ?>
@@ -3769,12 +3776,41 @@ function mvp_render_component_diagram() {
                             </div>
                         <?php endforeach; ?>
                         </td>
-                        <td class="mvp-cd-qty-col">
+                        <td class="mvp-cd-price-col">
                         <?php foreach ( $group_parts as $i => $part ) :
-                            $qty = (float) ( $part['unit_qty'] ?? 1 );
+                            $sku_key    = strtoupper( trim( $part['part_number'] ?? '' ) );
+                            $entry      = $products_by_sku[ $sku_key ] ?? null;
+                            $wc_product = $entry ? $entry['wc_product'] : null;
                         ?>
                             <div class="mvp-cd-part-line<?php echo $i > 0 ? ' mvp-cd-sep' : ''; ?>">
-                                &times;<?php echo esc_html( $qty == (int) $qty ? (int) $qty : $qty ); ?>
+                                <?php if ( $wc_product && $wc_product->get_price() !== '' ) : ?>
+                                    <?php echo wp_kses_post( wc_price( $wc_product->get_price() ) ); ?>
+                                <?php else : ?>
+                                    <span class="mvp-cd-no-price">—</span>
+                                <?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
+                        </td>
+                        <td class="mvp-cd-cart-col">
+                        <?php foreach ( $group_parts as $i => $part ) :
+                            $sku_key    = strtoupper( trim( $part['part_number'] ?? '' ) );
+                            $entry      = $products_by_sku[ $sku_key ] ?? null;
+                            $prod       = $entry ? $entry['post']       : null;
+                            $wc_product = $entry ? $entry['wc_product'] : null;
+                        ?>
+                            <div class="mvp-cd-part-line<?php echo $i > 0 ? ' mvp-cd-sep' : ''; ?>">
+                                <?php if ( $prod && $wc_product && $wc_product->is_purchasable() && $wc_product->is_in_stock() ) : ?>
+                                    <a href="<?php echo esc_url( $wc_product->add_to_cart_url() ); ?>"
+                                       class="mvp-cd-atc-btn"
+                                       aria-label="<?php echo esc_attr( 'Add ' . $part['part_number'] . ' to cart' ); ?>">
+                                        Add to cart
+                                    </a>
+                                <?php elseif ( $prod ) : ?>
+                                    <a href="<?php echo esc_url( get_permalink( $prod->ID ) ); ?>"
+                                       class="mvp-cd-atc-btn mvp-cd-atc-view">
+                                        View
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                         </td>
@@ -3882,7 +3918,24 @@ function mvp_render_component_diagram() {
         color: #1a2d4a;
         text-align: center;
     }
-    .mvp-cd-qty-col { text-align: center; }
+    .mvp-cd-price-col { text-align: right; white-space: nowrap; font-weight: 600; color: #1a2d4a; }
+    .mvp-cd-no-price  { color: #aaa; }
+    .mvp-cd-cart-col  { text-align: center; white-space: nowrap; }
+    .mvp-cd-atc-btn {
+        display: inline-block;
+        padding: 4px 10px;
+        background: #1a2d4a;
+        color: #fff !important;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        text-decoration: none !important;
+        white-space: nowrap;
+        transition: background 0.15s;
+    }
+    .mvp-cd-atc-btn:hover { background: #F29F05; }
+    .mvp-cd-atc-view { background: #6c7a8d; }
+    .mvp-cd-atc-view:hover { background: #4a5568; }
     .mvp-cd-sep { border-top: 1px dashed #ddd; padding-top: 4px; margin-top: 4px; }
     .mvp-cd-part-col a { color: #1a2d4a; font-weight: 600; text-decoration: underline; }
     .mvp-cd-part-col a:hover { color: #F29F05; }
