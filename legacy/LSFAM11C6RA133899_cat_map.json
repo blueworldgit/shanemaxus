@@ -1,0 +1,1034 @@
+{
+  "serial": "LSFAM11C6RA133899",
+  "vin_cat_id": 5317,
+  "categories": [
+    {
+      "json_title": "air intake system",
+      "mid_cat_id": 5348,
+      "components": [
+        {
+          "json_title": "QE140A001 - Air Cleaner",
+          "leaf_name": "Air Cleaner",
+          "leaf_cat_id": 5367
+        }
+      ]
+    },
+    {
+      "json_title": "airbag",
+      "mid_cat_id": 5344,
+      "components": [
+        {
+          "json_title": "QE471A001 - AirBag",
+          "leaf_name": "AirBag",
+          "leaf_cat_id": 5366
+        }
+      ]
+    },
+    {
+      "json_title": "antenna",
+      "mid_cat_id": 5345,
+      "components": [
+        {
+          "json_title": "QE741A001 - Antenna",
+          "leaf_name": "Antenna",
+          "leaf_cat_id": 7609
+        }
+      ]
+    },
+    {
+      "json_title": "body interior & exterior electronics",
+      "mid_cat_id": 5355,
+      "components": [
+        {
+          "json_title": "QE830A001 - BodyInterior&ExteriorElectronics",
+          "leaf_name": "BodyInterior&ExteriorElectronics",
+          "leaf_cat_id": 7610
+        }
+      ]
+    },
+    {
+      "json_title": "body lower exterior trim",
+      "mid_cat_id": 5332,
+      "components": [
+        {
+          "json_title": "QE645A001 - Assist Step",
+          "leaf_name": "Assist Step",
+          "leaf_cat_id": 5369
+        },
+        {
+          "json_title": "QE644A001 - Mud Guard",
+          "leaf_name": "Mud Guard",
+          "leaf_cat_id": 5370
+        }
+      ]
+    },
+    {
+      "json_title": "body lower structure",
+      "mid_cat_id": 5349,
+      "components": [
+        {
+          "json_title": "QE510A001 - Body Lower Structure",
+          "leaf_name": "Body Lower Structure",
+          "leaf_cat_id": 7611
+        }
+      ]
+    },
+    {
+      "json_title": "body upper exterior trim",
+      "mid_cat_id": 5357,
+      "components": [
+        {
+          "json_title": "QE691A001 - Body Exterior Trim",
+          "leaf_name": "Body Exterior Trim",
+          "leaf_cat_id": 5372
+        },
+        {
+          "json_title": "QE696A001 - Exterior Emblem/Decal/Nameplate",
+          "leaf_name": "Exterior Emblem/Decal/Nameplate",
+          "leaf_cat_id": 7612
+        }
+      ]
+    },
+    {
+      "json_title": "body upper structure",
+      "mid_cat_id": 5318,
+      "components": [
+        {
+          "json_title": "QE521A001 - Inner Framing",
+          "leaf_name": "Inner Framing",
+          "leaf_cat_id": 5376
+        },
+        {
+          "json_title": "QE522A001 - Outer Framing",
+          "leaf_name": "Outer Framing",
+          "leaf_cat_id": 5373
+        },
+        {
+          "json_title": "QE525A001 - Rear Framing",
+          "leaf_name": "Rear Framing",
+          "leaf_cat_id": 5375
+        },
+        {
+          "json_title": "QE523A001 - Roof Framing",
+          "leaf_name": "Roof Framing",
+          "leaf_cat_id": 5374
+        }
+      ]
+    },
+    {
+      "json_title": "body window",
+      "mid_cat_id": 5321,
+      "components": [
+        {
+          "json_title": "QE611A001 - Window",
+          "leaf_name": "Window",
+          "leaf_cat_id": 5377
+        }
+      ]
+    },
+    {
+      "json_title": "brakes",
+      "mid_cat_id": 5325,
+      "components": [
+        {
+          "json_title": "QE244A002 - Brake Apply",
+          "leaf_name": "Brake Apply",
+          "leaf_cat_id": 5384
+        },
+        {
+          "json_title": "QE245A001 - Brake Modulator",
+          "leaf_name": "Brake Modulator",
+          "leaf_cat_id": 5382
+        },
+        {
+          "json_title": "QE246A001 - Brake Pedal",
+          "leaf_name": "Brake Pedal",
+          "leaf_cat_id": 5380
+        },
+        {
+          "json_title": "QE247A001 - Brake Pipes",
+          "leaf_name": "Brake Pipes",
+          "leaf_cat_id": 5381
+        },
+        {
+          "json_title": "QE241A001 - Front Brakes",
+          "leaf_name": "Front Brakes",
+          "leaf_cat_id": 5383
+        },
+        {
+          "json_title": "QE243A002 - Rear Electric Parking Brakes",
+          "leaf_name": "Rear Electric Parking Brakes",
+          "leaf_cat_id": 5378
+        },
+        {
+          "json_title": "QE242A001 - Rear Mechanical Brakes",
+          "leaf_name": "Rear Mechanical Brakes",
+          "leaf_cat_id": 5379
+        }
+      ]
+    },
+    {
+      "json_title": "bumpers,fascia & grille",
+      "mid_cat_id": 5330,
+      "components": [
+        {
+          "json_title": "QE621A001 - Front Bumper",
+          "leaf_name": "Front Bumper",
+          "leaf_cat_id": 5386
+        },
+        {
+          "json_title": "QE623A001 - Grille",
+          "leaf_name": "Grille",
+          "leaf_cat_id": 5385
+        },
+        {
+          "json_title": "QE622A001 - Rear Bumper",
+          "leaf_name": "Rear Bumper",
+          "leaf_cat_id": 5388
+        },
+        {
+          "json_title": "QE625A001 - Wheelhouse Liner",
+          "leaf_name": "Wheelhouse Liner",
+          "leaf_cat_id": 5387
+        }
+      ]
+    },
+    {
+      "json_title": "charging & energystorage",
+      "mid_cat_id": 5336,
+      "components": [
+        {
+          "json_title": "QE843A001 - Charging&EnergyStorage",
+          "leaf_name": "Charging&EnergyStorage",
+          "leaf_cat_id": 7613
+        }
+      ]
+    },
+    {
+      "json_title": "chassis structure",
+      "mid_cat_id": 5341,
+      "components": [
+        {
+          "json_title": "QE253A001 - Frame",
+          "leaf_name": "Frame",
+          "leaf_cat_id": 5390
+        },
+        {
+          "json_title": "QE255A001 - Spare Tire Device",
+          "leaf_name": "Spare Tire Device",
+          "leaf_cat_id": 5391
+        }
+      ]
+    },
+    {
+      "json_title": "communicate",
+      "mid_cat_id": 5346,
+      "components": [
+        {
+          "json_title": "QE751A001 - Vehicle Tele-Communication",
+          "leaf_name": "Vehicle Tele-Communication",
+          "leaf_cat_id": 5392
+        }
+      ]
+    },
+    {
+      "json_title": "customer switches",
+      "mid_cat_id": 5350,
+      "components": [
+        {
+          "json_title": "QE726A001 - Accessory Switch",
+          "leaf_name": "Accessory Switch",
+          "leaf_cat_id": 5393
+        },
+        {
+          "json_title": "QE725A001 - Ignition Switch and Key",
+          "leaf_name": "Ignition Switch and Key",
+          "leaf_cat_id": 5396
+        },
+        {
+          "json_title": "QE723A001 - Multi-Function Column Switch",
+          "leaf_name": "Multi-Function Column Switch",
+          "leaf_cat_id": 5394
+        },
+        {
+          "json_title": "QE821A001 - Passive Entry Passive Start",
+          "leaf_name": "Passive Entry Passive Start",
+          "leaf_cat_id": 5395
+        },
+        {
+          "json_title": "QE721A001 - Window Lift Switch",
+          "leaf_name": "Window Lift Switch",
+          "leaf_cat_id": 5397
+        }
+      ]
+    },
+    {
+      "json_title": "driver information",
+      "mid_cat_id": 5361,
+      "components": [
+        {
+          "json_title": "QE711A001 - Clusters",
+          "leaf_name": "Clusters",
+          "leaf_cat_id": 5398
+        }
+      ]
+    },
+    {
+      "json_title": "emission exhaust system",
+      "mid_cat_id": 5360,
+      "components": [
+        {
+          "json_title": "QE160A001 - Exhaust system - D20",
+          "leaf_name": "Exhaust system - D20",
+          "leaf_cat_id": 5399
+        },
+        {
+          "json_title": "QE160A002 - Exhaust system - gasoline engine",
+          "leaf_name": "Exhaust system - gasoline engine",
+          "leaf_cat_id": 5400
+        }
+      ]
+    },
+    {
+      "json_title": "entertainment",
+      "mid_cat_id": 5322,
+      "components": [
+        {
+          "json_title": "QE731A001 - Player",
+          "leaf_name": "Player",
+          "leaf_cat_id": 5402
+        },
+        {
+          "json_title": "QE732A001 - Speaker",
+          "leaf_name": "Speaker",
+          "leaf_cat_id": 5401
+        }
+      ]
+    },
+    {
+      "json_title": "front closures front end sheetmetal",
+      "mid_cat_id": 5319,
+      "components": [
+        {
+          "json_title": "QE572A001 - Fenders",
+          "leaf_name": "Fenders",
+          "leaf_cat_id": 5404
+        },
+        {
+          "json_title": "QE571B001 - Hood Lock",
+          "leaf_name": "Hood Lock",
+          "leaf_cat_id": 5405
+        },
+        {
+          "json_title": "QE571A001 - Hood",
+          "leaf_name": "Hood",
+          "leaf_cat_id": 5403
+        }
+      ]
+    },
+    {
+      "json_title": "front lamp",
+      "mid_cat_id": 5337,
+      "components": [
+        {
+          "json_title": "QE650A001 - FrontLamp",
+          "leaf_name": "FrontLamp",
+          "leaf_cat_id": 5409
+        }
+      ]
+    },
+    {
+      "json_title": "frontexterior hvac airflow",
+      "mid_cat_id": 5327,
+      "components": [
+        {
+          "json_title": "QE340A001 - Front End Exterior Airflow",
+          "leaf_name": "Front End Exterior Airflow",
+          "leaf_cat_id": 5406
+        }
+      ]
+    },
+    {
+      "json_title": "frontinterior hvac airflow",
+      "mid_cat_id": 5334,
+      "components": [
+        {
+          "json_title": "QE322A001 - Front Interior Control",
+          "leaf_name": "Front Interior Control",
+          "leaf_cat_id": 5407
+        },
+        {
+          "json_title": "QE321A001 - Front Interior HVAC Airflow",
+          "leaf_name": "Front Interior HVAC Airflow",
+          "leaf_cat_id": 5408
+        }
+      ]
+    },
+    {
+      "json_title": "fuel storage & handling",
+      "mid_cat_id": 5340,
+      "components": [
+        {
+          "json_title": "QE183A001 - Fuel Plumbing & Hardware",
+          "leaf_name": "Fuel Plumbing & Hardware",
+          "leaf_cat_id": 7614
+        },
+        {
+          "json_title": "QE181A001 - Fuel Tank & Canister",
+          "leaf_name": "Fuel Tank & Canister",
+          "leaf_cat_id": 7615
+        },
+        {
+          "json_title": "QE184A001 - Urea system",
+          "leaf_name": "Urea system",
+          "leaf_cat_id": 5412
+        }
+      ]
+    },
+    {
+      "json_title": "hvac & powertrain coolingin",
+      "mid_cat_id": 5351,
+      "components": [
+        {
+          "json_title": "QE313A001 - Coolant Plumbing & Hardware",
+          "leaf_name": "Coolant Plumbing & Hardware",
+          "leaf_cat_id": 7616
+        },
+        {
+          "json_title": "QE312A001 - Refrigerant Plumbing & Hardware",
+          "leaf_name": "Refrigerant Plumbing & Hardware",
+          "leaf_cat_id": 7617
+        },
+        {
+          "json_title": "QE314A001 - Transmission Oil Cooler & Plumbing Hardware",
+          "leaf_name": "Transmission Oil Cooler & Plumbing Hardware",
+          "leaf_cat_id": 7618
+        }
+      ]
+    },
+    {
+      "json_title": "instrument panel & console",
+      "mid_cat_id": 5353,
+      "components": [
+        {
+          "json_title": "QE416A001 - Floor Console",
+          "leaf_name": "Floor Console",
+          "leaf_cat_id": 5418
+        },
+        {
+          "json_title": "QE412A001 - Instrument Panel Crossmember",
+          "leaf_name": "Instrument Panel Crossmember",
+          "leaf_cat_id": 5416
+        },
+        {
+          "json_title": "QE411A001 - Instrument Panel",
+          "leaf_name": "Instrument Panel",
+          "leaf_cat_id": 5419
+        },
+        {
+          "json_title": "QE414A001 - SteeringWheel",
+          "leaf_name": "SteeringWheel",
+          "leaf_cat_id": 5417
+        }
+      ]
+    },
+    {
+      "json_title": "interior acoustic syetem",
+      "mid_cat_id": 5362,
+      "components": [
+        {
+          "json_title": "QE451A001 - Sound Insulation、Heat Insulation",
+          "leaf_name": "Sound Insulation、Heat Insulation",
+          "leaf_cat_id": 5420
+        }
+      ]
+    },
+    {
+      "json_title": "interior lamp",
+      "mid_cat_id": 5363,
+      "components": [
+        {
+          "json_title": "QE440A001 - InteriorLamp",
+          "leaf_name": "InteriorLamp",
+          "leaf_cat_id": 5421
+        }
+      ]
+    },
+    {
+      "json_title": "interior trim",
+      "mid_cat_id": 5326,
+      "components": [
+        {
+          "json_title": "QE43BA001 - Body Structure Garnish Trim",
+          "leaf_name": "Body Structure Garnish Trim",
+          "leaf_cat_id": 7619
+        },
+        {
+          "json_title": "QE437A001 - Floor Trim",
+          "leaf_name": "Floor Trim",
+          "leaf_cat_id": 5425
+        },
+        {
+          "json_title": "QE436A001 - Roof Trim",
+          "leaf_name": "Roof Trim",
+          "leaf_cat_id": 5422
+        },
+        {
+          "json_title": "QE432A001 - SideClosureGarnishTrim",
+          "leaf_name": "SideClosureGarnishTrim",
+          "leaf_cat_id": 5423
+        }
+      ]
+    },
+    {
+      "json_title": "mounts",
+      "mid_cat_id": 5320,
+      "components": [
+        {
+          "json_title": "QE262A001 - Frame to Body Mounts",
+          "leaf_name": "Frame to Body Mounts",
+          "leaf_cat_id": 5427
+        },
+        {
+          "json_title": "QE261A001 - Powertrain Mounts",
+          "leaf_name": "Powertrain Mounts",
+          "leaf_cat_id": 5426
+        }
+      ]
+    },
+    {
+      "json_title": "on vehicle attachments&tools",
+      "mid_cat_id": 5329,
+      "components": [
+        {
+          "json_title": "QE919A001 - Lubricant",
+          "leaf_name": "Lubricant",
+          "leaf_cat_id": 5429
+        },
+        {
+          "json_title": "QE917A001 - On Vehicle Tools",
+          "leaf_name": "On Vehicle Tools",
+          "leaf_cat_id": 5428
+        }
+      ]
+    },
+    {
+      "json_title": "pickup box",
+      "mid_cat_id": 5333,
+      "components": [
+        {
+          "json_title": "QE5A4A001 - Front Panel Assembly",
+          "leaf_name": "Front Panel Assembly",
+          "leaf_cat_id": 7620
+        },
+        {
+          "json_title": "QE5A1A001 - Platform Assembly",
+          "leaf_name": "Platform Assembly",
+          "leaf_cat_id": 7621
+        },
+        {
+          "json_title": "QE5A2A001 - Side Panel-Inner Assembly",
+          "leaf_name": "Side Panel-Inner Assembly",
+          "leaf_cat_id": 7622
+        },
+        {
+          "json_title": "QE5A5A001 - Side Panel-Outer Assembly",
+          "leaf_name": "Side Panel-Outer Assembly",
+          "leaf_cat_id": 7623
+        },
+        {
+          "json_title": "QE5A0A001 - cargo car body assembly",
+          "leaf_name": "cargo car body assembly",
+          "leaf_cat_id": 7624
+        }
+      ]
+    },
+    {
+      "json_title": "power & signaldistribution",
+      "mid_cat_id": 5342,
+      "components": [
+        {
+          "json_title": "QE869A001 - BatteryCable",
+          "leaf_name": "BatteryCable",
+          "leaf_cat_id": 5458
+        },
+        {
+          "json_title": "QE862A001 - BodyHarness",
+          "leaf_name": "BodyHarness",
+          "leaf_cat_id": 5461
+        },
+        {
+          "json_title": "QE865A001 - ChassisHarness",
+          "leaf_name": "ChassisHarness",
+          "leaf_cat_id": 5456
+        },
+        {
+          "json_title": "QE864A001 - DoorHarness",
+          "leaf_name": "DoorHarness",
+          "leaf_cat_id": 5457
+        },
+        {
+          "json_title": "QE861A001 - EngineCompartmentHarness",
+          "leaf_name": "EngineCompartmentHarness",
+          "leaf_cat_id": 5455
+        },
+        {
+          "json_title": "QE867A001 - Fusebox-Engine Compartment",
+          "leaf_name": "Fusebox-Engine Compartment",
+          "leaf_cat_id": 5459
+        },
+        {
+          "json_title": "QE863A001 - InstrumentPanelHarness",
+          "leaf_name": "InstrumentPanelHarness",
+          "leaf_cat_id": 5460
+        },
+        {
+          "json_title": "QE868A001 - PowerOutlet&CigaretteLighterApplication",
+          "leaf_name": "PowerOutlet&CigaretteLighterApplication",
+          "leaf_cat_id": 7625
+        }
+      ]
+    },
+    {
+      "json_title": "power generation",
+      "mid_cat_id": 5338,
+      "components": [
+        {
+          "json_title": "QE111Q005 - Accessory&Accessory Drive-D20",
+          "leaf_name": "Accessory&Accessory Drive-D20",
+          "leaf_cat_id": 7626
+        },
+        {
+          "json_title": "QE111L005 - Coolant Pump And Inl&OtltTube-D20",
+          "leaf_name": "Coolant Pump And Inl&OtltTube-D20",
+          "leaf_cat_id": 7627
+        },
+        {
+          "json_title": "QE111E005 - Crankshaft Rod-D20",
+          "leaf_name": "Crankshaft Rod-D20",
+          "leaf_cat_id": 5446
+        },
+        {
+          "json_title": "QE111B005 - Cylinder Block&Accessory-D20",
+          "leaf_name": "Cylinder Block&Accessory-D20",
+          "leaf_cat_id": 7628
+        },
+        {
+          "json_title": "QE111C005 - Cylinder Head-D20",
+          "leaf_name": "Cylinder Head-D20",
+          "leaf_cat_id": 5441
+        },
+        {
+          "json_title": "QE111S005 - EGR ASM-D20",
+          "leaf_name": "EGR ASM-D20",
+          "leaf_cat_id": 5437
+        },
+        {
+          "json_title": "QE111A006 - Engine ASM-D20（STP）",
+          "leaf_name": "Engine ASM-D20（STP）",
+          "leaf_cat_id": 5450
+        },
+        {
+          "json_title": "QE111A005 - Engine ASM-D20",
+          "leaf_name": "Engine ASM-D20",
+          "leaf_cat_id": 5445
+        },
+        {
+          "json_title": "QE111U005 - Engine Accessory-D20",
+          "leaf_name": "Engine Accessory-D20",
+          "leaf_cat_id": 5444
+        },
+        {
+          "json_title": "QE111H005 - Exhaust Elbow&Turbocharger-D20",
+          "leaf_name": "Exhaust Elbow&Turbocharger-D20",
+          "leaf_cat_id": 7629
+        },
+        {
+          "json_title": "QE111D005 - Head Cover&PCV-D20",
+          "leaf_name": "Head Cover&PCV-D20",
+          "leaf_cat_id": 7630
+        },
+        {
+          "json_title": "QE111G005 - MANIFOLD ASM-INT-D20",
+          "leaf_name": "MANIFOLD ASM-INT-D20",
+          "leaf_cat_id": 5443
+        },
+        {
+          "json_title": "QE111J005 - Oil Cooler And Inl&OtltTube&Filter-D20",
+          "leaf_name": "Oil Cooler And Inl&OtltTube&Filter-D20",
+          "leaf_cat_id": 7631
+        },
+        {
+          "json_title": "QE111M005 - Oil pumps&vacuum pumps&vacuum tube components-D20",
+          "leaf_name": "Oil pumps&vacuum pumps&vacuum tube components-D20",
+          "leaf_cat_id": 7632
+        },
+        {
+          "json_title": "QE111F005 - SHAFT-BALANCER-D20",
+          "leaf_name": "SHAFT-BALANCER-D20",
+          "leaf_cat_id": 5439
+        },
+        {
+          "json_title": "QE111R005 - Sensor&Harness-D20",
+          "leaf_name": "Sensor&Harness-D20",
+          "leaf_cat_id": 7633
+        },
+        {
+          "json_title": "QE111K005 - Sump&Oil Suction Pipe&Dipstick-D20",
+          "leaf_name": "Sump&Oil Suction Pipe&Dipstick-D20",
+          "leaf_cat_id": 7634
+        },
+        {
+          "json_title": "QE111P005 - Timing Drive-D20",
+          "leaf_name": "Timing Drive-D20",
+          "leaf_cat_id": 5449
+        },
+        {
+          "json_title": "QE111I005 - uel System-D20",
+          "leaf_name": "uel System-D20",
+          "leaf_cat_id": 5452
+        }
+      ]
+    },
+    {
+      "json_title": "power transmission",
+      "mid_cat_id": 5359,
+      "components": [
+        {
+          "json_title": "QE121AA10 - Breather Tube Kit",
+          "leaf_name": "Breather Tube Kit",
+          "leaf_cat_id": 7635
+        },
+        {
+          "json_title": "QE121AA07 - Converter Kit",
+          "leaf_name": "Converter Kit",
+          "leaf_cat_id": 7636
+        },
+        {
+          "json_title": "QE121AA08 - Converter Sealing Elements Kit",
+          "leaf_name": "Converter Sealing Elements Kit",
+          "leaf_cat_id": 7637
+        },
+        {
+          "json_title": "QE124A001 - Front Drive Axle",
+          "leaf_name": "Front Drive Axle",
+          "leaf_cat_id": 5473
+        },
+        {
+          "json_title": "QE121AA04 - Mechatronic Kit",
+          "leaf_name": "Mechatronic Kit",
+          "leaf_cat_id": 7638
+        },
+        {
+          "json_title": "QE121AA11 - Mechatronic Sealing elements replacement",
+          "leaf_name": "Mechatronic Sealing elements replacement",
+          "leaf_cat_id": 7639
+        },
+        {
+          "json_title": "QE121AA01 - Oil Pan Kit",
+          "leaf_name": "Oil Pan Kit",
+          "leaf_cat_id": 7640
+        },
+        {
+          "json_title": "QE126A002 - Propeller Shaft",
+          "leaf_name": "Propeller Shaft",
+          "leaf_cat_id": 5479
+        },
+        {
+          "json_title": "QE126A001 - Propshaft",
+          "leaf_name": "Propshaft",
+          "leaf_cat_id": 5474
+        },
+        {
+          "json_title": "QE125A001 - Rear Drive Axle",
+          "leaf_name": "Rear Drive Axle",
+          "leaf_cat_id": 5466
+        },
+        {
+          "json_title": "QE121AA09 - Selector Shaft Sealing Ring Kit",
+          "leaf_name": "Selector Shaft Sealing Ring Kit",
+          "leaf_cat_id": 7641
+        },
+        {
+          "json_title": "QE121AA05 - Shaft Sealing Ring Output",
+          "leaf_name": "Shaft Sealing Ring Output",
+          "leaf_cat_id": 7642
+        },
+        {
+          "json_title": "QE128A001 - Transfer Case(Part time 4WD)",
+          "leaf_name": "Transfer Case(Part time 4WD)",
+          "leaf_cat_id": 7643
+        },
+        {
+          "json_title": "QE128A002 - Transfer Case(torque on demand)",
+          "leaf_name": "Transfer Case(torque on demand)",
+          "leaf_cat_id": 7644
+        },
+        {
+          "json_title": "QE121A001 - Transmission assembly(6AT)",
+          "leaf_name": "Transmission assembly(6AT)",
+          "leaf_cat_id": 7645
+        },
+        {
+          "json_title": "QE121A002 - Transmission assembly(SAGW-6MT)",
+          "leaf_name": "Transmission assembly(SAGW-6MT)",
+          "leaf_cat_id": 7646
+        }
+      ]
+    },
+    {
+      "json_title": "powertrain control&diagnostic",
+      "mid_cat_id": 5347,
+      "components": [
+        {
+          "json_title": "QE131A001 - EngineManagement",
+          "leaf_name": "EngineManagement",
+          "leaf_cat_id": 5462
+        }
+      ]
+    },
+    {
+      "json_title": "powertrain driver interface",
+      "mid_cat_id": 5354,
+      "components": [
+        {
+          "json_title": "QE151A001 - Accelerator Pedal",
+          "leaf_name": "Accelerator Pedal",
+          "leaf_cat_id": 5463
+        }
+      ]
+    },
+    {
+      "json_title": "rear closure",
+      "mid_cat_id": 5364,
+      "components": [
+        {
+          "json_title": "QE562B001 - E/GATE Handle and Lock",
+          "leaf_name": "E/GATE Handle and Lock",
+          "leaf_cat_id": 7647
+        },
+        {
+          "json_title": "QE562A001 - Endgate",
+          "leaf_name": "Endgate",
+          "leaf_cat_id": 5481
+        }
+      ]
+    },
+    {
+      "json_title": "rear lamp",
+      "mid_cat_id": 5328,
+      "components": [
+        {
+          "json_title": "QE660A001 - RearLamp",
+          "leaf_name": "RearLamp",
+          "leaf_cat_id": 5483
+        }
+      ]
+    },
+    {
+      "json_title": "rear view mirror",
+      "mid_cat_id": 5331,
+      "components": [
+        {
+          "json_title": "QE580A001 - Rear View Mirror",
+          "leaf_name": "Rear View Mirror",
+          "leaf_cat_id": 7648
+        }
+      ]
+    },
+    {
+      "json_title": "rearinterior hvac airflow",
+      "mid_cat_id": 5323,
+      "components": [
+        {
+          "json_title": "QE334A001 - Interior Heating Pipe",
+          "leaf_name": "Interior Heating Pipe",
+          "leaf_cat_id": 5482
+        }
+      ]
+    },
+    {
+      "json_title": "safety belt",
+      "mid_cat_id": 5339,
+      "components": [
+        {
+          "json_title": "QE460A002 - Second Row Seat Belts",
+          "leaf_name": "Second Row Seat Belts",
+          "leaf_cat_id": 5487
+        },
+        {
+          "json_title": "QE460A001 - Third Row Safety Belts",
+          "leaf_name": "Third Row Safety Belts",
+          "leaf_cat_id": 5486
+        }
+      ]
+    },
+    {
+      "json_title": "safety&avoidance",
+      "mid_cat_id": 5335,
+      "components": [
+        {
+          "json_title": "QE811A001 - AirBagControlUnit",
+          "leaf_name": "AirBagControlUnit",
+          "leaf_cat_id": 5484
+        },
+        {
+          "json_title": "QE812A001 - ParkDistanceControlSystem",
+          "leaf_name": "ParkDistanceControlSystem",
+          "leaf_cat_id": 5485
+        }
+      ]
+    },
+    {
+      "json_title": "seats",
+      "mid_cat_id": 5343,
+      "components": [
+        {
+          "json_title": "QE421C001 - Front Electrical Seat LH",
+          "leaf_name": "Front Electrical Seat LH",
+          "leaf_cat_id": 5491
+        },
+        {
+          "json_title": "QE421C002 - Front Electrical Seat RH",
+          "leaf_name": "Front Electrical Seat RH",
+          "leaf_cat_id": 5494
+        },
+        {
+          "json_title": "QE421B001 - Front Manual Seat LH",
+          "leaf_name": "Front Manual Seat LH",
+          "leaf_cat_id": 5493
+        },
+        {
+          "json_title": "QE421B002 - Front Manual Seat RH",
+          "leaf_name": "Front Manual Seat RH",
+          "leaf_cat_id": 5488
+        },
+        {
+          "json_title": "QE421A001 - Seats Layout",
+          "leaf_name": "Seats Layout",
+          "leaf_cat_id": 5492
+        },
+        {
+          "json_title": "QE421D002 - Second Row  Double seat",
+          "leaf_name": "Second Row  Double seat",
+          "leaf_cat_id": 5489
+        },
+        {
+          "json_title": "QE421D001 - Second Row Three Seat（Two head rest / three head rest）",
+          "leaf_name": "Second Row Three Seat（Two head rest / three head rest）",
+          "leaf_cat_id": 7649
+        }
+      ]
+    },
+    {
+      "json_title": "side closures",
+      "mid_cat_id": 5352,
+      "components": [
+        {
+          "json_title": "QE551C001 - Front Door Electric Glass Regulator",
+          "leaf_name": "Front Door Electric Glass Regulator",
+          "leaf_cat_id": 5497
+        },
+        {
+          "json_title": "QE551B001 - Front Door Handle and Lock",
+          "leaf_name": "Front Door Handle and Lock",
+          "leaf_cat_id": 5498
+        },
+        {
+          "json_title": "QE551A001 - Front Side Closure",
+          "leaf_name": "Front Side Closure",
+          "leaf_cat_id": 5495
+        },
+        {
+          "json_title": "QE552A001 - Rear Side Closure",
+          "leaf_name": "Rear Side Closure",
+          "leaf_cat_id": 5499
+        },
+        {
+          "json_title": "QE557A001 - TNK FIL DR",
+          "leaf_name": "TNK FIL DR",
+          "leaf_cat_id": 5496
+        }
+      ]
+    },
+    {
+      "json_title": "steering",
+      "mid_cat_id": 5356,
+      "components": [
+        {
+          "json_title": "QE215A003 - Electirc redirector（Left/Right  Hand)",
+          "leaf_name": "Electirc redirector（Left/Right  Hand)",
+          "leaf_cat_id": 7650
+        },
+        {
+          "json_title": "QE215A001 - Redirector(left hand）",
+          "leaf_name": "Redirector(left hand）",
+          "leaf_cat_id": 7651
+        },
+        {
+          "json_title": "QE215A002 - Redirector(right hand）",
+          "leaf_name": "Redirector(right hand）",
+          "leaf_cat_id": 7652
+        },
+        {
+          "json_title": "QE214A001 - Steering Column",
+          "leaf_name": "Steering Column",
+          "leaf_cat_id": 5503
+        }
+      ]
+    },
+    {
+      "json_title": "suspension",
+      "mid_cat_id": 5358,
+      "components": [
+        {
+          "json_title": "QE222A002 - Five Bar Linkage Spiral Spring Rear Suspension",
+          "leaf_name": "Five Bar Linkage Spiral Spring Rear Suspension",
+          "leaf_cat_id": 5507
+        },
+        {
+          "json_title": "QE224A001 - Front Shock Absorber",
+          "leaf_name": "Front Shock Absorber",
+          "leaf_cat_id": 5506
+        },
+        {
+          "json_title": "QE221A001 - Front Suspension",
+          "leaf_name": "Front Suspension",
+          "leaf_cat_id": 5504
+        },
+        {
+          "json_title": "QE222A001 - Rear Leaf-spring Suspension",
+          "leaf_name": "Rear Leaf-spring Suspension",
+          "leaf_cat_id": 5505
+        }
+      ]
+    },
+    {
+      "json_title": "tire,wheels,wheel trim",
+      "mid_cat_id": 5365,
+      "components": [
+        {
+          "json_title": "QE230A001 - Tire,Wheel,Trim",
+          "leaf_name": "Tire,Wheel,Trim",
+          "leaf_cat_id": 7653
+        }
+      ]
+    },
+    {
+      "json_title": "wiper & washer",
+      "mid_cat_id": 5324,
+      "components": [
+        {
+          "json_title": "QE682A001 - Front Washer",
+          "leaf_name": "Front Washer",
+          "leaf_cat_id": 5510
+        },
+        {
+          "json_title": "QE681A001 - Front Wiper",
+          "leaf_name": "Front Wiper",
+          "leaf_cat_id": 5509
+        }
+      ]
+    }
+  ]
+}

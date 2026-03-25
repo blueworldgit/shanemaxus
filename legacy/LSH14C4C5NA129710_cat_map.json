@@ -1,0 +1,762 @@
+{
+  "serial": "LSH14C4C5NA129710",
+  "vin_cat_id": 7301,
+  "categories": [
+    {
+      "json_title": "airbag",
+      "mid_cat_id": 7317,
+      "components": [
+        {
+          "json_title": "FE471A001 - AirBag",
+          "leaf_name": "AirBag",
+          "leaf_cat_id": 7370
+        }
+      ]
+    },
+    {
+      "json_title": "antenna",
+      "mid_cat_id": 7329,
+      "components": [
+        {
+          "json_title": "FE741A001 - Antenna",
+          "leaf_name": "Antenna",
+          "leaf_cat_id": 7594
+        }
+      ]
+    },
+    {
+      "json_title": "body interior & exterior electronics",
+      "mid_cat_id": 7338,
+      "components": [
+        {
+          "json_title": "FE830A001 - BodyInterior&ExteriorElectronics",
+          "leaf_name": "BodyInterior&ExteriorElectronics",
+          "leaf_cat_id": 7595
+        }
+      ]
+    },
+    {
+      "json_title": "body lower structure",
+      "mid_cat_id": 7321,
+      "components": [
+        {
+          "json_title": "FE510A001 - Body Lower Structure",
+          "leaf_name": "Body Lower Structure",
+          "leaf_cat_id": 7596
+        }
+      ]
+    },
+    {
+      "json_title": "body upper exterior trim",
+      "mid_cat_id": 7334,
+      "components": [
+        {
+          "json_title": "FE691A001 - Body Exterior Trim",
+          "leaf_name": "Body Exterior Trim",
+          "leaf_cat_id": 7435
+        },
+        {
+          "json_title": "FE696A001 - Exterior Emblem/Decal/Nameplate",
+          "leaf_name": "Exterior Emblem/Decal/Nameplate",
+          "leaf_cat_id": 7597
+        }
+      ]
+    },
+    {
+      "json_title": "body upper structure",
+      "mid_cat_id": 7302,
+      "components": [
+        {
+          "json_title": "FE521A001 - Inner Framing",
+          "leaf_name": "Inner Framing",
+          "leaf_cat_id": 7433
+        },
+        {
+          "json_title": "FE522A001 - Outer Framing",
+          "leaf_name": "Outer Framing",
+          "leaf_cat_id": 7431
+        },
+        {
+          "json_title": "FE522A002 - PANEL ASM-BODY SI & R/END ASM-RR",
+          "leaf_name": "PANEL ASM-BODY SI & R/END ASM-RR",
+          "leaf_cat_id": 7598
+        },
+        {
+          "json_title": "FE525A001 - Rear Framing",
+          "leaf_name": "Rear Framing",
+          "leaf_cat_id": 7349
+        },
+        {
+          "json_title": "FE523A001 - Roof Framing",
+          "leaf_name": "Roof Framing",
+          "leaf_cat_id": 7352
+        }
+      ]
+    },
+    {
+      "json_title": "body window",
+      "mid_cat_id": 7308,
+      "components": [
+        {
+          "json_title": "FE611A001 - Window",
+          "leaf_name": "Window",
+          "leaf_cat_id": 7351
+        }
+      ]
+    },
+    {
+      "json_title": "brakes",
+      "mid_cat_id": 7305,
+      "components": [
+        {
+          "json_title": "FE244A001 - Brake Apply",
+          "leaf_name": "Brake Apply",
+          "leaf_cat_id": 7355
+        },
+        {
+          "json_title": "FE245A001 - Brake Modulator",
+          "leaf_name": "Brake Modulator",
+          "leaf_cat_id": 7358
+        },
+        {
+          "json_title": "FE246A001 - Brake Pedal",
+          "leaf_name": "Brake Pedal",
+          "leaf_cat_id": 7359
+        },
+        {
+          "json_title": "FE247A001 - Brake Pipes(ABS)",
+          "leaf_name": "Brake Pipes(ABS)",
+          "leaf_cat_id": 7599
+        },
+        {
+          "json_title": "FE247B001 - Brake Pipes(ESP)",
+          "leaf_name": "Brake Pipes(ESP)",
+          "leaf_cat_id": 7600
+        },
+        {
+          "json_title": "FE241A001 - Front Brakes",
+          "leaf_name": "Front Brakes",
+          "leaf_cat_id": 7345
+        },
+        {
+          "json_title": "FE243A001 - Mechanical Parking Brakes",
+          "leaf_name": "Mechanical Parking Brakes",
+          "leaf_cat_id": 7354
+        },
+        {
+          "json_title": "FE242A001 - Rear Disc Brake Corner",
+          "leaf_name": "Rear Disc Brake Corner",
+          "leaf_cat_id": 7346
+        }
+      ]
+    },
+    {
+      "json_title": "bumpers,fascia & grille",
+      "mid_cat_id": 7313,
+      "components": [
+        {
+          "json_title": "FE621A001 - Front Bumper",
+          "leaf_name": "Front Bumper",
+          "leaf_cat_id": 7365
+        },
+        {
+          "json_title": "FE622A001 - Rear Bumper",
+          "leaf_name": "Rear Bumper",
+          "leaf_cat_id": 7372
+        },
+        {
+          "json_title": "FE625A001 - Wheelhouse Liner",
+          "leaf_name": "Wheelhouse Liner",
+          "leaf_cat_id": 7369
+        }
+      ]
+    },
+    {
+      "json_title": "charging & energystorage",
+      "mid_cat_id": 7318,
+      "components": [
+        {
+          "json_title": "FE843A001 - Charging&EnergyStorage",
+          "leaf_name": "Charging&EnergyStorage",
+          "leaf_cat_id": 7601
+        },
+        {
+          "json_title": "FE845A001 - Moudule-Electric Vehicle Control Unit",
+          "leaf_name": "Moudule-Electric Vehicle Control Unit",
+          "leaf_cat_id": 7375
+        },
+        {
+          "json_title": "FE843C005 - The internal parts of power battery",
+          "leaf_name": "The internal parts of power battery",
+          "leaf_cat_id": 7374
+        },
+        {
+          "json_title": "FE843C007 - The internal parts of power battery",
+          "leaf_name": "The internal parts of power battery",
+          "leaf_cat_id": 7374
+        }
+      ]
+    },
+    {
+      "json_title": "communicate",
+      "mid_cat_id": 7322,
+      "components": [
+        {
+          "json_title": "FE751A001 - Vehicle Tele-Communication",
+          "leaf_name": "Vehicle Tele-Communication",
+          "leaf_cat_id": 7378
+        }
+      ]
+    },
+    {
+      "json_title": "customer switches",
+      "mid_cat_id": 7330,
+      "components": [
+        {
+          "json_title": "FE726A001 - Accessory Switch",
+          "leaf_name": "Accessory Switch",
+          "leaf_cat_id": 7391
+        },
+        {
+          "json_title": "FE727A001 - Door Switches",
+          "leaf_name": "Door Switches",
+          "leaf_cat_id": 7395
+        },
+        {
+          "json_title": "FE725A001 - Ignition Switch and Key",
+          "leaf_name": "Ignition Switch and Key",
+          "leaf_cat_id": 7387
+        },
+        {
+          "json_title": "FE723A001 - Multi-Function Column Switch",
+          "leaf_name": "Multi-Function Column Switch",
+          "leaf_cat_id": 7385
+        },
+        {
+          "json_title": "FE721A001 - Window Lift Switch",
+          "leaf_name": "Window Lift Switch",
+          "leaf_cat_id": 7383
+        }
+      ]
+    },
+    {
+      "json_title": "driver information",
+      "mid_cat_id": 7332,
+      "components": [
+        {
+          "json_title": "FE711A001 - Clusters",
+          "leaf_name": "Clusters",
+          "leaf_cat_id": 7398
+        }
+      ]
+    },
+    {
+      "json_title": "entertainment",
+      "mid_cat_id": 7339,
+      "components": [
+        {
+          "json_title": "FE731A001 - Infotainment System",
+          "leaf_name": "Infotainment System",
+          "leaf_cat_id": 7400
+        },
+        {
+          "json_title": "FE732A001 - Speaker",
+          "leaf_name": "Speaker",
+          "leaf_cat_id": 7405
+        }
+      ]
+    },
+    {
+      "json_title": "front closures front end sheetmetal",
+      "mid_cat_id": 7340,
+      "components": [
+        {
+          "json_title": "FE572A001 - Fenders",
+          "leaf_name": "Fenders",
+          "leaf_cat_id": 7409
+        },
+        {
+          "json_title": "FE571B001 - Hood Lock",
+          "leaf_name": "Hood Lock",
+          "leaf_cat_id": 7407
+        },
+        {
+          "json_title": "FE571A001 - Hood",
+          "leaf_name": "Hood",
+          "leaf_cat_id": 7403
+        }
+      ]
+    },
+    {
+      "json_title": "front lamp",
+      "mid_cat_id": 7303,
+      "components": [
+        {
+          "json_title": "FE650A001 - FrontLamp",
+          "leaf_name": "FrontLamp",
+          "leaf_cat_id": 7422
+        }
+      ]
+    },
+    {
+      "json_title": "frontexterior hvac airflow",
+      "mid_cat_id": 7304,
+      "components": [
+        {
+          "json_title": "FE340A001 - Front End Exterior Airflow",
+          "leaf_name": "Front End Exterior Airflow",
+          "leaf_cat_id": 7414
+        }
+      ]
+    },
+    {
+      "json_title": "frontinterior hvac airflow",
+      "mid_cat_id": 7309,
+      "components": [
+        {
+          "json_title": "FE322A001 - Front Interior Control",
+          "leaf_name": "Front Interior Control",
+          "leaf_cat_id": 7419
+        },
+        {
+          "json_title": "FE321A001 - Front Interior HVAC Airflow",
+          "leaf_name": "Front Interior HVAC Airflow",
+          "leaf_cat_id": 7417
+        }
+      ]
+    },
+    {
+      "json_title": "hvac & powertrain coolingin",
+      "mid_cat_id": 7315,
+      "components": [
+        {
+          "json_title": "FE311A001 - Air conditioning compressor",
+          "leaf_name": "Air conditioning compressor",
+          "leaf_cat_id": 7424
+        },
+        {
+          "json_title": "FE313A001 - Coolant Plumbing & Hardware",
+          "leaf_name": "Coolant Plumbing & Hardware",
+          "leaf_cat_id": 7602
+        },
+        {
+          "json_title": "FE312A001 - Refrigerant Plumbing & Hardware",
+          "leaf_name": "Refrigerant Plumbing & Hardware",
+          "leaf_cat_id": 7603
+        }
+      ]
+    },
+    {
+      "json_title": "instrument panel & console",
+      "mid_cat_id": 7319,
+      "components": [
+        {
+          "json_title": "FE416A001 - Floor Console",
+          "leaf_name": "Floor Console",
+          "leaf_cat_id": 7390
+        },
+        {
+          "json_title": "FE412A001 - Instrument Panel Crossmember",
+          "leaf_name": "Instrument Panel Crossmember",
+          "leaf_cat_id": 7371
+        },
+        {
+          "json_title": "FE411A001 - Instrument Panel",
+          "leaf_name": "Instrument Panel",
+          "leaf_cat_id": 7432
+        }
+      ]
+    },
+    {
+      "json_title": "interior acoustic syetem",
+      "mid_cat_id": 7323,
+      "components": [
+        {
+          "json_title": "FE451A001 - Sound Insulation、Heat Insulation",
+          "leaf_name": "Sound Insulation、Heat Insulation",
+          "leaf_cat_id": 7389
+        }
+      ]
+    },
+    {
+      "json_title": "interior lamp",
+      "mid_cat_id": 7327,
+      "components": [
+        {
+          "json_title": "FE440A001 - InteriorLamp",
+          "leaf_name": "InteriorLamp",
+          "leaf_cat_id": 7393
+        }
+      ]
+    },
+    {
+      "json_title": "interior trim",
+      "mid_cat_id": 7333,
+      "components": [
+        {
+          "json_title": "FE432A001 - Door Trim",
+          "leaf_name": "Door Trim",
+          "leaf_cat_id": 7350
+        },
+        {
+          "json_title": "FE437A001 - Floor Trim",
+          "leaf_name": "Floor Trim",
+          "leaf_cat_id": 7410
+        },
+        {
+          "json_title": "FE435A001 - Rear Door Trim",
+          "leaf_name": "Rear Door Trim",
+          "leaf_cat_id": 7397
+        },
+        {
+          "json_title": "FE436A001 - Roof Trim",
+          "leaf_name": "Roof Trim",
+          "leaf_cat_id": 7408
+        },
+        {
+          "json_title": "FE431A001 - Side Trim",
+          "leaf_name": "Side Trim",
+          "leaf_cat_id": 7373
+        }
+      ]
+    },
+    {
+      "json_title": "mounts",
+      "mid_cat_id": 7337,
+      "components": [
+        {
+          "json_title": "FE261A001 - EPT Mounts",
+          "leaf_name": "EPT Mounts",
+          "leaf_cat_id": 7412
+        }
+      ]
+    },
+    {
+      "json_title": "on vehicle attachments&tools",
+      "mid_cat_id": 7341,
+      "components": [
+        {
+          "json_title": "FE919A001 - Fluids and Lubrications",
+          "leaf_name": "Fluids and Lubrications",
+          "leaf_cat_id": 7421
+        },
+        {
+          "json_title": "FE911A001 - On Vehicle Attachments",
+          "leaf_name": "On Vehicle Attachments",
+          "leaf_cat_id": 7416
+        },
+        {
+          "json_title": "FE917A001 - On Vehicle Tools",
+          "leaf_name": "On Vehicle Tools",
+          "leaf_cat_id": 7420
+        }
+      ]
+    },
+    {
+      "json_title": "power & signaldistribution",
+      "mid_cat_id": 7310,
+      "components": [
+        {
+          "json_title": "FE869A001 - BatteryCable",
+          "leaf_name": "BatteryCable",
+          "leaf_cat_id": 7344
+        },
+        {
+          "json_title": "FE862A001 - BodyHarness",
+          "leaf_name": "BodyHarness",
+          "leaf_cat_id": 7429
+        },
+        {
+          "json_title": "FE864A001 - DoorHarness",
+          "leaf_name": "DoorHarness",
+          "leaf_cat_id": 7436
+        },
+        {
+          "json_title": "FE861A001 - EngineCompartmentHarness",
+          "leaf_name": "EngineCompartmentHarness",
+          "leaf_cat_id": 7426
+        },
+        {
+          "json_title": "FE872A001 - High Voltage Harness",
+          "leaf_name": "High Voltage Harness",
+          "leaf_cat_id": 7343
+        },
+        {
+          "json_title": "FE863A001 - InstrumentPanelHarness",
+          "leaf_name": "InstrumentPanelHarness",
+          "leaf_cat_id": 7434
+        },
+        {
+          "json_title": "FE868A001 - Power Outlet & Cigarette Lighter Device",
+          "leaf_name": "Power Outlet & Cigarette Lighter Device",
+          "leaf_cat_id": 7604
+        }
+      ]
+    },
+    {
+      "json_title": "pipe",
+      "mid_cat_id": 7307,
+      "components": [
+        {
+          "json_title": "FE191A001 - EPT System",
+          "leaf_name": "EPT System",
+          "leaf_cat_id": 7423
+        },
+        {
+          "json_title": "FE191A002 - EPT System",
+          "leaf_name": "EPT System",
+          "leaf_cat_id": 7423
+        },
+        {
+          "json_title": "FE191A004 - EPT System",
+          "leaf_name": "EPT System",
+          "leaf_cat_id": 7423
+        },
+        {
+          "json_title": "FE191A004 - EPT System",
+          "leaf_name": "EPT System",
+          "leaf_cat_id": 7423
+        },
+        {
+          "json_title": "FE191B001 - The internal parts of reduction",
+          "leaf_name": "The internal parts of reduction",
+          "leaf_cat_id": 7427
+        }
+      ]
+    },
+    {
+      "json_title": "power transmission",
+      "mid_cat_id": 7320,
+      "components": [
+        {
+          "json_title": "FE126A001 - Front Half Shaft",
+          "leaf_name": "Front Half Shaft",
+          "leaf_cat_id": 7356
+        },
+        {
+          "json_title": "FE125A001 - Rear Drive Axle",
+          "leaf_name": "Rear Drive Axle",
+          "leaf_cat_id": 7353
+        }
+      ]
+    },
+    {
+      "json_title": "powertrain driver interface",
+      "mid_cat_id": 7312,
+      "components": [
+        {
+          "json_title": "FE151A001 - Accelerator Pedal",
+          "leaf_name": "Accelerator Pedal",
+          "leaf_cat_id": 7348
+        },
+        {
+          "json_title": "FE152A001 - TransmissionShiftActuation",
+          "leaf_name": "TransmissionShiftActuation",
+          "leaf_cat_id": 7357
+        }
+      ]
+    },
+    {
+      "json_title": "rear closure",
+      "mid_cat_id": 7325,
+      "components": [
+        {
+          "json_title": "FE561C001 - Rear Door Handle and Door Lock",
+          "leaf_name": "Rear Door Handle and Door Lock",
+          "leaf_cat_id": 7361
+        },
+        {
+          "json_title": "FE561A001 - Rear Door",
+          "leaf_name": "Rear Door",
+          "leaf_cat_id": 7360
+        },
+        {
+          "json_title": "FE561A002 - Rear Door",
+          "leaf_name": "Rear Door",
+          "leaf_cat_id": 7360
+        }
+      ]
+    },
+    {
+      "json_title": "rear lamp",
+      "mid_cat_id": 7328,
+      "components": [
+        {
+          "json_title": "FE660A001 - RearLamp",
+          "leaf_name": "RearLamp",
+          "leaf_cat_id": 7362
+        }
+      ]
+    },
+    {
+      "json_title": "rear view mirror",
+      "mid_cat_id": 7331,
+      "components": [
+        {
+          "json_title": "FE580A001 - Rear View Mirror",
+          "leaf_name": "Rear View Mirror",
+          "leaf_cat_id": 7605
+        }
+      ]
+    },
+    {
+      "json_title": "safety belt",
+      "mid_cat_id": 7335,
+      "components": [
+        {
+          "json_title": "FE465A001 - MerchandiseTetherTreatment",
+          "leaf_name": "MerchandiseTetherTreatment",
+          "leaf_cat_id": 7381
+        },
+        {
+          "json_title": "FE460A001 - Seat Belts",
+          "leaf_name": "Seat Belts",
+          "leaf_cat_id": 7368
+        }
+      ]
+    },
+    {
+      "json_title": "safety&avoidance",
+      "mid_cat_id": 7336,
+      "components": [
+        {
+          "json_title": "FE811A001 - Air Bag Control Unit",
+          "leaf_name": "Air Bag Control Unit",
+          "leaf_cat_id": 7366
+        },
+        {
+          "json_title": "FE812A001 - Park Distance Control",
+          "leaf_name": "Park Distance Control",
+          "leaf_cat_id": 7364
+        }
+      ]
+    },
+    {
+      "json_title": "sealant & body attachment",
+      "mid_cat_id": 7342,
+      "components": [
+        {
+          "json_title": "FE536A001 - Body Attachment",
+          "leaf_name": "Body Attachment",
+          "leaf_cat_id": 7377
+        }
+      ]
+    },
+    {
+      "json_title": "seats",
+      "mid_cat_id": 7311,
+      "components": [
+        {
+          "json_title": "FE421A001 - Front  Seat(Left)",
+          "leaf_name": "Front  Seat(Left)",
+          "leaf_cat_id": 7606
+        },
+        {
+          "json_title": "FE421B001 - Front  Seat（Right）",
+          "leaf_name": "Front  Seat（Right）",
+          "leaf_cat_id": 7376
+        }
+      ]
+    },
+    {
+      "json_title": "side closures",
+      "mid_cat_id": 7306,
+      "components": [
+        {
+          "json_title": "FE551C001 - Front Door Electric Glass Regulator",
+          "leaf_name": "Front Door Electric Glass Regulator",
+          "leaf_cat_id": 7386
+        },
+        {
+          "json_title": "FE551B001 - Front Door Handle and Lock",
+          "leaf_name": "Front Door Handle and Lock",
+          "leaf_cat_id": 7384
+        },
+        {
+          "json_title": "FE551A001 - Front Side Closure",
+          "leaf_name": "Front Side Closure",
+          "leaf_cat_id": 7382
+        },
+        {
+          "json_title": "FE553B001 - Side Sliding Door Handle and Door Lock",
+          "leaf_name": "Side Sliding Door Handle and Door Lock",
+          "leaf_cat_id": 7394
+        },
+        {
+          "json_title": "FE553A001 - Side Sliding Door",
+          "leaf_name": "Side Sliding Door",
+          "leaf_cat_id": 7388
+        },
+        {
+          "json_title": "FE557A001 - TNK FIL DR",
+          "leaf_name": "TNK FIL DR",
+          "leaf_cat_id": 7392
+        }
+      ]
+    },
+    {
+      "json_title": "steering",
+      "mid_cat_id": 7314,
+      "components": [
+        {
+          "json_title": "FE215A001 - Redirector（Left Hand/Right Hand）",
+          "leaf_name": "Redirector（Left Hand/Right Hand）",
+          "leaf_cat_id": 7607
+        },
+        {
+          "json_title": "FE214A001 - Steering Column",
+          "leaf_name": "Steering Column",
+          "leaf_cat_id": 7396
+        }
+      ]
+    },
+    {
+      "json_title": "suspension",
+      "mid_cat_id": 7316,
+      "components": [
+        {
+          "json_title": "FE224A001 - Front Shock Absorber",
+          "leaf_name": "Front Shock Absorber",
+          "leaf_cat_id": 7411
+        },
+        {
+          "json_title": "FE221A001 - Front Suspension",
+          "leaf_name": "Front Suspension",
+          "leaf_cat_id": 7402
+        },
+        {
+          "json_title": "FE222A001 - Rear Suspension",
+          "leaf_name": "Rear Suspension",
+          "leaf_cat_id": 7406
+        }
+      ]
+    },
+    {
+      "json_title": "tire,wheels,wheel trim",
+      "mid_cat_id": 7324,
+      "components": [
+        {
+          "json_title": "FE230A001 - Tire,Wheel,Trim",
+          "leaf_name": "Tire,Wheel,Trim",
+          "leaf_cat_id": 7608
+        }
+      ]
+    },
+    {
+      "json_title": "wiper & washer",
+      "mid_cat_id": 7326,
+      "components": [
+        {
+          "json_title": "FE681A001 - Front Wiper",
+          "leaf_name": "Front Wiper",
+          "leaf_cat_id": 7413
+        },
+        {
+          "json_title": "FE682A001 - Washer System",
+          "leaf_name": "Washer System",
+          "leaf_cat_id": 7418
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,758 @@
+{
+  "serial": "LSFAM120XNA160733",
+  "vin_cat_id": 4408,
+  "categories": [
+    {
+      "json_title": "airbag",
+      "mid_cat_id": 4436,
+      "components": [
+        {
+          "json_title": "SE471A001 - AirBag",
+          "leaf_name": "AirBag",
+          "leaf_cat_id": 4508
+        }
+      ]
+    },
+    {
+      "json_title": "antenna",
+      "mid_cat_id": 4439,
+      "components": [
+        {
+          "json_title": "SE741A001 - Antenna",
+          "leaf_name": "Antenna",
+          "leaf_cat_id": 7654
+        }
+      ]
+    },
+    {
+      "json_title": "body interior & exterior electronics",
+      "mid_cat_id": 4446,
+      "components": [
+        {
+          "json_title": "SE830A001 - BodyInterior&ExteriorElectronics",
+          "leaf_name": "BodyInterior&ExteriorElectronics",
+          "leaf_cat_id": 7655
+        }
+      ]
+    },
+    {
+      "json_title": "body lower exterior trim",
+      "mid_cat_id": 4444,
+      "components": [
+        {
+          "json_title": "SE645A001 - Assist Step",
+          "leaf_name": "Assist Step",
+          "leaf_cat_id": 4516
+        },
+        {
+          "json_title": "SE644A001 - Mud Guard",
+          "leaf_name": "Mud Guard",
+          "leaf_cat_id": 4545
+        }
+      ]
+    },
+    {
+      "json_title": "body lower structure",
+      "mid_cat_id": 4438,
+      "components": [
+        {
+          "json_title": "SE510A001 - Body Lower Structure",
+          "leaf_name": "Body Lower Structure",
+          "leaf_cat_id": 7656
+        }
+      ]
+    },
+    {
+      "json_title": "body upper exterior trim",
+      "mid_cat_id": 4410,
+      "components": [
+        {
+          "json_title": "SE691A001 - Body Exterior Trim",
+          "leaf_name": "Body Exterior Trim",
+          "leaf_cat_id": 4539
+        },
+        {
+          "json_title": "SE696A001 - Exterior Emblem/Decal/Nameplate",
+          "leaf_name": "Exterior Emblem/Decal/Nameplate",
+          "leaf_cat_id": 7657
+        }
+      ]
+    },
+    {
+      "json_title": "body upper structure",
+      "mid_cat_id": 4416,
+      "components": [
+        {
+          "json_title": "SE521A001 - Inner Framing",
+          "leaf_name": "Inner Framing",
+          "leaf_cat_id": 4505
+        },
+        {
+          "json_title": "SE522A001 - Outer Framing",
+          "leaf_name": "Outer Framing",
+          "leaf_cat_id": 4542
+        },
+        {
+          "json_title": "SE523A001 - Roof Framing",
+          "leaf_name": "Roof Framing",
+          "leaf_cat_id": 4454
+        }
+      ]
+    },
+    {
+      "json_title": "body window",
+      "mid_cat_id": 4414,
+      "components": [
+        {
+          "json_title": "SE611A001 - Window",
+          "leaf_name": "Window",
+          "leaf_cat_id": 4458
+        }
+      ]
+    },
+    {
+      "json_title": "brakes",
+      "mid_cat_id": 4421,
+      "components": [
+        {
+          "json_title": "SE244A002 - Brake Apply",
+          "leaf_name": "Brake Apply",
+          "leaf_cat_id": 4461
+        },
+        {
+          "json_title": "SE245A001 - Brake Modulator",
+          "leaf_name": "Brake Modulator",
+          "leaf_cat_id": 4463
+        },
+        {
+          "json_title": "SE246A001 - Brake Pedal",
+          "leaf_name": "Brake Pedal",
+          "leaf_cat_id": 4466
+        },
+        {
+          "json_title": "SE247A001 - Brake Pipes",
+          "leaf_name": "Brake Pipes",
+          "leaf_cat_id": 4469
+        },
+        {
+          "json_title": "SE241A001 - Front Brakes",
+          "leaf_name": "Front Brakes",
+          "leaf_cat_id": 4453
+        },
+        {
+          "json_title": "SE243A001 - Mechanical Parking Brakes",
+          "leaf_name": "Mechanical Parking Brakes",
+          "leaf_cat_id": 4457
+        },
+        {
+          "json_title": "SE242A001 - Rear Mechanical Brakes",
+          "leaf_name": "Rear Mechanical Brakes",
+          "leaf_cat_id": 4459
+        }
+      ]
+    },
+    {
+      "json_title": "bumpers,fascia & grille",
+      "mid_cat_id": 4424,
+      "components": [
+        {
+          "json_title": "SE621A001 - Front Bumper",
+          "leaf_name": "Front Bumper",
+          "leaf_cat_id": 4470
+        },
+        {
+          "json_title": "SE623A001 - Grille",
+          "leaf_name": "Grille",
+          "leaf_cat_id": 4471
+        },
+        {
+          "json_title": "SE622A001 - Rear Bumper",
+          "leaf_name": "Rear Bumper",
+          "leaf_cat_id": 4473
+        },
+        {
+          "json_title": "SE625A001 - Wheelhouse Liner",
+          "leaf_name": "Wheelhouse Liner",
+          "leaf_cat_id": 4478
+        }
+      ]
+    },
+    {
+      "json_title": "charging & energystorage",
+      "mid_cat_id": 4429,
+      "components": [
+        {
+          "json_title": "SE843A001 - Charging&EnergyStorage",
+          "leaf_name": "Charging&EnergyStorage",
+          "leaf_cat_id": 7658
+        },
+        {
+          "json_title": "SE843B001 - Inside the power battery（CATL-88.55Kwh）",
+          "leaf_name": "Inside the power battery（CATL-88.55Kwh）",
+          "leaf_cat_id": 4479
+        },
+        {
+          "json_title": "SE845A001 - Moudule-Electric Vehicle Control Unit&EVCC",
+          "leaf_name": "Moudule-Electric Vehicle Control Unit&EVCC",
+          "leaf_cat_id": 7659
+        },
+        {
+          "json_title": "SE844A001 - PowerInverter",
+          "leaf_name": "PowerInverter",
+          "leaf_cat_id": 4482
+        }
+      ]
+    },
+    {
+      "json_title": "chassis structure",
+      "mid_cat_id": 4433,
+      "components": [
+        {
+          "json_title": "SE253A001 - Frame",
+          "leaf_name": "Frame",
+          "leaf_cat_id": 4487
+        }
+      ]
+    },
+    {
+      "json_title": "customer switches",
+      "mid_cat_id": 4440,
+      "components": [
+        {
+          "json_title": "SE726A001 - Accessory Switches",
+          "leaf_name": "Accessory Switches",
+          "leaf_cat_id": 4496
+        },
+        {
+          "json_title": "SE725A001 - Ignition Switch and Key",
+          "leaf_name": "Ignition Switch and Key",
+          "leaf_cat_id": 4492
+        },
+        {
+          "json_title": "SE723A001 - Multi-Function Column Switch",
+          "leaf_name": "Multi-Function Column Switch",
+          "leaf_cat_id": 4491
+        },
+        {
+          "json_title": "SE721A001 - Window Lift Switch",
+          "leaf_name": "Window Lift Switch",
+          "leaf_cat_id": 4489
+        }
+      ]
+    },
+    {
+      "json_title": "driver information",
+      "mid_cat_id": 4442,
+      "components": [
+        {
+          "json_title": "SE711A001 - Clusters",
+          "leaf_name": "Clusters",
+          "leaf_cat_id": 4495
+        }
+      ]
+    },
+    {
+      "json_title": "entertainment",
+      "mid_cat_id": 4448,
+      "components": [
+        {
+          "json_title": "SE731A001 - Player",
+          "leaf_name": "Player",
+          "leaf_cat_id": 4500
+        },
+        {
+          "json_title": "SE732A001 - Speaker",
+          "leaf_name": "Speaker",
+          "leaf_cat_id": 4503
+        }
+      ]
+    },
+    {
+      "json_title": "front closures front end sheetmetal",
+      "mid_cat_id": 4412,
+      "components": [
+        {
+          "json_title": "SE572A001 - Fenders",
+          "leaf_name": "Fenders",
+          "leaf_cat_id": 4513
+        },
+        {
+          "json_title": "SE571B001 - Hood Lock",
+          "leaf_name": "Hood Lock",
+          "leaf_cat_id": 4511
+        },
+        {
+          "json_title": "SE571A001 - Hood",
+          "leaf_name": "Hood",
+          "leaf_cat_id": 4506
+        }
+      ]
+    },
+    {
+      "json_title": "front lamp",
+      "mid_cat_id": 4422,
+      "components": [
+        {
+          "json_title": "SE650A001 - FrontLamp",
+          "leaf_name": "FrontLamp",
+          "leaf_cat_id": 4529
+        }
+      ]
+    },
+    {
+      "json_title": "frontexterior hvac airflow",
+      "mid_cat_id": 4418,
+      "components": [
+        {
+          "json_title": "SE340A001 - Front End Exterior Airflow",
+          "leaf_name": "Front End Exterior Airflow",
+          "leaf_cat_id": 4517
+        }
+      ]
+    },
+    {
+      "json_title": "frontinterior hvac airflow",
+      "mid_cat_id": 4417,
+      "components": [
+        {
+          "json_title": "SE322A001 - Front Interior Control",
+          "leaf_name": "Front Interior Control",
+          "leaf_cat_id": 4523
+        },
+        {
+          "json_title": "SE321A001 - Front Interior HVAC Airflow",
+          "leaf_name": "Front Interior HVAC Airflow",
+          "leaf_cat_id": 4525
+        }
+      ]
+    },
+    {
+      "json_title": "hvac & powertrain coolingin",
+      "mid_cat_id": 4425,
+      "components": [
+        {
+          "json_title": "SE311A001 - Air conditioning compressor",
+          "leaf_name": "Air conditioning compressor",
+          "leaf_cat_id": 4530
+        },
+        {
+          "json_title": "SE313A001 - Coolant Plumbing & Hardware",
+          "leaf_name": "Coolant Plumbing & Hardware",
+          "leaf_cat_id": 7660
+        },
+        {
+          "json_title": "SE312A001 - Refrigerant Plumbing & Hardware",
+          "leaf_name": "Refrigerant Plumbing & Hardware",
+          "leaf_cat_id": 7661
+        }
+      ]
+    },
+    {
+      "json_title": "instrument panel & console",
+      "mid_cat_id": 4430,
+      "components": [
+        {
+          "json_title": "SE416A001 - Floor Console",
+          "leaf_name": "Floor Console",
+          "leaf_cat_id": 4498
+        },
+        {
+          "json_title": "SE412A001 - Instrument Panel Crossmember",
+          "leaf_name": "Instrument Panel Crossmember",
+          "leaf_cat_id": 4541
+        },
+        {
+          "json_title": "SE411A001 - Instrument Panel",
+          "leaf_name": "Instrument Panel",
+          "leaf_cat_id": 4538
+        },
+        {
+          "json_title": "SE414A001 - SteeringWheel",
+          "leaf_name": "SteeringWheel",
+          "leaf_cat_id": 4544
+        }
+      ]
+    },
+    {
+      "json_title": "interior acoustic syetem",
+      "mid_cat_id": 4434,
+      "components": [
+        {
+          "json_title": "SE451A001 - Sound Insulation、Heat Insulation",
+          "leaf_name": "Sound Insulation、Heat Insulation",
+          "leaf_cat_id": 4547
+        }
+      ]
+    },
+    {
+      "json_title": "interior lamp",
+      "mid_cat_id": 4441,
+      "components": [
+        {
+          "json_title": "SE440A001 - InteriorLamp",
+          "leaf_name": "InteriorLamp",
+          "leaf_cat_id": 4481
+        }
+      ]
+    },
+    {
+      "json_title": "interior trim",
+      "mid_cat_id": 4447,
+      "components": [
+        {
+          "json_title": "SE43BA001 - Body Structure Garnish Trim",
+          "leaf_name": "Body Structure Garnish Trim",
+          "leaf_cat_id": 7662
+        },
+        {
+          "json_title": "SE437A001 - Floor Trim",
+          "leaf_name": "Floor Trim",
+          "leaf_cat_id": 4514
+        },
+        {
+          "json_title": "SE436A001 - Roof Trim",
+          "leaf_name": "Roof Trim",
+          "leaf_cat_id": 4509
+        },
+        {
+          "json_title": "SE432A001 - SideClosureGarnishTrim",
+          "leaf_name": "SideClosureGarnishTrim",
+          "leaf_cat_id": 4486
+        }
+      ]
+    },
+    {
+      "json_title": "mounts",
+      "mid_cat_id": 4449,
+      "components": [
+        {
+          "json_title": "SE262A001 - Frame to Body Mounts",
+          "leaf_name": "Frame to Body Mounts",
+          "leaf_cat_id": 4520
+        }
+      ]
+    },
+    {
+      "json_title": "on vehicle attachments&tools",
+      "mid_cat_id": 4413,
+      "components": [
+        {
+          "json_title": "SE919A001 - Lubricant",
+          "leaf_name": "Lubricant",
+          "leaf_cat_id": 4526
+        },
+        {
+          "json_title": "SE917A001 - On Vehicle Attachments",
+          "leaf_name": "On Vehicle Attachments",
+          "leaf_cat_id": 4522
+        }
+      ]
+    },
+    {
+      "json_title": "pickup box",
+      "mid_cat_id": 4409,
+      "components": [
+        {
+          "json_title": "SE5A4A001 - Front Panel Assembly",
+          "leaf_name": "Front Panel Assembly",
+          "leaf_cat_id": 7663
+        },
+        {
+          "json_title": "SE5A1A001 - Platform Assembly",
+          "leaf_name": "Platform Assembly",
+          "leaf_cat_id": 7664
+        },
+        {
+          "json_title": "SE5A5A001 - Side Panel-Outer Assembly",
+          "leaf_name": "Side Panel-Outer Assembly",
+          "leaf_cat_id": 7665
+        }
+      ]
+    },
+    {
+      "json_title": "power & signaldistribution",
+      "mid_cat_id": 4426,
+      "components": [
+        {
+          "json_title": "SE869A001 - BatteryCable",
+          "leaf_name": "BatteryCable",
+          "leaf_cat_id": 4460
+        },
+        {
+          "json_title": "SE862A001 - BodyHarness",
+          "leaf_name": "BodyHarness",
+          "leaf_cat_id": 4546
+        },
+        {
+          "json_title": "SE865A001 - ChassisHarness",
+          "leaf_name": "ChassisHarness",
+          "leaf_cat_id": 4451
+        },
+        {
+          "json_title": "SE864A001 - DoorHarness",
+          "leaf_name": "DoorHarness",
+          "leaf_cat_id": 4452
+        },
+        {
+          "json_title": "SE861A001 - EngineCompartmentHarness",
+          "leaf_name": "EngineCompartmentHarness",
+          "leaf_cat_id": 4543
+        },
+        {
+          "json_title": "SE872A001 - High Voltage Harness",
+          "leaf_name": "High Voltage Harness",
+          "leaf_cat_id": 4462
+        },
+        {
+          "json_title": "SE863A001 - InstrumentPanelHarness",
+          "leaf_name": "InstrumentPanelHarness",
+          "leaf_cat_id": 4455
+        },
+        {
+          "json_title": "SE868A001 - PowerOutlet&CigaretteLighterApplication",
+          "leaf_name": "PowerOutlet&CigaretteLighterApplication",
+          "leaf_cat_id": 7666
+        }
+      ]
+    },
+    {
+      "json_title": "pipe",
+      "mid_cat_id": 4419,
+      "components": [
+        {
+          "json_title": "SE191A001 - EPT System",
+          "leaf_name": "EPT System",
+          "leaf_cat_id": 4537
+        },
+        {
+          "json_title": "SE191B001 - The internal parts of reduction",
+          "leaf_name": "The internal parts of reduction",
+          "leaf_cat_id": 4540
+        }
+      ]
+    },
+    {
+      "json_title": "power transmission",
+      "mid_cat_id": 4432,
+      "components": [
+        {
+          "json_title": "SE125A001 - REAR AXLE ASM-BRK",
+          "leaf_name": "REAR AXLE ASM-BRK",
+          "leaf_cat_id": 4467
+        }
+      ]
+    },
+    {
+      "json_title": "powertrain driver interface",
+      "mid_cat_id": 4427,
+      "components": [
+        {
+          "json_title": "SE151A001 - Accelerator Pedal",
+          "leaf_name": "Accelerator Pedal",
+          "leaf_cat_id": 4464
+        },
+        {
+          "json_title": "SE152A001 - Transmission Shift Actuation",
+          "leaf_name": "Transmission Shift Actuation",
+          "leaf_cat_id": 4465
+        }
+      ]
+    },
+    {
+      "json_title": "rear closure",
+      "mid_cat_id": 4435,
+      "components": [
+        {
+          "json_title": "SE562B001 - E/GATE Handle and Lock",
+          "leaf_name": "E/GATE Handle and Lock",
+          "leaf_cat_id": 7667
+        },
+        {
+          "json_title": "SE562A001 - Endgate",
+          "leaf_name": "Endgate",
+          "leaf_cat_id": 4468
+        }
+      ]
+    },
+    {
+      "json_title": "rear lamp",
+      "mid_cat_id": 4443,
+      "components": [
+        {
+          "json_title": "SE660A001 - RearLamp",
+          "leaf_name": "RearLamp",
+          "leaf_cat_id": 4474
+        }
+      ]
+    },
+    {
+      "json_title": "rear view mirror",
+      "mid_cat_id": 4445,
+      "components": [
+        {
+          "json_title": "SE580A001 - Rear View Mirror",
+          "leaf_name": "Rear View Mirror",
+          "leaf_cat_id": 7668
+        }
+      ]
+    },
+    {
+      "json_title": "safety belt",
+      "mid_cat_id": 4411,
+      "components": [
+        {
+          "json_title": "SE460A001 - Safety Belts",
+          "leaf_name": "Safety Belts",
+          "leaf_cat_id": 4480
+        }
+      ]
+    },
+    {
+      "json_title": "safety&avoidance",
+      "mid_cat_id": 4450,
+      "components": [
+        {
+          "json_title": "SE811A001 - AirBagControlUnit",
+          "leaf_name": "AirBagControlUnit",
+          "leaf_cat_id": 4476
+        },
+        {
+          "json_title": "SE812A001 - ParkDistanceControlSystem",
+          "leaf_name": "ParkDistanceControlSystem",
+          "leaf_cat_id": 4475
+        }
+      ]
+    },
+    {
+      "json_title": "seats",
+      "mid_cat_id": 4415,
+      "components": [
+        {
+          "json_title": "SE421C001 - Front Electirc Seat(left)",
+          "leaf_name": "Front Electirc Seat(left)",
+          "leaf_cat_id": 7669
+        },
+        {
+          "json_title": "SE421C002 - Front Electirc Seat(right)",
+          "leaf_name": "Front Electirc Seat(right)",
+          "leaf_cat_id": 7670
+        },
+        {
+          "json_title": "SE421B001 - Front Manual Seat（LH）",
+          "leaf_name": "Front Manual Seat（LH）",
+          "leaf_cat_id": 4485
+        },
+        {
+          "json_title": "SE421B002 - Front Manual Seat（RH）",
+          "leaf_name": "Front Manual Seat（RH）",
+          "leaf_cat_id": 4488
+        },
+        {
+          "json_title": "SE421D001 - Rear Row  Seat",
+          "leaf_name": "Rear Row  Seat",
+          "leaf_cat_id": 4493
+        },
+        {
+          "json_title": "SE421A001 - Seats Layout",
+          "leaf_name": "Seats Layout",
+          "leaf_cat_id": 4483
+        }
+      ]
+    },
+    {
+      "json_title": "side closures",
+      "mid_cat_id": 4420,
+      "components": [
+        {
+          "json_title": "SE551C001 - Front Door Electric Glass Regulator",
+          "leaf_name": "Front Door Electric Glass Regulator",
+          "leaf_cat_id": 4501
+        },
+        {
+          "json_title": "SE551B001 - Front Door Handle and Lock",
+          "leaf_name": "Front Door Handle and Lock",
+          "leaf_cat_id": 4499
+        },
+        {
+          "json_title": "SE551A001 - Front Side Closure",
+          "leaf_name": "Front Side Closure",
+          "leaf_cat_id": 4497
+        },
+        {
+          "json_title": "SE552A001 - Rear Side Closure",
+          "leaf_name": "Rear Side Closure",
+          "leaf_cat_id": 4504
+        },
+        {
+          "json_title": "SE557A001 - TNK FIL DR",
+          "leaf_name": "TNK FIL DR",
+          "leaf_cat_id": 4507
+        }
+      ]
+    },
+    {
+      "json_title": "steering",
+      "mid_cat_id": 4423,
+      "components": [
+        {
+          "json_title": "SE215A001 - Redirector(left hand）",
+          "leaf_name": "Redirector(left hand）",
+          "leaf_cat_id": 7671
+        },
+        {
+          "json_title": "SE214A001 - Steering Column",
+          "leaf_name": "Steering Column",
+          "leaf_cat_id": 4510
+        }
+      ]
+    },
+    {
+      "json_title": "suspension",
+      "mid_cat_id": 4428,
+      "components": [
+        {
+          "json_title": "SE224A001 - Front Shock Absorber",
+          "leaf_name": "Front Shock Absorber",
+          "leaf_cat_id": 4524
+        },
+        {
+          "json_title": "SE221A001 - Front Suspension",
+          "leaf_name": "Front Suspension",
+          "leaf_cat_id": 4518
+        },
+        {
+          "json_title": "SE222A001 - Rear Suspension",
+          "leaf_name": "Rear Suspension",
+          "leaf_cat_id": 4521
+        }
+      ]
+    },
+    {
+      "json_title": "tire,wheels,wheel trim",
+      "mid_cat_id": 4431,
+      "components": [
+        {
+          "json_title": "SE230A001 - Tire,Wheel,Trim",
+          "leaf_name": "Tire,Wheel,Trim",
+          "leaf_cat_id": 7672
+        }
+      ]
+    },
+    {
+      "json_title": "wiper & washer",
+      "mid_cat_id": 4437,
+      "components": [
+        {
+          "json_title": "SE682A001 - Front Washer",
+          "leaf_name": "Front Washer",
+          "leaf_cat_id": 4534
+        },
+        {
+          "json_title": "SE681A001 - Front Wiper",
+          "leaf_name": "Front Wiper",
+          "leaf_cat_id": 4531
+        }
+      ]
+    }
+  ]
+}

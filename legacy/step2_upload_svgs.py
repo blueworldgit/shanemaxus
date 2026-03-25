@@ -95,24 +95,39 @@ def run(serial, dry_run=False):
                 ok += 1
                 continue
 
+            svg_len  = len(svg_code)
+            # Scale timeout with payload size: 90s base + 1s per 10 KB of SVG
+            timeout  = 90 + svg_len // 10_000
+
             print(f'  ^ {leaf_name} (id={leaf_id})  parts={len(parts)}  svg={"yes" if svg_code else "no"}', end=' ', flush=True)
 
-            try:
-                r = requests.post(
-                    f'{CUSTOM_BASE}/set-component-meta',
-                    json=payload,
-                    timeout=40,
-                )
-                if r.status_code == 200:
-                    updated = r.json().get('updated', [])
-                    print(f'[OK] saved {updated}')
-                    ok += 1
-                else:
-                    print(f'[!!] {r.status_code}: {r.text[:150]}')
+            for attempt in range(1, 4):   # up to 3 attempts
+                try:
+                    r = requests.post(
+                        f'{CUSTOM_BASE}/set-component-meta',
+                        json=payload,
+                        timeout=timeout,
+                    )
+                    if r.status_code == 200:
+                        updated = r.json().get('updated', [])
+                        print(f'[OK] saved {updated}')
+                        ok += 1
+                        break
+                    else:
+                        print(f'[!!] {r.status_code}: {r.text[:150]}')
+                        failed += 1
+                        break   # HTTP errors won't improve with a retry
+                except requests.ConnectionError as e:
+                    if attempt < 3:
+                        print(f'[retry {attempt}]', end=' ', flush=True)
+                        time.sleep(5 * attempt)
+                    else:
+                        print(f'[!!] connection error after 3 attempts: {e}')
+                        failed += 1
+                except requests.RequestException as e:
+                    print(f'[!!] request error: {e}')
                     failed += 1
-            except requests.RequestException as e:
-                print(f'[!!] request error: {e}')
-                failed += 1
+                    break
 
             time.sleep(0.2)
 

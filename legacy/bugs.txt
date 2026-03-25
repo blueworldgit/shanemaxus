@@ -1,5 +1,761 @@
-Errors:
-  âœ-- Failed to create "Door  Wire Harnesses": {"code":"term_exists","message":"A term with the name provided already exists with this parent.","data":{"status":400,"resource_id":3647}}      
-  âœ-- Failed to create "Instrument Panel  Wire Harnesses": {"code":"term_exists","message":"A term with the name provided already exists with this parent.","data":{"status":400,"resource_id":3756}}
-  âœ-- Failed to create "Rear  Axle （Front drive vehicle）": {"code":"term_exists","message":"A term with the name provided already exists with this parent.","data":{"status":400,"resource_id":3721}}
-  âœ-- Failed to create "Rear Electric  Drive Axle": {"code":"term_exists","message":"A term with the name provided already exists with this parent.","data":{"status":400,"resource_id":3728}} 
+  = Front Door Electric Glass Regulator (id=4501) ├óΓé¼ΓÇ¥ already exists
+  = Front Door Handle and Lock (id=4499) ├óΓé¼ΓÇ¥ already exists
+  = Front Side Closure (id=4497) ├óΓé¼ΓÇ¥ already exists     
+  = Rear Side Closure (id=4504) ├óΓé¼ΓÇ¥ already exists      
+  = TNK FIL DR (id=4507) ├óΓé¼ΓÇ¥ already exists
+[Steering] (id=4423) ├óΓé¼ΓÇ¥ 2 component(s)
+  + [DRY RUN] Would create "Redirector(left hand∩╝ë" under "Steering" (id=4423)
+  = Steering Column (id=4510) ├óΓé¼ΓÇ¥ already exists        
+[Suspension] (id=4428) ├óΓé¼ΓÇ¥ 3 component(s)
+  = Front Shock Absorber (id=4524) ├óΓé¼ΓÇ¥ already exists   
+  = Front Suspension (id=4518) ├óΓé¼ΓÇ¥ already exists       
+  = Rear Suspension (id=4521) ├óΓé¼ΓÇ¥ already exists        
+[TireWheelsWheel Trim] (id=4431) ├óΓé¼ΓÇ¥ 1 component(s)     
+  + [DRY RUN] Would create "Tire,Wheel,Trim" under "TireWheelsWheel Trim" (id=4431)
+[Wiper and Washer] (id=4437) ├óΓé¼ΓÇ¥ 2 component(s)
+  = Front Washer (id=4534) ├óΓé¼ΓÇ¥ already exists
+  = Front Wiper (id=4531) ├óΓé¼ΓÇ¥ already exists
+
+=== Done [DRY RUN ├óΓé¼ΓÇ¥ no changes made] ===
+  Would create  : 20
+  Existing : 80
+  Errors   : 0
+  Map file : not written (dry run)
+(env) PS C:\wamp64\www\shanemaxus\legacy> python step1_create_leaf_cats.py lsfam120xna160733--dry-run
+âœ-- JSON not found: C:\wamp64\www\shanemaxus\legacy\epcdata_json\LSFAM120XNA160733--DRY-RUN.json
+(env) PS C:\wamp64\www\shanemaxus\legacy> python step1_create_leaf_cats.py lsfam120xna160733 --dry-run
+*** DRY RUN â€” no categories will be created ***
+
+=== STEP 1: Create leaf categories â€” LSFAM120XNA160733 [DRY RUN] ===
+  Mid-categories in JSON : 42
+  Components (leaf) total: 100
+
+Looking up VIN category (slug=lsfam120xna160733) ...
+  âœ“ VIN: LSFAM120XNA160733 (id=4408)
+
+Loading mid-categories under VIN ...
+  Found 42 mid-categories in WC
+
+[Airbag] (id=4436) â€” 1 component(s)
+  = AirBag (id=4508) â€” already exists
+[Antenna] (id=4439) â€” 1 component(s)
+  + [DRY RUN] Would create "Antenna" under "Antenna" (id=4439)
+[Body Interior and Exterior Electronics] (id=4446) â€” 1 component(s)
+  + [DRY RUN] Would create "BodyInterior&ExteriorElectronics" under "Body Interior and Exterior Electronics" (id=4446)    
+[Body Lower Exterior Trim] (id=4444) â€” 2 component(s)
+  = Assist Step (id=4516) â€” already exists
+  = Mud Guard (id=4545) â€” already exists
+[Body Lower Structure] (id=4438) â€” 1 component(s)
+  + [DRY RUN] Would create "Body Lower Structure" under "Body Lower Structure" (id=4438)
+[Body Upper Exterior Trim] (id=4410) â€” 2 component(s)
+  = Body Exterior Trim (id=4539) â€” already exists
+  + [DRY RUN] Would create "Exterior Emblem/Decal/Nameplate" under "Body Upper Exterior Trim" (id=4410)
+[Body Upper Structure] (id=4416) â€” 3 component(s)
+  = Inner Framing (id=4505) â€” already exists
+  = Outer Framing (id=4542) â€” already exists
+  = Roof Framing (id=4454) â€” already exists
+[Body Window] (id=4414) â€” 1 component(s)
+  = Window (id=4458) â€” already exists
+[Brakes] (id=4421) â€” 7 component(s)
+  = Brake Apply (id=4461) â€” already exists
+  = Brake Modulator (id=4463) â€” already exists
+  = Brake Pedal (id=4466) â€” already exists
+  = Brake Pipes (id=4469) â€” already exists
+  = Front Brakes (id=4453) â€” already exists
+  = Mechanical Parking Brakes (id=4457) â€” already exists   
+  = Rear Mechanical Brakes (id=4459) â€” already exists      
+[BumpersFascia and Grille] (id=4424) â€” 4 component(s)      
+  = Front Bumper (id=4470) â€” already exists
+  = Grille (id=4471) â€” already exists
+  = Rear Bumper (id=4473) â€” already exists
+  = Wheelhouse Liner (id=4478) â€” already exists
+[Charging and Energystorage] (id=4429) â€” 4 component(s)    
+  + [DRY RUN] Would create "Charging&EnergyStorage" under "Charging and Energystorage" (id=4429)
+  = Inside the power battery（CATL-88.55Kwh） (id=4479) â€” already exists
+  + [DRY RUN] Would create "Moudule-Electric Vehicle Control Unit&EVCC" under "Charging and Energystorage" (id=4429)      
+  = PowerInverter (id=4482) â€” already exists
+[Chassis Structure] (id=4433) â€” 1 component(s)
+  = Frame (id=4487) â€” already exists
+[Customer Switches] (id=4440) â€” 4 component(s)
+  = Accessory Switches (id=4496) â€” already exists
+  = Ignition Switch and Key (id=4492) â€” already exists
+  = Multi-Function Column Switch (id=4491) â€” already exists
+  = Window Lift Switch (id=4489) â€” already exists
+[Driver Information] (id=4442) â€” 1 component(s)
+  = Clusters (id=4495) â€” already exists
+[Entertainment] (id=4448) â€” 2 component(s)
+  = Player (id=4500) â€” already exists
+  = Speaker (id=4503) â€” already exists
+[Front Closures Front End Sheetmetal] (id=4412) â€” 3 component(s)
+  = Fenders (id=4513) â€” already exists
+  = Hood Lock (id=4511) â€” already exists
+  = Hood (id=4506) â€” already exists
+[Front Lamp] (id=4422) â€” 1 component(s)
+  = FrontLamp (id=4529) â€” already exists
+[Frontexterior Hvac Airflow] (id=4418) â€” 1 component(s)
+  = Front End Exterior Airflow (id=4517) â€” already exists
+[Frontinterior Hvac Airflow] (id=4417) â€” 2 component(s)
+  = Front Interior Control (id=4523) â€” already exists
+  = Front Interior HVAC Airflow (id=4525) â€” already exists
+[Hvac and Powertrain Coolingin] (id=4425) â€” 3 component(s) 
+  = Air conditioning compressor (id=4530) â€” already exists
+  + [DRY RUN] Would create "Coolant Plumbing & Hardware" under "Hvac and Powertrain Coolingin" (id=4425)
+  + [DRY RUN] Would create "Refrigerant Plumbing & Hardware" under "Hvac and Powertrain Coolingin" (id=4425)
+[Instrument Panel and Console] (id=4430) â€” 4 component(s)  
+  = Floor Console (id=4498) â€” already exists
+  = Instrument Panel Crossmember (id=4541) â€” already exists
+  = Instrument Panel (id=4538) â€” already exists
+  = SteeringWheel (id=4544) â€” already exists
+[Interior Acoustic Syetem] (id=4434) â€” 1 component(s)      
+  = Sound Insulation、Heat Insulation (id=4547) â€” already exists
+[Interior Lamp] (id=4441) â€” 1 component(s)
+  = InteriorLamp (id=4481) â€” already exists
+[Interior Trim] (id=4447) â€” 4 component(s)
+  + [DRY RUN] Would create "Body Structure Garnish Trim" under "Interior Trim" (id=4447)
+  = Floor Trim (id=4514) â€” already exists
+  = Roof Trim (id=4509) â€” already exists
+  = SideClosureGarnishTrim (id=4486) â€” already exists      
+[Mounts] (id=4449) â€” 1 component(s)
+  = Frame to Body Mounts (id=4520) â€” already exists
+[On Vehicle AttachmentsandTools] (id=4413) â€” 2 component(s)
+  = Lubricant (id=4526) â€” already exists
+  = On Vehicle Attachments (id=4522) â€” already exists
+[Pickup Box] (id=4409) â€” 3 component(s)
+  + [DRY RUN] Would create "Front Panel Assembly" under "Pickup Box" (id=4409)
+  + [DRY RUN] Would create "Platform Assembly" under "Pickup Box" (id=4409)
+  + [DRY RUN] Would create "Side Panel-Outer Assembly" under "Pickup Box" (id=4409)
+[Power and Signaldistribution] (id=4426) â€” 8 component(s)  
+  = BatteryCable (id=4460) â€” already exists
+  = BodyHarness (id=4546) â€” already exists
+  = ChassisHarness (id=4451) â€” already exists
+  = DoorHarness (id=4452) â€” already exists
+  = EngineCompartmentHarness (id=4543) â€” already exists    
+  = High Voltage Harness (id=4462) â€” already exists        
+  = InstrumentPanelHarness (id=4455) â€” already exists      
+  + [DRY RUN] Would create "PowerOutlet&CigaretteLighterApplication" under "Power and Signaldistribution" (id=4426)       
+[Pipe] (id=4419) â€” 2 component(s)
+  = EPT System (id=4537) â€” already exists
+  = The internal parts of reduction (id=4540) â€” already exists
+[Power Transmission] (id=4432) â€” 1 component(s)
+  = REAR AXLE ASM-BRK (id=4467) â€” already exists
+[Powertrain Driver Interface] (id=4427) â€” 2 component(s)
+  = Accelerator Pedal (id=4464) â€” already exists
+  = Transmission Shift Actuation (id=4465) â€” already exists
+[Rear Closure] (id=4435) â€” 2 component(s)
+  + [DRY RUN] Would create "E/GATE Handle and Lock" under "Rear Closure" (id=4435)
+  = Endgate (id=4468) â€” already exists
+[Rear Lamp] (id=4443) â€” 1 component(s)
+  = RearLamp (id=4474) â€” already exists
+[Rear View Mirror] (id=4445) â€” 1 component(s)
+  + [DRY RUN] Would create "Rear View Mirror" under "Rear View Mirror" (id=4445)
+[Safety Belt] (id=4411) â€” 1 component(s)
+  = Safety Belts (id=4480) â€” already exists
+[SafetyandAvoidance] (id=4450) â€” 2 component(s)
+  = AirBagControlUnit (id=4476) â€” already exists
+  = ParkDistanceControlSystem (id=4475) â€” already exists
+[Seats] (id=4415) â€” 6 component(s)
+  + [DRY RUN] Would create "Front Electirc Seat(left)" under "Seats" (id=4415)
+  + [DRY RUN] Would create "Front Electirc Seat(right)" under "Seats" (id=4415)
+  = Front Manual Seat（LH） (id=4485) â€” already exists     
+  = Front Manual Seat（RH） (id=4488) â€” already exists     
+  + [DRY RUN] Would create "Rear Row  Seat" under "Seats" (id=4415)
+  = Seats Layout (id=4483) â€” already exists
+[Side Closures] (id=4420) â€” 5 component(s)
+  = Front Door Electric Glass Regulator (id=4501) â€” already exists
+  = Front Door Handle and Lock (id=4499) â€” already exists
+  = Front Side Closure (id=4497) â€” already exists
+  = Rear Side Closure (id=4504) â€” already exists
+  = TNK FIL DR (id=4507) â€” already exists
+[Steering] (id=4423) â€” 2 component(s)
+  + [DRY RUN] Would create "Redirector(left hand）" under "Steering" (id=4423)
+  = Steering Column (id=4510) â€” already exists
+[Suspension] (id=4428) â€” 3 component(s)
+  = Front Shock Absorber (id=4524) â€” already exists
+  = Front Suspension (id=4518) â€” already exists
+  = Rear Suspension (id=4521) â€” already exists
+[TireWheelsWheel Trim] (id=4431) â€” 1 component(s)
+  + [DRY RUN] Would create "Tire,Wheel,Trim" under "TireWheelsWheel Trim" (id=4431)
+[Wiper and Washer] (id=4437) â€” 2 component(s)
+  = Front Washer (id=4534) â€” already exists
+  = Front Wiper (id=4531) â€” already exists
+
+=== Done [DRY RUN â€” no changes made] ===
+  Would create  : 20
+  Existing : 80
+  Errors   : 0
+  Map file : not written (dry run)
+(env) PS C:\wamp64\www\shanemaxus\legacy> python run_steps2_3.py lsfam120xna160733
+
+Serial : LSFAM120XNA160733
+Will run: step2_upload_svgs.py  →  step3_attach_products.py  
+
+Press Enter to start, or Ctrl+C to cancel:
+
+============================================================ 
+  Starting STEP 2 – Upload SVGs
+============================================================ 
+
+[!!] Cat map not found: C:\wamp64\www\shanemaxus\legacy\LSFAM120XNA160733_cat_map.json
+  Run step1_create_leaf_cats.py first.
+
+[ABORT] STEP 2 – Upload SVGs failed with exit code 1. Step 3 will not run.
+(env) PS C:\wamp64\www\shanemaxus\legacy> & ..\env\Scripts\Activate.ps1 ; python run_steps2_3.py lsfam120xna160733        
+
+Serial : LSFAM120XNA160733
+Will run: step2_upload_svgs.py  →  step3_attach_products.py  
+
+Press Enter to start, or Ctrl+C to cancel: Enter
+
+============================================================ 
+  Starting STEP 2 – Upload SVGs
+============================================================ 
+
+[!!] Cat map not found: C:\wamp64\www\shanemaxus\legacy\LSFAM120XNA160733_cat_map.json
+  Run step1_create_leaf_cats.py first.
+
+[ABORT] STEP 2 – Upload SVGs failed with exit code 1. Step 3 will not run.
+(env) PS C:\wamp64\www\shanemaxus\legacy> python step1_create_leaf_cats.py lsfam120xna160733
+
+=== STEP 1: Create leaf categories â€” LSFAM120XNA160733 === 
+  Mid-categories in JSON : 42
+  Components (leaf) total: 100
+
+Looking up VIN category (slug=lsfam120xna160733) ...
+  âœ“ VIN: LSFAM120XNA160733 (id=4408)
+
+Loading mid-categories under VIN ...
+  Found 42 mid-categories in WC
+
+[Airbag] (id=4436) â€” 1 component(s)
+  = AirBag (id=4508) â€” already exists
+[Antenna] (id=4439) â€” 1 component(s)
+  + Creating "Antenna" under mid id=4439 ... id=7654
+[Body Interior and Exterior Electronics] (id=4446) â€” 1 component(s)
+  + Creating "BodyInterior&ExteriorElectronics" under mid id=4446 ... id=7655
+[Body Lower Exterior Trim] (id=4444) â€” 2 component(s)
+  = Assist Step (id=4516) â€” already exists
+  = Mud Guard (id=4545) â€” already exists
+[Body Lower Structure] (id=4438) â€” 1 component(s)
+  + Creating "Body Lower Structure" under mid id=4438 ... id=7656
+[Body Upper Exterior Trim] (id=4410) â€” 2 component(s)
+  = Body Exterior Trim (id=4539) â€” already exists
+  + Creating "Exterior Emblem/Decal/Nameplate" under mid id=4410 ... id=7657
+[Body Upper Structure] (id=4416) â€” 3 component(s)
+  = Inner Framing (id=4505) â€” already exists
+  = Outer Framing (id=4542) â€” already exists
+  = Roof Framing (id=4454) â€” already exists
+[Body Window] (id=4414) â€” 1 component(s)
+  = Window (id=4458) â€” already exists
+[Brakes] (id=4421) â€” 7 component(s)
+  = Brake Apply (id=4461) â€” already exists
+  = Brake Modulator (id=4463) â€” already exists
+  = Brake Pedal (id=4466) â€” already exists
+  = Brake Pipes (id=4469) â€” already exists
+  = Front Brakes (id=4453) â€” already exists
+  = Mechanical Parking Brakes (id=4457) â€” already exists   
+  = Rear Mechanical Brakes (id=4459) â€” already exists      
+[BumpersFascia and Grille] (id=4424) â€” 4 component(s)      
+  = Front Bumper (id=4470) â€” already exists
+  = Grille (id=4471) â€” already exists
+  = Rear Bumper (id=4473) â€” already exists
+  = Wheelhouse Liner (id=4478) â€” already exists
+[Charging and Energystorage] (id=4429) â€” 4 component(s)    
+  + Creating "Charging&EnergyStorage" under mid id=4429 ... id=7658
+  = Inside the power battery（CATL-88.55Kwh） (id=4479) â€” already exists
+  + Creating "Moudule-Electric Vehicle Control Unit&EVCC" under mid id=4429 ... id=7659
+  = PowerInverter (id=4482) â€” already exists
+[Chassis Structure] (id=4433) â€” 1 component(s)
+  = Frame (id=4487) â€” already exists
+[Customer Switches] (id=4440) â€” 4 component(s)
+  = Accessory Switches (id=4496) â€” already exists
+  = Ignition Switch and Key (id=4492) â€” already exists
+  = Multi-Function Column Switch (id=4491) â€” already exists
+  = Window Lift Switch (id=4489) â€” already exists
+[Driver Information] (id=4442) â€” 1 component(s)
+  = Clusters (id=4495) â€” already exists
+[Entertainment] (id=4448) â€” 2 component(s)
+  = Player (id=4500) â€” already exists
+  = Speaker (id=4503) â€” already exists
+[Front Closures Front End Sheetmetal] (id=4412) â€” 3 component(s)
+  = Fenders (id=4513) â€” already exists
+  = Hood Lock (id=4511) â€” already exists
+  = Hood (id=4506) â€” already exists
+[Front Lamp] (id=4422) â€” 1 component(s)
+  = FrontLamp (id=4529) â€” already exists
+[Frontexterior Hvac Airflow] (id=4418) â€” 1 component(s)
+  = Front End Exterior Airflow (id=4517) â€” already exists
+[Frontinterior Hvac Airflow] (id=4417) â€” 2 component(s)
+  = Front Interior Control (id=4523) â€” already exists
+  = Front Interior HVAC Airflow (id=4525) â€” already exists
+[Hvac and Powertrain Coolingin] (id=4425) â€” 3 component(s) 
+  = Air conditioning compressor (id=4530) â€” already exists
+  + Creating "Coolant Plumbing & Hardware" under mid id=4425 ... id=7660
+  + Creating "Refrigerant Plumbing & Hardware" under mid id=4425 ... id=7661
+[Instrument Panel and Console] (id=4430) â€” 4 component(s)
+  = Floor Console (id=4498) â€” already exists
+  = Instrument Panel Crossmember (id=4541) â€” already exists
+  = Instrument Panel (id=4538) â€” already exists
+  = SteeringWheel (id=4544) â€” already exists
+[Interior Acoustic Syetem] (id=4434) â€” 1 component(s)      
+  = Sound Insulation、Heat Insulation (id=4547) â€” already exists
+[Interior Lamp] (id=4441) â€” 1 component(s)
+  = InteriorLamp (id=4481) â€” already exists
+[Interior Trim] (id=4447) â€” 4 component(s)
+  + Creating "Body Structure Garnish Trim" under mid id=4447 ... id=7662
+  = Floor Trim (id=4514) â€” already exists
+  = Roof Trim (id=4509) â€” already exists
+  = SideClosureGarnishTrim (id=4486) â€” already exists      
+[Mounts] (id=4449) â€” 1 component(s)
+  = Frame to Body Mounts (id=4520) â€” already exists
+[On Vehicle AttachmentsandTools] (id=4413) â€” 2 component(s)
+  = Lubricant (id=4526) â€” already exists
+  = On Vehicle Attachments (id=4522) â€” already exists
+[Pickup Box] (id=4409) â€” 3 component(s)
+  + Creating "Front Panel Assembly" under mid id=4409 ... id=7663
+  + Creating "Platform Assembly" under mid id=4409 ... id=7664
+  + Creating "Side Panel-Outer Assembly" under mid id=4409 ... id=7665
+[Power and Signaldistribution] (id=4426) â€” 8 component(s)
+  = BatteryCable (id=4460) â€” already exists
+  = BodyHarness (id=4546) â€” already exists
+  = ChassisHarness (id=4451) â€” already exists
+  = DoorHarness (id=4452) â€” already exists
+  = EngineCompartmentHarness (id=4543) â€” already exists    
+  = High Voltage Harness (id=4462) â€” already exists        
+  = InstrumentPanelHarness (id=4455) â€” already exists      
+  + Creating "PowerOutlet&CigaretteLighterApplication" under mid id=4426 ... id=7666
+[Pipe] (id=4419) â€” 2 component(s)
+  = EPT System (id=4537) â€” already exists
+  = The internal parts of reduction (id=4540) â€” already exists
+[Power Transmission] (id=4432) â€” 1 component(s)
+  = REAR AXLE ASM-BRK (id=4467) â€” already exists
+[Powertrain Driver Interface] (id=4427) â€” 2 component(s)
+  = Accelerator Pedal (id=4464) â€” already exists
+  = Transmission Shift Actuation (id=4465) â€” already exists
+[Rear Closure] (id=4435) â€” 2 component(s)
+  + Creating "E/GATE Handle and Lock" under mid id=4435 ... id=7667
+  = Endgate (id=4468) â€” already exists
+[Rear Lamp] (id=4443) â€” 1 component(s)
+  = RearLamp (id=4474) â€” already exists
+[Rear View Mirror] (id=4445) â€” 1 component(s)
+  + Creating "Rear View Mirror" under mid id=4445 ... id=7668
+[Safety Belt] (id=4411) â€” 1 component(s)
+  = Safety Belts (id=4480) â€” already exists
+[SafetyandAvoidance] (id=4450) â€” 2 component(s)
+  = AirBagControlUnit (id=4476) â€” already exists
+  = ParkDistanceControlSystem (id=4475) â€” already exists
+[Seats] (id=4415) â€” 6 component(s)
+  + Creating "Front Electirc Seat(left)" under mid id=4415 ... id=7669
+  + Creating "Front Electirc Seat(right)" under mid id=4415 ... id=7670
+  = Front Manual Seat（LH） (id=4485) â€” already exists
+  = Front Manual Seat（RH） (id=4488) â€” already exists
+  + Creating "Rear Row  Seat" under mid id=4415 ... already exists (id=4493)
+  = Seats Layout (id=4483) â€” already exists
+[Side Closures] (id=4420) â€” 5 component(s)
+  = Front Door Electric Glass Regulator (id=4501) â€” already exists
+  = Front Door Handle and Lock (id=4499) â€” already exists
+  = Front Side Closure (id=4497) â€” already exists
+  = Rear Side Closure (id=4504) â€” already exists
+  = TNK FIL DR (id=4507) â€” already exists
+[Steering] (id=4423) â€” 2 component(s)
+  + Creating "Redirector(left hand）" under mid id=4423 ... id=7671
+  = Steering Column (id=4510) â€” already exists
+[Suspension] (id=4428) â€” 3 component(s)
+  = Front Shock Absorber (id=4524) â€” already exists
+  = Front Suspension (id=4518) â€” already exists
+  = Rear Suspension (id=4521) â€” already exists
+[TireWheelsWheel Trim] (id=4431) â€” 1 component(s)
+  + Creating "Tire,Wheel,Trim" under mid id=4431 ... id=7672
+[Wiper and Washer] (id=4437) â€” 2 component(s)
+  = Front Washer (id=4534) â€” already exists
+  = Front Wiper (id=4531) â€” already exists
+
+=== Done ===
+  Created  : 20
+  Existing : 80
+  Errors   : 0
+  Map saved: C:\wamp64\www\shanemaxus\legacy\LSFAM120XNA160733_cat_map.json
+(env) PS C:\wamp64\www\shanemaxus\legacy> python run_steps2_3.py lsfam120xna160733 --dry-run
+
+Serial : LSFAM120XNA160733 [DRY RUN]
+Will run: step2_upload_svgs.py  →  step3_attach_products.py  
+
+Press Enter to start, or Ctrl+C to cancel:
+
+============================================================ 
+  Starting STEP 2 – Upload SVGs
+============================================================ 
+
+
+=== STEP 2: Upload SVGs + parts JSON -- LSFAM120XNA160733 [DRY RUN] ===
+
+[airbag]
+  ^ [DRY RUN] Would upload: AirBag (id=4508)  parts=5  svg=yes
+[antenna]
+  ^ [DRY RUN] Would upload: Antenna (id=7654)  parts=3  svg=yes
+[body interior & exterior electronics]
+  ^ [DRY RUN] Would upload: BodyInterior&ExteriorElectronics (id=7655)  parts=11  svg=yes
+[body lower exterior trim]
+  ^ [DRY RUN] Would upload: Assist Step (id=4516)  parts=7  svg=yes
+  ^ [DRY RUN] Would upload: Mud Guard (id=4545)  parts=4  svg=yes
+[body lower structure]
+  ^ [DRY RUN] Would upload: Body Lower Structure (id=7656)  parts=38  svg=yes
+[body upper exterior trim]
+  ^ [DRY RUN] Would upload: Body Exterior Trim (id=4539)  parts=11  svg=yes
+  ^ [DRY RUN] Would upload: Exterior Emblem/Decal/Nameplate (id=7657)  parts=3  svg=yes
+[body upper structure]
+  ^ [DRY RUN] Would upload: Inner Framing (id=4505)  parts=8  svg=yes
+  ^ [DRY RUN] Would upload: Outer Framing (id=4542)  parts=18  svg=yes
+  ^ [DRY RUN] Would upload: Roof Framing (id=4454)  parts=6  svg=yes
+[body window]
+  ^ [DRY RUN] Would upload: Window (id=4458)  parts=10  svg=yes
+[brakes]
+  ^ [DRY RUN] Would upload: Brake Apply (id=4461)  parts=15  svg=yes
+  ^ [DRY RUN] Would upload: Brake Modulator (id=4463)  parts=17  svg=yes
+  ^ [DRY RUN] Would upload: Brake Pedal (id=4466)  parts=6  svg=yes
+  ^ [DRY RUN] Would upload: Brake Pipes (id=4469)  parts=32  svg=yes
+  ^ [DRY RUN] Would upload: Front Brakes (id=4453)  parts=29  svg=yes
+  ^ [DRY RUN] Would upload: Mechanical Parking Brakes (id=4457)  parts=14  svg=yes
+  ^ [DRY RUN] Would upload: Rear Mechanical Brakes (id=4459)  parts=14  svg=yes
+[bumpers,fascia & grille]
+  ^ [DRY RUN] Would upload: Front Bumper (id=4470)  parts=14  svg=yes
+  ^ [DRY RUN] Would upload: Grille (id=4471)  parts=12  svg=yes
+  ^ [DRY RUN] Would upload: Rear Bumper (id=4473)  parts=16  svg=yes
+  ^ [DRY RUN] Would upload: Wheelhouse Liner (id=4478)  parts=12  svg=yes
+[charging & energystorage]
+  ^ [DRY RUN] Would upload: Charging&EnergyStorage (id=7658)  parts=4  svg=yes
+  ^ [DRY RUN] Would upload: Inside the power battery（CATL-88.55Kwh） (id=4479)  parts=18  svg=yes
+  ^ [DRY RUN] Would upload: Moudule-Electric Vehicle Control Unit&EVCC (id=7659)  parts=9  svg=yes
+  ^ [DRY RUN] Would upload: PowerInverter (id=4482)  parts=2  svg=yes
+[chassis structure]
+  ^ [DRY RUN] Would upload: Frame (id=4487)  parts=23  svg=yes
+[customer switches]
+  ^ [DRY RUN] Would upload: Accessory Switches (id=4496)  parts=5  svg=yes
+  ^ [DRY RUN] Would upload: Ignition Switch and Key (id=4492)  parts=6  svg=yes
+  ^ [DRY RUN] Would upload: Multi-Function Column Switch (id=4491)  parts=7  svg=yes
+  ^ [DRY RUN] Would upload: Window Lift Switch (id=4489)  parts=2  svg=yes
+[driver information]
+  ^ [DRY RUN] Would upload: Clusters (id=4495)  parts=5  svg=yes
+[entertainment]
+  ^ [DRY RUN] Would upload: Player (id=4500)  parts=6  svg=yes
+  ^ [DRY RUN] Would upload: Speaker (id=4503)  parts=6  svg=yes
+[front closures front end sheetmetal]
+  ^ [DRY RUN] Would upload: Fenders (id=4513)  parts=9  svg=yes
+  ^ [DRY RUN] Would upload: Hood Lock (id=4511)  parts=3  svg=yes
+  ^ [DRY RUN] Would upload: Hood (id=4506)  parts=15  svg=yes
+[front lamp]
+  ^ [DRY RUN] Would upload: FrontLamp (id=4529)  parts=9  svg=yes
+[frontexterior hvac airflow]
+  ^ [DRY RUN] Would upload: Front End Exterior Airflow (id=4517)  parts=25  svg=yes
+[frontinterior hvac airflow]
+  ^ [DRY RUN] Would upload: Front Interior Control (id=4523)  parts=3  svg=yes
+  ^ [DRY RUN] Would upload: Front Interior HVAC Airflow (id=4525)  parts=19  svg=yes
+[hvac & powertrain coolingin]
+  ^ [DRY RUN] Would upload: Air conditioning compressor (id=4530)  parts=9  svg=yes
+  ^ [DRY RUN] Would upload: Coolant Plumbing & Hardware (id=7660)  parts=17  svg=yes
+  ^ [DRY RUN] Would upload: Refrigerant Plumbing & Hardware (id=7661)  parts=16  svg=yes
+[instrument panel & console]
+  ^ [DRY RUN] Would upload: Floor Console (id=4498)  parts=35  svg=yes
+  ^ [DRY RUN] Would upload: Instrument Panel Crossmember (id=4541)  parts=5  svg=yes
+  ^ [DRY RUN] Would upload: Instrument Panel (id=4538)  parts=37  svg=yes
+  ^ [DRY RUN] Would upload: SteeringWheel (id=4544)  parts=4  svg=yes
+[interior acoustic syetem]
+  ^ [DRY RUN] Would upload: Sound Insulation、Heat Insulation (id=4547)  parts=8  svg=yes
+[interior lamp]
+  ^ [DRY RUN] Would upload: InteriorLamp (id=4481)  parts=6  svg=yes
+[interior trim]
+  ^ [DRY RUN] Would upload: Body Structure Garnish Trim (id=7662)  parts=42  svg=yes
+  ^ [DRY RUN] Would upload: Floor Trim (id=4514)  parts=12  svg=yes
+  ^ [DRY RUN] Would upload: Roof Trim (id=4509)  parts=10  svg=yes
+  ^ [DRY RUN] Would upload: SideClosureGarnishTrim (id=4486)  parts=47  svg=yes
+[mounts]
+  ^ [DRY RUN] Would upload: Frame to Body Mounts (id=4520)  parts=22  svg=yes
+[on vehicle attachments&tools]
+  ^ [DRY RUN] Would upload: Lubricant (id=4526)  parts=5  svg=yes
+  ^ [DRY RUN] Would upload: On Vehicle Attachments (id=4522)  parts=7  svg=yes
+[pickup box]
+  ^ [DRY RUN] Would upload: Front Panel Assembly (id=7663)  parts=3  svg=yes
+  ^ [DRY RUN] Would upload: Platform Assembly (id=7664)  parts=5  svg=yes
+  ^ [DRY RUN] Would upload: Side Panel-Outer Assembly (id=7665)  parts=17  svg=yes
+[power & signaldistribution]
+  ^ [DRY RUN] Would upload: BatteryCable (id=4460)  parts=5  svg=yes
+  ^ [DRY RUN] Would upload: BodyHarness (id=4546)  parts=3  svg=yes
+  ^ [DRY RUN] Would upload: ChassisHarness (id=4451)  parts=8  svg=yes
+  ^ [DRY RUN] Would upload: DoorHarness (id=4452)  parts=4  svg=yes
+  ^ [DRY RUN] Would upload: EngineCompartmentHarness (id=4543)  parts=6  svg=yes
+  ^ [DRY RUN] Would upload: High Voltage Harness (id=4462)  parts=20  svg=yes
+  ^ [DRY RUN] Would upload: InstrumentPanelHarness (id=4455)  parts=4  svg=yes
+  ^ [DRY RUN] Would upload: PowerOutlet&CigaretteLighterApplication (id=7666)  parts=3  svg=yes
+[pipe]
+  ^ [DRY RUN] Would upload: EPT System (id=4537)  parts=30  svg=yes
+  ^ [DRY RUN] Would upload: The internal parts of reduction (id=4540)  parts=34  svg=yes
+[power transmission]
+  ^ [DRY RUN] Would upload: REAR AXLE ASM-BRK (id=4467)  parts=25  svg=yes
+[powertrain driver interface]
+  ^ [DRY RUN] Would upload: Accelerator Pedal (id=4464)  parts=2  svg=yes
+  ^ [DRY RUN] Would upload: Transmission Shift Actuation (id=4465)  parts=4  svg=yes
+[rear closure]
+  ^ [DRY RUN] Would upload: E/GATE Handle and Lock (id=7667)  parts=10  svg=yes
+  ^ [DRY RUN] Would upload: Endgate (id=4468)  parts=17  svg=yes
+[rear lamp]
+  ^ [DRY RUN] Would upload: RearLamp (id=4474)  parts=12  svg=yes
+[rear view mirror]
+  ^ [DRY RUN] Would upload: Rear View Mirror (id=7668)  parts=4  svg=yes
+[safety belt]
+  ^ [DRY RUN] Would upload: Safety Belts (id=4480)  parts=6  svg=yes
+[safety&avoidance]
+  ^ [DRY RUN] Would upload: AirBagControlUnit (id=4476)  parts=6  svg=yes
+  ^ [DRY RUN] Would upload: ParkDistanceControlSystem (id=4475)  parts=8  svg=yes
+[seats]
+  ^ [DRY RUN] Would upload: Front Electirc Seat(left) (id=7669)  parts=17  svg=yes
+  ^ [DRY RUN] Would upload: Front Electirc Seat(right) (id=7670)  parts=17  svg=yes
+  ^ [DRY RUN] Would upload: Front Manual Seat（LH） (id=4485)  parts=6  svg=yes
+  ^ [DRY RUN] Would upload: Front Manual Seat（RH） (id=4488)  parts=5  svg=yes
+  ^ [DRY RUN] Would upload: Rear Row  Seat (id=4493)  parts=15  svg=yes
+  ^ [DRY RUN] Would upload: Seats Layout (id=4483)  parts=3  svg=yes
+[side closures]
+  ^ [DRY RUN] Would upload: Front Door Electric Glass Regulator (id=4501)  parts=18  svg=yes
+  ^ [DRY RUN] Would upload: Front Door Handle and Lock (id=4499)  parts=29  svg=yes
+  ^ [DRY RUN] Would upload: Front Side Closure (id=4497)  parts=16  svg=yes
+  ^ [DRY RUN] Would upload: Rear Side Closure (id=4504)  parts=16  svg=yes
+  ^ [DRY RUN] Would upload: TNK FIL DR (id=4507)  parts=8  svg=yes
+[steering]
+  ^ [DRY RUN] Would upload: Redirector(left hand） (id=7671)  parts=11  svg=yes
+  ^ [DRY RUN] Would upload: Steering Column (id=4510)  parts=9  svg=yes
+[suspension]
+  ^ [DRY RUN] Would upload: Front Shock Absorber (id=4524)  parts=15  svg=yes
+  ^ [DRY RUN] Would upload: Front Suspension (id=4518)  parts=30  svg=yes
+  ^ [DRY RUN] Would upload: Rear Suspension (id=4521)  parts=25  svg=yes
+[tire,wheels,wheel trim]
+  ^ [DRY RUN] Would upload: Tire,Wheel,Trim (id=7672)  parts=17  svg=yes
+[wiper & washer]
+  ^ [DRY RUN] Would upload: Front Washer (id=4534)  parts=13  svg=yes
+  ^ [DRY RUN] Would upload: Front Wiper (id=4531)  parts=13  svg=yes
+
+=== Done [DRY RUN] ===
+  Would upload : 100
+  Skipped  : 0
+  Failed   : 0
+
+[OK] STEP 2 – Upload SVGs completed successfully.
+
+============================================================ 
+  Starting STEP 3 – Attach Products
+============================================================ 
+
+
+=== STEP 3: Attach products to leaf categories -- LSFAM120XNA160733 [DRY RUN] ===
+
+  Fetching 1043 unique SKUs (bulk)...
+    Bulk request 1/3 (500 SKUs)...
+    Bulk request 2/3 (500 SKUs)...
+    Bulk request 3/3 (43 SKUs)...
+  Fetching current categories for 1043 products (batched)...
+    43/1043 products fetched...
+    143/1043 products fetched...
+    243/1043 products fetched...
+    343/1043 products fetched...
+    443/1043 products fetched...
+    543/1043 products fetched...
+    643/1043 products fetched...
+    743/1043 products fetched...
+    843/1043 products fetched...
+    943/1043 products fetched...
+Traceback (most recent call last):
+  File "C:\wamp64\www\shanemaxus\legacy\step3_attach_products.py", line 349, in <module>
+    run(args.serial, dry_run=args.dry_run)
+  File "C:\wamp64\www\shanemaxus\legacy\step3_attach_products.py", line 219, in run
+    product_cat_cache = batch_fetch_categories(found_products)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\wamp64\www\shanemaxus\legacy\step3_attach_products.py", line 114, in batch_fetch_categories
+    for fut in as_completed(futures):
+  File "C:\Python312\Lib\concurrent\futures\_base.py", line 243, in as_completed
+    waiter.event.wait(wait_timeout)
+  File "C:\Python312\Lib\threading.py", line 634, in wait    
+    signaled = self._cond.wait(timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\threading.py", line 334, in wait    
+    waiter.acquire()
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "C:\wamp64\www\shanemaxus\legacy\run_steps2_3.py", line 58, in <module>
+    main()
+  File "C:\wamp64\www\shanemaxus\legacy\run_steps2_3.py", line 50, in main
+    run_step('STEP 3 – Attach Products', 'step3_attach_products.py', serial, args.dry_run)
+  File "C:\wamp64\www\shanemaxus\legacy\run_steps2_3.py", line 28, in run_step
+    result = subprocess.run(cmd, cwd=SCRIPT_DIR)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\subprocess.py", line 550, in run    
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\subprocess.py", line 1201, in communicate
+    self.wait()
+  File "C:\Python312\Lib\subprocess.py", line 1264, in wait  
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\subprocess.py", line 1588, in _wait 
+    result = _winapi.WaitForSingleObject(self._handle,       
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^       
+KeyboardInterrupt
+(env) PS C:\wamp64\www\shanemaxus\legacy> python run_steps2_3.py lsfam120xna160733          
+
+Serial : LSFAM120XNA160733
+Will run: step2_upload_svgs.py  →  step3_attach_products.py  
+
+Press Enter to start, or Ctrl+C to cancel:
+
+============================================================ 
+  Starting STEP 2 – Upload SVGs
+============================================================ 
+
+
+=== STEP 2: Upload SVGs + parts JSON -- LSFAM120XNA160733 ===
+
+[airbag]
+  ^ AirBag (id=4508)  parts=5  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[antenna]
+  ^ Antenna (id=7654)  parts=3  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[body interior & exterior electronics]
+  ^ BodyInterior&ExteriorElectronics (id=7655)  parts=11  svg=yes[OK] saved ['component_svg_code', 'component_parts_json']
+[body lower exterior trim]
+  ^ Assist Step (id=4516)  parts=7  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Mud Guard (id=4545)  parts=4  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[body lower structure]
+  ^ Body Lower Structure (id=7656)  parts=38  svg=yes [OK] saved [ved ['component_svg_code', 'component_parts_json']
+[body upper exterior trim]
+  ^ Body Exterior Trim (id=4539)  parts=11  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Exterior Emblem/Decal/Nameplate (id=7657)  parts=3  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[body upper structure]
+  ^ Inner Framing (id=4505)  parts=8  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Outer Framing (id=4542)  parts=18  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Roof Framing (id=4454)  parts=6  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[body window]
+  ^ Window (id=4458)  parts=10  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[brakes]
+  ^ Brake Apply (id=4461)  parts=15  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Brake Modulator (id=4463)  parts=17  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Brake Pedal (id=4466)  parts=6  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Brake Pipes (id=4469)  parts=32  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Front Brakes (id=4453)  parts=29  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Mechanical Parking Brakes (id=4457)  parts=14  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Rear Mechanical Brakes (id=4459)  parts=14  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[bumpers,fascia & grille]
+  ^ Front Bumper (id=4470)  parts=14  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Grille (id=4471)  parts=12  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Rear Bumper (id=4473)  parts=16  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Wheelhouse Liner (id=4478)  parts=12  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[charging & energystorage]
+  ^ Charging&EnergyStorage (id=7658)  parts=4  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Inside the power battery（CATL-88.55Kwh） (id=4479)  parts=18  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Moudule-Electric Vehicle Control Unit&EVCC (id=7659)  parts=9  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ PowerInverter (id=4482)  parts=2  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[chassis structure]
+  ^ Frame (id=4487)  parts=23  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[customer switches]
+  ^ Accessory Switches (id=4496)  parts=5  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Ignition Switch and Key (id=4492)  parts=6  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Multi-Function Column Switch (id=4491)  parts=7  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Window Lift Switch (id=4489)  parts=2  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[driver information]
+  ^ Clusters (id=4495)  parts=5  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[entertainment]
+  ^ Player (id=4500)  parts=6  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Speaker (id=4503)  parts=6  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[front closures front end sheetmetal]
+  ^ Fenders (id=4513)  parts=9  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Hood Lock (id=4511)  parts=3  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Hood (id=4506)  parts=15  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[front lamp]
+  ^ FrontLamp (id=4529)  parts=9  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[frontexterior hvac airflow]
+  ^ Front End Exterior Airflow (id=4517)  parts=25  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[frontinterior hvac airflow]
+  ^ Front Interior Control (id=4523)  parts=3  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Front Interior HVAC Airflow (id=4525)  parts=19  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[hvac & powertrain coolingin]
+  ^ Air conditioning compressor (id=4530)  parts=9  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Coolant Plumbing & Hardware (id=7660)  parts=17  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Refrigerant Plumbing & Hardware (id=7661)  parts=16  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[instrument panel & console]
+  ^ Floor Console (id=4498)  parts=35  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Instrument Panel Crossmember (id=4541)  parts=5  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Instrument Panel (id=4538)  parts=37  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ SteeringWheel (id=4544)  parts=4  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[interior acoustic syetem]
+  ^ Sound Insulation、Heat Insulation (id=4547)  parts=8  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[interior lamp]
+  ^ InteriorLamp (id=4481)  parts=6  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[interior trim]
+  ^ Body Structure Garnish Trim (id=7662)  parts=42  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Floor Trim (id=4514)  parts=12  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Roof Trim (id=4509)  parts=10  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ SideClosureGarnishTrim (id=4486)  parts=47  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[mounts]
+  ^ Frame to Body Mounts (id=4520)  parts=22  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[on vehicle attachments&tools]
+  ^ Lubricant (id=4526)  parts=5  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ On Vehicle Attachments (id=4522)  parts=7  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[pickup box]
+  ^ Front Panel Assembly (id=7663)  parts=3  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Platform Assembly (id=7664)  parts=5  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Side Panel-Outer Assembly (id=7665)  parts=17  svg=yes [!!] request error: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+[power & signaldistribution]
+  ^ BatteryCable (id=4460)  parts=5  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ BodyHarness (id=4546)  parts=3  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ ChassisHarness (id=4451)  parts=8  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ DoorHarness (id=4452)  parts=4  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ EngineCompartmentHarness (id=4543)  parts=6  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ High Voltage Harness (id=4462)  parts=20  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ InstrumentPanelHarness (id=4455)  parts=4  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ PowerOutlet&CigaretteLighterApplication (id=7666)  parts=3  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[pipe]
+  ^ EPT System (id=4537)  parts=30  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ The internal parts of reduction (id=4540)  parts=34  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[power transmission]
+  ^ REAR AXLE ASM-BRK (id=4467)  parts=25  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[powertrain driver interface]
+  ^ Accelerator Pedal (id=4464)  parts=2  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Transmission Shift Actuation (id=4465)  parts=4  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[rear closure]
+  ^ E/GATE Handle and Lock (id=7667)  parts=10  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Endgate (id=4468)  parts=17  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[rear lamp]
+  ^ RearLamp (id=4474)  parts=12  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[rear view mirror]
+  ^ Rear View Mirror (id=7668)  parts=4  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[safety belt]
+  ^ Safety Belts (id=4480)  parts=6  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[safety&avoidance]
+  ^ AirBagControlUnit (id=4476)  parts=6  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ ParkDistanceControlSystem (id=4475)  parts=8  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[seats]
+  ^ Front Electirc Seat(left) (id=7669)  parts=17  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Front Electirc Seat(right) (id=7670)  parts=17  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Front Manual Seat（LH） (id=4485)  parts=6  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Front Manual Seat（RH） (id=4488)  parts=5  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Rear Row  Seat (id=4493)  parts=15  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Seats Layout (id=4483)  parts=3  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[side closures]
+  ^ Front Door Electric Glass Regulator (id=4501)  parts=18  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Front Door Handle and Lock (id=4499)  parts=29  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Front Side Closure (id=4497)  parts=16  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Rear Side Closure (id=4504)  parts=16  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ TNK FIL DR (id=4507)  parts=8  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[steering]
+  ^ Redirector(left hand） (id=7671)  parts=11  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Steering Column (id=4510)  parts=9  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[suspension]
+  ^ Front Shock Absorber (id=4524)  parts=15  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Front Suspension (id=4518)  parts=30  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Rear Suspension (id=4521)  parts=25  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[tire,wheels,wheel trim]
+  ^ Tire,Wheel,Trim (id=7672)  parts=17  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+[wiper & washer]
+  ^ Front Washer (id=4534)  parts=13  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+  ^ Front Wiper (id=4531)  parts=13  svg=yes [OK] saved ['component_svg_code', 'component_parts_json']
+
+=== Done ===
+  Uploaded : 99
+  Skipped  : 0
+  Failed   : 1
+
+[ABORT] STEP 2 – Upload SVGs failed with exit code 1. Step 3 will not run.
