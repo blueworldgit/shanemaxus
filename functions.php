@@ -7234,8 +7234,18 @@ function mvp_product_svg_gallery() {
             }
         });
 
-        // Zoom controls (mirrors the category widget behaviour)
+        // Zoom: stepped +/-/reset buttons, PLUS hover-to-magnify (loupe) at
+        // default scale — restores the original single-product hover behaviour.
         var scale = 1, STEP = 0.2, MIN = 0.4, MAX = 4, baseH = 0;
+        var HOVER = 2.5, hovering = false;
+
+        function applyBase(){
+            srcSvg.style.transformOrigin = 'top left';
+            srcSvg.style.transform = scale === 1 ? '' : 'scale(' + scale + ')';
+            inner.style.overflow = scale > 1 ? 'auto' : 'hidden';
+            inner.style.cursor   = scale > 1 ? 'grab' : 'zoom-in';
+            inner.style.height   = scale > 1 ? (baseH * scale) + 'px' : '';
+        }
         controls.querySelectorAll('.mvp-cd-zoom-btn').forEach(function(btn){
             btn.addEventListener('click', function(){
                 if (!baseH) baseH = inner.clientHeight;
@@ -7243,9 +7253,31 @@ function mvp_product_svg_gallery() {
                 if (a === 'in')    scale = Math.min(MAX, +(scale + STEP).toFixed(2));
                 if (a === 'out')   scale = Math.max(MIN, +(scale - STEP).toFixed(2));
                 if (a === 'reset') scale = 1;
-                srcSvg.style.transform = scale === 1 ? '' : 'scale(' + scale + ')';
-                inner.style.height = scale > 1 ? (baseH * scale) + 'px' : '';
+                hovering = false;
+                applyBase();
             });
+        });
+        applyBase();
+
+        // Hover magnify — only when not stepped-zoomed via the buttons
+        inner.addEventListener('mouseenter', function(){
+            if (scale !== 1) return;
+            hovering = true;
+            inner.style.overflow = 'hidden';
+        });
+        inner.addEventListener('mousemove', function(e){
+            if (scale !== 1 || !hovering) return;
+            var r = inner.getBoundingClientRect();
+            var x = (e.clientX - r.left) / r.width  * 100;
+            var y = (e.clientY - r.top)  / r.height * 100;
+            srcSvg.style.transformOrigin = x + '% ' + y + '%';
+            srcSvg.style.transform = 'scale(' + HOVER + ')';
+        });
+        inner.addEventListener('mouseleave', function(){
+            if (scale !== 1) return;
+            hovering = false;
+            srcSvg.style.transform = '';
+            srcSvg.style.transformOrigin = 'top left';
         });
 
         // Kill the native WooCommerce zoom trigger left over from the gallery
@@ -7312,22 +7344,30 @@ add_action( 'wp_head', function() {
         border-bottom: 1px solid #dde3e9;
         flex-shrink: 0;
     }
-    .mvp-pd-widget .mvp-cd-zoom-btn {
-        width: 30px;
-        height: 30px;
-        border: 1px solid #bbc5d0;
-        border-radius: 4px;
-        background: #fff;
-        cursor: pointer;
-        font-size: 18px;
-        line-height: 1;
-        display: flex;
+    /* !important + min/max-width override the theme's single-product button
+       min-width, which was stretching these to ~81px */
+    .woocommerce-product-gallery__image .mvp-pd-widget .mvp-cd-zoom-btn {
+        width: 34px !important;
+        min-width: 34px !important;
+        max-width: 34px !important;
+        height: 30px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        flex: 0 0 auto !important;
+        box-sizing: border-box !important;
+        border: 1px solid #bbc5d0 !important;
+        border-radius: 4px !important;
+        background: #fff !important;
+        cursor: pointer !important;
+        font-size: 18px !important;
+        line-height: 1 !important;
+        display: flex !important;
         align-items: center;
         justify-content: center;
-        color: #1a2d4a;
+        color: #1a2d4a !important;
         transition: background 0.15s;
     }
-    .mvp-pd-widget .mvp-cd-zoom-btn:hover { background: #e8edf2; }
+    .woocommerce-product-gallery__image .mvp-pd-widget .mvp-cd-zoom-btn:hover { background: #e8edf2 !important; }
     .mvp-pd-widget .mvp-cd-svg-inner {
         overflow: auto;
         flex: 1;
