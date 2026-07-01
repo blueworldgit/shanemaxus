@@ -7355,19 +7355,19 @@ add_action( 'wp_head', function() {
         margin: 0 !important;
         flex: 0 0 auto !important;
         box-sizing: border-box !important;
-        border: 1px solid #bbc5d0 !important;
+        border: 1px solid #F29F05 !important;
         border-radius: 4px !important;
-        background: #fff !important;
+        background: #F29F05 !important;
         cursor: pointer !important;
         font-size: 18px !important;
         line-height: 1 !important;
         display: flex !important;
         align-items: center;
         justify-content: center;
-        color: #1a2d4a !important;
-        transition: background 0.15s;
+        color: #fff !important;
+        transition: background 0.15s, border-color 0.15s;
     }
-    .woocommerce-product-gallery__image .mvp-pd-widget .mvp-cd-zoom-btn:hover { background: #e8edf2 !important; }
+    .woocommerce-product-gallery__image .mvp-pd-widget .mvp-cd-zoom-btn:hover { background: #D18A0C !important; border-color: #D18A0C !important; }
     .mvp-pd-widget .mvp-cd-svg-inner {
         overflow: auto;
         flex: 1;
