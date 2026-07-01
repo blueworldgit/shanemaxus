@@ -7137,7 +7137,13 @@ add_action( 'woocommerce_single_product_summary', function() {
     echo '</div>';
 }, 27 );
 
-// Replace product gallery image with SVG diagram + highlighted callout (no bottom diagram)
+// Replace the product gallery image with the SAME contained, zoomable diagram
+// widget used on category pages (see mvp_render_component_diagram). The old
+// approach forced the A4-portrait SVG into the gallery slot at height:auto and
+// then EXPANDED the viewBox to include any stray off-page geometry (common in
+// the EPC exports), which left many products with a tall empty box and a
+// drifting orange callout ring. Containing the SVG in a fixed, scrollable box
+// with a fit-to-box viewBox fixes every affected product uniformly.
 add_action( 'wp_footer', 'mvp_product_svg_gallery', 30 );
 function mvp_product_svg_gallery() {
     if ( ! is_product() ) return;
@@ -7147,17 +7153,14 @@ function mvp_product_svg_gallery() {
     $callout = get_post_meta( $product->get_id(), 'callout_number', true );
     if ( ! $callout ) return;
 
-    // Find the leaf category with an SVG diagram
+    // Find the leaf category that carries the diagram SVG
     $cats = wp_get_post_terms( $product->get_id(), 'product_cat', array( 'fields' => 'all' ) );
     if ( is_wp_error( $cats ) || empty( $cats ) ) return;
 
     $svg_code = '';
     foreach ( $cats as $cat ) {
         $svg = get_term_meta( $cat->term_id, 'component_svg_code', true );
-        if ( $svg ) {
-            $svg_code = $svg;
-            break;
-        }
+        if ( $svg ) { $svg_code = $svg; break; }
     }
     if ( ! $svg_code ) return;
     ?>
@@ -7165,97 +7168,90 @@ function mvp_product_svg_gallery() {
     <script>
     (function(){
         var callout = '<?php echo esc_js( $callout ); ?>';
-        var source = document.getElementById('mvp-pd-svg-source');
-        if (!source || !callout) return;
+        var source  = document.getElementById('mvp-pd-svg-source');
+        if (!source) return;
 
-        // Find the real diagram SVG in the hidden source
+        // The real diagram is the SVG with the most text callouts
         var srcSvg = null;
-        source.querySelectorAll('svg').forEach(function(s) {
+        source.querySelectorAll('svg').forEach(function(s){
             if (s.querySelectorAll('text').length > 5) srcSvg = s;
         });
-        if (!srcSvg) return;
+        if (!srcSvg) { source.remove(); return; }
 
-        // Style SVG for gallery display — fill gallery width, height follows naturally
-        srcSvg.style.width = '100%';
-        srcSvg.style.height = 'auto';
+        // Keep the SVG's native viewBox and fit-to-box (centre + clip). We do NOT
+        // expand the viewBox to chase stray off-page geometry, so no whitespace.
+        srcSvg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+        srcSvg.removeAttribute('width');
+        srcSvg.removeAttribute('height');
+        srcSvg.style.width   = '100%';
+        srcSvg.style.height  = '100%';
         srcSvg.style.display = 'block';
+        srcSvg.style.transformOrigin = 'top left';
+        srcSvg.style.transition = 'transform 0.2s';
         srcSvg.style.background = '#fff';
 
-        // Highlight the callout number in orange
-        srcSvg.querySelectorAll('text').forEach(function(t) {
+        var gallery = document.querySelector('.woocommerce-product-gallery__image')
+                   || document.querySelector('.woocommerce-product-gallery__image--placeholder');
+        if (!gallery) { source.remove(); return; }
+
+        // Build the same widget shell as the category page (zoom controls + inner)
+        var box = document.createElement('div');
+        box.className = 'mvp-cd-svg-wrap mvp-pd-widget';
+
+        var controls = document.createElement('div');
+        controls.className = 'mvp-cd-zoom-controls';
+        controls.innerHTML =
+            '<button type="button" class="mvp-cd-zoom-btn" data-action="out" aria-label="Zoom out">&#8722;</button>' +
+            '<button type="button" class="mvp-cd-zoom-btn" data-action="reset" aria-label="Reset zoom">&#8635;</button>' +
+            '<button type="button" class="mvp-cd-zoom-btn" data-action="in" aria-label="Zoom in">&#43;</button>';
+
+        var inner = document.createElement('div');
+        inner.className = 'mvp-cd-svg-inner';
+        inner.appendChild(srcSvg);
+
+        box.appendChild(controls);
+        box.appendChild(inner);
+        gallery.innerHTML = '';
+        gallery.appendChild(box);
+        gallery.style.cursor = 'default';
+
+        // Highlight this product's callout number in orange and ring it
+        srcSvg.querySelectorAll('text').forEach(function(t){
             if (t.textContent.trim() === callout) {
                 t.style.setProperty('fill', '#F29F05', 'important');
                 t.style.setProperty('font-weight', 'bold', 'important');
-                t.style.setProperty('font-size', '16', 'important');
+                try {
+                    var bb = t.getBBox();
+                    var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    c.setAttribute('cx', bb.x + bb.width / 2);
+                    c.setAttribute('cy', bb.y + bb.height / 2);
+                    c.setAttribute('r', Math.max(bb.width, bb.height) * 0.9 + 5);
+                    c.setAttribute('fill', 'none');
+                    c.setAttribute('stroke', '#F29F05');
+                    c.setAttribute('stroke-width', '2');
+                    t.parentNode.insertBefore(c, t);
+                } catch(e) {}
             }
         });
 
-        // Replace the WooCommerce gallery image (works with both product images and placeholders)
-        var gallery = document.querySelector('.woocommerce-product-gallery__image') || document.querySelector('.woocommerce-product-gallery__image--placeholder');
-        if (gallery) {
-            gallery.innerHTML = '';
-            gallery.appendChild(srcSvg);
-            gallery.style.cursor = 'default';
-
-            // Add circle highlight now that SVG is in the DOM and getBBox works
-            srcSvg.querySelectorAll('text').forEach(function(t) {
-                if (t.textContent.trim() === callout) {
-                    try {
-                        var bbox = t.getBBox();
-                        var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                        circle.setAttribute('cx', bbox.x + bbox.width/2);
-                        circle.setAttribute('cy', bbox.y + bbox.height/2);
-                        circle.setAttribute('r', Math.max(bbox.width, bbox.height));
-                        circle.setAttribute('fill', 'none');
-                        circle.setAttribute('stroke', '#F29F05');
-                        circle.setAttribute('stroke-width', '2');
-                        t.parentNode.insertBefore(circle, t);
-                    } catch(e) {}
-                }
+        // Zoom controls (mirrors the category widget behaviour)
+        var scale = 1, STEP = 0.2, MIN = 0.4, MAX = 4, baseH = 0;
+        controls.querySelectorAll('.mvp-cd-zoom-btn').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                if (!baseH) baseH = inner.clientHeight;
+                var a = btn.dataset.action;
+                if (a === 'in')    scale = Math.min(MAX, +(scale + STEP).toFixed(2));
+                if (a === 'out')   scale = Math.max(MIN, +(scale - STEP).toFixed(2));
+                if (a === 'reset') scale = 1;
+                srcSvg.style.transform = scale === 1 ? '' : 'scale(' + scale + ')';
+                inner.style.height = scale > 1 ? (baseH * scale) + 'px' : '';
             });
+        });
 
-            // Only EXPAND viewBox if content is clipped outside it — uses svg.getBBox for full coverage
-            try {
-                var vb2 = (srcSvg.getAttribute('viewBox') || '0 0 100 100').split(/\s+/).map(Number);
-                var vbX2=vb2[0],vbY2=vb2[1],vbW2=vb2[2],vbH2=vb2[3];
-                var bb2 = srcSvg.getBBox();
-                var mnX2 = Math.min(vbX2, bb2.x);
-                var mnY2 = Math.min(vbY2, bb2.y);
-                var mxX2 = Math.max(vbX2+vbW2, bb2.x+bb2.width);
-                var mxY2 = Math.max(vbY2+vbH2, bb2.y+bb2.height);
-                var changed2 = (mnX2 < vbX2 || mnY2 < vbY2 || mxX2 > vbX2+vbW2 || mxY2 > vbY2+vbH2);
-                if(changed2){ var p2=15; srcSvg.setAttribute('viewBox',(mnX2-p2)+' '+(mnY2-p2)+' '+(mxX2-mnX2+p2*2)+' '+(mxY2-mnY2+p2*2)); }
-            } catch(e) {}
+        // Kill the native WooCommerce zoom trigger left over from the gallery
+        var trigger = document.querySelector('.woocommerce-product-gallery__trigger');
+        if (trigger) trigger.style.display = 'none';
 
-            // Disable WooCommerce zoom (we use our own)
-            var trigger = document.querySelector('.woocommerce-product-gallery__trigger');
-            if (trigger) trigger.style.display = 'none';
-            var zoomImgs = gallery.querySelectorAll('.zoomImg');
-            zoomImgs.forEach(function(z) { z.remove(); });
-
-            // Custom SVG hover zoom
-            gallery.style.overflow = 'hidden';
-            gallery.style.cursor = 'zoom-in';
-            var zoomScale = 2.5;
-            srcSvg.style.transformOrigin = '0 0';
-            srcSvg.style.transition = 'transform 0.15s ease';
-
-            gallery.addEventListener('mouseenter', function() {
-                srcSvg.style.transform = 'scale(' + zoomScale + ')';
-            });
-            gallery.addEventListener('mousemove', function(e) {
-                var rect = gallery.getBoundingClientRect();
-                var x = (e.clientX - rect.left) / rect.width * 100;
-                var y = (e.clientY - rect.top) / rect.height * 100;
-                srcSvg.style.transformOrigin = x + '% ' + y + '%';
-            });
-            gallery.addEventListener('mouseleave', function() {
-                srcSvg.style.transform = 'scale(1)';
-                srcSvg.style.transformOrigin = '0 0';
-            });
-        }
-
-        // Remove the hidden source
         source.remove();
     })();
     </script>
@@ -7296,19 +7292,53 @@ add_action( 'wp_head', function() {
     }
     .woocommerce-product-gallery__trigger { display: none !important; }
     .woocommerce-product-gallery .zoomImg { display: none !important; }
-    .woocommerce-product-gallery__image svg,
-    .woocommerce-product-gallery__image--placeholder svg { width: 100%; height: auto; display: block; }
-    .mvp-pd-svg-wrap {
+    /* Single-product exploded-diagram widget — contained + zoomable, mirrors
+       the category-page component diagram box (mvp_render_component_diagram) */
+    .woocommerce-product-gallery__image .mvp-cd-svg-wrap.mvp-pd-widget {
+        width: 100%;
+        height: 520px;
+        border: 1px solid #dde3e9;
         background: #fff;
-        border: 1px solid #eee;
-        border-radius: 8px;
-        padding: 20px;
-        overflow: auto;
-        max-height: 500px;
+        border-radius: 6px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
     }
-    .mvp-pd-svg-wrap svg {
-        max-width: 100%;
-        height: auto;
+    .mvp-pd-widget .mvp-cd-zoom-controls {
+        display: flex;
+        gap: 6px;
+        padding: 6px 8px;
+        background: #f4f6f8;
+        border-bottom: 1px solid #dde3e9;
+        flex-shrink: 0;
+    }
+    .mvp-pd-widget .mvp-cd-zoom-btn {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #bbc5d0;
+        border-radius: 4px;
+        background: #fff;
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #1a2d4a;
+        transition: background 0.15s;
+    }
+    .mvp-pd-widget .mvp-cd-zoom-btn:hover { background: #e8edf2; }
+    .mvp-pd-widget .mvp-cd-svg-inner {
+        overflow: auto;
+        flex: 1;
+        cursor: grab;
+        padding: 10px;
+    }
+    .mvp-pd-widget .mvp-cd-svg-inner svg {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+        transform-origin: top left;
     }
 
     </style>
