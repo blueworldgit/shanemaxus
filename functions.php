@@ -6543,12 +6543,16 @@ add_action( 'rest_api_init', function () {
             'term_id'    => array( 'required' => true,  'type' => 'integer' ),
             'svg_code'   => array( 'required' => false, 'type' => 'string'  ),
             'parts_json' => array( 'required' => false, 'type' => 'string'  ),
-            'secret'     => array( 'required' => true,  'type' => 'string'  ),
+            'secret'     => array( 'required' => false, 'type' => 'string'  ),
         ),
     ) );
 } );
 
 function mvp_set_component_meta_permission( WP_REST_Request $request ) {
+    // Allow logged-in admins (WP application-password auth) in addition to the shared secret.
+    if ( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
+        return true;
+    }
     $secret = $request->get_param( 'secret' );
     return hash_equals( MVP_COMPONENT_API_SECRET, (string) $secret );
 }
@@ -6565,13 +6569,14 @@ function mvp_set_component_meta( WP_REST_Request $request ) {
     $updated = array();
 
     $svg_code = $request->get_param( 'svg_code' );
-    if ( $svg_code !== null ) {
+    // No-overwrite guard: only fill categories that currently have no diagram.
+    if ( $svg_code !== null && ! get_term_meta( $term_id, 'component_svg_code', true ) ) {
         update_term_meta( $term_id, 'component_svg_code', $svg_code );
         $updated[] = 'component_svg_code';
     }
 
     $parts_json = $request->get_param( 'parts_json' );
-    if ( $parts_json !== null ) {
+    if ( $parts_json !== null && ! get_term_meta( $term_id, 'component_parts_json', true ) ) {
         // Validate it's parseable JSON
         $decoded = json_decode( $parts_json, true );
         if ( ! is_array( $decoded ) ) {
