@@ -2885,8 +2885,8 @@ function mvp_vehicle_render_full_page() {
         <div class="mvp-category-grid">
             <?php foreach ( $categories as $cat ) :
                 // Build category image filename: replace spaces with underscores
-                $cat_img_name = str_replace( ' ', '_', $cat->name ) . '.png';
-                $cat_img_url  = $cat_img_base . $cat_img_name;
+                $cat_img_file = mvp_category_icon_file( $cat->name );
+                $cat_img_url  = $cat_img_file ? $cat_img_base . $cat_img_file : '';
                 // Link directly to the WooCommerce category archive for this vehicle's category
                 $cat_url = get_term_link( $cat );
                 if ( is_wp_error( $cat_url ) ) {
@@ -2897,8 +2897,7 @@ function mvp_vehicle_render_full_page() {
             ?>
             <a href="<?php echo esc_url( $cat_url ); ?>" class="mvp-category-card">
                 <div class="mvp-category-card-img">
-                    <img src="<?php echo esc_url( $cat_img_url ); ?>" alt="<?php echo esc_attr( $cat->name ); ?>" loading="lazy"
-                         onerror="this.style.display='none'">
+                    <?php if ( $cat_img_url ) : ?><img src="<?php echo esc_url( $cat_img_url ); ?>" alt="<?php echo esc_attr( $cat->name ); ?>" loading="lazy" onerror="this.style.display='none'"><?php endif; ?>
                 </div>
                 <div class="mvp-category-card-body">
                     <h3><?php echo esc_html( $cat->name ); ?></h3>
@@ -4013,19 +4012,8 @@ function mvp_department_vehicle_redirect( $dept_slug, $vehicle_slug ) {
                 if ( is_wp_error( $term_url ) ) continue;
             ?>
             <?php
-                $raw_name = html_entity_decode( $dc['term']->name, ENT_QUOTES, 'UTF-8' );
-                $img_name = str_replace( ' ', '_', $raw_name ) . '.png';
-                $img_dir  = WP_CONTENT_DIR . '/uploads/categories/';
-                $has_img  = file_exists( $img_dir . $img_name );
-                if ( ! $has_img ) {
-                    $try_and = str_replace( '&', 'and', $img_name );
-                    if ( file_exists( $img_dir . $try_and ) ) { $img_name = $try_and; $has_img = true; }
-                }
-                if ( ! $has_img ) {
-                    foreach ( glob( $img_dir . '*.png' ) as $gf ) {
-                        if ( strcasecmp( basename( $gf ), $img_name ) === 0 ) { $img_name = basename( $gf ); $has_img = true; break; }
-                    }
-                }
+                $img_name = mvp_category_icon_file( $dc['term']->name );
+                $has_img  = ( $img_name !== '' );
             ?>
             <a href="<?php echo esc_url( $term_url ); ?>" class="mvp-vdept-card<?php echo $has_img ? ' has-img' : ''; ?>">
                 <?php if ( $has_img ) : ?>
@@ -4145,20 +4133,9 @@ function mvp_department_render_page( $dept_slug ) {
     }
 
     // Category image with fallback matching
-    $raw_dept = html_entity_decode( $dept_display_name, ENT_QUOTES, 'UTF-8' );
-    $cat_img_name = str_replace( ' ', '_', $raw_dept ) . '.png';
-    $cat_img_dir  = WP_CONTENT_DIR . '/uploads/categories/';
-    $cat_img_found = file_exists( $cat_img_dir . $cat_img_name );
-    if ( ! $cat_img_found ) {
-        $try_and = str_replace( '&', 'and', $cat_img_name );
-        if ( file_exists( $cat_img_dir . $try_and ) ) { $cat_img_name = $try_and; $cat_img_found = true; }
-    }
-    if ( ! $cat_img_found ) {
-        foreach ( glob( $cat_img_dir . '*.png' ) as $gf ) {
-            if ( strcasecmp( basename( $gf ), $cat_img_name ) === 0 ) { $cat_img_name = basename( $gf ); $cat_img_found = true; break; }
-        }
-    }
-    $cat_img_url = $cat_img_found ? $cat_img_base . $cat_img_name : '';
+    $cat_img_name  = mvp_category_icon_file( $dept_display_name );
+    $cat_img_found = ( $cat_img_name !== '' );
+    $cat_img_url   = $cat_img_found ? $cat_img_base . $cat_img_name : '';
 
     get_header();
     ?>
@@ -6678,20 +6655,8 @@ function mvp_render_midlevel_subcat_grid() {
             $count = (int) $child->count;
         ?>
         <?php
-            $raw_name = html_entity_decode( $child->name, ENT_QUOTES, 'UTF-8' );
-            $img_name = str_replace( ' ', '_', $raw_name ) . '.png';
-            $img_dir  = WP_CONTENT_DIR . '/uploads/categories/';
-            $img_path = $img_dir . $img_name;
-            $has_img  = file_exists( $img_path );
-            if ( ! $has_img ) {
-                $try_and = str_replace( '&', 'and', $img_name );
-                if ( file_exists( $img_dir . $try_and ) ) { $img_name = $try_and; $img_path = $img_dir . $img_name; $has_img = true; }
-            }
-            if ( ! $has_img ) {
-                foreach ( glob( $img_dir . '*.png' ) as $gf ) {
-                    if ( strcasecmp( basename( $gf ), $img_name ) === 0 ) { $img_name = basename( $gf ); $img_path = $gf; $has_img = true; break; }
-                }
-            }
+            $img_name = mvp_category_icon_file( $child->name );
+            $has_img  = ( $img_name !== '' );
         ?>
         <a class="mvp-subcat-card<?php echo $has_img ? ' has-img' : ''; ?>" href="<?php echo esc_url( $link ); ?>">
             <?php if ( $has_img ) : ?>
@@ -6854,9 +6819,8 @@ function mvp_subcategory_thumbnail_fallback( $category ) {
     if ( $thumbnail_id ) {
         echo wp_get_attachment_image( $thumbnail_id, 'woocommerce_thumbnail' );
     } else {
-        $img_name = str_replace( ' ', '_', $category->name ) . '.png';
-        $img_path = WP_CONTENT_DIR . '/uploads/categories/' . $img_name;
-        if ( file_exists( $img_path ) ) {
+        $img_name = mvp_category_icon_file( $category->name );
+        if ( $img_name !== '' ) {
             $img_url = content_url( '/uploads/categories/' . $img_name );
             echo '<img src="' . esc_url( $img_url ) . '" alt="' . esc_attr( $category->name ) . '" style="background:#fff;object-fit:contain;width:100%;height:auto;padding:10px;" />';
         } else {
@@ -7458,3 +7422,46 @@ add_action( 'wp_head', function() {
     </style>
     <?php
 }, 20 );
+
+
+if ( ! function_exists( 'mvp_category_icon_file' ) ) {
+/**
+ * Resolve a product_cat name to an icon file basename in /uploads/categories/.
+ * Returns '' if none found. Exact current-convention match is tried FIRST, so any
+ * card that already resolves keeps identical behaviour; the rest are fallbacks only.
+ * Added 2026-07-06 (blank category-card fix). Safe to revert: delete this function
+ * and this session's git commit restores the prior inline resolvers.
+ */
+function mvp_category_icon_file( $name ) {
+    static $norm_index = null;
+    $dir = WP_CONTENT_DIR . '/uploads/categories/';
+    $d   = html_entity_decode( $name, ENT_QUOTES, 'UTF-8' );
+    // 1) exact current convention (entity-decoded name, spaces -> underscore)
+    $try = str_replace( ' ', '_', $d ) . '.png';
+    if ( is_file( $dir . $try ) ) return $try;
+    // 2) & -> and
+    $try_and = str_replace( '&', 'and', $try );
+    if ( is_file( $dir . $try_and ) ) return $try_and;
+    // 3) filesystem-sanitised (slash/backslash -> underscore) - fixes names with "/"
+    $san = str_replace( array( ' ', '/', '\\' ), '_', $d ) . '.png';
+    if ( $san !== $try && is_file( $dir . $san ) ) return $san;
+    // 4) normalised alnum index (largest real file wins), built once per request
+    if ( $norm_index === null ) {
+        $norm_index = array();
+        foreach ( (array) glob( $dir . '*.png' ) as $gf ) {
+            $sz = @filesize( $gf );
+            if ( $sz === false || $sz <= 1000 ) continue;
+            if ( ! mb_check_encoding( $gf, 'UTF-8' ) ) continue; // skip corrupt-byte filenames that break URLs
+            $b = preg_replace( '/_[A-Za-z0-9]{7}$/', '', basename( $gf, '.png' ) );
+            $k = preg_replace( '/[^a-z0-9]/', '', strtolower( html_entity_decode( $b, ENT_QUOTES, 'UTF-8' ) ) );
+            if ( $k === '' ) continue;
+            if ( ! isset( $norm_index[ $k ] ) || $sz > (int) $norm_index[ $k ]['s'] ) {
+                $norm_index[ $k ] = array( 'f' => basename( $gf ), 's' => $sz );
+            }
+        }
+    }
+    $key = preg_replace( '/[^a-z0-9]/', '', strtolower( $d ) );
+    if ( $key !== '' && isset( $norm_index[ $key ] ) ) return $norm_index[ $key ]['f'];
+    return '';
+}
+}
