@@ -6066,7 +6066,10 @@ function mvp_render_component_diagram() {
         var wrap = document.getElementById('<?php echo esc_js( $uid ); ?>');
         if (!wrap) return;
         var rows   = Array.from(wrap.querySelectorAll('.mvp-cd-row'));
-        var svg = null; document.querySelectorAll('svg').forEach(function(s) { if (!svg && s.querySelectorAll('text').length > 5) svg = s; });
+        // Prefer the diagram SVG inside this widget's container (robust for small
+        // diagrams with <=5 callouts, where the old text-count heuristic failed).
+        var svg = wrap.querySelector('.mvp-cd-svg-inner svg');
+        if (!svg) { document.querySelectorAll('svg').forEach(function(s) { if (!svg && s.querySelectorAll('text').length > 5) svg = s; }); }
         // Only EXPAND viewBox if content is clipped outside it (never shrink) — uses svg.getBBox for full coverage
         if (svg) {
             try {
@@ -7176,10 +7179,11 @@ function mvp_product_svg_gallery() {
         var source  = document.getElementById('mvp-pd-svg-source');
         if (!source) return;
 
-        // The real diagram is the SVG with the most text callouts
+        // The real diagram is the SVG with the most text callouts (no fixed
+        // threshold, so small diagrams with only a few callouts still build).
         var srcSvg = null;
         source.querySelectorAll('svg').forEach(function(s){
-            if (s.querySelectorAll('text').length > 5) srcSvg = s;
+            if (!srcSvg || s.querySelectorAll('text').length > srcSvg.querySelectorAll('text').length) srcSvg = s;
         });
         if (!srcSvg) { source.remove(); return; }
 
