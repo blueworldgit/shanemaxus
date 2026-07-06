@@ -6120,6 +6120,9 @@ function mvp_render_component_diagram() {
             rows.forEach(function (r) {
                 r.classList.toggle('mvp-cd-active', r.dataset.callout === n);
             });
+            // Re-resolve the diagram SVG if it wasn't captured at load (guards
+            // against a DOMContentLoaded timing race on large inline SVGs).
+            if (!svg) { svg = wrap.querySelector('.mvp-cd-svg-inner svg'); }
             if (svg) {
                 svg.querySelectorAll('text').forEach(function (t) {
                     var orig = t.getAttribute('data-orig-fill') || '';
