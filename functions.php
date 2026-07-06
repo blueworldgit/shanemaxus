@@ -7234,6 +7234,10 @@ function mvp_product_svg_gallery() {
                     c.setAttribute('fill', 'none');
                     c.setAttribute('stroke', '#F29F05');
                     c.setAttribute('stroke-width', '2');
+                    // The callout text is positioned by its own transform, which getBBox
+                    // ignores — copy it so the ring lands on the label, not at the origin.
+                    var tf = t.getAttribute('transform');
+                    if ( tf ) { c.setAttribute('transform', tf); }
                     t.parentNode.insertBefore(c, t);
                 } catch(e) {}
             }
