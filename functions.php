@@ -5746,7 +5746,7 @@ function mvp_render_component_diagram() {
     // Must be at least 3 levels below Maxus root (Maxus > VIN > mid-category > leaf)
     $maxus_id  = mvp_get_maxus_term_id();
     $ancestors = get_ancestors( $term->term_id, 'product_cat', 'taxonomy' );
-    if ( count( $ancestors ) < 3 || ! in_array( $maxus_id, $ancestors, true ) ) return;
+    if ( count( $ancestors ) < 2 || ! in_array( $maxus_id, $ancestors, true ) ) return;
 
     $svg_code   = get_term_meta( $term->term_id, 'component_svg_code',   true );
     $parts_json = get_term_meta( $term->term_id, 'component_parts_json', true );
