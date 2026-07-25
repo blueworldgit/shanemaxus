@@ -2233,6 +2233,39 @@ function mvp_inject_product_seo_meta() {
 // ============================================================
 
 /**
+ * Component SVG store — content-addressed files under uploads/component-svg/.
+ * Each distinct diagram is stored once as <sha1>.svg; terms hold only the
+ * 40-char hash in component_svg_hash. Reads fall back to the legacy
+ * component_svg_code term-meta blob if the file is missing.
+ */
+function mvp_get_component_svg( $term_id ) {
+    $sha = get_term_meta( $term_id, 'component_svg_hash', true );
+    if ( $sha && preg_match( '/^[0-9a-f]{40}$/', $sha ) ) {
+        $f = WP_CONTENT_DIR . '/uploads/component-svg/' . $sha . '.svg';
+        if ( is_readable( $f ) ) {
+            $svg = file_get_contents( $f );
+            if ( $svg !== false && $svg !== '' ) { return $svg; }
+        }
+    }
+    return get_term_meta( $term_id, 'component_svg_code', true ); // legacy fallback
+}
+
+function mvp_store_component_svg( $term_id, $svg_code ) {
+    $sha = sha1( $svg_code );
+    $dir = WP_CONTENT_DIR . '/uploads/component-svg';
+    if ( ! is_dir( $dir ) ) { wp_mkdir_p( $dir ); }
+    $f = $dir . '/' . $sha . '.svg';
+    if ( ! file_exists( $f ) ) {
+        if ( file_put_contents( $f . '.tmp', $svg_code ) === false || ! rename( $f . '.tmp', $f ) ) {
+            return new WP_Error( 'svg_write_failed', 'Could not write component SVG file.', array( 'status' => 500 ) );
+        }
+        chmod( $f, 0644 );
+    }
+    update_term_meta( $term_id, 'component_svg_hash', $sha );
+    return $sha;
+}
+
+/**
  * On a leaf product_cat page (depth >= 3 below Maxus) that has component_svg_code
  * and component_parts_json term meta set, render an interactive SVG diagram
  * alongside a parts table grouped by call_out_order.
@@ -2250,7 +2283,7 @@ function mvp_render_component_diagram() {
     $ancestors = get_ancestors( $term->term_id, 'product_cat', 'taxonomy' );
     if ( count( $ancestors ) < 2 || ! in_array( $maxus_id, $ancestors, true ) ) return;
 
-    $svg_code   = get_term_meta( $term->term_id, 'component_svg_code',   true );
+    $svg_code   = mvp_get_component_svg( $term->term_id );
     $parts_json = get_term_meta( $term->term_id, 'component_parts_json', true );
     if ( ! $svg_code || ! $parts_json ) return;
 
@@ -2975,9 +3008,14 @@ function mvp_set_component_meta( WP_REST_Request $request ) {
 
     $svg_code = $request->get_param( 'svg_code' );
     // No-overwrite guard: only fill categories that currently have no diagram.
-    if ( $svg_code !== null && ! get_term_meta( $term_id, 'component_svg_code', true ) ) {
-        update_term_meta( $term_id, 'component_svg_code', $svg_code );
-        $updated[] = 'component_svg_code';
+    if ( $svg_code !== null
+         && ! get_term_meta( $term_id, 'component_svg_hash', true )
+         && ! get_term_meta( $term_id, 'component_svg_code', true ) ) {
+        $stored = mvp_store_component_svg( $term_id, $svg_code );
+        if ( is_wp_error( $stored ) ) {
+            return $stored;
+        }
+        $updated[] = 'component_svg_hash';
     }
 
     $parts_json = $request->get_param( 'parts_json' );
@@ -3306,7 +3344,7 @@ function mvp_product_svg_gallery() {
 
     $svg_code = '';
     foreach ( $cats as $cat ) {
-        $svg = get_term_meta( $cat->term_id, 'component_svg_code', true );
+        $svg = mvp_get_component_svg( $cat->term_id );
         if ( $svg ) { $svg_code = $svg; break; }
     }
     if ( ! $svg_code ) return;
