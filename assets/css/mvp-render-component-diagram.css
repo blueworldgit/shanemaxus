@@ -1,0 +1,145 @@
+    .mvp-component-diagram {
+        display: flex;
+        gap: 24px;
+        margin: 0 0 32px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+    .mvp-cd-svg-wrap {
+        flex: 0 1 45%;
+        min-width: 280px;
+        border: 1px solid #dde3e9;
+        background: #fff;
+        border-radius: 6px;
+        overflow: hidden;
+        max-height: 640px;
+        display: flex;
+        flex-direction: column;
+    }
+    .mvp-cd-zoom-controls {
+        display: flex;
+        gap: 6px;
+        padding: 6px 8px;
+        background: #f4f6f8;
+        border-bottom: 1px solid #dde3e9;
+        flex-shrink: 0;
+    }
+    .mvp-cd-zoom-btn {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #bbc5d0;
+        border-radius: 4px;
+        background: #fff;
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #1a2d4a;
+        transition: background 0.15s;
+    }
+    .mvp-cd-zoom-btn:hover { background: #e8edf2; }
+    .mvp-cd-svg-inner {
+        overflow: auto;
+        flex: 1;
+        cursor: grab;
+    }
+    .mvp-cd-svg-inner svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        transform-origin: top left;
+        transition: transform 0.2s;
+    }
+    .mvp-cd-table-wrap {
+        flex: 1 1 320px;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+    .mvp-cd-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #fff;
+        border: 1px solid #dde3e9;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .mvp-cd-table thead th { 
+        background: #D18A0C;
+        color: #fff;
+        padding: 10px 14px;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .03em;
+    }
+    .mvp-cd-th-num  { width: 42px; text-align: center; line-height: 48px; }
+    .mvp-cd-th-qty  { width: 52px; }
+    .mvp-cd-table tbody tr {
+        border-bottom: 1px solid #edf0f4;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+    .mvp-cd-table tbody tr:last-child { border-bottom: none; }
+    .mvp-cd-table tbody tr:hover   { background: #f5f8ff; }
+    .mvp-cd-table tbody tr.mvp-cd-active { background: #fff3cd; }
+    .mvp-cd-table td { padding: 9px 14px; vertical-align: top; }
+    .mvp-cd-num {
+        font-weight: 700;
+        font-size: 15px;
+        color: #1a2d4a;
+        text-align: center; line-height: 48px;
+    }
+    .mvp-cd-price-col { text-align: right; white-space: nowrap; font-weight: 600; color: #1a2d4a; }
+    .mvp-cd-no-price  { color: #aaa; }
+    .mvp-cd-cart-col  { text-align: center; line-height: 48px; white-space: nowrap; }
+    .mvp-cd-lr-badge {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 3px;
+        margin-left: 6px;
+        text-transform: uppercase;
+        vertical-align: middle;
+    }
+    .mvp-cd-lr-left {
+        background: #e3f2fd;
+        color: #1565c0;
+    }
+    .mvp-cd-lr-right {
+        background: #fce4ec;
+        color: #c62828;
+    }
+    .mvp-cd-request-price {
+        background: #BF3617 !important;
+        color: #fff !important;
+        border: none !important;
+        cursor: pointer;
+    }
+    .mvp-cd-request-price:hover { background: #a82e13 !important; }
+    .mvp-cd-atc-btn {
+        display: inline-block;
+        padding: 4px 10px;
+        background: #BF3617;
+        color: #fff !important;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        text-decoration: none !important;
+        white-space: nowrap;
+        transition: background 0.15s;
+    }
+    .mvp-cd-atc-btn:hover { background: #a02e13; }
+    .mvp-cd-atc-view { background: #6c7a8d; }
+    .mvp-cd-atc-view:hover { background: #4a5568; }
+    .mvp-cd-sep { border-top: 1px dashed #ddd; padding-top: 8px; margin-top: 4px; }
+    .mvp-cd-part-col a { color: #1a2d4a; font-weight: 600; text-decoration: underline; }
+    .mvp-cd-part-col a:hover { color: #F29F05; }
+    @media (max-width: 700px) {
+        .mvp-cd-svg-wrap { flex: 0 0 100%; max-height: none; }
+    }
+    

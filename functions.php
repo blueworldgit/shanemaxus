@@ -1,5 +1,53 @@
 <?php
-// ============================================================// FIX: Vehicle & Department page titles (override AIOSEO)// ============================================================add_filter( 'pre_get_document_title', 'mvp_fix_page_titles', 999 );add_filter( 'aioseo_title', 'mvp_fix_page_titles_aioseo', 999 );function mvp_fix_page_titles( $title ) {    $vehicle_slug = get_query_var( 'mvp_vehicle' );    if ( $vehicle_slug ) {        $maxus_term_id = mvp_get_maxus_term_id();        $vin_terms = get_terms( array(            'taxonomy'   => 'product_cat',            'parent'     => $maxus_term_id,            'hide_empty' => false,            'meta_query' => array( array( 'key' => 'vehicle_slug', 'value' => sanitize_title( $vehicle_slug ) ) ),        ) );        if ( ! is_wp_error( $vin_terms ) && ! empty( $vin_terms ) ) {            $model = get_term_meta( $vin_terms[0]->term_id, 'vehicle_model', true );            return ( $model ? $model : 'Vehicle' ) . ' - Maxus Parts Direct';        }    }    $dept_slug = get_query_var( 'mvp_department' );    if ( $dept_slug ) {        $dept_name = ucwords( str_replace( '-', ' ', $dept_slug ) );        $vehicle_slug2 = get_query_var( 'mvp_dept_vehicle' );        if ( $vehicle_slug2 ) {            $maxus_term_id = mvp_get_maxus_term_id();            $vin_terms = get_terms( array(                'taxonomy'   => 'product_cat',                'parent'     => $maxus_term_id,                'hide_empty' => false,                'meta_query' => array( array( 'key' => 'vehicle_slug', 'value' => sanitize_title( $vehicle_slug2 ) ) ),            ) );            if ( ! is_wp_error( $vin_terms ) && ! empty( $vin_terms ) ) {                $model = get_term_meta( $vin_terms[0]->term_id, 'vehicle_model', true );                return $dept_name . ' - ' . ( $model ? $model : $vehicle_slug2 ) . ' - Maxus Parts Direct';            }        }        return $dept_name . ' - Maxus Parts Direct';    }    return $title;}function mvp_fix_page_titles_aioseo( $title ) {    $custom = mvp_fix_page_titles( '' );    return $custom ? $custom : $title;}
+// ============================================================
+// FIX: Vehicle & Department page titles (override AIOSEO)
+// ============================================================
+add_filter( 'pre_get_document_title', 'mvp_fix_page_titles', 999 );
+add_filter( 'aioseo_title', 'mvp_fix_page_titles_aioseo', 999 );
+
+function mvp_fix_page_titles( $title ) {
+    $vehicle_slug = get_query_var( 'mvp_vehicle' );
+    if ( $vehicle_slug ) {
+        $maxus_term_id = mvp_get_maxus_term_id();
+        $vin_terms = get_terms( array(
+            'taxonomy'   => 'product_cat',
+            'parent'     => $maxus_term_id,
+            'hide_empty' => false,
+            'meta_query' => array( array( 'key' => 'vehicle_slug', 'value' => sanitize_title( $vehicle_slug ) ) ),
+        ) );
+        if ( ! is_wp_error( $vin_terms ) && ! empty( $vin_terms ) ) {
+            $model = get_term_meta( $vin_terms[0]->term_id, 'vehicle_model', true );
+            return ( $model ? $model : 'Vehicle' ) . ' - Maxus Parts Direct';
+        }
+    }
+
+    $dept_slug = get_query_var( 'mvp_department' );
+    if ( $dept_slug ) {
+        $dept_name = ucwords( str_replace( '-', ' ', $dept_slug ) );
+        $vehicle_slug2 = get_query_var( 'mvp_dept_vehicle' );
+        if ( $vehicle_slug2 ) {
+            $maxus_term_id = mvp_get_maxus_term_id();
+            $vin_terms = get_terms( array(
+                'taxonomy'   => 'product_cat',
+                'parent'     => $maxus_term_id,
+                'hide_empty' => false,
+                'meta_query' => array( array( 'key' => 'vehicle_slug', 'value' => sanitize_title( $vehicle_slug2 ) ) ),
+            ) );
+            if ( ! is_wp_error( $vin_terms ) && ! empty( $vin_terms ) ) {
+                $model = get_term_meta( $vin_terms[0]->term_id, 'vehicle_model', true );
+                return $dept_name . ' - ' . ( $model ? $model : $vehicle_slug2 ) . ' - Maxus Parts Direct';
+            }
+        }
+        return $dept_name . ' - Maxus Parts Direct';
+    }
+
+    return $title;
+}
+
+function mvp_fix_page_titles_aioseo( $title ) {
+    $custom = mvp_fix_page_titles( '' );
+    return $custom ? $custom : $title;
+}
 require_once get_stylesheet_directory() . "/trade-account-form.php";
 
 function mobex_enovathemes_child_scripts() {
@@ -176,736 +224,8 @@ function get_products_not_in_category($request) {
 // ============================================================
 add_action( 'wp_head', 'mvp_sitewide_header_css', 998 );
 function mvp_sitewide_header_css() {
-    $logo_url = content_url( '/uploads/mpd-logo-original.webp' );
     ?>
-    <style id="mvp-sitewide-header">
-    /* ── Hide default Mobex desktop header + Elementor header — we replace it entirely ── */
-    #et-desktop-8543,
-    .et-desktop.header {
-        display: none !important;
-    }
-
-    /* ── Mobile header: orange background + logo swap ── */
-    #et-mobile-435 {
-        background: #F29F05 !important;
-    }
-    #et-mobile-435 .header-logo .logo {
-        visibility: hidden;
-        width: 0; height: 0; position: absolute;
-    }
-    #et-mobile-435 .header-logo {
-        display: block;
-        background-image: url('<?php echo esc_url( $logo_url ); ?>');
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center left;
-        width: 180px; height: 40px; min-width: 180px;
-    }
-    #et-mobile-435 .mobile-toggle,
-    #et-mobile-435 .mobile-toggle:before,
-    #et-mobile-435 .mobile-toggle:after {
-        color: #fff !important;
-        background-color: #fff !important;
-    }
-    #et-mobile-435 .mobile-menu li a { color: #333 !important; }
-    #et-mobile-435 [data-id="60c0b2d"],
-    #et-mobile-435 .e-con {
-        background: #D18A0C !important;
-    }
-    #et-mobile-435 .e-con * {
-        color: #fff !important;
-    }
-    /* Hamburger toggle — SVG 3-line icon */
-    #et-mobile-435 .mobile-toggle {
-        width: 30px !important;
-        height: 30px !important;
-        position: relative !important;
-        z-index: 100;
-        background: transparent !important;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='20' viewBox='0 0 24 20'%3E%3Crect y='0' width='24' height='3' rx='1.5' fill='white'/%3E%3Crect y='8.5' width='24' height='3' rx='1.5' fill='white'/%3E%3Crect y='17' width='24' height='3' rx='1.5' fill='white'/%3E%3C/svg%3E") !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        background-size: 24px 20px !important;
-        border: none !important;
-        box-shadow: none !important;
-        cursor: pointer !important;
-        font-size: 0 !important;
-        color: transparent !important;
-    }
-    #et-mobile-435 .mobile-toggle:before,
-    #et-mobile-435 .mobile-toggle:after {
-        display: none !important;
-    }
-    }
-
-    /* ═══════════════════════════════════════
-       CUSTOM 3-ROW DESKTOP HEADER
-       ═══════════════════════════════════════ */
-    .mvp-hdr { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    .mvp-hdr *, .mvp-hdr *::before, .mvp-hdr *::after { box-sizing: border-box; }
-    .mvp-hdr a { text-decoration: none; transition: color 0.2s, background 0.2s; }
-    .mvp-hdr-wrap { max-width: 1320px; margin: 0 auto; padding: 0 10px; }
-
-    /* ── ROW 1: Top utility bar — white bg, 48px min-height ── */
-    .mvp-hdr-r1 {
-        background: #fff;
-        border-bottom: 1px solid #f0f0f0;
-    }
-    .mvp-hdr-r1 .mvp-hdr-wrap {
-        display: flex;
-        align-items: center;
-        min-height: 48px;
-        gap: 0;
-    }
-    .mvp-hdr-r1-ask {
-        display: flex; align-items: center; gap: 8px;
-        color: #111; font-size: 13px; font-weight: 400;
-    }
-    .mvp-hdr-r1-ask svg { width: 18px; height: 18px; fill: #F29F05; flex-shrink: 0; display: none; }
-    .mvp-hdr-r1-ask:hover { color: #F29F05; }
-
-    .mvp-hdr-r1-social {
-        display: flex; align-items: center; gap: 8px;
-        margin-left: auto;
-    }
-    .mvp-hdr-r1-social span {
-        font-size: 13px; font-weight: 600; color: #111;
-        margin-right: 8px;
-    }
-    .mvp-hdr-r1-social a {
-        display: flex; align-items: center; justify-content: center;
-        width: 24px; height: 24px;
-    }
-    .mvp-hdr-r1-social a svg { width: 12px; height: 12px; fill: #fff; }
-    .mvp-hdr-r1-social a:hover svg { fill: #fff; }
-    .mvp-hdr-r1-social a { border-radius: 6px; }
-    .mvp-hdr-r1-social a[title="Facebook"] { background: #3B5998; }
-    .mvp-hdr-r1-social a[title="Instagram"] { background: #BC2A8D; }
-    .mvp-hdr-r1-social a[title="LinkedIn"] { background: #007BB6; }
-    .mvp-hdr-r1-social a[title="Twitter"] { background: #00ACED; }
-    .mvp-hdr-r1-social a[title="YouTube"] { background: #BB0000; }
-
-    .mvp-hdr-r1-login {
-        margin-left: 18px; position: relative; margin-right: -20px;
-    }
-    .mvp-hdr-r1-login > a {
-        display: flex; align-items: center; gap: 6px;
-        background: none; color: #111; font-size: 13px; font-weight: 700;
-        padding: 0; height: auto; cursor: pointer; border-radius: 0;
-    }
-    .mvp-hdr-r1-login > a svg { width: 14px; height: 14px; fill: #111; }
-    .mvp-hdr-r1-login > a:hover { color: #F29F05; } .mvp-hdr-r1-login > a:hover svg { fill: #F29F05; }
-    .mvp-hdr-r1-login .mvp-login-dd {
-        display: none; position: absolute; right: 0; top: 40px;
-        background: #111; padding: 16px; min-width: 220px; z-index: 9999;
-        border-radius: 0 0 4px 4px;
-    }
-    .mvp-hdr-r1-login:hover .mvp-login-dd { display: block; }
-    .mvp-login-dd input[type="text"],
-    .mvp-login-dd input[type="password"] {
-        width: 100%; padding: 8px 10px; margin-bottom: 8px;
-        border: 1px solid #333; border-radius: 3px;
-        background: #222; color: #fff; font-size: 13px;
-    }
-    .mvp-login-dd input::placeholder { color: #999; }
-    .mvp-login-dd .mvp-login-btn {
-        width: 100%; padding: 8px; border: none; border-radius: 3px;
-        background: #F29F05; color: #000; font-weight: 700; font-size: 13px;
-        cursor: pointer; margin-bottom: 8px;
-    }
-    .mvp-login-dd .mvp-login-btn:hover { background: #F29F05; }
-    .mvp-login-dd .mvp-login-links { display: flex; justify-content: space-between; }
-    .mvp-login-dd .mvp-login-links a { color: #9a9a9a; font-size: 12px; }
-    .mvp-login-dd .mvp-login-links a:hover { color: #fff; }
-
-    /* ── ROW 2: Logo + search + phone — white bg, padding 4px 0 16px ── */
-    .mvp-hdr-r2 {
-        background: #fff;
-    }
-    .mvp-hdr-r2 .mvp-hdr-wrap {
-        display: flex;
-        align-items: center;
-        padding-top: 8px;
-        padding-bottom: 16px;
-        gap: 0;
-    }
-    .mvp-hdr-r2-logo {
-        flex-shrink: 0;
-        margin-right: 32px;
-    }
-    .mvp-hdr-r2-logo img {
-        width: 164px; height: auto; display: block;
-    }
-    .mvp-hdr-r2-home {
-        flex-shrink: 0;
-        display: flex; align-items: center; gap: 8px;
-        background: #BF3617; color: #fff; font-weight: 700; font-size: 16px;
-        padding: 0 24px; height: 48px; border-radius: 6px;
-        margin-right: 8px;
-    }
-    .mvp-hdr-r2-home svg { width: 18px; height: 18px; flex-shrink: 0; }
-    .mvp-hdr-r2-home:hover { background: #a82e13; color: #fff; }
-
-    .mvp-hdr-r2-search {
-        flex: 1; display: flex; align-items: center; max-width: 520px;
-        background: #f0f0f0; border: 1px solid #e0e0e0; border-radius: 6px;
-        overflow: hidden; height: 48px;
-    }
-    .mvp-hdr-r2-search input[type="text"] {
-        text-align: center; line-height: 48px;
-        flex: 1; border: none; background: transparent;
-        padding: 0 14px; font-size: 14px; color: #333; height: 100%;
-        outline: none;
-    }
-    .mvp-hdr-r2-search input::placeholder { color: #999; }
-    .mvp-hdr-r2-search button {
-        background: #BF3617; border: none; color: #fff;
-        width: 52px; height: 100%; font-size: 0;
-        cursor: pointer; flex-shrink: 0;
-        display: flex; align-items: center; justify-content: center;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-    .mvp-hdr-r2-search button:hover { background: #a82e13; }
-
-    .mvp-hdr-r2-phone {
-        flex-shrink: 0; display: flex; align-items: center; gap: 10px;
-        margin-left: auto; text-decoration: none; color: #333;
-    }
-    .mvp-hdr-r2-phone svg { display: none !important; }
-    .mvp-hdr-r2-phone-text { line-height: 1.3; }
-    .mvp-hdr-r2-phone-num { font-size: 14px; font-weight: 700; color: #111; display: block; }
-    .mvp-hdr-r2-phone-sub { font-size: 13px; color: #777; display: block; }
-
-    /* ── ROW 3: Nav bar — dark gold, 64px min-height ── */
-    .mvp-hdr-r3 {
-        background: #D18A0C;
-    }
-    .mvp-hdr-r3 .mvp-hdr-wrap {
-        display: flex;
-        align-items: center;
-        min-height: 64px;
-    }
-    .mvp-hdr-r3-nav {
-        display: flex; align-items: center; gap: 0;
-        list-style: none; margin: 0; padding: 0;
-        margin-left: -16px;
-        margin-right: auto;
-    }
-    .mvp-hdr-r3-nav li a {
-        display: block; padding: 22px 16px;
-        color: #fff; font-size: 16px; font-weight: 700;
-        white-space: nowrap; line-height: 1;
-    }
-    .mvp-hdr-r3-nav li a:hover {
-    }
-    .mvp-hdr-r3-nav li.current-menu-item a, .mvp-hdr-r3-nav li:first-child a {
-        text-decoration: underline; text-underline-offset: 4px;
-    /* ── Nav dropdown menu ── */
-    .mvp-hdr-r3-nav .mvp-has-dropdown { position: relative; }
-    .mvp-hdr-r3-nav .mvp-dropdown {
-        display: none !important; position: absolute; top: 100%; left: 0; z-index: 9999;
-        background: #fff; min-width: 260px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        border-radius: 0 0 6px 6px; padding: 8px 0; list-style: none; margin: 0;
-    }
-    .mvp-hdr-r3-nav .mvp-has-dropdown:hover .mvp-dropdown { display: block !important; }
-    .mvp-hdr-r3-nav .mvp-dropdown li a {
-        display: block; padding: 8px 20px; color: #333 !important; font-size: 14px !important;
-        font-weight: 500 !important; white-space: nowrap;
-    }
-    .mvp-hdr-r3-nav .mvp-dropdown li a:hover {
-        background: #f5f5f5; color: #BF3617 !important; text-decoration: none !important;
-    }
-    /* ── Custom scrollbar for vehicle dropdown ── */
-    .mvp-mega::-webkit-scrollbar { display: none; }
-    .mvp-mega { -ms-overflow-style: none; scrollbar-width: none; }
-        text-decoration: underline; text-underline-offset: 4px;
-    }
-    .mvp-hdr-r3-actions {
-        display: flex; align-items: center; gap: 0;
-        margin-left: auto;
-    }
-    .mvp-hdr-r3-actions a {
-        display: flex; align-items: center; gap: 6px;
-        padding: 22px 14px; color: #fff; font-size: 13px; font-weight: 600;
-        white-space: nowrap; line-height: 1;
-    }
-    .mvp-hdr-r3-actions a svg { width: 20px; height: 20px; fill: #fff; }
-    .mvp-hdr-r3-actions a:hover { text-decoration: underline; text-underline-offset: 4px; }
-    .mvp-hdr-r3-actions a.mvp-r3-cart { flex-direction: row; align-items: center; gap: 6px; }
-    .mvp-hdr-r3-actions a.mvp-r3-icon { padding: 22px 12px; gap: 0; } .mvp-hdr-r3-actions a.mvp-r3-icon svg { border-radius: 32px; }
-    .mvp-hdr-r3-actions a.mvp-r3-icon svg { width: 22px; height: 22px; }
-    .mvp-hdr-r3-actions .mvp-r3-myvehicle {
-        background: #BF3617; padding: 0 24px; height: 48px; border-radius: 6px; font-size: 16px;
-        margin-left: 8px; font-weight: 700;
-    }
-    .mvp-hdr-r3-actions .mvp-r3-myvehicle:hover { background: #040404; text-decoration: none; }
-    .mvp-hdr-r3-actions .mvp-cart-badge {
-    .mvp-cart-text { font-size: 16px; font-weight: 700; line-height: 1; width: 100%; }
-    .mvp-cart-stacked { display: flex; flex-direction: column; gap: 1px; }
-    .mvp-cart-sub { font-size: 11px; font-weight: 700; display: block; line-height: 1; margin-top: 2px; }
-    .mvp-cart-sub .mvp-cart-badge { margin-left: 0; margin-right: 2px; }
-        background: #F29F05; color: #000; font-size: 10px; font-weight: 700;
-    .mvp-cart-text { font-size: 16px; font-weight: 700; line-height: 1; width: 100%; }
-    .mvp-cart-stacked { display: flex; flex-direction: column; gap: 1px; }
-    .mvp-cart-sub { font-size: 11px; font-weight: 700; display: block; line-height: 1; margin-top: 2px; }
-    .mvp-cart-sub .mvp-cart-badge { margin-left: 0; margin-right: 2px; }
-        border-radius: 50%; min-width: 18px; height: 18px;
-    .mvp-cart-text { font-size: 16px; font-weight: 700; line-height: 1; width: 100%; }
-    .mvp-cart-stacked { display: flex; flex-direction: column; gap: 1px; }
-    .mvp-cart-sub { font-size: 11px; font-weight: 700; display: block; line-height: 1; margin-top: 2px; }
-    .mvp-cart-sub .mvp-cart-badge { margin-left: 0; margin-right: 2px; }
-        display: inline-flex; align-items: center; justify-content: center;
-    .mvp-cart-text { font-size: 16px; font-weight: 700; line-height: 1; width: 100%; }
-    .mvp-cart-stacked { display: flex; flex-direction: column; gap: 1px; }
-    .mvp-cart-sub { font-size: 11px; font-weight: 700; display: block; line-height: 1; margin-top: 2px; }
-    .mvp-cart-sub .mvp-cart-badge { margin-left: 0; margin-right: 2px; }
-        margin-left: 4px; padding: 0 4px;
-    .mvp-cart-text { font-size: 16px; font-weight: 700; line-height: 1; width: 100%; }
-    .mvp-cart-stacked { display: flex; flex-direction: column; gap: 1px; }
-    .mvp-cart-sub { font-size: 11px; font-weight: 700; display: block; line-height: 1; margin-top: 2px; }
-    .mvp-cart-sub .mvp-cart-badge { margin-left: 0; margin-right: 2px; }
-    }
-    .mvp-cart-text { font-size: 16px; font-weight: 700; line-height: 1; width: 100%; }
-    .mvp-cart-stacked { display: flex; flex-direction: column; gap: 1px; }
-    .mvp-cart-sub { font-size: 11px; font-weight: 700; display: block; line-height: 1; margin-top: 2px; }
-    .mvp-cart-sub .mvp-cart-badge { margin-left: 0; margin-right: 2px; }
-
-    /* ── WooCommerce Add to Cart + View Cart buttons — site red ── */
-    .woocommerce a.added_to_cart,
-    .woocommerce a.button.wc-forward {
-        background-color: #BF3617 !important;
-        color: #fff !important;
-        border-radius: 4px;
-        padding: 8px 16px;
-        font-weight: 600;
-        text-decoration: none;
-    }
-    .woocommerce a.added_to_cart:hover,
-    .woocommerce a.button.wc-forward:hover {
-        background-color: #a02e13 !important;
-    }
-    .woocommerce-message.mvp-cart-notice {
-        background: #f7f6f7;
-        border-top: 3px solid #BF3617; border-bottom: 1px solid #e0e0e0;
-        padding: 14px 20px;
-        margin: 0 0 20px;
-        font-size: 14px;
-        color: #333;
-        line-height: 1.6;
-        overflow: hidden;
-    }
-    .woocommerce ul.products li.product .button.add_to_cart_button {
-        color: #BF3617 !important;
-    }
-    .woocommerce ul.products li.product .button.add_to_cart_button:hover {
-        color: #a02e13 !important;
-    }
-    /* ── WooCommerce Blocks buttons (Cart, Checkout, Place Order) — site red ── */
-    .wc-block-cart__submit-button,
-    .wc-block-components-button.contained,
-    .wp-element-button.wc-block-components-button,
-    .wc-block-components-checkout-place-order-button,
-    .wc-block-checkout__actions_row .wc-block-components-button,
-    .wc-block-components-totals-coupon__button {
-        background-color: #BF3617 !important;
-        color: #fff !important;
-        border: none !important;
-    }
-    .wc-block-cart__submit-button:hover,
-    .wc-block-components-button.contained:hover,
-    .wp-element-button.wc-block-components-button:hover,
-    .wc-block-components-checkout-place-order-button:hover {
-        background-color: #a02e13 !important;
-    }
-    /* Return to cart link */
-    .wc-block-components-checkout-return-to-cart-button {
-        color: #BF3617 !important;
-    }
-    .wc-block-components-checkout-return-to-cart-button:hover {
-    /* ── Worldpay payment form fix for WooCommerce Blocks ── */
-    .wc-block-components-radio-control-accordion-content iframe {
-        height: 44px !important;
-        max-height: 44px !important;
-    }
-    .wc-block-components-radio-control-accordion-content .wc-block-gateway-input.field {
-        height: auto !important;
-        margin-bottom: 12px;
-    }
-    .wc-block-components-radio-control-accordion-content {
-        padding: 16px !important;
-    }
-    #access_worldpay_checkout-card-number,
-    #access_worldpay_checkout-card-expiry,
-    #access_worldpay_checkout-card-cvc {
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        overflow: hidden;
-        height: 44px !important;
-    }
-    #access_worldpay_checkout-card-expiry,
-    #access_worldpay_checkout-card-cvc {
-        display: inline-block;
-        width: calc(50% - 8px) !important;
-    }
-    #access_worldpay_checkout-card-cvc { margin-left: 12px; }
-    #access_worldpay_checkout-card-holder-name {
-        width: 100% !important;
-        height: 44px;
-        padding: 0 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 14px;
-        margin-top: 12px;
-    }
-        color: #a02e13 !important;
-    /* ── Worldpay payment form fix for WooCommerce Blocks ── */
-    .wc-block-components-radio-control-accordion-content iframe {
-        height: 44px !important;
-        max-height: 44px !important;
-    }
-    .wc-block-components-radio-control-accordion-content .wc-block-gateway-input.field {
-        height: auto !important;
-        margin-bottom: 12px;
-    }
-    .wc-block-components-radio-control-accordion-content {
-        padding: 16px !important;
-    }
-    #access_worldpay_checkout-card-number,
-    #access_worldpay_checkout-card-expiry,
-    #access_worldpay_checkout-card-cvc {
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        overflow: hidden;
-        height: 44px !important;
-    }
-    #access_worldpay_checkout-card-expiry,
-    #access_worldpay_checkout-card-cvc {
-        display: inline-block;
-        width: calc(50% - 8px) !important;
-    }
-    #access_worldpay_checkout-card-cvc { margin-left: 12px; }
-    #access_worldpay_checkout-card-holder-name {
-        width: 100% !important;
-        height: 44px;
-        padding: 0 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 14px;
-        margin-top: 12px;
-    }
-    }
-    /* ── Worldpay payment form fix for WooCommerce Blocks ── */
-    .wc-block-components-radio-control-accordion-content iframe {
-        height: 44px !important;
-        max-height: 44px !important;
-    }
-    .wc-block-components-radio-control-accordion-content .wc-block-gateway-input.field {
-        height: auto !important;
-        margin-bottom: 12px;
-    }
-    .wc-block-components-radio-control-accordion-content {
-        padding: 16px !important;
-    }
-    #access_worldpay_checkout-card-number,
-    #access_worldpay_checkout-card-expiry,
-    #access_worldpay_checkout-card-cvc {
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        overflow: hidden;
-        height: 44px !important;
-    }
-    #access_worldpay_checkout-card-expiry,
-    #access_worldpay_checkout-card-cvc {
-        display: inline-block;
-        width: calc(50% - 8px) !important;
-    }
-    #access_worldpay_checkout-card-cvc { margin-left: 12px; }
-    #access_worldpay_checkout-card-holder-name {
-        width: 100% !important;
-        height: 44px;
-        padding: 0 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 14px;
-        margin-top: 12px;
-    }
-    /* ── Pagination — site red for active/hover ── */
-    .woocommerce nav.woocommerce-pagination ul li a:hover,
-    .woocommerce nav.woocommerce-pagination ul li span.current,
-    nav.woocommerce-pagination ul li a:hover,
-    nav.woocommerce-pagination ul li span.current {
-        background: #BF3617 !important;
-        color: #fff !important;
-        border-color: #BF3617 !important;
-    }
-    .woocommerce nav.woocommerce-pagination ul li a,
-    nav.woocommerce-pagination ul li a {
-        border-color: #BF3617 !important;
-        color: #BF3617 !important;
-    }
-    /* ── Hide Archives, Categories sidebar widgets + default Mobex footer ── */
-    .shop-bottom-widgets,
-    #et-footer-default {
-        display: none !important;
-    }
-
-    /* ── Single product page layout ── */
-    body.single-product .summary.entry-summary {
-        display: flex; flex-direction: column; min-height: 450px;
-    }
-    body.single-product .summary .product_title {
-        margin-bottom: 10px; font-size: 24px; font-weight: 700;
-    }
-    body.single-product .summary .price {
-        margin-top: 10px; margin-bottom: 20px; font-size: 1.8em;
-    }
-    body.single-product .summary form.cart {
-        margin-top: 15px; margin-bottom: 20px;
-    }
-    /* Hide default WooCommerce meta (categories/tags) on product pages */
-    body.single-product .product_meta {
-        display: none !important;
-    }
-    /* Hide Callout/Qty text that appears after add to cart */
-    body.single-product .summary .callout-field,
-    body.single-product .summary p:has(> .callout),
-    body.single-product .summary > p[style] {
-        display: none !important;
-    }
-    /* Hide reviews tab */
-    body.single-product .woocommerce-Reviews,
-    body.single-product #tab-reviews,
-    body.single-product li.reviews_tab {
-        display: none !important;
-    }
-    /* Hide WooCommerce tabs - show description inline */
-    body.single-product .woocommerce-tabs {
-        display: none !important;
-    }
-
-    /* SKU / Part No / Weight meta row */
-    .mvp-product-meta-info {
-        margin-bottom: 15px; font-size: 14px; color: #666;
-    }
-    .mvp-product-meta-info .meta-label { color: #888; }
-    .mvp-product-meta-info .meta-value { font-family: monospace; color: #333; font-weight: 600; }
-    .mvp-product-meta-info .meta-sep { margin: 0 12px; color: #ccc; }
-
-    /* Request a Price button */
-    .mvp-price-request-text {
-        font-size: 1.4em; font-weight: 600; color: #888; margin: 10px 0 5px;
-    }
-    .mvp-request-price-btn {
-        display: inline-block; background: #F29F05; color: #fff; border: none;
-        padding: 12px 28px; font-size: 15px; font-weight: 700; border-radius: 4px;
-        cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;
-        text-decoration: none; margin: 10px 0 15px;
-    }
-    .mvp-request-price-btn:hover { background: #F29F05; color: #fff; }
-
-    /* Estimated Delivery */
-    .mvp-delivery-time {
-        margin: 15px 0; padding: 12px 15px;
-        background: #fff8e6; border-radius: 6px; border-left: 4px solid #F29F05;
-    }
-    .mvp-delivery-time .delivery-label { font-weight: 600; color: #333; margin-right: 8px; }
-    .mvp-delivery-time .delivery-value { color: #F29F05; font-weight: 600; }
-
-    /* Compatible Vehicles */
-    .mvp-vehicle-compat {
-        margin-top: auto !important; padding: 15px;
-        background: #f5f5f5; border-radius: 6px; border-left: 4px solid #F29F05;
-    }
-    .mvp-vehicle-compat h4 { margin: 0 0 10px; font-size: 0.95em; color: #333; font-weight: 600; }
-    .mvp-vehicle-compat ul { margin: 0; padding: 0; list-style: none; }
-    .mvp-vehicle-compat li {
-        padding: 5px 0; border-bottom: 1px solid #e0e0e0; font-size: 0.9em;
-    }
-    .mvp-vehicle-compat li:last-child { border-bottom: none; }
-    .mvp-vehicle-compat .v-name { font-weight: 600; color: #333; }
-    .mvp-vehicle-compat .v-year { color: #666; margin-left: 5px; }
-    .mvp-vehicle-compat .v-empty { color: #999; font-style: italic; font-size: 0.9em; }
-
-    /* Hide related products */
-    body.single-product .related.products {
-        display: none !important;
-    }
-
-    /* Hide review form, post navigation (Previous/Next), and any stray borders between description and recently viewed */
-    body.single-product #reviews,
-    body.single-product #review_form_wrapper,
-    body.single-product .woocommerce-Reviews,
-    body.single-product #respond,
-    body.single-product .comment-respond,
-    body.single-product .storefront-product-pagination,
-    body.single-product nav.post-navigation,
-    body.single-product .product-navigation,
-    body.single-product .mobex-product-navigation,
-    body.single-product .product > .summary ~ hr,
-    body.single-product .product > .summary ~ .clear {
-        display: none !important;
-    }
-    /* Remove stray borders/margins/lines from hidden woo sections */
-    body.single-product .woocommerce-tabs,
-    body.single-product .related.products,
-    body.single-product .up-sells,
-    body.single-product .cross-sells {
-        margin: 0 !important; padding: 0 !important; border: none !important;
-        height: 0 !important; overflow: hidden !important;
-    }
-    /* Kill all hr and border lines between description and recently viewed */
-    body.single-product div.product hr,
-    body.single-product div.product > .clear,
-    body.single-product .products-separator,
-    body.single-product .product-separator {
-        display: none !important;
-    }
-    body.single-product div.product > div:not(.mvp-product-description):not(.images):not(.summary):not(.mvp-vehicle-notice):not([class*="recently"]):not([class*="widget"]):not(.mvp-vehicle-compat) {
-        border: none !important;
-    }
-
-    /* Product description section (below image/summary) */
-    .mvp-product-description {
-        padding: 25px 0; border-top: 1px solid #eee; margin-top: 20px;
-        padding-bottom: 0; margin-bottom: 0;
-        clear: both;
-    }
-    .mvp-product-description h3 {
-        font-size: 18px; font-weight: 700; color: #333; margin: 0 0 12px;
-    }
-    .mvp-product-description p, .mvp-product-description div {
-        font-size: 14px; color: #555; line-height: 1.7;
-    }
-
-    /* ── Hide orange vehicle filter bar (Model/Year/Engine/Transmission/Trim) ── */
-    body:not(.home) .widget_product_vehicle_filter_widget,
-    body:not(.home) .product-vehicle-filter,
-    body:not(.home) .vehicle-filter-mobile-toggle {
-        display: none !important;
-    }
-
-    /* ── "Viewing parts for" bar — red background ── */
-    .mvp-vehicle-notice {
-        background: #BF3617 !important;
-    }
-    .mvp-vehicle-notice a {
-        color: #fff !important;
-    }
-    /* Hide "Viewing parts for" bar on cart, checkout, and account pages */
-    body.woocommerce-cart .mvp-vehicle-notice,
-    body.woocommerce-checkout .mvp-vehicle-notice,
-    body.woocommerce-account .mvp-vehicle-notice {
-        display: none !important;
-    }
-
-    /* ── Why Use Us ── */
-    .mvp-why-us {
-        background: #fff;
-        padding: 20px 20px 25px;
-        text-align: center; line-height: 48px;
-    }
-    .mvp-why-us h2 { font-size: 22px; font-weight: 700; color: #333; margin: 0 0 16px; }
-    .mvp-why-grid {
-        display: flex; flex-wrap: nowrap; justify-content: center;
-        gap: 20px; max-width: 1100px; margin: 0 auto;
-    }
-    .mvp-why-card {
-        background: #fff; border-radius: 8px; padding: 18px 14px 16px;
-        flex: 1 1 0; max-width: 170px; text-align: center; line-height: 48px;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .mvp-why-card:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
-    .mvp-why-icon { width: 48px; height: 48px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; }
-    .mvp-why-icon svg { width: 40px; height: 40px; fill: none; stroke: #034C8C; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-    .mvp-why-card h3 { font-size: 13px; font-weight: 700; color: #333; margin: 0 0 6px; }
-    .mvp-why-card p { font-size: 11px; color: #888; line-height: 1.4; margin: 0; }
-    @media (max-width: 1024px) {
-        .mvp-why-grid { flex-wrap: wrap; gap: 16px; }
-        .mvp-why-card { flex: 1 1 200px; max-width: 30%; padding: 20px 16px 18px; }
-    }
-    @media (max-width: 768px) {
-        .mvp-why-us { padding: 25px 20px 30px; }
-        .mvp-why-grid { flex-wrap: wrap; gap: 16px; }
-        .mvp-why-card { flex: 1 1 200px; max-width: 45%; padding: 20px 16px 18px; }
-        .mvp-why-card h3 { font-size: 14px; }
-        .mvp-why-card p { font-size: 12px; line-height: 1.5; }
-    }
-    @media (max-width: 480px) {
-        .mvp-why-card { flex: 1 1 130px; max-width: 45%; padding: 14px 10px 12px; }
-    }
-
-    /* ── Custom Footer ── */
-    .mvp-footer * { box-sizing: border-box; }
-    .mvp-footer {
-        background: #1a1a2e; color: #ccc;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        font-size: 14px; line-height: 1.7; padding: 0; margin: 0; width: 100%;
-    }
-    .mvp-footer-main {
-        max-width: 1300px; margin: 0 auto; padding: 50px 30px 40px;
-        display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr 1fr; gap: 30px;
-    }
-    .mvp-footer-col h4 {
-        color: #fff; font-size: 16px; font-weight: 600; margin: 0 0 18px 0;
-        padding-bottom: 12px; border-bottom: 2px solid #F29F05;
-        text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
-    }
-    .mvp-footer-col ul { list-style: none; margin: 0; padding: 0; }
-    .mvp-footer-col ul li { margin-bottom: 8px; }
-    .mvp-footer-col ul li a { color: #ccc; text-decoration: none; transition: color 0.2s ease; }
-    .mvp-footer-col ul li a:hover { color: #F29F05; }
-    .mvp-footer-company-name { color: #fff; font-size: 20px; font-weight: 700; margin: 0 0 4px 0; }
-    .mvp-footer-trading { font-size: 12px; color: #999; margin-bottom: 16px; }
-    .mvp-footer-contact { margin-bottom: 16px; }
-    .mvp-footer-contact p { margin: 0 0 6px 0; color: #ccc; font-size: 13px; line-height: 1.6; }
-    .mvp-footer-contact a { color: #F29F05; text-decoration: none; }
-    .mvp-footer-contact a:hover { color: #fff; }
-    .mvp-footer-phone { font-size: 16px !important; font-weight: 600; color: #fff !important; }
-    .mvp-footer-reg { font-size: 12px; color: #888; margin-bottom: 16px; }
-    .mvp-footer-reg p { margin: 0 0 2px 0; }
-    .mvp-footer-payments { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-    .mvp-footer-payments .pay-icon {
-        background: #fff; color: #333; border-radius: 4px; padding: 4px 10px;
-        font-size: 11px; font-weight: 700; letter-spacing: 0.3px;
-        display: inline-flex; align-items: center; height: 28px;
-    }
-    .mvp-footer-bottom { border-top: 1px solid #2a2a3e; background: #151525; }
-    .mvp-footer-bottom-inner {
-        max-width: 1300px; margin: 0 auto; padding: 18px 30px;
-        display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
-    }
-    .mvp-footer-copyright { color: #888; font-size: 13px; margin: 0; }
-    .mvp-footer-bottom-links { display: flex; gap: 8px; align-items: center; font-size: 13px; }
-    .mvp-footer-bottom-links a { color: #888; text-decoration: none; transition: color 0.2s ease; }
-    .mvp-footer-bottom-links a:hover { color: #F29F05; }
-    .mvp-footer-bottom-links .sep { color: #555; }
-    @media (max-width: 1024px) {
-        .mvp-footer-main { grid-template-columns: 1fr 1fr; gap: 24px 30px; padding: 40px 24px 30px; }
-        .mvp-footer-col:first-child { grid-column: 1 / -1; }
-    }
-    @media (max-width: 768px) {
-        .mvp-footer-main { grid-template-columns: 1fr; gap: 20px; padding: 30px 20px 24px; }
-        .mvp-footer-bottom-inner { flex-direction: column; text-align: center; line-height: 48px; padding: 14px 20px; }
-    }
-
-    /* ── Responsive: hide custom header on mobile, show default ── */
-    @media (max-width: 1024px) {
-        .mvp-hdr { display: none !important; }
-        #et-desktop-8543 { display: none !important; background: #F29F05 !important; }
-        #et-desktop-8543 .header-logo .logo { visibility: hidden; width: 0; height: 0; position: absolute; }
-        #et-desktop-8543 .header-logo {
-            display: block;
-            background-image: url('<?php echo esc_url( $logo_url ); ?>');
-            background-repeat: no-repeat; background-size: contain;
-            background-position: center left;
-            width: 180px; height: 40px; min-width: 180px;
-        }
-        #et-desktop-8543 .header-menu > li > a,
-        #et-desktop-8543 .header-menu > li > a .txt { color: #fff !important; }
-    }
-    </style>
+    <link rel="stylesheet" id="mvp-sitewide-header" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-sitewide-header.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-sitewide-header.css' ); ?>">
     <?php
 }
 
@@ -928,6 +248,14 @@ function mvp_sitewide_header_inject() {
     $menu_items = wp_get_nav_menu_items( 'header-menu-1' );
     $nav_html = '';
     $vehicle_cats = get_terms( array( 'taxonomy' => 'product_cat', 'parent' => 3590, 'hide_empty' => false ) );
+    // Menu = vehicles only: keep terms that have vehicle_model + vehicle_slug, drop mis-categorised
+    // leaf departments (Brakes, Air Con, Rear Closure, etc.). Then order popular-first (Deliver 9, then 3...).
+    if ( ! is_wp_error( $vehicle_cats ) ) {
+        $vehicle_cats = array_values( array_filter( $vehicle_cats, function( $vc ) {
+            return get_term_meta( $vc->term_id, 'vehicle_model', true ) && get_term_meta( $vc->term_id, 'vehicle_slug', true );
+        } ) );
+        usort( $vehicle_cats, 'mvp_vehicle_popularity_cmp' );
+    }
     if ( $menu_items ) {
         foreach ( $menu_items as $item ) {
             if ( $item->menu_item_parent != 0 ) continue;
@@ -948,7 +276,7 @@ function mvp_sitewide_header_inject() {
                     if ( ! isset( $groups[$family] ) ) $groups[$family] = array();
                     $groups[$family][] = array( 'slug' => (get_term_meta( $vc->term_id, 'vehicle_slug', true ) ?: $vc->slug), 'name' => $display, 'img' => get_term_meta( $vc->term_id, 'vehicle_image', true ) );
                 }
-                ksort( $groups );
+                // (groups already in popularity order — no alphabetical ksort)
                 foreach ( $groups as $family => $vehicles ) {
                     $nav_html .= '<div style="padding:6px 16px 2px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.5px;">' . esc_html( $family ) . '</div>';
                     foreach ( $vehicles as $v ) {
@@ -1032,7 +360,7 @@ function mvp_sitewide_header_inject() {
         +   '</div>'
         +   '<a href="tel:01953528800" class="mvp-hdr-r2-phone">'
         +     '<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.81.37 1.6.65 2.37a2 2 0 01-.45 2.11L8.09 9.42a16 16 0 006 6l1.22-1.22a2 2 0 012.11-.45c.77.28 1.56.52 2.37.65a2 2 0 011.72 2.03z"/></svg>'
-        +     '<span class="mvp-hdr-r2-phone-text"><span class="mvp-hdr-r2-phone-num">01953 528300</span><span class="mvp-hdr-r2-phone-sub">Call us between 9 AM - 5 PM</span></span>'
+        +     '<span class="mvp-hdr-r2-phone-text"><span class="mvp-hdr-r2-phone-num">01953 528800</span><span class="mvp-hdr-r2-phone-sub">Call us between 9 AM - 5 PM</span></span>'
         +   '</a>'
         + '</div></div>'
 
@@ -1165,708 +493,7 @@ add_action( 'wp_head', 'mvp_facelift_css', 999 );
 function mvp_facelift_css() {
     if ( ! is_front_page() && ! is_home() ) return;
     ?>
-    <style id="mvp-facelift-css">
-    /* === HIDE: RevSlider widget (inside elementor section a40da3e) === */
-    body.home .elementor-element-a40da3e,
-    body.home sr7-module,
-    body.home .wp-block-themepunch-revslider,
-    body.home .elementor-widget-slider_revolution {
-        display: none !important;
-    }
-
-    /* === HIDE: Department category icons row === */
-    body.home .elementor-element-099500a {
-        display: none !important;
-    }
-
-    /* === HIDE: Featured manufacturers heading + logos === */
-    body.home .elementor-element-9f85e6f,
-    body.home .elementor-element-e540d81 {
-        display: none !important;
-    }
-
-    /* === HIDE: Promo banners (Engine Oil, Tools, Batteries) === */
-    body.home .elementor-element-23763df {
-        display: none !important;
-    }
-
-    /* === HIDE: "Know what you pay for" section === */
-    body.home .elementor-element-20e40c9 {
-        display: none !important;
-    }
-
-    /* === HIDE: "Car repairs have never been so easy" section === */
-    body.home .elementor-element-7033a3b {
-        display: none !important;
-    }
-
-    /* === HIDE: Empty spacer section === */
-    body.home .elementor-element-9e19027 {
-        display: none !important;
-    }
-
-    /* === HIDE: Original 6-dropdown vehicle filter bar === */
-    body.home .elementor-element-3e78bee {
-        display: block !important;
-    }
-
-    /* ── Hero Banner ── */
-    #mvp-facelift-hero-area { padding: 24px 0; }
-    .mvp-hero {
-        position: relative;
-        max-width: 1320px;
-        margin: 0 auto;
-        height: 348px;
-        border-radius: 6px;
-        background-image: url('https://shane.maxusvanparts.co.uk/wp-content/uploads/resized.jpg');
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        margin-bottom: 0;
-    }
-    .mvp-hero-content {
-        position: relative;
-        z-index: 2;
-        max-width: none;
-        padding: 60px 120px;
-        text-align: left;
-    }
-    .mvp-hero-content h1 { white-space: nowrap;
-        font-family: 'Oswald', sans-serif;
-        font-size: 56px;
-        font-weight: 700;
-        color: #fff;
-        line-height: 1;
-        margin: 0 0 8px;
-        text-transform: uppercase;
-        letter-spacing: 0px;
-        text-shadow: 1px 1px 1px rgba(0,0,0,0.25);
-    }
-    .mvp-hero-content h1 .hero-sub {
-        display: block;
-        font-size: 32px;
-        line-height: 1;
-        margin-top: 4px;
-    }
-    .mvp-hero-content p {
-        font-family: 'Inter', sans-serif;
-        font-size: 18px;
-        font-weight: 500;
-        color: #fff;
-        line-height: 1.35;
-        margin: 16px 0 24px;
-        max-width: 520px;
-    }
-    .mvp-hero-btn {
-        display: inline-block;
-        padding: 12px 32px;
-        background: #F29F05;
-        color: #fff;
-        font-size: 15px;
-        font-weight: 600;
-        text-decoration: none;
-        border-radius: 4px;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    .mvp-hero-btn:hover {
-        background: #e08e00;
-        color: #fff;
-    }
-    @media (max-width: 768px) {
-        .mvp-hero { height: 300px; }
-        .mvp-hero-content { padding: 30px 30px; }
-        .mvp-hero-content h1 { white-space: nowrap; font-size: 42px; }
-        .mvp-hero-content h1 .hero-sub { font-size: 26px; }
-        .mvp-hero-content p { font-size: 15px; margin: 12px 0 18px; }
-        .mvp-hero-btn { padding: 10px 24px; font-size: 13px; }
-    }
-    @media (max-width: 480px) {
-        .mvp-hero { height: 220px; }
-        .mvp-hero-content { padding: 20px 20px; }
-        .mvp-hero-content h1 { white-space: nowrap; font-size: 28px; }
-        .mvp-hero-content h1 .hero-sub { font-size: 18px; }
-        .mvp-hero-content p { font-size: 13px; margin: 8px 0 12px; }
-    }
-
-    /* ── Vehicle Carousel ── */
-    .mvp-vehicles {
-        background: #fff;
-        padding: 25px 0 20px;
-        text-align: center; line-height: 48px;
-    }
-    .mvp-carousel-wrapper {
-        position: relative;
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 0 60px;
-    }
-    .mvp-carousel-track {
-        display: flex;
-        gap: 8px;
-        overflow-x: auto;
-        scroll-behavior: smooth;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        padding: 10px 5px;
-    }
-    .mvp-carousel-track::-webkit-scrollbar { display: none; }
-    .mvp-vehicle-card {
-        flex: 0 0 140px;
-        text-align: center; line-height: 48px;
-        text-decoration: none;
-        color: #333;
-        padding: 5px;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-    .mvp-vehicle-card:hover { transform: translateY(-3px); }
-    .mvp-vehicle-circle {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 3px solid #ccc;
-        background: #f8f8f8;
-        margin: 0 auto 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-    .mvp-vehicle-circle img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
-    }
-    .mvp-vehicle-card:hover .mvp-vehicle-circle {
-        border-color: #999;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    }
-    .mvp-vehicle-card:hover .mvp-vehicle-name { color: #F29F05; }
-    .mvp-vehicle-name {
-        font-weight: 600;
-        font-size: 12px;
-        margin-bottom: 2px;
-        color: #333;
-        transition: color 0.3s ease;
-        line-height: 1.2;
-    }
-    .mvp-vehicle-years {
-        font-size: 11px;
-        color: #999;
-    }
-    .mvp-carousel-nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 30px;
-        height: 40px;
-        background: transparent;
-        color: #333;
-        border: none;
-        cursor: pointer;
-        font-size: 24px;
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: color 0.3s;
-    }
-    .mvp-carousel-nav:hover { color: #F29F05; }
-    .mvp-carousel-nav.prev { left: 15px; }
-    .mvp-carousel-nav.next { right: 15px; }
-    @media (max-width: 767px) {
-        .mvp-carousel-wrapper { padding: 0 40px; }
-        .mvp-carousel-track { gap: 6px; }
-        .mvp-vehicle-card { flex: 0 0 100px; }
-        .mvp-vehicle-circle { width: 90px; height: 90px; }
-        .mvp-vehicle-name { font-size: 10px; }
-        .mvp-carousel-nav { width: 24px; height: 30px; font-size: 20px; }
-        .mvp-carousel-nav.prev { left: 10px; }
-        .mvp-carousel-nav.next { right: 10px; }
-    }
-
-    /* ── Why Use Us ── */
-    .mvp-why-us {
-        background: #fff;
-        padding: 20px 20px 25px;
-        text-align: center; line-height: 48px;
-    }
-    .mvp-why-us h2 {
-        font-size: 22px;
-        font-weight: 700;
-        color: #333;
-        margin: 0 0 16px;
-    }
-    .mvp-why-grid {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: center;
-        gap: 20px;
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-    .mvp-why-card {
-        background: #fff;
-        border-radius: 8px;
-        padding: 18px 14px 16px;
-        flex: 1 1 0;
-        max-width: 170px;
-        text-align: center; line-height: 48px;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .mvp-why-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    }
-    .mvp-why-icon {
-        width: 48px;
-        height: 48px;
-        margin: 0 auto 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .mvp-why-icon svg {
-        width: 40px;
-        height: 40px;
-        fill: none;
-        stroke: #034C8C;
-        stroke-width: 1.5;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-    .mvp-why-card h3 {
-        font-size: 13px;
-        font-weight: 700;
-        color: #333;
-        margin: 0 0 6px;
-    }
-    .mvp-why-card p {
-        font-size: 11px;
-        color: #888;
-        line-height: 1.4;
-        margin: 0;
-    }
-    @media (max-width: 1024px) {
-        .mvp-why-grid { flex-wrap: wrap; gap: 16px; }
-        .mvp-why-card { flex: 1 1 200px; max-width: 30%; padding: 20px 16px 18px; }
-    }
-    @media (max-width: 768px) {
-        .mvp-why-us { padding: 25px 20px 30px; }
-        .mvp-why-grid { flex-wrap: wrap; gap: 16px; }
-        .mvp-why-card { flex: 1 1 200px; max-width: 45%; padding: 20px 16px 18px; }
-        .mvp-why-card h3 { font-size: 14px; }
-        .mvp-why-card p { font-size: 12px; line-height: 1.5; }
-    }
-    @media (max-width: 480px) {
-        .mvp-why-card { flex: 1 1 130px; max-width: 45%; padding: 14px 10px 12px; }
-    }
-
-    /* ── Custom Footer ── */
-    .mvp-footer * { box-sizing: border-box; }
-    .mvp-footer {
-        background: #1a1a2e;
-        color: #ccc;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        font-size: 14px;
-        line-height: 1.7;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-    }
-    .mvp-footer-main {
-        max-width: 1300px;
-        margin: 0 auto;
-        padding: 50px 30px 40px;
-        display: grid;
-        grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr 1fr;
-        gap: 30px;
-    }
-    .mvp-footer-col h4 {
-        color: #fff;
-        font-size: 16px;
-        font-weight: 600;
-        margin: 0 0 18px 0;
-        padding-bottom: 12px;
-        border-bottom: 2px solid #F29F05;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        white-space: nowrap;
-    }
-    .mvp-footer-col ul { list-style: none; margin: 0; padding: 0; }
-    .mvp-footer-col ul li { margin-bottom: 8px; }
-    .mvp-footer-col ul li a {
-        color: #ccc;
-        text-decoration: none;
-        transition: color 0.2s ease;
-    }
-    .mvp-footer-col ul li a:hover { color: #F29F05; }
-    .mvp-footer-company-name {
-        color: #fff;
-        font-size: 20px;
-        font-weight: 700;
-        margin: 0 0 4px 0;
-    }
-    .mvp-footer-trading {
-        font-size: 12px;
-        color: #999;
-        margin-bottom: 16px;
-    }
-    .mvp-footer-contact { margin-bottom: 16px; }
-    .mvp-footer-contact p { margin: 0 0 6px 0; color: #ccc; font-size: 13px; line-height: 1.6; }
-    .mvp-footer-contact a { color: #F29F05; text-decoration: none; }
-    .mvp-footer-contact a:hover { color: #fff; }
-    .mvp-footer-phone { font-size: 16px !important; font-weight: 600; color: #fff !important; }
-    .mvp-footer-reg { font-size: 12px; color: #888; margin-bottom: 16px; }
-    .mvp-footer-reg p { margin: 0 0 2px 0; }
-    .mvp-footer-payments { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-    .mvp-footer-payments .pay-icon {
-        background: #fff;
-        color: #333;
-        border-radius: 4px;
-        padding: 4px 10px;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.3px;
-        display: inline-flex;
-        align-items: center;
-        height: 28px;
-    }
-    .mvp-footer-bottom {
-        border-top: 1px solid #2a2a3e;
-        background: #151525;
-    }
-    .mvp-footer-bottom-inner {
-        max-width: 1300px;
-        margin: 0 auto;
-        padding: 18px 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    .mvp-footer-copyright { color: #888; font-size: 13px; margin: 0; }
-    .mvp-footer-bottom-links { display: flex; gap: 8px; align-items: center; font-size: 13px; }
-    .mvp-footer-bottom-links a { color: #888; text-decoration: none; transition: color 0.2s ease; }
-    .mvp-footer-bottom-links a:hover { color: #F29F05; }
-    .mvp-footer-bottom-links .sep { color: #555; }
-    @media (max-width: 1024px) {
-        .mvp-footer-main { grid-template-columns: 1fr 1fr; gap: 24px 30px; padding: 40px 24px 30px; }
-        .mvp-footer-col:first-child { grid-column: 1 / -1; }
-    }
-    @media (max-width: 768px) {
-        .mvp-footer-main { grid-template-columns: 1fr; gap: 20px; padding: 30px 20px 24px; }
-        .mvp-footer-bottom-inner { flex-direction: column; text-align: center; line-height: 48px; padding: 14px 20px; }
-    }
-
-    
-    /* === Why Use Us icon mask-images (Elementor can't resolve media IDs) === */
-    .elementor-element-c73c57f > .elementor-widget-container > .et-icon-box .icon:before {
-        mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/shield-check.svg) !important;
-        -webkit-mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/shield-check.svg) !important;
-    }
-    .elementor-element-bd73a19 > .elementor-widget-container > .et-icon-box .icon:before {
-        mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/headset.svg) !important;
-        -webkit-mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/headset.svg) !important;
-    }
-    .elementor-element-a272fa2 > .elementor-widget-container > .et-icon-box .icon:before {
-        mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/toolbox.svg) !important;
-        -webkit-mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/toolbox.svg) !important;
-    }
-    .elementor-element-99bbea6 > .elementor-widget-container > .et-icon-box .icon:before {
-        mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/clipboard-check.svg) !important;
-        -webkit-mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/clipboard-check.svg) !important;
-    }
-    .elementor-element-4103e18 > .elementor-widget-container > .et-icon-box .icon:before {
-        mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/telephone-call.svg) !important;
-        -webkit-mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/telephone-call.svg) !important;
-    }
-    .elementor-element-d981530 > .elementor-widget-container > .et-icon-box .icon:before {
-        mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/shipping.svg) !important;
-        -webkit-mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/shipping.svg) !important;
-    }
-    /* === Product loop tweaks to match target === */
-    body.home ul.products .product .button,
-    body.home ul.products .product .added_to_cart {
-        background-color: transparent !important;
-        color: #888 !important;
-        box-shadow: none !important;
-    }
-    body.home ul.products .product .button:hover,
-    body.home ul.products .product .added_to_cart:hover {
-        background-color: transparent !important;
-        color: #333 !important;
-    }
-    body.home ul.products .product .button:before,
-    body.home ul.products .product .button:after,
-    body.home ul.products .product .added_to_cart:before,
-    body.home ul.products .product .added_to_cart:after {
-        display: none !important;
-    }
-    body.home ul.products .product .star-rating-wrap {
-        display: none !important;
-    }
-
-    /* === Hide extra Elementor sections === */
-    body.home .elementor-element-1eaa1c9, body.home .elementor-element-f5b0776,
-    body.home .elementor-element-1fb0185, body.home .elementor-element-b14d001,
-    body.home .elementor-element-09f258e, body.home .elementor-element-1b38164,
-    body.home .elementor-element-1af2051, body.home .elementor-element-4a31403,
-    body.home .elementor-element-25b37be, body.home .elementor-element-099500a { display: none !important; }
-    body.home .mvp-search-bar-wrap { display: block !important; }
-
-    /* === Hide small custom Why Us (keep bigger Elementor version) === */
-    .mvp-why-us { display: none !important; }
-
-    /* === Vehicle filter bar (DESKTOP ONLY) === */
-    @media (min-width: 1025px) {
-    body.home .elementor-element-3e78bee, body.home .elementor-element-3e78bee.breakpoint-767 { display: none !important; }
-    body.home .elementor-element-3e78bee .vehicle-filter-mobile-toggle { display: none !important; }
-    body.home .elementor-element-3e78bee form.product-vehicle-filter { display: flex !important; visibility: visible !important; }
-    body.home .elementor-element-3e78bee .atts { display: flex !important; flex: 0 0 336px !important; gap: 8px !important; height: 36px !important; align-items: center !important; }
-    body.home .elementor-element-3e78bee .vf-item { margin: 0 !important; height: 36px !important; }
-    body.home .elementor-element-3e78bee .vf-item.model { flex: 0 0 208px !important; }
-    body.home .elementor-element-3e78bee .vf-item.year { flex: 0 0 120px !important; }
-    body.home .elementor-element-3e78bee .last { flex: 1 !important; display: flex !important; align-items: center !important; }
-    body.home .elementor-element-3e78bee .vin { display: flex !important; align-items: center !important; }
-    body.home .elementor-element-3e78bee .vin span { color: #444 !important; font-weight: 700 !important; font-size: 12px !important; padding: 0 8px !important; }
-    body.home .elementor-element-3e78bee .vin input { padding: 0 10px !important; border: none !important; border-radius: 4px !important; font-size: 13px !important; height: 36px !important; width: 180px !important; }
-    body.home .elementor-element-3e78bee .reg, body.home .elementor-element-3e78bee .reg-input { width: 180px !important; min-width: 180px !important; flex: 0 0 180px !important; }
-    body.home .elementor-element-3e78bee .reg-input { padding: 0 10px !important; font-size: 13px !important; height: 36px !important; border: none !important; border-radius: 4px !important; }
-    body.home .elementor-element-3e78bee input[type="submit"] { background-color: #BF3617 !important; color: #fff !important; border: none !important; border-radius: 6px !important; font-size: 13px !important; font-weight: 700 !important; height: 36px !important; width: 75px !important; }
-    body.home .elementor-element-3e78bee input[type="submit"]:hover { background-color: #111 !important; }
-    body.home .elementor-element-3e78bee .select2-container, body.home .elementor-element-3e78bee .select2-selection--single { height: 36px !important; }
-    body.home .elementor-element-3e78bee .select2-selection__rendered { line-height: 36px !important; padding: 0 10px !important; font-size: 13px !important; }
-    body.home .elementor-element-3e78bee .select2-selection__arrow { height: 36px !important; }
-    }
-
-    /* === Why Use Us icons (Elementor - fix mask-image URLs) === */
-    .elementor-element-c73c57f .et-icon-box .icon:before { mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/shield-check.svg) !important; -webkit-mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/shield-check.svg) !important; }
-    .elementor-element-bd73a19 .et-icon-box .icon:before { mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/headset.svg) !important; -webkit-mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/headset.svg) !important; }
-    .elementor-element-a272fa2 .et-icon-box .icon:before { mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/toolbox.svg) !important; -webkit-mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/toolbox.svg) !important; }
-    .elementor-element-99bbea6 .et-icon-box .icon:before { mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/clipboard-check.svg) !important; -webkit-mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/clipboard-check.svg) !important; }
-    .elementor-element-4103e18 .et-icon-box .icon:before { mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/telephone-call.svg) !important; -webkit-mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/telephone-call.svg) !important; }
-    .elementor-element-d981530 .et-icon-box .icon:before { mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/shipping.svg) !important; -webkit-mask-image: url(https://shane.maxusvanparts.co.uk/wp-content/uploads/shipping.svg) !important; }
-    .why-use-us-grid > .e-con-inner { display: flex !important; align-items: stretch !important; }
-    .why-use-us-grid > .e-con-inner > .e-child { display: flex !important; flex-direction: column !important; }
-    .why-use-us-grid .elementor-widget-et_icon_box { flex: 1 !important; }
-    .why-use-us-grid { flex: 1 !important; }
-    .elementor-element-fca08fb > .e-con-inner { align-items: flex-start !important; }
-
-    /* ══════════════════════════════════════════════════════════
-       MOBILE OVERRIDES — show Elementor defaults on mobile
-       (our custom desktop injections dont run on mobile,
-       so we need the original Elementor sections visible)
-       ══════════════════════════════════════════════════════════ */
-    @media (max-width: 1024px) {
-        /* Show RevSlider on mobile */
-        body.home .elementor-element-a40da3e,
-        body.home sr7-module,
-        body.home .wp-block-themepunch-revslider,
-        body.home .elementor-widget-slider_revolution {
-            display: none !important;
-        }
-
-        /* HIDE Elementor filter on mobile — replaced by custom mobile filter */
-        body.home .elementor-element-3e78bee,
-        body.home .elementor-element-3e78bee.breakpoint-767 {
-            display: none !important;
-        }
-        /* Hide the toggle — form always visible */
-        body.home .elementor-element-3e78bee .vehicle-filter-mobile-toggle {
-            display: none !important;
-        }
-        /* Force form visible (theme hides it behind toggle on mobile) */
-        body.home .elementor-element-3e78bee form.product-vehicle-filter,
-        body.home .et-vehicle-filter.breakpoint-767 form.product-vehicle-filter {
-            display: flex !important;
-            visibility: visible !important;
-            flex-direction: column !important;
-            flex-wrap: wrap !important;
-            gap: 10px !important;
-            padding: 12px !important;
-        }
-        body.home .elementor-element-3e78bee .atts {
-            flex: 1 1 100% !important;
-            width: 100% !important;
-            gap: 8px !important;
-            height: auto !important;
-            flex-direction: column !important;
-        }
-        body.home .elementor-element-3e78bee .vf-item,
-        body.home .elementor-element-3e78bee .vf-item.model,
-        body.home .elementor-element-3e78bee .vf-item.year {
-            flex: 1 1 100% !important;
-            width: 100% !important;
-            min-width: 0 !important;
-        }
-        body.home .elementor-element-3e78bee .last {
-            flex: 1 1 100% !important;
-            width: 100% !important;
-            flex-wrap: wrap !important;
-            flex-direction: column !important;
-            gap: 8px !important;
-        }
-        body.home .elementor-element-3e78bee .vin {
-            width: 100% !important;
-            flex: 1 1 100% !important;
-            flex-direction: column !important;
-        }
-        body.home .elementor-element-3e78bee .vin span {
-            display: none !important;
-        }
-        body.home .elementor-element-3e78bee .vin input,
-        body.home .elementor-element-3e78bee .reg-input {
-            width: 100% !important;
-            flex: 1 1 auto !important;
-            box-sizing: border-box !important;
-        }
-        body.home .elementor-element-3e78bee .reg,
-        body.home .elementor-element-3e78bee .reg-input {
-            width: 100% !important;
-            flex: 1 1 100% !important;
-            min-width: 0 !important;
-        }
-        body.home .elementor-element-3e78bee input[type=submit] {
-            width: 100% !important;
-            flex: 1 1 auto !important;
-        }
-        body.home .elementor-element-3e78bee .select2-container {
-            width: 100% !important;
-        }
-        body.home .elementor-element-3e78bee .reset {
-            text-align: center !important;
-            display: block !important;
-        }
-
-        /* Show original category carousel */
-        body.home .elementor-element-25b37be,
-        body.home .elementor-element-099500a {
-            display: none !important;
-        }
-
-        /* Show the extra Elementor sections */
-        body.home .elementor-element-1eaa1c9,
-        body.home .elementor-element-f5b0776,
-        body.home .elementor-element-1fb0185,
-        body.home .elementor-element-b14d001,
-        body.home .elementor-element-09f258e,
-        body.home .elementor-element-1b38164,
-        body.home .elementor-element-1af2051,
-        body.home .elementor-element-4a31403 {
-            display: block !important;
-        }
-
-        /* Show Why Use Us Elementor section */
-        body.home .elementor-element-8b07793 {
-            height: auto !important;
-            min-height: 0 !important;
-            max-height: none !important;
-            overflow: visible !important;
-            display: block !important;
-        }
-
-        /* Show hero area on mobile but hide hero banner, keep carousel */
-        #mvp-facelift-hero-area {
-            display: block !important;
-            padding: 12px 0 !important;
-        }
-        #mvp-facelift-hero-area > .mvp-hero {
-            display: none !important;
-        }
-        .mvp-hero {
-            height: 200px !important;
-            border-radius: 0 !important;
-            margin: 0 !important;
-        }
-        .mvp-hero-content {
-            padding: 20px 20px !important;
-            max-width: 100% !important;
-        }
-        .mvp-hero-content h1 {
-            font-size: 28px !important;
-            white-space: normal !important;
-        }
-        .mvp-hero-content h1 .hero-sub {
-            font-size: 18px !important;
-        }
-        .mvp-hero-content p {
-            font-size: 13px !important;
-            display: none !important;
-        }
-
-        body.home .mvp-search-bar-wrap {
-            display: none !important;
-        }
-
-        /* Show original department icons / categories row */
-        body.home .elementor-element-9f85e6f,
-        body.home .elementor-element-e540d81,
-        body.home .elementor-element-23763df,
-        body.home .elementor-element-20e40c9,
-        body.home .elementor-element-7033a3b {
-            display: block !important;
-        }
-
-        /* Show vehicle circles on mobile — horizontal scroll */
-        .mvp-vehicles {
-            display: block !important;
-            padding: 10px 0;
-            overflow-x: auto;
-        }
-        .mvp-carousel-track {
-            display: flex !important;
-            gap: 10px;
-            padding: 0 16px;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        .mvp-vehicle-card {
-            flex: 0 0 80px !important;
-        }
-        .mvp-vehicle-circle {
-            width: 70px !important;
-            height: 70px !important;
-        }
-        .mvp-vehicle-name {
-            font-size: 10px !important;
-        }
-        .mvp-carousel-nav {
-            display: none !important;
-        }
-
-        /* Why Use Us — stack vertically on mobile, show all cards */
-        .elementor-element-8b07793 {
-            height: auto !important;
-            min-height: 0 !important;
-            max-height: none !important;
-            overflow: visible !important;
-            display: block !important;
-        }
-        .elementor-element-8b07793 .e-con-inner {
-            height: auto !important;
-            display: block !important;
-            flex-direction: column !important;
-        }
-        .elementor-element-8b07793 .e-child {
-            width: 100% !important;
-            max-width: 100% !important;
-            flex-basis: 100% !important;
-        }
-        .elementor-element-8b07793 .et-icon-box {
-            margin-bottom: 16px;
-        }
-
-        }
-    }
-    </style>
+    <link rel="stylesheet" id="mvp-facelift-css" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-facelift.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-facelift.css' ); ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
     <?php
@@ -1891,6 +518,7 @@ function mvp_facelift_inject_hero_and_carousel() {
 
     $cards = '';
     if ( ! is_wp_error( $vin_terms ) ) {
+        usort( $vin_terms, 'mvp_vehicle_popularity_cmp' ); // popular models first: Deliver 9, then Deliver 3, then others
         foreach ( $vin_terms as $term ) {
             $model = get_term_meta( $term->term_id, 'vehicle_model', true );
             $year  = get_term_meta( $term->term_id, 'vehicle_year', true );
@@ -2000,11 +628,10 @@ function mvp_facelift_footer() {
                     <p>Company Reg: 16322863</p>
                     <p>VAT No: 490 9953 39</p>
                 </div>
-                <div class="mvp-footer-payments">
-                    <span class="pay-icon">VISA</span>
-                    <span class="pay-icon">Mastercard</span>
-                    <span class="pay-icon">AMEX</span>
-                    <span class="pay-icon">Maestro</span>
+                <div class="mvp-footer-payments" title="We accept Visa, Mastercard and American Express">
+                    <svg class="pay-card" width="46" height="29" viewBox="0 0 46 29" aria-label="Visa"><rect width="46" height="29" rx="4" fill="#fff" stroke="#e5e5e5"/><text x="23" y="20" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" font-style="italic" fill="#1A1F71" text-anchor="middle">VISA</text></svg>
+                    <svg class="pay-card" width="46" height="29" viewBox="0 0 46 29" aria-label="Mastercard"><rect width="46" height="29" rx="4" fill="#fff" stroke="#e5e5e5"/><circle cx="19" cy="14.5" r="7.5" fill="#EB001B"/><circle cx="27" cy="14.5" r="7.5" fill="#F79E1B" fill-opacity="0.85"/></svg>
+                    <svg class="pay-card" width="46" height="29" viewBox="0 0 46 29" aria-label="American Express"><rect width="46" height="29" rx="4" fill="#006FCF"/><text x="23" y="18" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle" letter-spacing="0.5">AMEX</text></svg>
                 </div>
             </div>
             <div class="mvp-footer-col">
@@ -2202,7 +829,7 @@ function mvp_handle_price_request() {
     if ( $sent ) {
         wp_send_json_success( 'Your request has been sent. We will be in touch shortly.' );
     } else {
-        wp_send_json_error( 'Failed to send. Please try calling us on 01953 528300.' );
+        wp_send_json_error( 'Failed to send. Please try calling us on 01953 528800.' );
     }
 }
 
@@ -2212,63 +839,7 @@ function mvp_price_request_modal() {
     $nonce = wp_create_nonce( 'mvp_price_request_nonce' );
     $ajax_url = admin_url( 'admin-ajax.php' );
     ?>
-    <style>
-    .mvp-request-price-btn {
-        display: inline-block;
-        background: #BF3617;
-        color: #fff !important;
-        font-weight: 700;
-        font-size: 15px;
-        padding: 12px 28px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        text-decoration: none;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        transition: background 0.2s;
-    }
-    .mvp-request-price-btn:hover { background: #a82e13; color: #fff !important; }
-    .mvp-request-price-loop { background: #BF3617 !important; color: #fff !important; font-weight: 600 !important; border-radius: 6px !important; }
-    .mvp-request-price-loop:hover { background: #a82e13 !important; }
-    .mvp-price-request-text { font-size: 18px; font-weight: 700; color: #BF3617; margin-bottom: 12px; }
-    .mvp-price-modal-overlay {
-        display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0,0,0,0.6); z-index: 99999; align-items: center; justify-content: center;
-    }
-    .mvp-price-modal-overlay.active { display: flex; }
-    .mvp-price-modal {
-        background: #fff; border-radius: 12px; padding: 32px; max-width: 480px; width: 90%;
-        max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
-    .mvp-price-modal h3 { font-size: 20px; font-weight: 700; color: #1a1a2e; margin: 0 0 6px; }
-    .mvp-price-modal-close {
-        position: absolute; top: 12px; right: 16px; font-size: 24px; color: #999;
-        cursor: pointer; background: none; border: none; line-height: 1;
-    }
-    .mvp-price-modal-close:hover { color: #333; }
-    .mvp-price-modal-product {
-        background: #f5f5f5; border-radius: 8px; padding: 12px 16px; margin: 16px 0; font-size: 13px; color: #666;
-    }
-    .mvp-price-modal-product strong { color: #333; }
-    .mvp-price-modal label { display: block; font-size: 13px; font-weight: 600; color: #333; margin: 14px 0 4px; }
-    .mvp-price-modal input[type=text],
-    .mvp-price-modal input[type=email],
-    .mvp-price-modal input[type=tel] {
-        width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; box-sizing: border-box;
-    }
-    .mvp-price-modal input:focus { border-color: #F29F05; outline: none; box-shadow: 0 0 0 2px rgba(242,159,5,0.2); }
-    .mvp-price-modal-submit {
-        width: 100%; margin-top: 20px; padding: 14px; background: #BF3617; color: #fff;
-        border: none; border-radius: 6px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.2s;
-    }
-    .mvp-price-modal-submit:hover { background: #a82e13; }
-    .mvp-price-modal-submit:disabled { background: #ccc; cursor: not-allowed; }
-    .mvp-price-modal-msg { margin-top: 12px; padding: 10px 14px; border-radius: 6px; font-size: 14px; display: none; }
-    .mvp-price-modal-msg.success { display: block; background: #e8f5e9; color: #2e7d32; }
-    .mvp-price-modal-msg.error { display: block; background: #fbe9e7; color: #c62828; }
-    @media (max-width: 600px) { .mvp-price-modal { padding: 24px 20px; } }
-    </style>
+    <link rel="stylesheet" id="mvp-price-request-modal" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-price-request-modal.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-price-request-modal.css' ); ?>">
 
     <div class="mvp-price-modal-overlay" id="mvpPriceModal">
         <div class="mvp-price-modal">
@@ -2722,7 +1293,7 @@ function mvp_vehicle_template_redirect() {
             'hide_empty' => true,
             'orderby'    => 'name',
         ) ),
-        'cat_img_base' => 'https://shane.maxusvanparts.co.uk/wp-content/uploads/categories/',
+        'cat_img_base' => '/wp-content/uploads/categories/',
     );
 
     // Reset 404 status and set 200
@@ -2752,120 +1323,7 @@ function mvp_vehicle_render_full_page() {
     } );
     get_header();
     ?>
-    <style>
-    /* Vehicle Landing Page Styles */
-    .mvp-vehicle-page {
-        max-width: 1300px;
-        margin: 0 auto;
-        padding: 30px 20px 60px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    .mvp-vehicle-header {
-        display: flex;
-        align-items: center;
-        gap: 30px;
-        margin-bottom: 35px;
-        padding-bottom: 25px;
-        border-bottom: 2px solid #f0f0f0;
-    }
-    .mvp-vehicle-header-img {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 3px solid #ccc;
-        background: #f8f8f8;
-        overflow: hidden;
-        flex-shrink: 0;
-    }
-    .mvp-vehicle-header-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .mvp-vehicle-header-info h1 {
-        font-size: 32px;
-        font-weight: 700;
-        color: #1a1a2e;
-        margin: 0 0 6px;
-    }
-    .mvp-vehicle-header-info .mvp-vh-years {
-        font-size: 16px;
-        color: #888;
-        margin: 0 0 10px;
-    }
-    .mvp-vehicle-header-info .mvp-vh-breadcrumb {
-        font-size: 14px;
-        color: #aaa;
-    }
-    .mvp-vehicle-header-info .mvp-vh-breadcrumb a {
-        color: #034C8C;
-        text-decoration: none;
-    }
-    .mvp-vehicle-header-info .mvp-vh-breadcrumb a:hover {
-        color: #F29F05;
-    }
-    .mvp-category-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 20px;
-    }
-    .mvp-category-card {
-        background: #fff;
-        border: 1px solid #eee;
-        border-radius: 10px;
-        overflow: hidden;
-        text-decoration: none;
-        color: #333;
-        transition: transform 0.3s, box-shadow 0.3s;
-        display: flex;
-        flex-direction: column;
-    }
-    .mvp-category-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    }
-    .mvp-category-card-img {
-        width: 100%;
-        height: 150px;
-        background: #f5f5f5;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-    .mvp-category-card-img img {
-        max-width: 90%;
-        max-height: 130px;
-        object-fit: contain;
-    }
-    .mvp-category-card-body {
-        padding: 14px 16px;
-        text-align: center; line-height: 48px;
-    }
-    .mvp-category-card-body h3 {
-        font-size: 15px;
-        font-weight: 600;
-        color: #1a1a2e;
-        margin: 0 0 4px;
-    }
-    .mvp-category-card-body .mvp-cat-count {
-        font-size: 12px;
-        color: #999;
-    }
-    @media (max-width: 768px) {
-        .mvp-vehicle-header { flex-direction: column; text-align: center; line-height: 48px; gap: 16px; }
-        .mvp-vehicle-header-img { width: 120px; height: 120px; }
-        .mvp-vehicle-header-info h1 { font-size: 24px; }
-        .mvp-category-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
-        .mvp-category-card-img { height: 120px; }
-    }
-    @media (max-width: 480px) {
-        .mvp-category-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-        .mvp-category-card-img { height: 100px; }
-        .mvp-category-card-body { padding: 10px 12px; }
-        .mvp-category-card-body h3 { font-size: 13px; }
-    }
-    </style>
+    <link rel="stylesheet" id="mvp-vehicle-render-full-page" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-vehicle-render-full-page.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-vehicle-render-full-page.css' ); ?>">
 
     <div class="mvp-vehicle-page">
         <div class="mvp-vehicle-header">
@@ -3857,134 +2315,7 @@ function mvp_department_vehicle_redirect( $dept_slug, $vehicle_slug ) {
 
     get_header();
     ?>
-    <style>
-    .mvp-vdept-page {
-        max-width: 1300px;
-        margin: 0 auto;
-        padding: 30px 20px 60px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    .mvp-vdept-header {
-        margin-bottom: 35px;
-        padding-bottom: 25px;
-        border-bottom: 2px solid #f0f0f0;
-    }
-    .mvp-vdept-breadcrumb {
-        font-size: 14px;
-        color: #aaa;
-        margin-bottom: 8px;
-    }
-    .mvp-vdept-breadcrumb a { color: #034C8C; text-decoration: none; }
-    .mvp-vdept-breadcrumb a:hover { color: #F29F05; }
-    .mvp-vdept-header h1 {
-        font-size: 28px;
-        font-weight: 700;
-        color: #1a1a2e;
-        margin: 0 0 4px;
-    }
-    .mvp-vdept-header .mvp-vdept-subtitle {
-        font-size: 15px;
-        color: #666;
-        margin: 0;
-    }
-    .mvp-vdept-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 18px;
-    }
-    .mvp-vdept-card {
-        background: #fff;
-        border: 1px solid #eee;
-        border-radius: 12px;
-        padding: 22px 20px;
-        text-decoration: none;
-        color: #1a1a2e;
-        transition: transform 0.25s, box-shadow 0.25s;
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-    }
-    .mvp-vdept-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.09);
-        border-color: #034C8C;
-    }
-    .mvp-vdept-card-name {
-        font-size: 15px;
-        font-weight: 700;
-        color: #1a1a2e;
-    }
-    .mvp-vdept-card-count {
-        font-size: 13px;
-        color: #034C8C;
-        font-weight: 600;
-    }
-    .mvp-vdept-card-img {
-        width: 100%;
-        height: 150px;
-        background: #f5f5f5;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-    .mvp-vdept-card-img img {
-        max-width: 90%;
-        max-height: 130px;
-        object-fit: contain;
-    }
-    .mvp-vdept-card.has-img {
-        padding: 12px 12px 18px;
-    }
-    @media (max-width: 600px) {
-        .mvp-vdept-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-    }
-    .mvp-vehicle-notice {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        background: #f0f5ff;
-        border: 1px solid #c7d9f7;
-        border-radius: 8px;
-        padding: 12px 18px;
-        margin-bottom: 28px;
-        flex-wrap: wrap;
-    }
-    .mvp-vehicle-notice-text {
-        font-size: 14px;
-        color: #333;
-        line-height: 1.5;
-    }
-    .mvp-vehicle-notice-text strong {
-        color: #1a1a2e;
-    }
-    .mvp-vehicle-notice-change {
-        display: inline-block;
-        font-size: 13px;
-        font-weight: 600;
-        color: #fff;
-        background: #BF3617;
-        border-radius: 6px;
-        padding: 7px 16px;
-        text-decoration: none;
-        white-space: nowrap;
-        flex-shrink: 0;
-        cursor: pointer;
-        border: none;
-    }
-    .mvp-vehicle-notice-change:hover {
-        background: #a82e13;
-        color: #fff;
-    }
-    .mvp-vehicle-notice-change.mvp-view-all {
-        background: #BF3617;
-    }
-    .mvp-vehicle-notice-change.mvp-view-all:hover {
-        background: #a82e13;
-    }
-    </style>
+    <link rel="stylesheet" id="mvp-department-vehicle-redirect" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-department-vehicle-redirect.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-department-vehicle-redirect.css' ); ?>">
 
     <div class="mvp-vdept-page">
         <div class="mvp-vdept-header">
@@ -4081,7 +2412,7 @@ function mvp_department_render_page( $dept_slug ) {
     ) );
 
     $vehicles_with_dept = array();
-    $cat_img_base = 'https://shane.maxusvanparts.co.uk/wp-content/uploads/categories/';
+    $cat_img_base = '/wp-content/uploads/categories/';
 
     if ( ! is_wp_error( $vin_terms ) ) {
         foreach ( $vin_terms as $vin_term ) {
@@ -4139,126 +2470,7 @@ function mvp_department_render_page( $dept_slug ) {
 
     get_header();
     ?>
-    <style>
-    .mvp-dept-page {
-        max-width: 1300px;
-        margin: 0 auto;
-        padding: 30px 20px 60px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    .mvp-dept-header {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-        margin-bottom: 35px;
-        padding-bottom: 25px;
-        border-bottom: 2px solid #f0f0f0;
-    }
-    .mvp-dept-header-img {
-        width: 100px;
-        height: 100px;
-        background: #f8f8f8;
-        border-radius: 12px;
-        overflow: hidden;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .mvp-dept-header-img img {
-        max-width: 85%;
-        max-height: 85%;
-        object-fit: contain;
-    }
-    .mvp-dept-header-info h1 {
-        font-size: 32px;
-        font-weight: 700;
-        color: #1a1a2e;
-        margin: 0 0 6px;
-    }
-    .mvp-dept-header-info .mvp-dept-breadcrumb {
-        font-size: 14px;
-        color: #aaa;
-    }
-    .mvp-dept-header-info .mvp-dept-breadcrumb a {
-        color: #034C8C;
-        text-decoration: none;
-    }
-    .mvp-dept-header-info .mvp-dept-breadcrumb a:hover { color: #F29F05; }
-    .mvp-dept-subtitle {
-        font-size: 16px;
-        color: #666;
-        margin: 6px 0 0;
-    }
-    .mvp-dept-vehicle-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 20px;
-    }
-    .mvp-dept-vehicle-card {
-        background: #fff;
-        border: 1px solid #eee;
-        border-radius: 12px;
-        overflow: hidden;
-        text-decoration: none;
-        color: #333;
-        transition: transform 0.3s, box-shadow 0.3s;
-        display: flex;
-        flex-direction: column;
-    }
-    .mvp-dept-vehicle-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    }
-    .mvp-dept-vehicle-card-img {
-        width: 100%;
-        height: 160px;
-        background: #f5f5f5;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        padding: 15px;
-        box-sizing: border-box;
-    }
-    .mvp-dept-vehicle-card-img img {
-        max-width: 100%;
-        max-height: 130px;
-        object-fit: contain;
-    }
-    .mvp-dept-vehicle-card-body {
-        padding: 16px 18px;
-        border-top: 1px solid #f0f0f0;
-    }
-    .mvp-dept-vehicle-card-body h3 {
-        font-size: 16px;
-        font-weight: 700;
-        color: #1a1a2e;
-        margin: 0 0 4px;
-    }
-    .mvp-dept-vehicle-card-body .mvp-dept-year {
-        font-size: 13px;
-        color: #888;
-        margin: 0 0 8px;
-    }
-    .mvp-dept-vehicle-card-body .mvp-dept-parts {
-        font-size: 13px;
-        color: #034C8C;
-        font-weight: 600;
-    }
-    @media (max-width: 768px) {
-        .mvp-dept-header { flex-direction: column; text-align: center; line-height: 48px; gap: 16px; }
-        .mvp-dept-header-img { width: 80px; height: 80px; }
-        .mvp-dept-header-info h1 { font-size: 24px; }
-        .mvp-dept-vehicle-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
-        .mvp-dept-vehicle-card-img { height: 120px; }
-    }
-    @media (max-width: 480px) {
-        .mvp-dept-vehicle-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-        .mvp-dept-vehicle-card-body { padding: 12px 14px; }
-        .mvp-dept-vehicle-card-body h3 { font-size: 14px; }
-    }
-    </style>
+    <link rel="stylesheet" id="mvp-department-render-page" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-department-render-page.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-department-render-page.css' ); ?>">
 
     <div class="mvp-dept-page">
         <div class="mvp-dept-header">
@@ -4669,135 +2881,7 @@ function mvp_vehicle_lookup_panel() {
         }
     }
     ?>
-    <style>
-    /* Vehicle lookup panel */
-    #mvp-lookup-panel {
-        display: none;
-        position: fixed;
-        background: #F29F05;
-        padding: 20px 24px;
-        border-radius: 0 0 8px 8px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        z-index: 999999;
-        min-width: 380px;
-        max-width: 440px;
-        box-sizing: border-box;
-    }
-    #mvp-lookup-panel.is-open { display: block; }
-    #mvp-lookup-panel .mvp-lp-label {
-        color: #fff;
-        font-size: 13px;
-        font-weight: 600;
-        margin: 0 0 8px 0;
-    }
-    #mvp-lookup-panel .mvp-lp-row {
-        display: flex;
-        gap: 0;
-    }
-    #mvp-lookup-panel .mvp-lp-row input {
-        flex: 1;
-        padding: 10px 14px;
-        border: none;
-        border-radius: 4px 0 0 4px;
-        font-size: 14px;
-        outline: none;
-        color: #333;
-        background: #fff;
-        height: 42px;
-        box-sizing: border-box;
-    }
-    #mvp-lookup-panel .mvp-lp-row input::placeholder { color: #999; }
-    #mvp-lookup-panel .mvp-lp-row button {
-        background: #BF3617;
-        color: #fff;
-        border: none;
-        padding: 10px 18px;
-        border-radius: 0 4px 4px 0;
-        font-size: 14px;
-        font-weight: 700;
-        cursor: pointer;
-        white-space: nowrap;
-        height: 42px;
-        box-sizing: border-box;
-        transition: background 0.2s;
-    }
-    #mvp-lookup-panel .mvp-lp-row button:hover { background: #a02e13; }
-    #mvp-lookup-panel .mvp-lp-hint {
-        color: rgba(255,255,255,0.85);
-        font-size: 11px;
-        margin: 6px 0 0 0;
-    }
-    #mvp-lookup-panel .mvp-lp-divider {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin: 14px 0;
-        color: rgba(255,255,255,0.8);
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    #mvp-lookup-panel .mvp-lp-divider::before,
-    #mvp-lookup-panel .mvp-lp-divider::after {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: rgba(255,255,255,0.35);
-    }
-    #mvp-lookup-panel .mvp-lp-select {
-        flex: 1;
-        padding: 10px 12px;
-        border: none;
-        border-radius: 4px;
-        font-size: 14px;
-        color: #333;
-        background: #fff;
-        height: 42px;
-        box-sizing: border-box;
-        outline: none;
-        cursor: pointer;
-    }
-    #mvp-lookup-panel .mvp-lp-select:disabled {
-        background: #e8e8e8;
-        color: #999;
-        cursor: not-allowed;
-    }
-    #mvp-lookup-panel .mvp-lp-go {
-        background: #BF3617;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 4px;
-        font-size: 14px;
-        font-weight: 700;
-        cursor: pointer;
-        white-space: nowrap;
-        height: 42px;
-        box-sizing: border-box;
-        transition: background 0.2s;
-    }
-    #mvp-lookup-panel .mvp-lp-go:hover { background: #a02e13; }
-    #mvp-lookup-panel .mvp-lp-go:disabled { background: #9a7a6a; cursor: not-allowed; }
-    #mvp-lookup-panel .mvp-lp-model-row {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 10px;
-    }
-    #mvp-lookup-panel .mvp-lp-result {
-        margin-top: 10px;
-        padding: 10px 14px;
-        border-radius: 4px;
-        font-size: 13px;
-        display: none;
-    }
-    #mvp-lookup-panel .mvp-lp-result.show { display: block; }
-    #mvp-lookup-panel .mvp-lp-result.success { background: rgba(255,255,255,0.95); color: #333; }
-    #mvp-lookup-panel .mvp-lp-result.error { background: rgba(0,0,0,0.15); color: #fff; }
-    @keyframes mvp-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    .mvp-lp-loader { display: inline-flex; align-items: center; gap: 8px; }
-    .mvp-lp-loader svg { animation: mvp-spin 1s linear infinite; flex-shrink: 0; }
-    </style>
+    <link rel="stylesheet" id="mvp-vehicle-lookup-panel" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-vehicle-lookup-panel.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-vehicle-lookup-panel.css' ); ?>">
 
     <div id="mvp-lookup-panel">
         <!-- Model/Year selector -->
@@ -5102,82 +3186,7 @@ function mvp_vehicle_search_bar() {
     $home_url = home_url( '/' );
     $ajax_url = admin_url( 'admin-ajax.php' );
     ?>
-    <style id="mvp-search-bar-css">
-    .mvp-search-bar-wrap { max-width: 100%; margin: 0; position: relative; }
-    .mvp-search-bar {
-        display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 10px;
-        padding: 0 16px; height: 68px;
-        background: var(--e-global-color-secondary, #F29F05);
-        border-radius: 6px; box-shadow: rgba(0,0,0,0.1) 0px 0px 6px 0px; position: relative;
-    }
-    .mvp-search-bar .mvp-sb-select {
-        box-sizing: border-box; margin: 0;
-        height: 36px; padding: 0 28px 0 10px; font-size: 13px; font-family: inherit;
-        border: 1px solid #e0e0e0; border-radius: 6px; outline: none; color: #444; background: #fff;
-        cursor: pointer; min-width: 0;
-        -webkit-appearance: none; -moz-appearance: none; appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E");
-        background-repeat: no-repeat; background-position: right 10px center;
-    }
-    .mvp-search-bar .mvp-sb-model { width: 208px; min-width: 208px; flex: 0 0 208px; }
-    .mvp-search-bar .mvp-sb-year { width: 120px; min-width: 120px; flex: 0 0 120px; }
-    .mvp-search-bar .mvp-sb-atts { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
-    .mvp-search-bar .mvp-sb-last { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex: 1 1 auto; }
-    .mvp-search-bar .mvp-sb-or {
-        white-space: nowrap; font-weight: 700; font-size: 12px;
-        text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.85;
-        color: #444; padding: 0 2px; flex-shrink: 0;
-    }
-    .mvp-search-bar .mvp-sb-input { flex-shrink: 0;
-        height: 36px; padding: 0 10px; font-size: 13px; font-family: inherit;
-        border: none; border-radius: 4px; outline: none; color: #333; background: #fff;
-        box-sizing: border-box; margin: 0; width: 180px; min-width: 180px; flex: 0 0 180px;
-    }
-    .mvp-search-bar .mvp-sb-input::placeholder { color: #999; font-size: 13px; }
-    .mvp-search-bar .mvp-sb-submit {
-        height: 48px; padding: 0 16px; font-size: 13px; font-weight: 600;
-        font-family: inherit; white-space: nowrap;
-        border: none; border-radius: 6px; background: #BF3617; color: #fff; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; margin: 0; box-sizing: border-box;
-        cursor: pointer; text-transform: none; transition: background 0.2s;
-    }
-    .mvp-search-bar .mvp-sb-submit:hover { background: #a02e13; }
-    .mvp-search-bar .mvp-sb-reset { display: none !important;
-        font-size: 11px; color: rgba(255,255,255,0.7); cursor: pointer;
-        text-decoration: underline; flex-shrink: 0; white-space: nowrap;
-    }
-    .mvp-search-bar .mvp-sb-reset:hover { color: #fff; }
-    .mvp-sb-result {
-        position: absolute; top: 100%; right: 20px; z-index: 100;
-        font-size: 12px; margin-top: 4px; padding: 8px 14px; border-radius: 4px;
-        display: none; min-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .mvp-sb-result.show { display: block; }
-    .mvp-sb-result.success { background: rgba(255,255,255,0.95); color: #333; }
-    .mvp-sb-result.error { background: rgba(0,0,0,0.15); color: #fff; }
-    @keyframes mvp-sb-spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
-    .mvp-sb-loader { display: inline-flex; align-items: center; gap: 8px; }
-    .mvp-sb-loader svg { animation: mvp-sb-spin 1s linear infinite; flex-shrink: 0; }
-    .mvp-sb-mobile-toggle {
-        display: none; background: var(--e-global-color-secondary, #F29F05);
-        color: #fff; font-weight: 600; font-size: 14px; text-align: center; line-height: 48px;
-        padding: 0 16px; height: 68px; border-radius: 6px; cursor: pointer;
-    }
-    @media (max-width: 960px) {
-        .mvp-search-bar { flex-wrap: wrap; gap: 8px; padding: 12px 16px; }
-        .mvp-search-bar .mvp-sb-model, .mvp-search-bar .mvp-sb-year { min-width: 0; flex: 1 1 45%; }
-        .mvp-search-bar .mvp-sb-input { flex-shrink: 0; width: auto; flex: 1 1 40%; }
-    }
-    @media (max-width: 600px) {
-        .mvp-sb-mobile-toggle { display: block; }
-        .mvp-search-bar { display: none; flex-direction: column; }
-        .mvp-search-bar.mvp-sb-open { display: flex; margin-top: 4px; border-radius: 0 0 6px 6px; }
-        .mvp-sb-mobile-toggle.mvp-sb-open { border-radius: 6px 6px 0 0; margin-bottom: 0; }
-        .mvp-search-bar .mvp-sb-model, .mvp-search-bar .mvp-sb-year,
-        .mvp-search-bar .mvp-sb-input { flex-shrink: 0; width: 100% !important; min-width: 0; flex: 1 1 100%; }
-        .mvp-search-bar .mvp-sb-submit { width: 100%; }
-        .mvp-search-bar .mvp-sb-or { display: none; }
-    }
-    </style>
+    <link rel="stylesheet" id="mvp-vehicle-search-bar" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-vehicle-search-bar.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-vehicle-search-bar.css' ); ?>">
     <script>
     document.addEventListener("DOMContentLoaded", function(){
         var mvpModels = <?php echo json_encode( $models ); ?>;
@@ -5498,49 +3507,7 @@ function mvp_vehicle_sticky_notice_bar() {
     $slug  = sanitize_title( wp_unslash( $_COOKIE['mvp_vehicle_slug'] ) );
     $vehicle_url = home_url( '/vehicle/' . $slug . '/' );
     ?>
-    <style>
-    #mvp-vehicle-bar {
-        width: 100%;
-        background: #F29F05;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 18px;
-        padding: 9px 20px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        font-size: 13px;
-        line-height: 1.4;
-        flex-wrap: wrap;
-        position: relative;
-        z-index: 100;
-        box-sizing: border-box;
-    }
-    #mvp-vehicle-bar .mvp-bar-label {
-        opacity: 0.75;
-    }
-    #mvp-vehicle-bar .mvp-bar-vehicle {
-        font-weight: 700;
-        color: #fff;
-    }
-    #mvp-vehicle-bar .mvp-bar-change {
-        display: inline-block;
-        font-size: 12px;
-        font-weight: 600;
-        color: #F29F05;
-        background: #F29F05;
-        border-radius: 4px;
-        padding: 4px 12px;
-        text-decoration: none;
-        white-space: nowrap;
-        cursor: pointer;
-        border: none;
-    }
-    #mvp-vehicle-bar .mvp-bar-change:hover {
-        background: #fff;
-        color: #F29F05;
-    }
-    </style>
+    <link rel="stylesheet" id="mvp-vehicle-sticky-notice-bar" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-vehicle-sticky-notice-bar.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-vehicle-sticky-notice-bar.css' ); ?>">
 
     <div id="mvp-vehicle-bar">
         <span class="mvp-bar-label">Viewing parts for:</span>
@@ -5571,136 +3538,87 @@ function mvp_vehicle_sticky_notice_bar() {
  */
 add_action( 'wp_head', 'mvp_inject_product_seo_meta', 1 );
 function mvp_inject_product_seo_meta() {
-    // Only run on single product pages
-    if ( ! is_product() ) {
-        return;
-    }
+    if ( ! is_product() ) return;
+    global $post; if ( ! $post ) return;
+    $product = wc_get_product( $post->ID ); if ( ! $product ) return;
+    $pid = $product->get_id();
 
-    global $post;
-    if ( ! $post ) {
-        return;
-    }
+    $oem  = get_post_meta( $pid, 'original_sku', true ) ?: $product->get_sku();
+    $name = $product->get_name();
 
-    // Get the product object
-    $product = wc_get_product( $post->ID );
-    if ( ! $product ) {
-        return;
-    }
-
-    // Get original_sku (Oscar part number)
-    $original_sku = get_post_meta( $product->get_id(), 'original_sku', true );
-    if ( ! $original_sku ) {
-        // Fallback to WordPress SKU if original_sku doesn't exist
-        $original_sku = $product->get_sku();
-    }
-
-    // Get product name
-    $product_name = $product->get_name();
-
-    // Get vehicle model from the product's VIN category
-    $vehicle_models = array();
-    $categories = get_the_terms( $product->get_id(), 'product_cat' );
-    
-    if ( $categories && ! is_wp_error( $categories ) ) {
-        $maxus_term_id = mvp_get_maxus_term_id();
-        
-        foreach ( $categories as $cat ) {
-            // Check if this category is a VIN (direct child of Maxus)
-            if ( $cat->parent === $maxus_term_id ) {
-                $vehicle_model = get_term_meta( $cat->term_id, 'vehicle_model', true );
-                $vehicle_year  = get_term_meta( $cat->term_id, 'vehicle_year', true );
-                
-                if ( $vehicle_model ) {
-                    $display_model = $vehicle_model;
-                    if ( $vehicle_year ) {
-                        $display_model .= ' (' . $vehicle_year . ')';
-                    }
-                    $vehicle_models[] = $display_model;
-                }
+    // Vehicle model(s) from the VIN category (direct child of Maxus root)
+    $models = array(); $model_one = ''; $year_one = '';
+    $cats = get_the_terms( $pid, 'product_cat' );
+    if ( $cats && ! is_wp_error( $cats ) ) {
+        $maxus = mvp_get_maxus_term_id();
+        foreach ( $cats as $cat ) {
+            if ( $cat->parent === $maxus ) {
+                $vm = get_term_meta( $cat->term_id, 'vehicle_model', true );
+                $vy = get_term_meta( $cat->term_id, 'vehicle_year', true );
+                if ( $vm ) { if ( ! $model_one ) { $model_one = $vm; $year_one = $vy; } $models[] = $vm . ( $vy ? " ($vy)" : '' ); }
             }
         }
     }
 
-    // Build meta description
-    $description = $product_name;
-    if ( ! empty( $vehicle_models ) ) {
-        $description .= ' for ' . implode( ', ', $vehicle_models );
-    }
-    $description .= '. Part Number: ' . $original_sku;
-    
-    // Add short description if available
-    $short_desc = $product->get_short_description();
-    if ( $short_desc ) {
-        $short_desc = wp_strip_all_tags( $short_desc );
-        $short_desc = substr( $short_desc, 0, 100 );
-        $description .= '. ' . $short_desc;
-    }
-
-    // Get product price
-    $price = $product->get_price();
-    $currency = get_woocommerce_currency();
-
-    // Get product image
+    $price     = $product->get_price();
+    $currency  = get_woocommerce_currency();
     $image_url = wp_get_attachment_image_url( $product->get_image_id(), 'full' );
+    $url       = get_permalink( $pid );
+    $avail     = $product->is_in_stock() ? 'InStock' : 'OutOfStock';
+    $weight    = $product->get_weight();
+    $desc      = wp_strip_all_tags( $product->get_short_description() ?: $product->get_description() );
+    $desc      = trim( mb_substr( $desc, 0, 300 ) );
 
-    // Get product URL
-    $product_url = get_permalink( $product->get_id() );
+    // NOTE: <meta name="description"> is intentionally NOT echoed here.
+    // AIOSEO is the single authoritative source (echoing here caused a duplicate-meta bug).
 
-    // Get availability
-    $availability = $product->is_in_stock() ? 'InStock' : 'OutOfStock';
-
-    // Output meta tags
-    echo "\n<!-- Dynamic Product SEO Meta Tags -->\n";
-    echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
-    
-    // Output JSON-LD Schema for Product
-    echo '<script type="application/ld+json">' . "\n";
-    $schema = array(
-        '@context' => 'https://schema.org',
-        '@type' => 'Product',
-        'name' => $product_name,
-        'sku' => $original_sku,
-        'description' => $description,
-        'url' => $product_url,
+    // --- Product JSON-LD (AIOSEO emits no Product node; this is the only one) ---
+    $product_schema = array(
+        '@type'       => 'Product',
+        '@id'         => $url . '#product',
+        'name'        => $name,
+        'sku'         => $oem,
+        'mpn'         => $oem,
+        'description' => $desc,
+        'url'         => $url,
+        'brand'       => array( '@type' => 'Brand', 'name' => 'Maxus' ),
+        'category'    => 'Genuine Maxus Van Parts',
     );
-
-    // Add image if available
-    if ( $image_url ) {
-        $schema['image'] = $image_url;
-    }
-
-    // Add offers (price info)
+    if ( $image_url ) $product_schema['image'] = $image_url;
+    if ( $weight )    $product_schema['weight'] = array( '@type' => 'QuantitativeValue', 'value' => $weight, 'unitCode' => 'KGM' );
     if ( $price ) {
-        $schema['offers'] = array(
-            '@type' => 'Offer',
-            'price' => $price,
+        $product_schema['offers'] = array(
+            '@type'         => 'Offer',
+            'price'         => $price,
             'priceCurrency' => $currency,
-            'availability' => 'https://schema.org/' . $availability,
-            'url' => $product_url,
+            'availability'  => 'https://schema.org/' . $avail,
+            'url'           => $url,
+            'seller'        => array( '@type' => 'Organization', 'name' => 'Maxus Parts Direct' ),
         );
     }
-
-    // Add vehicle model as additionalProperty if available
-    if ( ! empty( $vehicle_models ) ) {
-        $schema['additionalProperty'] = array();
-        foreach ( $vehicle_models as $model ) {
-            $schema['additionalProperty'][] = array(
-                '@type' => 'PropertyValue',
-                'name' => 'Vehicle Model',
-                'value' => $model,
-            );
-        }
+    if ( $model_one ) {
+        $veh = array( '@type' => 'Vehicle', 'name' => 'Maxus ' . $model_one );
+        if ( $year_one ) $veh['vehicleModelDate'] = $year_one;
+        $product_schema['isAccessoryOrSparePartFor'] = $veh;
     }
 
-    // Add brand (Maxus)
-    $schema['brand'] = array(
-        '@type' => 'Brand',
-        'name' => 'Maxus',
+    // --- FAQPage JSON-LD (answer engines / AI quote these Q&A directly) ---
+    $model_txt = $model_one ? ( 'the Maxus ' . $model_one . ( $year_one ? " ($year_one)" : '' ) ) : 'your Maxus';
+    $faq = array(
+        '@type'      => 'FAQPage',
+        '@id'        => $url . '#faq',
+        'mainEntity' => array(
+            array( '@type' => 'Question', 'name' => 'Is this a genuine Maxus part?',
+                'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'Yes. This is a genuine SAIC Maxus component, never an aftermarket copy.' ) ),
+            array( '@type' => 'Question', 'name' => 'Will this part fit ' . $model_txt . '?',
+                'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'This part is listed for ' . $model_txt . '. Exact fitment can vary by build, so add your registration or VIN at checkout and our parts team confirms the correct part for your vehicle before dispatch.' ) ),
+            array( '@type' => 'Question', 'name' => 'What is the OEM part number?',
+                'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'The genuine Maxus OEM part number is ' . $oem . '.' ) ),
+        ),
     );
 
-    echo wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT );
-    echo "\n" . '</script>' . "\n";
-    echo "<!-- End Dynamic Product SEO -->\n";
+    $graph = array( '@context' => 'https://schema.org', '@graph' => array( $product_schema, $faq ) );
+    echo "\n<script type=\"application/ld+json\">" . wp_json_encode( $graph, JSON_UNESCAPED_SLASHES ) . "</script>\n";
 }
 
 // ============================================================
@@ -5891,152 +3809,7 @@ function mvp_render_component_diagram() {
 
     </div>
 
-    <style>
-    .mvp-component-diagram {
-        display: flex;
-        gap: 24px;
-        margin: 0 0 32px;
-        align-items: flex-start;
-        flex-wrap: wrap;
-    }
-    .mvp-cd-svg-wrap {
-        flex: 0 1 45%;
-        min-width: 280px;
-        border: 1px solid #dde3e9;
-        background: #fff;
-        border-radius: 6px;
-        overflow: hidden;
-        max-height: 640px;
-        display: flex;
-        flex-direction: column;
-    }
-    .mvp-cd-zoom-controls {
-        display: flex;
-        gap: 6px;
-        padding: 6px 8px;
-        background: #f4f6f8;
-        border-bottom: 1px solid #dde3e9;
-        flex-shrink: 0;
-    }
-    .mvp-cd-zoom-btn {
-        width: 30px;
-        height: 30px;
-        border: 1px solid #bbc5d0;
-        border-radius: 4px;
-        background: #fff;
-        cursor: pointer;
-        font-size: 18px;
-        line-height: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #1a2d4a;
-        transition: background 0.15s;
-    }
-    .mvp-cd-zoom-btn:hover { background: #e8edf2; }
-    .mvp-cd-svg-inner {
-        overflow: auto;
-        flex: 1;
-        cursor: grab;
-    }
-    .mvp-cd-svg-inner svg {
-        width: 100%;
-        height: auto;
-        display: block;
-        transform-origin: top left;
-        transition: transform 0.2s;
-    }
-    .mvp-cd-table-wrap {
-        flex: 1 1 320px;
-        overflow-x: auto;
-        overflow-y: auto;
-    }
-    .mvp-cd-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 13px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        background: #fff;
-        border: 1px solid #dde3e9;
-        border-radius: 6px;
-        overflow: hidden;
-    }
-    .mvp-cd-table thead th { 
-        background: #D18A0C;
-        color: #fff;
-        padding: 10px 14px;
-        text-align: left;
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: .03em;
-    }
-    .mvp-cd-th-num  { width: 42px; text-align: center; line-height: 48px; }
-    .mvp-cd-th-qty  { width: 52px; }
-    .mvp-cd-table tbody tr {
-        border-bottom: 1px solid #edf0f4;
-        cursor: pointer;
-        transition: background 0.15s;
-    }
-    .mvp-cd-table tbody tr:last-child { border-bottom: none; }
-    .mvp-cd-table tbody tr:hover   { background: #f5f8ff; }
-    .mvp-cd-table tbody tr.mvp-cd-active { background: #fff3cd; }
-    .mvp-cd-table td { padding: 9px 14px; vertical-align: top; }
-    .mvp-cd-num {
-        font-weight: 700;
-        font-size: 15px;
-        color: #1a2d4a;
-        text-align: center; line-height: 48px;
-    }
-    .mvp-cd-price-col { text-align: right; white-space: nowrap; font-weight: 600; color: #1a2d4a; }
-    .mvp-cd-no-price  { color: #aaa; }
-    .mvp-cd-cart-col  { text-align: center; line-height: 48px; white-space: nowrap; }
-    .mvp-cd-lr-badge {
-        display: inline-block;
-        font-size: 10px;
-        font-weight: 700;
-        padding: 2px 6px;
-        border-radius: 3px;
-        margin-left: 6px;
-        text-transform: uppercase;
-        vertical-align: middle;
-    }
-    .mvp-cd-lr-left {
-        background: #e3f2fd;
-        color: #1565c0;
-    }
-    .mvp-cd-lr-right {
-        background: #fce4ec;
-        color: #c62828;
-    }
-    .mvp-cd-request-price {
-        background: #BF3617 !important;
-        color: #fff !important;
-        border: none !important;
-        cursor: pointer;
-    }
-    .mvp-cd-request-price:hover { background: #a82e13 !important; }
-    .mvp-cd-atc-btn {
-        display: inline-block;
-        padding: 4px 10px;
-        background: #BF3617;
-        color: #fff !important;
-        border-radius: 4px;
-        font-size: 11px;
-        font-weight: 600;
-        text-decoration: none !important;
-        white-space: nowrap;
-        transition: background 0.15s;
-    }
-    .mvp-cd-atc-btn:hover { background: #a02e13; }
-    .mvp-cd-atc-view { background: #6c7a8d; }
-    .mvp-cd-atc-view:hover { background: #4a5568; }
-    .mvp-cd-sep { border-top: 1px dashed #ddd; padding-top: 8px; margin-top: 4px; }
-    .mvp-cd-part-col a { color: #1a2d4a; font-weight: 600; text-decoration: underline; }
-    .mvp-cd-part-col a:hover { color: #F29F05; }
-    @media (max-width: 700px) {
-        .mvp-cd-svg-wrap { flex: 0 0 100%; max-height: none; }
-    }
-    </style>
+    <link rel="stylesheet" id="mvp-render-component-diagram" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-render-component-diagram.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-render-component-diagram.css' ); ?>">
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -6507,6 +4280,183 @@ function cvone_diagnostic() {
 }
 
 // ============================================================
+// Products by Date Updated Status — REST Endpoint
+// Now with unique original_sku filtering
+// ============================================================
+// GET /wp-json/custom/v1/products-by-date-updated?status=empty|invalid|stale|all&days=7&page=1&per_page=100&unique_original_sku=1
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'custom/v1', '/products-by-date-updated', array(
+        'methods'             => 'GET',
+        'callback'            => 'cvone_get_products_by_date_updated',
+        'permission_callback' => '__return_true',
+    ) );
+} );
+
+function cvone_get_products_by_date_updated( WP_REST_Request $request ) {
+    global $wpdb;
+
+    $status              = $request->get_param( 'status' ) ?: 'all';
+    $days                = (int) ( $request->get_param( 'days' ) ?: 7 );
+    $page                = (int) ( $request->get_param( 'page' ) ?: 1 );
+    $per_page            = (int) ( $request->get_param( 'per_page' ) ?: 100 );
+    $offset              = ( $page - 1 ) * $per_page;
+    $unique_original_sku = filter_var( $request->get_param( 'unique_original_sku' ), FILTER_VALIDATE_BOOLEAN );
+
+    $date_threshold = date( 'Y-m-d', strtotime( "-{$days} days" ) );
+
+    $where_clause = "p.post_type = 'product' AND p.post_status = 'publish'";
+
+    // Join used only when dedup is requested
+    $osku_join = "
+        LEFT JOIN {$wpdb->postmeta} osku ON p.ID = osku.post_id AND osku.meta_key = 'original_sku'
+    ";
+
+    // Dedup key: real original_sku when present/non-empty, otherwise a per-ID fallback so
+    // products without an original_sku are never collapsed into each other.
+    $dedup_key = "IF(osku.meta_value IS NULL OR osku.meta_value = '', CONCAT('__no_osku_', p.ID), osku.meta_value)";
+
+    if ( $status === 'empty' ) {
+        $base_select = "p.ID, p.post_title, '' as date_updated";
+        $base_from   = "
+            FROM {$wpdb->posts} p
+            LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = 'date_updated'
+            {$osku_join}
+            WHERE {$where_clause}
+              AND pm.meta_id IS NULL
+        ";
+        $prepare_args_query = array( $per_page, $offset );
+        $prepare_args_count = array();
+
+    } elseif ( $status === 'invalid' ) {
+        $base_select = "p.ID, p.post_title, pm.meta_value as date_updated";
+        $base_from   = "
+            FROM {$wpdb->posts} p
+            INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = 'date_updated'
+            {$osku_join}
+            WHERE {$where_clause}
+              AND pm.meta_value != ''
+              AND pm.meta_value NOT REGEXP '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+        ";
+        $prepare_args_query = array( $per_page, $offset );
+        $prepare_args_count = array();
+
+    } elseif ( $status === 'stale' ) {
+        $base_select = "p.ID, p.post_title, pm.meta_value as date_updated";
+        $base_from   = "
+            FROM {$wpdb->posts} p
+            INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = 'date_updated'
+            {$osku_join}
+            WHERE {$where_clause}
+              AND pm.meta_value REGEXP '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+              AND pm.meta_value < %s
+        ";
+        $prepare_args_query = array( $date_threshold, $per_page, $offset );
+        $prepare_args_count = array( $date_threshold );
+
+    } else { // all
+        $base_select = "p.ID, p.post_title, COALESCE(pm.meta_value, '') as date_updated";
+        $base_from   = "
+            FROM {$wpdb->posts} p
+            LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = 'date_updated'
+            {$osku_join}
+            WHERE {$where_clause}
+              AND (
+                pm.meta_id IS NULL
+                OR pm.meta_value = ''
+                OR pm.meta_value NOT REGEXP '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+                OR pm.meta_value < %s
+              )
+        ";
+        $prepare_args_query = array( $date_threshold, $per_page, $offset );
+        $prepare_args_count = array( $date_threshold );
+    }
+
+    if ( $unique_original_sku ) {
+        // Wrap in a window-function subquery to pick one row per original_sku
+        // (lowest post ID wins), THEN paginate the deduped set.
+        $query = "
+            SELECT ID, post_title, date_updated FROM (
+                SELECT {$base_select},
+                       ROW_NUMBER() OVER (
+                           PARTITION BY {$dedup_key}
+                           ORDER BY p.ID ASC
+                       ) as rn
+                {$base_from}
+            ) deduped
+            WHERE rn = 1
+            ORDER BY ID ASC
+            LIMIT %d OFFSET %d
+        ";
+
+        $count_query = "
+            SELECT COUNT(*) FROM (
+                SELECT {$dedup_key} as dkey
+                {$base_from}
+                GROUP BY dkey
+            ) deduped_count
+        ";
+
+        // query needs all args except the trailing LIMIT/OFFSET replaced correctly;
+        // count query drops the trailing per_page/offset args entirely.
+        $count_args = array_slice( $prepare_args_query, 0, count( $prepare_args_query ) - 2 );
+
+        $products = $wpdb->get_results( $wpdb->prepare( $query, $prepare_args_query ), ARRAY_A );
+        $total    = empty( $count_args )
+            ? (int) $wpdb->get_var( $count_query )
+            : (int) $wpdb->get_var( $wpdb->prepare( $count_query, $count_args ) );
+
+    } else {
+        // Original (non-deduped) behavior
+        $query = "
+            SELECT {$base_select}
+            {$base_from}
+            ORDER BY p.ID ASC
+            LIMIT %d OFFSET %d
+        ";
+        $count_query = "
+            SELECT COUNT(DISTINCT p.ID)
+            {$base_from}
+        ";
+        $count_args = array_slice( $prepare_args_query, 0, count( $prepare_args_query ) - 2 );
+
+        $products = $wpdb->get_results( $wpdb->prepare( $query, $prepare_args_query ), ARRAY_A );
+        $total    = empty( $count_args )
+            ? (int) $wpdb->get_var( $count_query )
+            : (int) $wpdb->get_var( $wpdb->prepare( $count_query, $count_args ) );
+    }
+
+    // Add additional product details
+    $enriched_products = array();
+    foreach ( $products as $product ) {
+        $_product = wc_get_product( $product['ID'] );
+        if ( ! $_product ) continue;
+
+        $enriched_products[] = array(
+            'id'            => (int) $product['ID'],
+            'title'         => $product['post_title'],
+            'sku'           => $_product->get_sku(),
+            'original_sku'  => get_post_meta( $product['ID'], 'original_sku', true ),
+            'date_updated'  => $product['date_updated'],
+            'edit_link'     => admin_url( 'post.php?post=' . $product['ID'] . '&action=edit' ),
+        );
+    }
+
+    $total_pages = ceil( $total / $per_page );
+
+    return new WP_REST_Response( array(
+        'status'              => $status,
+        'days'                => $days,
+        'date_threshold'      => $date_threshold,
+        'page'                => $page,
+        'per_page'            => $per_page,
+        'unique_original_sku' => $unique_original_sku,
+        'total'               => $total,
+        'total_pages'         => $total_pages,
+        'products'            => $enriched_products,
+    ), 200 );
+}
+
+// ============================================================
 // 14. COMPONENT DIAGRAM — REST ENDPOINT TO SAVE TERM META
 // ============================================================
 // POST /wp-json/custom/v1/set-component-meta
@@ -6672,56 +4622,7 @@ function mvp_render_midlevel_subcat_grid() {
         <?php endforeach; ?>
     </div>
 
-    <style>
-    .mvp-subcat-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin: 0 0 40px;
-    }
-.mvp-subcat-card {        flex: 1 1 200px;        max-width: 260px;        display: flex;        flex-direction: column;        align-items: center;        justify-content: center;        gap: 8px;        background: #fff;        color: #333;        text-decoration: none;        border-radius: 10px;        border: 1px solid #eee;        padding: 32px 20px;        text-align: center;        transition: transform 0.3s, box-shadow 0.3s;        box-shadow: none;    }
-.mvp-subcat-card:hover {        transform: translateY(-4px);        box-shadow: 0 8px 25px rgba(0,0,0,0.1);    }
-    .mvp-subcat-img {
-        background: #f5f5f5;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #f5f5f5;
-        border-radius: 10px 10px 0 0;
-        padding: 8px;
-        margin-bottom: 4px;
-    }
-    .mvp-subcat-img img {
-        max-width: 100%;
-        max-height: 120px;
-        object-fit: contain;
-    }
-    .mvp-subcat-card.has-img {
-        overflow: hidden;
-        padding: 12px 12px 20px;
-    }
-    .mvp-subcat-icon {
-        font-size: 28px;
-        line-height: 1;
-        opacity: 0.7;
-    }
-    .mvp-subcat-name {
-        color: #1a1a2e;
-        font-size: 16px;
-        font-weight: 700;
-        letter-spacing: .01em;
-        line-height: 1.3;
-    }
-    .mvp-subcat-count {
-        color: #999;
-        font-size: 12px;
-        opacity: 0.75;
-        font-weight: 400;
-    }
-    @media (max-width: 600px) {
-.mvp-subcat-card {        flex: 1 1 200px;        max-width: 260px;        display: flex;        flex-direction: column;        align-items: center;        justify-content: center;        gap: 8px;        background: #fff;        color: #333;        text-decoration: none;        border-radius: 10px;        border: 1px solid #eee;        padding: 32px 20px;        text-align: center;        transition: transform 0.3s, box-shadow 0.3s;        box-shadow: none;    }
-    </style>
+    <link rel="stylesheet" id="mvp-render-midlevel-subcat-grid" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-render-midlevel-subcat-grid.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-render-midlevel-subcat-grid.css' ); ?>">
     <?php
 }
 // ============================================================
@@ -6838,62 +4739,7 @@ function mvp_subcategory_thumbnail_fallback( $category ) {
 add_action( 'wp_footer', function() {
     if ( ! is_front_page() && ! is_home() ) return;
     ?>
-    <style>
-    @media (max-width: 1024px) {
-        .mvp-mobile-filter {
-            background: #D18A0C;
-            border-radius: 8px;
-            padding: 16px;
-            margin: 0 10px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .mvp-mobile-filter select,
-        .mvp-mobile-filter input[type=text] {
-            width: 100%;
-            height: 44px;
-            padding: 0 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            color: #333;
-            background: #fff;
-            box-sizing: border-box;
-            -webkit-appearance: menulist;
-        }
-        .mvp-mobile-filter input[type=text] {
-            -webkit-appearance: none;
-            text-align: center;
-            text-transform: uppercase;
-        }
-        .mvp-mobile-filter input[type=text]::placeholder {
-            color: #999;
-            text-transform: uppercase;
-        }
-        .mvp-mobile-filter .mvp-mf-or {
-            color: #fff;
-            font-weight: 700;
-            font-size: 12px;
-            text-align: center;
-        }
-        .mvp-mobile-filter button {
-            width: 100%;
-            height: 48px;
-            background: #BF3617;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-        .mvp-mobile-filter button:hover { background: #a82e13; }
-    }
-    @media (min-width: 1025px) {
-        .mvp-mobile-filter { display: none !important; }
-    }
-    </style>
+    <link rel="stylesheet" id="mvp-subcategory-thumbnail-fallback" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-subcategory-thumbnail-fallback.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-subcategory-thumbnail-fallback.css' ); ?>">
     <script>
     (function(){
         if (window.innerWidth > 1024) return;
@@ -6963,56 +4809,7 @@ add_action( 'wp_head', function() {
 add_action( 'wp_head', function() {
     if ( ! is_front_page() && ! is_home() ) return;
     ?>
-    <style>
-    .mvp-featured-section { max-width: 1320px; margin: 20px auto 0; padding: 0 20px; }
-    .mvp-featured-section h2 { font-size: 22px; font-weight: 700; color: #333; margin: 0 0 16px; }
-    .mvp-featured-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-    }
-    .mvp-feat-card {
-        border: 1px solid #eee;
-        border-radius: 8px;
-        padding: 16px;
-        display: flex;
-        gap: 14px;
-        align-items: flex-start;
-        text-decoration: none;
-        color: #333;
-        transition: box-shadow 0.2s;
-        background: #fff;
-    }
-    .mvp-feat-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-    .mvp-feat-card-img {
-        width: 100px;
-        height: 100px;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #f9f9f9;
-        border-radius: 6px;
-        overflow: hidden;
-    }
-    .mvp-feat-card-img img { max-width: 90%; max-height: 90%; object-fit: contain; }
-    .mvp-feat-card-info { flex: 1; min-width: 0; }
-    .mvp-feat-card-title {
-        font-size: 13px; font-weight: 700; color: #333;
-        margin: 0 0 4px; line-height: 1.3;
-        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-    }
-    .mvp-feat-card-sku { font-size: 11px; color: #999; margin: 0 0 8px; }
-    .mvp-feat-card-price { font-size: 16px; font-weight: 700; color: #333; margin: 0 0 8px; }
-    .mvp-feat-card-btn {
-        float: right;
-        display: inline-block; font-size: 12px; color: #fff; text-decoration: none; background: #BF3617;
-        border: none; border-radius: 4px; padding: 6px 14px; font-weight: 600;
-    }
-    .mvp-feat-card-btn:hover { background: #a82e13; color: #fff; }
-    @media (max-width: 900px) { .mvp-featured-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { .mvp-featured-grid { grid-template-columns: 1fr; } }
-    </style>
+    <link rel="stylesheet" id="mvp-injectMobileFilter" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-injectMobileFilter.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-injectMobileFilter.css' ); ?>">
     <?php
 }, 21 );
 
@@ -7273,95 +5070,7 @@ function mvp_product_svg_gallery() {
 add_action( 'wp_head', function() {
     if ( ! is_product() ) return;
     ?>
-    <style>
-    .mvp-product-diagram {
-        max-width: 1300px;
-        margin: 0 auto 40px;
-        padding: 30px;
-        background: #f9f9f9;
-        border-radius: 12px;
-        border: 1px solid #eee;
-    }
-    .mvp-product-diagram h3 {
-        font-size: 18px;
-        font-weight: 700;
-        color: #1a1a2e;
-        margin: 0 0 8px;
-    }
-    .mvp-callout-badge {
-        background: #f5f5f5;
-        border-left: 4px solid #BF3617;
-        padding: 10px 16px;
-        margin: 0 0 12px;
-        border-radius: 0 6px 6px 0;
-        font-size: 14px;
-        color: #333;
-    }
-    .mvp-callout-num {
-        font-weight: 700;
-        color: #F29F05;
-        font-size: 18px;
-    }
-    .woocommerce-product-gallery__trigger { display: none !important; }
-    .woocommerce-product-gallery .zoomImg { display: none !important; }
-    /* Single-product exploded-diagram widget — contained + zoomable, mirrors
-       the category-page component diagram box (mvp_render_component_diagram) */
-    .woocommerce-product-gallery__image .mvp-cd-svg-wrap.mvp-pd-widget {
-        width: 100%;
-        height: 520px;
-        border: 1px solid #dde3e9;
-        background: #fff;
-        border-radius: 6px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-    }
-    .mvp-pd-widget .mvp-cd-zoom-controls {
-        display: flex;
-        gap: 6px;
-        padding: 6px 8px;
-        background: #f4f6f8;
-        border-bottom: 1px solid #dde3e9;
-        flex-shrink: 0;
-    }
-    /* !important + min/max-width override the theme's single-product button
-       min-width, which was stretching these to ~81px */
-    .woocommerce-product-gallery__image .mvp-pd-widget .mvp-cd-zoom-btn {
-        width: 34px !important;
-        min-width: 34px !important;
-        max-width: 34px !important;
-        height: 30px !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        flex: 0 0 auto !important;
-        box-sizing: border-box !important;
-        border: 1px solid #F29F05 !important;
-        border-radius: 4px !important;
-        background: #F29F05 !important;
-        cursor: pointer !important;
-        font-size: 18px !important;
-        line-height: 1 !important;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        color: #fff !important;
-        transition: background 0.15s, border-color 0.15s;
-    }
-    .woocommerce-product-gallery__image .mvp-pd-widget .mvp-cd-zoom-btn:hover { background: #D18A0C !important; border-color: #D18A0C !important; }
-    .mvp-pd-widget .mvp-cd-svg-inner {
-        overflow: auto;
-        flex: 1;
-        cursor: grab;
-        padding: 10px;
-    }
-    .mvp-pd-widget .mvp-cd-svg-inner svg {
-        width: 100% !important;
-        height: 100% !important;
-        display: block;
-        transform-origin: top left;
-    }
-
-    </style>
+    <link rel="stylesheet" id="mvp-applyBase" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-applyBase.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-applyBase.css' ); ?>">
     <?php
 }, 22 );
 
@@ -7403,23 +5112,7 @@ add_action( 'wp_enqueue_scripts', function() {
 add_action( 'wp_head', function() {
     if ( ! is_front_page() && ! is_home() ) return;
     ?>
-    <style>
-    /* Fix department sidebar icon dark backgrounds */
-    .elementor-element-ea2c0ec .icon::before {
-        display: none !important;
-    }
-    .menu-icon.img, .menu-icon.img.lazyloaded {
-        background-color: transparent !important;
-    }
-    /* Hide the "Features products" heading and empty product widget */
-    body.home .elementor-widget-et_products {
-        display: none !important;
-    }
-    body.home .elementor-element-320ce91,
-    body.home .elementor-element-8555cc5 {
-        display: none !important;
-    }
-    </style>
+    <link rel="stylesheet" id="mvp-applyBase-2" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-applyBase-2.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-applyBase-2.css' ); ?>">
     <?php
 }, 20 );
 
@@ -7464,4 +5157,131 @@ function mvp_category_icon_file( $name ) {
     if ( $key !== '' && isset( $norm_index[ $key ] ) ) return $norm_index[ $key ]['f'];
     return '';
 }
+
+// ============================================================
+// Custom Product Meta Fields
+// ============================================================
+
+/**
+ * Add custom tab for Maxus product data in WooCommerce product editor
+ */
+add_filter( 'woocommerce_product_data_tabs', 'mvp_add_custom_product_data_tab' );
+function mvp_add_custom_product_data_tab( $tabs ) {
+    $tabs['mvp_custom_data'] = array(
+        'label'    => __( 'Maxus Data', 'woocommerce' ),
+        'target'   => 'mvp_custom_product_data',
+        'class'    => array(),
+        'priority' => 60,
+    );
+    return $tabs;
+}
+
+/**
+ * Add custom fields to the Maxus Data tab
+ */
+add_action( 'woocommerce_product_data_panels', 'mvp_add_custom_product_data_fields' );
+function mvp_add_custom_product_data_fields() {
+    global $post;
+    ?>
+    <div id="mvp_custom_product_data" class="panel woocommerce_options_panel">
+        <?php
+        // Callout Number field
+        woocommerce_wp_text_input( array(
+            'id'          => 'callout_number',
+            'label'       => __( 'Callout Number', 'woocommerce' ),
+            'placeholder' => '',
+            'desc_tip'    => true,
+            'description' => __( 'Product callout number for identification.', 'woocommerce' ),
+        ) );
+        
+        // Original SKU field
+        woocommerce_wp_text_input( array(
+            'id'          => 'original_sku',
+            'label'       => __( 'Original SKU', 'woocommerce' ),
+            'placeholder' => '',
+            'desc_tip'    => true,
+            'description' => __( 'Original SKU/part number (Oscar part number).', 'woocommerce' ),
+        ) );
+        
+        // Replacement Available checkbox
+        woocommerce_wp_checkbox( array(
+            'id'          => 'replacement_avail',
+            'label'       => __( 'Replacement Available', 'woocommerce' ),
+            'description' => __( 'Check if a replacement product is available.', 'woocommerce' ),
+        ) );
+        
+        // Replacement SKU field
+        woocommerce_wp_text_input( array(
+            'id'          => 'replacement_sku',
+            'label'       => __( 'Replacement SKU', 'woocommerce' ),
+            'placeholder' => '',
+            'desc_tip'    => true,
+            'description' => __( 'Replacement product SKU/part number.', 'woocommerce' ),
+        ) );
+        
+        // Date Updated field
+        woocommerce_wp_text_input( array(
+            'id'          => 'date_updated',
+            'label'       => __( 'Date Updated', 'woocommerce' ),
+            'placeholder' => 'YYYY-MM-DD',
+            'desc_tip'    => true,
+            'description' => __( 'Date when product data was last updated (YYYY-MM-DD format).', 'woocommerce' ),
+            'type'        => 'date',
+        ) );
+        ?>
+    </div>
+    <?php
+}
+
+/**
+ * Save custom product meta fields
+ */
+add_action( 'woocommerce_process_product_meta', 'mvp_save_custom_product_data_fields' );
+function mvp_save_custom_product_data_fields( $post_id ) {
+    // Callout Number
+    $callout_number = isset( $_POST['callout_number'] ) ? sanitize_text_field( $_POST['callout_number'] ) : '';
+    update_post_meta( $post_id, 'callout_number', $callout_number );
+    
+    // Original SKU
+    $original_sku = isset( $_POST['original_sku'] ) ? sanitize_text_field( $_POST['original_sku'] ) : '';
+    update_post_meta( $post_id, 'original_sku', $original_sku );
+    
+    // Replacement Available (checkbox)
+    $replacement_avail = isset( $_POST['replacement_avail'] ) ? 'yes' : 'no';
+    update_post_meta( $post_id, 'replacement_avail', $replacement_avail );
+    
+    // Replacement SKU
+    $replacement_sku = isset( $_POST['replacement_sku'] ) ? sanitize_text_field( $_POST['replacement_sku'] ) : '';
+    update_post_meta( $post_id, 'replacement_sku', $replacement_sku );
+    
+    // Date Updated
+    $date_updated = isset( $_POST['date_updated'] ) ? sanitize_text_field( $_POST['date_updated'] ) : '';
+    update_post_meta( $post_id, 'date_updated', $date_updated );
+}
+}
+
+
+// ---- Homepage vehicle-circle ordering: popular models first (added 18-Jul-2026) ----
+// Lower number = shown earlier. Deliver 9 leads, then Deliver 3, then the rest.
+function mvp_vehicle_priority( $term_id ) {
+    $m = strtoupper( (string) get_term_meta( $term_id, 'vehicle_model', true ) );
+    if ( strpos( $m, 'DELIVER 9' ) !== false ) return 10;   // incl. e-Deliver 9 / New Deliver 9 / RWD/FWD/LUX/STD/CHASSIS/2026
+    if ( strpos( $m, 'DELIVER 3' ) !== false || strpos( $m, 'EV30' ) !== false ) return 20;
+    if ( strpos( $m, 'DELIVER 7' ) !== false ) return 30;
+    if ( strpos( $m, 'DELIVER 5' ) !== false ) return 40;
+    if ( strpos( $m, 'T90' ) !== false )       return 50;
+    if ( strpos( $m, 'T60' ) !== false )       return 55;
+    if ( strpos( $m, 'ETERRON' ) !== false )   return 60;
+    if ( strpos( $m, 'MIFA' ) !== false )      return 70;
+    if ( strpos( $m, 'V80' ) !== false || strpos( $m, 'EV80' ) !== false ) return 80;
+    if ( strpos( $m, 'A80' ) !== false )       return 85;
+    return 100;
+}
+function mvp_vehicle_popularity_cmp( $a, $b ) {
+    $pa = mvp_vehicle_priority( $a->term_id );
+    $pb = mvp_vehicle_priority( $b->term_id );
+    if ( $pa !== $pb ) return $pa - $pb;
+    $ma = (string) get_term_meta( $a->term_id, 'vehicle_model', true );
+    $mb = (string) get_term_meta( $b->term_id, 'vehicle_model', true );
+    return strcasecmp( $ma, $mb );  // within a tier, alphabetical
 }

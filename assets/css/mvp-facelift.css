@@ -1,0 +1,701 @@
+    /* === HIDE: RevSlider widget (inside elementor section a40da3e) === */
+    body.home .elementor-element-a40da3e,
+    body.home sr7-module,
+    body.home .wp-block-themepunch-revslider,
+    body.home .elementor-widget-slider_revolution {
+        display: none !important;
+    }
+
+    /* === HIDE: Department category icons row === */
+    body.home .elementor-element-099500a {
+        display: none !important;
+    }
+
+    /* === HIDE: Featured manufacturers heading + logos === */
+    body.home .elementor-element-9f85e6f,
+    body.home .elementor-element-e540d81 {
+        display: none !important;
+    }
+
+    /* === HIDE: Promo banners (Engine Oil, Tools, Batteries) === */
+    body.home .elementor-element-23763df {
+        display: none !important;
+    }
+
+    /* === HIDE: "Know what you pay for" section === */
+    body.home .elementor-element-20e40c9 {
+        display: none !important;
+    }
+
+    /* === HIDE: "Car repairs have never been so easy" section === */
+    body.home .elementor-element-7033a3b {
+        display: none !important;
+    }
+
+    /* === HIDE: Empty spacer section === */
+    body.home .elementor-element-9e19027 {
+        display: none !important;
+    }
+
+    /* === HIDE: Original 6-dropdown vehicle filter bar === */
+    body.home .elementor-element-3e78bee {
+        display: block !important;
+    }
+
+    /* ── Hero Banner ── */
+    #mvp-facelift-hero-area { padding: 24px 0; }
+    .mvp-hero {
+        position: relative;
+        max-width: 1320px;
+        margin: 0 auto;
+        height: 348px;
+        border-radius: 6px;
+        background-image: url('/wp-content/uploads/resized.jpg');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        margin-bottom: 0;
+    }
+    .mvp-hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: none;
+        padding: 60px 120px;
+        text-align: left;
+    }
+    .mvp-hero-content h1 { white-space: nowrap;
+        font-family: 'Oswald', sans-serif;
+        font-size: 56px;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1;
+        margin: 0 0 8px;
+        text-transform: uppercase;
+        letter-spacing: 0px;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.25);
+    }
+    .mvp-hero-content h1 .hero-sub {
+        display: block;
+        font-size: 32px;
+        line-height: 1;
+        margin-top: 4px;
+    }
+    .mvp-hero-content p {
+        font-family: 'Inter', sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        color: #fff;
+        line-height: 1.35;
+        margin: 16px 0 24px;
+        max-width: 520px;
+    }
+    .mvp-hero-btn {
+        display: inline-block;
+        padding: 12px 32px;
+        background: #F29F05;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .mvp-hero-btn:hover {
+        background: #e08e00;
+        color: #fff;
+    }
+    @media (max-width: 768px) {
+        .mvp-hero { height: 300px; }
+        .mvp-hero-content { padding: 30px 30px; }
+        .mvp-hero-content h1 { white-space: nowrap; font-size: 42px; }
+        .mvp-hero-content h1 .hero-sub { font-size: 26px; }
+        .mvp-hero-content p { font-size: 15px; margin: 12px 0 18px; }
+        .mvp-hero-btn { padding: 10px 24px; font-size: 13px; }
+    }
+    @media (max-width: 480px) {
+        .mvp-hero { height: 220px; }
+        .mvp-hero-content { padding: 20px 20px; }
+        .mvp-hero-content h1 { white-space: nowrap; font-size: 28px; }
+        .mvp-hero-content h1 .hero-sub { font-size: 18px; }
+        .mvp-hero-content p { font-size: 13px; margin: 8px 0 12px; }
+    }
+
+    /* ── Vehicle Carousel ── */
+    .mvp-vehicles {
+        background: #fff;
+        padding: 25px 0 20px;
+        text-align: center; line-height: 48px;
+    }
+    .mvp-carousel-wrapper {
+        position: relative;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 60px;
+    }
+    .mvp-carousel-track {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding: 10px 5px;
+    }
+    .mvp-carousel-track::-webkit-scrollbar { display: none; }
+    .mvp-vehicle-card {
+        flex: 0 0 140px;
+        text-align: center; line-height: 48px;
+        text-decoration: none;
+        color: #333;
+        padding: 5px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .mvp-vehicle-card:hover { transform: translateY(-3px); }
+    .mvp-vehicle-circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid #ccc;
+        background: #f8f8f8;
+        margin: 0 auto 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    .mvp-vehicle-circle img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .mvp-vehicle-card:hover .mvp-vehicle-circle {
+        border-color: #999;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+    .mvp-vehicle-card:hover .mvp-vehicle-name { color: #F29F05; }
+    .mvp-vehicle-name {
+        font-weight: 600;
+        font-size: 12px;
+        margin-bottom: 2px;
+        color: #333;
+        transition: color 0.3s ease;
+        line-height: 1.2;
+    }
+    .mvp-vehicle-years {
+        font-size: 11px;
+        color: #999;
+    }
+    .mvp-carousel-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 40px;
+        background: transparent;
+        color: #333;
+        border: none;
+        cursor: pointer;
+        font-size: 24px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s;
+    }
+    .mvp-carousel-nav:hover { color: #F29F05; }
+    .mvp-carousel-nav.prev { left: 15px; }
+    .mvp-carousel-nav.next { right: 15px; }
+    @media (max-width: 767px) {
+        .mvp-carousel-wrapper { padding: 0 40px; }
+        .mvp-carousel-track { gap: 6px; }
+        .mvp-vehicle-card { flex: 0 0 100px; }
+        .mvp-vehicle-circle { width: 90px; height: 90px; }
+        .mvp-vehicle-name { font-size: 10px; }
+        .mvp-carousel-nav { width: 24px; height: 30px; font-size: 20px; }
+        .mvp-carousel-nav.prev { left: 10px; }
+        .mvp-carousel-nav.next { right: 10px; }
+    }
+
+    /* ── Why Use Us ── */
+    .mvp-why-us {
+        background: #fff;
+        padding: 20px 20px 25px;
+        text-align: center; line-height: 48px;
+    }
+    .mvp-why-us h2 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #333;
+        margin: 0 0 16px;
+    }
+    .mvp-why-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: 20px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    .mvp-why-card {
+        background: #fff;
+        border-radius: 8px;
+        padding: 18px 14px 16px;
+        flex: 1 1 0;
+        max-width: 170px;
+        text-align: center; line-height: 48px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .mvp-why-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+    .mvp-why-icon {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .mvp-why-icon svg {
+        width: 40px;
+        height: 40px;
+        fill: none;
+        stroke: #034C8C;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    .mvp-why-card h3 {
+        font-size: 13px;
+        font-weight: 700;
+        color: #333;
+        margin: 0 0 6px;
+    }
+    .mvp-why-card p {
+        font-size: 11px;
+        color: #888;
+        line-height: 1.4;
+        margin: 0;
+    }
+    @media (max-width: 1024px) {
+        .mvp-why-grid { flex-wrap: wrap; gap: 16px; }
+        .mvp-why-card { flex: 1 1 200px; max-width: 30%; padding: 20px 16px 18px; }
+    }
+    @media (max-width: 768px) {
+        .mvp-why-us { padding: 25px 20px 30px; }
+        .mvp-why-grid { flex-wrap: wrap; gap: 16px; }
+        .mvp-why-card { flex: 1 1 200px; max-width: 45%; padding: 20px 16px 18px; }
+        .mvp-why-card h3 { font-size: 14px; }
+        .mvp-why-card p { font-size: 12px; line-height: 1.5; }
+    }
+    @media (max-width: 480px) {
+        .mvp-why-card { flex: 1 1 130px; max-width: 45%; padding: 14px 10px 12px; }
+    }
+
+    /* ── Custom Footer ── */
+    .mvp-footer * { box-sizing: border-box; }
+    .mvp-footer {
+        background: #1a1a2e;
+        color: #ccc;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 14px;
+        line-height: 1.7;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+    .mvp-footer-main {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 50px 30px 40px;
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr 1fr;
+        gap: 30px;
+    }
+    .mvp-footer-col h4 {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 18px 0;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #F29F05;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+    }
+    .mvp-footer-col ul { list-style: none; margin: 0; padding: 0; }
+    .mvp-footer-col ul li { margin-bottom: 8px; }
+    .mvp-footer-col ul li a {
+        color: #ccc;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    .mvp-footer-col ul li a:hover { color: #F29F05; }
+    .mvp-footer-company-name {
+        color: #fff;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0 0 4px 0;
+    }
+    .mvp-footer-trading {
+        font-size: 12px;
+        color: #999;
+        margin-bottom: 16px;
+    }
+    .mvp-footer-contact { margin-bottom: 16px; }
+    .mvp-footer-contact p { margin: 0 0 6px 0; color: #ccc; font-size: 13px; line-height: 1.6; }
+    .mvp-footer-contact a { color: #F29F05; text-decoration: none; }
+    .mvp-footer-contact a:hover { color: #fff; }
+    .mvp-footer-phone { font-size: 16px !important; font-weight: 600; color: #fff !important; }
+    .mvp-footer-reg { font-size: 12px; color: #888; margin-bottom: 16px; }
+    .mvp-footer-reg p { margin: 0 0 2px 0; }
+    .mvp-footer-payments { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .mvp-footer-payments .pay-icon {
+        background: #fff;
+        color: #333;
+        border-radius: 4px;
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        display: inline-flex;
+        align-items: center;
+        height: 28px;
+    }
+    .mvp-footer-bottom {
+        border-top: 1px solid #2a2a3e;
+        background: #151525;
+    }
+    .mvp-footer-bottom-inner {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 18px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .mvp-footer-copyright { color: #888; font-size: 13px; margin: 0; }
+    .mvp-footer-bottom-links { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+    .mvp-footer-bottom-links a { color: #888; text-decoration: none; transition: color 0.2s ease; }
+    .mvp-footer-bottom-links a:hover { color: #F29F05; }
+    .mvp-footer-bottom-links .sep { color: #555; }
+    @media (max-width: 1024px) {
+        .mvp-footer-main { grid-template-columns: 1fr 1fr; gap: 24px 30px; padding: 40px 24px 30px; }
+        .mvp-footer-col:first-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 768px) {
+        .mvp-footer-main { grid-template-columns: 1fr; gap: 20px; padding: 30px 20px 24px; }
+        .mvp-footer-bottom-inner { flex-direction: column; text-align: center; line-height: 48px; padding: 14px 20px; }
+    }
+
+    
+    /* === Why Use Us icon mask-images (Elementor can't resolve media IDs) === */
+    .elementor-element-c73c57f > .elementor-widget-container > .et-icon-box .icon:before {
+        mask-image: url(/wp-content/uploads/shield-check.svg) !important;
+        -webkit-mask-image: url(/wp-content/uploads/shield-check.svg) !important;
+    }
+    .elementor-element-bd73a19 > .elementor-widget-container > .et-icon-box .icon:before {
+        mask-image: url(/wp-content/uploads/headset.svg) !important;
+        -webkit-mask-image: url(/wp-content/uploads/headset.svg) !important;
+    }
+    .elementor-element-a272fa2 > .elementor-widget-container > .et-icon-box .icon:before {
+        mask-image: url(/wp-content/uploads/toolbox.svg) !important;
+        -webkit-mask-image: url(/wp-content/uploads/toolbox.svg) !important;
+    }
+    .elementor-element-99bbea6 > .elementor-widget-container > .et-icon-box .icon:before {
+        mask-image: url(/wp-content/uploads/clipboard-check.svg) !important;
+        -webkit-mask-image: url(/wp-content/uploads/clipboard-check.svg) !important;
+    }
+    .elementor-element-4103e18 > .elementor-widget-container > .et-icon-box .icon:before {
+        mask-image: url(/wp-content/uploads/telephone-call.svg) !important;
+        -webkit-mask-image: url(/wp-content/uploads/telephone-call.svg) !important;
+    }
+    .elementor-element-d981530 > .elementor-widget-container > .et-icon-box .icon:before {
+        mask-image: url(/wp-content/uploads/shipping.svg) !important;
+        -webkit-mask-image: url(/wp-content/uploads/shipping.svg) !important;
+    }
+    /* === Product loop tweaks to match target === */
+    body.home ul.products .product .button,
+    body.home ul.products .product .added_to_cart {
+        background-color: transparent !important;
+        color: #888 !important;
+        box-shadow: none !important;
+    }
+    body.home ul.products .product .button:hover,
+    body.home ul.products .product .added_to_cart:hover {
+        background-color: transparent !important;
+        color: #333 !important;
+    }
+    body.home ul.products .product .button:before,
+    body.home ul.products .product .button:after,
+    body.home ul.products .product .added_to_cart:before,
+    body.home ul.products .product .added_to_cart:after {
+        display: none !important;
+    }
+    body.home ul.products .product .star-rating-wrap {
+        display: none !important;
+    }
+
+    /* === Hide extra Elementor sections === */
+    body.home .elementor-element-1eaa1c9, body.home .elementor-element-f5b0776,
+    body.home .elementor-element-1fb0185, body.home .elementor-element-b14d001,
+    body.home .elementor-element-09f258e, body.home .elementor-element-1b38164,
+    body.home .elementor-element-1af2051, body.home .elementor-element-4a31403,
+    body.home .elementor-element-25b37be, body.home .elementor-element-099500a { display: none !important; }
+    body.home .mvp-search-bar-wrap { display: block !important; }
+
+    /* === Hide small custom Why Us (keep bigger Elementor version) === */
+    .mvp-why-us { display: none !important; }
+
+    /* === Vehicle filter bar (DESKTOP ONLY) === */
+    @media (min-width: 1025px) {
+    body.home .elementor-element-3e78bee, body.home .elementor-element-3e78bee.breakpoint-767 { display: none !important; }
+    body.home .elementor-element-3e78bee .vehicle-filter-mobile-toggle { display: none !important; }
+    body.home .elementor-element-3e78bee form.product-vehicle-filter { display: flex !important; visibility: visible !important; }
+    body.home .elementor-element-3e78bee .atts { display: flex !important; flex: 0 0 336px !important; gap: 8px !important; height: 36px !important; align-items: center !important; }
+    body.home .elementor-element-3e78bee .vf-item { margin: 0 !important; height: 36px !important; }
+    body.home .elementor-element-3e78bee .vf-item.model { flex: 0 0 208px !important; }
+    body.home .elementor-element-3e78bee .vf-item.year { flex: 0 0 120px !important; }
+    body.home .elementor-element-3e78bee .last { flex: 1 !important; display: flex !important; align-items: center !important; }
+    body.home .elementor-element-3e78bee .vin { display: flex !important; align-items: center !important; }
+    body.home .elementor-element-3e78bee .vin span { color: #444 !important; font-weight: 700 !important; font-size: 12px !important; padding: 0 8px !important; }
+    body.home .elementor-element-3e78bee .vin input { padding: 0 10px !important; border: none !important; border-radius: 4px !important; font-size: 13px !important; height: 36px !important; width: 180px !important; }
+    body.home .elementor-element-3e78bee .reg, body.home .elementor-element-3e78bee .reg-input { width: 180px !important; min-width: 180px !important; flex: 0 0 180px !important; }
+    body.home .elementor-element-3e78bee .reg-input { padding: 0 10px !important; font-size: 13px !important; height: 36px !important; border: none !important; border-radius: 4px !important; }
+    body.home .elementor-element-3e78bee input[type="submit"] { background-color: #BF3617 !important; color: #fff !important; border: none !important; border-radius: 6px !important; font-size: 13px !important; font-weight: 700 !important; height: 36px !important; width: 75px !important; }
+    body.home .elementor-element-3e78bee input[type="submit"]:hover { background-color: #111 !important; }
+    body.home .elementor-element-3e78bee .select2-container, body.home .elementor-element-3e78bee .select2-selection--single { height: 36px !important; }
+    body.home .elementor-element-3e78bee .select2-selection__rendered { line-height: 36px !important; padding: 0 10px !important; font-size: 13px !important; }
+    body.home .elementor-element-3e78bee .select2-selection__arrow { height: 36px !important; }
+    }
+
+    /* === Why Use Us icons (Elementor - fix mask-image URLs) === */
+    .elementor-element-c73c57f .et-icon-box .icon:before { mask-image: url(/wp-content/uploads/shield-check.svg) !important; -webkit-mask-image: url(/wp-content/uploads/shield-check.svg) !important; }
+    .elementor-element-bd73a19 .et-icon-box .icon:before { mask-image: url(/wp-content/uploads/headset.svg) !important; -webkit-mask-image: url(/wp-content/uploads/headset.svg) !important; }
+    .elementor-element-a272fa2 .et-icon-box .icon:before { mask-image: url(/wp-content/uploads/toolbox.svg) !important; -webkit-mask-image: url(/wp-content/uploads/toolbox.svg) !important; }
+    .elementor-element-99bbea6 .et-icon-box .icon:before { mask-image: url(/wp-content/uploads/clipboard-check.svg) !important; -webkit-mask-image: url(/wp-content/uploads/clipboard-check.svg) !important; }
+    .elementor-element-4103e18 .et-icon-box .icon:before { mask-image: url(/wp-content/uploads/telephone-call.svg) !important; -webkit-mask-image: url(/wp-content/uploads/telephone-call.svg) !important; }
+    .elementor-element-d981530 .et-icon-box .icon:before { mask-image: url(/wp-content/uploads/shipping.svg) !important; -webkit-mask-image: url(/wp-content/uploads/shipping.svg) !important; }
+    .why-use-us-grid > .e-con-inner { display: flex !important; align-items: stretch !important; }
+    .why-use-us-grid > .e-con-inner > .e-child { display: flex !important; flex-direction: column !important; }
+    .why-use-us-grid .elementor-widget-et_icon_box { flex: 1 !important; }
+    .why-use-us-grid { flex: 1 !important; }
+    .elementor-element-fca08fb > .e-con-inner { align-items: flex-start !important; }
+
+    /* ══════════════════════════════════════════════════════════
+       MOBILE OVERRIDES — show Elementor defaults on mobile
+       (our custom desktop injections dont run on mobile,
+       so we need the original Elementor sections visible)
+       ══════════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+        /* Show RevSlider on mobile */
+        body.home .elementor-element-a40da3e,
+        body.home sr7-module,
+        body.home .wp-block-themepunch-revslider,
+        body.home .elementor-widget-slider_revolution {
+            display: none !important;
+        }
+
+        /* HIDE Elementor filter on mobile — replaced by custom mobile filter */
+        body.home .elementor-element-3e78bee,
+        body.home .elementor-element-3e78bee.breakpoint-767 {
+            display: none !important;
+        }
+        /* Hide the toggle — form always visible */
+        body.home .elementor-element-3e78bee .vehicle-filter-mobile-toggle {
+            display: none !important;
+        }
+        /* Force form visible (theme hides it behind toggle on mobile) */
+        body.home .elementor-element-3e78bee form.product-vehicle-filter,
+        body.home .et-vehicle-filter.breakpoint-767 form.product-vehicle-filter {
+            display: flex !important;
+            visibility: visible !important;
+            flex-direction: column !important;
+            flex-wrap: wrap !important;
+            gap: 10px !important;
+            padding: 12px !important;
+        }
+        body.home .elementor-element-3e78bee .atts {
+            flex: 1 1 100% !important;
+            width: 100% !important;
+            gap: 8px !important;
+            height: auto !important;
+            flex-direction: column !important;
+        }
+        body.home .elementor-element-3e78bee .vf-item,
+        body.home .elementor-element-3e78bee .vf-item.model,
+        body.home .elementor-element-3e78bee .vf-item.year {
+            flex: 1 1 100% !important;
+            width: 100% !important;
+            min-width: 0 !important;
+        }
+        body.home .elementor-element-3e78bee .last {
+            flex: 1 1 100% !important;
+            width: 100% !important;
+            flex-wrap: wrap !important;
+            flex-direction: column !important;
+            gap: 8px !important;
+        }
+        body.home .elementor-element-3e78bee .vin {
+            width: 100% !important;
+            flex: 1 1 100% !important;
+            flex-direction: column !important;
+        }
+        body.home .elementor-element-3e78bee .vin span {
+            display: none !important;
+        }
+        body.home .elementor-element-3e78bee .vin input,
+        body.home .elementor-element-3e78bee .reg-input {
+            width: 100% !important;
+            flex: 1 1 auto !important;
+            box-sizing: border-box !important;
+        }
+        body.home .elementor-element-3e78bee .reg,
+        body.home .elementor-element-3e78bee .reg-input {
+            width: 100% !important;
+            flex: 1 1 100% !important;
+            min-width: 0 !important;
+        }
+        body.home .elementor-element-3e78bee input[type=submit] {
+            width: 100% !important;
+            flex: 1 1 auto !important;
+        }
+        body.home .elementor-element-3e78bee .select2-container {
+            width: 100% !important;
+        }
+        body.home .elementor-element-3e78bee .reset {
+            text-align: center !important;
+            display: block !important;
+        }
+
+        /* Show original category carousel */
+        body.home .elementor-element-25b37be,
+        body.home .elementor-element-099500a {
+            display: none !important;
+        }
+
+        /* Show the extra Elementor sections */
+        body.home .elementor-element-1eaa1c9,
+        body.home .elementor-element-f5b0776,
+        body.home .elementor-element-1fb0185,
+        body.home .elementor-element-b14d001,
+        body.home .elementor-element-09f258e,
+        body.home .elementor-element-1b38164,
+        body.home .elementor-element-1af2051,
+        body.home .elementor-element-4a31403 {
+            display: block !important;
+        }
+
+        /* Show Why Use Us Elementor section */
+        body.home .elementor-element-8b07793 {
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            overflow: visible !important;
+            display: block !important;
+        }
+
+        /* Show hero area on mobile but hide hero banner, keep carousel */
+        #mvp-facelift-hero-area {
+            display: block !important;
+            padding: 12px 0 !important;
+        }
+        #mvp-facelift-hero-area > .mvp-hero {
+            display: none !important;
+        }
+        .mvp-hero {
+            height: 200px !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+        }
+        .mvp-hero-content {
+            padding: 20px 20px !important;
+            max-width: 100% !important;
+        }
+        .mvp-hero-content h1 {
+            font-size: 28px !important;
+            white-space: normal !important;
+        }
+        .mvp-hero-content h1 .hero-sub {
+            font-size: 18px !important;
+        }
+        .mvp-hero-content p {
+            font-size: 13px !important;
+            display: none !important;
+        }
+
+        body.home .mvp-search-bar-wrap {
+            display: none !important;
+        }
+
+        /* Show original department icons / categories row */
+        body.home .elementor-element-9f85e6f,
+        body.home .elementor-element-e540d81,
+        body.home .elementor-element-23763df,
+        body.home .elementor-element-20e40c9,
+        body.home .elementor-element-7033a3b {
+            display: block !important;
+        }
+
+        /* Show vehicle circles on mobile — horizontal scroll */
+        .mvp-vehicles {
+            display: block !important;
+            padding: 10px 0;
+            overflow-x: auto;
+        }
+        .mvp-carousel-track {
+            display: flex !important;
+            gap: 10px;
+            padding: 0 16px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .mvp-vehicle-card {
+            flex: 0 0 80px !important;
+        }
+        .mvp-vehicle-circle {
+            width: 70px !important;
+            height: 70px !important;
+        }
+        .mvp-vehicle-name {
+            font-size: 10px !important;
+        }
+        .mvp-carousel-nav {
+            display: none !important;
+        }
+
+        /* Why Use Us — stack vertically on mobile, show all cards */
+        .elementor-element-8b07793 {
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            overflow: visible !important;
+            display: block !important;
+        }
+        .elementor-element-8b07793 .e-con-inner {
+            height: auto !important;
+            display: block !important;
+            flex-direction: column !important;
+        }
+        .elementor-element-8b07793 .e-child {
+            width: 100% !important;
+            max-width: 100% !important;
+            flex-basis: 100% !important;
+        }
+        .elementor-element-8b07793 .et-icon-box {
+            margin-bottom: 16px;
+        }
+
+        }
+    }
+    

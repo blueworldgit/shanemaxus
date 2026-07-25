@@ -1,0 +1,88 @@
+    .mvp-product-diagram {
+        max-width: 1300px;
+        margin: 0 auto 40px;
+        padding: 30px;
+        background: #f9f9f9;
+        border-radius: 12px;
+        border: 1px solid #eee;
+    }
+    .mvp-product-diagram h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1a1a2e;
+        margin: 0 0 8px;
+    }
+    .mvp-callout-badge {
+        background: #f5f5f5;
+        border-left: 4px solid #BF3617;
+        padding: 10px 16px;
+        margin: 0 0 12px;
+        border-radius: 0 6px 6px 0;
+        font-size: 14px;
+        color: #333;
+    }
+    .mvp-callout-num {
+        font-weight: 700;
+        color: #F29F05;
+        font-size: 18px;
+    }
+    .woocommerce-product-gallery__trigger { display: none !important; }
+    .woocommerce-product-gallery .zoomImg { display: none !important; }
+    /* Single-product exploded-diagram widget — contained + zoomable, mirrors
+       the category-page component diagram box (mvp_render_component_diagram) */
+    .woocommerce-product-gallery__image .mvp-cd-svg-wrap.mvp-pd-widget {
+        width: 100%;
+        height: 520px;
+        border: 1px solid #dde3e9;
+        background: #fff;
+        border-radius: 6px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+    .mvp-pd-widget .mvp-cd-zoom-controls {
+        display: flex;
+        gap: 6px;
+        padding: 6px 8px;
+        background: #f4f6f8;
+        border-bottom: 1px solid #dde3e9;
+        flex-shrink: 0;
+    }
+    /* !important + min/max-width override the theme's single-product button
+       min-width, which was stretching these to ~81px */
+    .woocommerce-product-gallery__image .mvp-pd-widget .mvp-cd-zoom-btn {
+        width: 34px !important;
+        min-width: 34px !important;
+        max-width: 34px !important;
+        height: 30px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        flex: 0 0 auto !important;
+        box-sizing: border-box !important;
+        border: 1px solid #F29F05 !important;
+        border-radius: 4px !important;
+        background: #F29F05 !important;
+        cursor: pointer !important;
+        font-size: 18px !important;
+        line-height: 1 !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        color: #fff !important;
+        transition: background 0.15s, border-color 0.15s;
+    }
+    .woocommerce-product-gallery__image .mvp-pd-widget .mvp-cd-zoom-btn:hover { background: #D18A0C !important; border-color: #D18A0C !important; }
+    .mvp-pd-widget .mvp-cd-svg-inner {
+        overflow: auto;
+        flex: 1;
+        cursor: grab;
+        padding: 10px;
+    }
+    .mvp-pd-widget .mvp-cd-svg-inner svg {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+        transform-origin: top left;
+    }
+
+    

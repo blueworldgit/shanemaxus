@@ -1,0 +1,128 @@
+    /* Vehicle lookup panel */
+    #mvp-lookup-panel {
+        display: none;
+        position: fixed;
+        background: #F29F05;
+        padding: 20px 24px;
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        z-index: 999999;
+        min-width: 380px;
+        max-width: 440px;
+        box-sizing: border-box;
+    }
+    #mvp-lookup-panel.is-open { display: block; }
+    #mvp-lookup-panel .mvp-lp-label {
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+    }
+    #mvp-lookup-panel .mvp-lp-row {
+        display: flex;
+        gap: 0;
+    }
+    #mvp-lookup-panel .mvp-lp-row input {
+        flex: 1;
+        padding: 10px 14px;
+        border: none;
+        border-radius: 4px 0 0 4px;
+        font-size: 14px;
+        outline: none;
+        color: #333;
+        background: #fff;
+        height: 42px;
+        box-sizing: border-box;
+    }
+    #mvp-lookup-panel .mvp-lp-row input::placeholder { color: #999; }
+    #mvp-lookup-panel .mvp-lp-row button {
+        background: #BF3617;
+        color: #fff;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 0 4px 4px 0;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        height: 42px;
+        box-sizing: border-box;
+        transition: background 0.2s;
+    }
+    #mvp-lookup-panel .mvp-lp-row button:hover { background: #a02e13; }
+    #mvp-lookup-panel .mvp-lp-hint {
+        color: rgba(255,255,255,0.85);
+        font-size: 11px;
+        margin: 6px 0 0 0;
+    }
+    #mvp-lookup-panel .mvp-lp-divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 14px 0;
+        color: rgba(255,255,255,0.8);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    #mvp-lookup-panel .mvp-lp-divider::before,
+    #mvp-lookup-panel .mvp-lp-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: rgba(255,255,255,0.35);
+    }
+    #mvp-lookup-panel .mvp-lp-select {
+        flex: 1;
+        padding: 10px 12px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #333;
+        background: #fff;
+        height: 42px;
+        box-sizing: border-box;
+        outline: none;
+        cursor: pointer;
+    }
+    #mvp-lookup-panel .mvp-lp-select:disabled {
+        background: #e8e8e8;
+        color: #999;
+        cursor: not-allowed;
+    }
+    #mvp-lookup-panel .mvp-lp-go {
+        background: #BF3617;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        height: 42px;
+        box-sizing: border-box;
+        transition: background 0.2s;
+    }
+    #mvp-lookup-panel .mvp-lp-go:hover { background: #a02e13; }
+    #mvp-lookup-panel .mvp-lp-go:disabled { background: #9a7a6a; cursor: not-allowed; }
+    #mvp-lookup-panel .mvp-lp-model-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+    #mvp-lookup-panel .mvp-lp-result {
+        margin-top: 10px;
+        padding: 10px 14px;
+        border-radius: 4px;
+        font-size: 13px;
+        display: none;
+    }
+    #mvp-lookup-panel .mvp-lp-result.show { display: block; }
+    #mvp-lookup-panel .mvp-lp-result.success { background: rgba(255,255,255,0.95); color: #333; }
+    #mvp-lookup-panel .mvp-lp-result.error { background: rgba(0,0,0,0.15); color: #fff; }
+    @keyframes mvp-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .mvp-lp-loader { display: inline-flex; align-items: center; gap: 8px; }
+    .mvp-lp-loader svg { animation: mvp-spin 1s linear infinite; flex-shrink: 0; }
+    

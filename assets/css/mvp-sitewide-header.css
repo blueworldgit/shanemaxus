@@ -1,0 +1,729 @@
+    /* ── Hide default Mobex desktop header + Elementor header — we replace it entirely ── */
+    #et-desktop-8543,
+    .et-desktop.header {
+        display: none !important;
+    }
+
+    /* ── Mobile header: orange background + logo swap ── */
+    #et-mobile-435 {
+        background: #F29F05 !important;
+    }
+    #et-mobile-435 .header-logo .logo,
+    #et-mobile-435 .header-logo .sticky-logo {
+        visibility: hidden;
+        width: 0; height: 0; position: absolute;
+    }
+    #et-mobile-435 .header-logo {
+        display: block;
+        background-image: url('/wp-content/uploads/mpd-logo-original.webp');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center left;
+        width: 180px; height: 40px; min-width: 180px;
+    }
+    #et-mobile-435 .mobile-toggle,
+    #et-mobile-435 .mobile-toggle:before,
+    #et-mobile-435 .mobile-toggle:after {
+        color: #fff !important;
+        background-color: #fff !important;
+    }
+    #et-mobile-435 .mobile-menu li a { color: #333 !important; }
+    #et-mobile-435 [data-id="60c0b2d"],
+    #et-mobile-435 .e-con {
+        background: #D18A0C !important;
+    }
+    #et-mobile-435 .e-con * {
+        color: #fff !important;
+    }
+    /* Hamburger toggle — SVG 3-line icon */
+    #et-mobile-435 .mobile-toggle {
+        width: 30px !important;
+        height: 30px !important;
+        position: relative !important;
+        z-index: 100;
+        background: transparent !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='20' viewBox='0 0 24 20'%3E%3Crect y='0' width='24' height='3' rx='1.5' fill='white'/%3E%3Crect y='8.5' width='24' height='3' rx='1.5' fill='white'/%3E%3Crect y='17' width='24' height='3' rx='1.5' fill='white'/%3E%3C/svg%3E") !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-size: 24px 20px !important;
+        border: none !important;
+        box-shadow: none !important;
+        cursor: pointer !important;
+        font-size: 0 !important;
+        color: transparent !important;
+    }
+    #et-mobile-435 .mobile-toggle:before,
+    #et-mobile-435 .mobile-toggle:after {
+        display: none !important;
+    }
+    }
+
+    /* ═══════════════════════════════════════
+       CUSTOM 3-ROW DESKTOP HEADER
+       ═══════════════════════════════════════ */
+    .mvp-hdr { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .mvp-hdr *, .mvp-hdr *::before, .mvp-hdr *::after { box-sizing: border-box; }
+    .mvp-hdr a { text-decoration: none; transition: color 0.2s, background 0.2s; }
+    .mvp-hdr-wrap { max-width: 1320px; margin: 0 auto; padding: 0 10px; }
+
+    /* ── ROW 1: Top utility bar — white bg, 48px min-height ── */
+    .mvp-hdr-r1 {
+        background: #fff;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .mvp-hdr-r1 .mvp-hdr-wrap {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        gap: 0;
+    }
+    .mvp-hdr-r1-ask {
+        display: flex; align-items: center; gap: 8px;
+        color: #111; font-size: 13px; font-weight: 400;
+    }
+    .mvp-hdr-r1-ask svg { width: 18px; height: 18px; fill: #F29F05; flex-shrink: 0; display: none; }
+    .mvp-hdr-r1-ask:hover { color: #F29F05; }
+
+    .mvp-hdr-r1-social {
+        display: flex; align-items: center; gap: 8px;
+        margin-left: auto;
+    }
+    .mvp-hdr-r1-social span {
+        font-size: 13px; font-weight: 600; color: #111;
+        margin-right: 8px;
+    }
+    .mvp-hdr-r1-social a {
+        display: flex; align-items: center; justify-content: center;
+        width: 24px; height: 24px;
+    }
+    .mvp-hdr-r1-social a svg { width: 12px; height: 12px; fill: #fff; }
+    .mvp-hdr-r1-social a:hover svg { fill: #fff; }
+    .mvp-hdr-r1-social a { border-radius: 6px; }
+    .mvp-hdr-r1-social a[title="Facebook"] { background: #3B5998; }
+    .mvp-hdr-r1-social a[title="Instagram"] { background: #BC2A8D; }
+    .mvp-hdr-r1-social a[title="LinkedIn"] { background: #007BB6; }
+    .mvp-hdr-r1-social a[title="Twitter"] { background: #00ACED; }
+    .mvp-hdr-r1-social a[title="YouTube"] { background: #BB0000; }
+
+    .mvp-hdr-r1-login {
+        margin-left: 18px; position: relative; margin-right: -20px;
+    }
+    .mvp-hdr-r1-login > a {
+        display: flex; align-items: center; gap: 6px;
+        background: none; color: #111; font-size: 13px; font-weight: 700;
+        padding: 0; height: auto; cursor: pointer; border-radius: 0;
+    }
+    .mvp-hdr-r1-login > a svg { width: 14px; height: 14px; fill: #111; }
+    .mvp-hdr-r1-login > a:hover { color: #F29F05; } .mvp-hdr-r1-login > a:hover svg { fill: #F29F05; }
+    .mvp-hdr-r1-login .mvp-login-dd {
+        display: none; position: absolute; right: 0; top: 40px;
+        background: #111; padding: 16px; min-width: 220px; z-index: 9999;
+        border-radius: 0 0 4px 4px;
+    }
+    .mvp-hdr-r1-login:hover .mvp-login-dd { display: block; }
+    .mvp-login-dd input[type="text"],
+    .mvp-login-dd input[type="password"] {
+        width: 100%; padding: 8px 10px; margin-bottom: 8px;
+        border: 1px solid #333; border-radius: 3px;
+        background: #222; color: #fff; font-size: 13px;
+    }
+    .mvp-login-dd input::placeholder { color: #999; }
+    .mvp-login-dd .mvp-login-btn {
+        width: 100%; padding: 8px; border: none; border-radius: 3px;
+        background: #F29F05; color: #000; font-weight: 700; font-size: 13px;
+        cursor: pointer; margin-bottom: 8px;
+    }
+    .mvp-login-dd .mvp-login-btn:hover { background: #F29F05; }
+    .mvp-login-dd .mvp-login-links { display: flex; justify-content: space-between; }
+    .mvp-login-dd .mvp-login-links a { color: #9a9a9a; font-size: 12px; }
+    .mvp-login-dd .mvp-login-links a:hover { color: #fff; }
+
+    /* ── ROW 2: Logo + search + phone — white bg, padding 4px 0 16px ── */
+    .mvp-hdr-r2 {
+        background: #fff;
+    }
+    .mvp-hdr-r2 .mvp-hdr-wrap {
+        display: flex;
+        align-items: center;
+        padding-top: 8px;
+        padding-bottom: 16px;
+        gap: 0;
+    }
+    .mvp-hdr-r2-logo {
+        flex-shrink: 0;
+        margin-right: 32px;
+    }
+    .mvp-hdr-r2-logo img {
+        width: 164px; height: auto; display: block;
+    }
+    .mvp-hdr-r2-home {
+        flex-shrink: 0;
+        display: flex; align-items: center; gap: 8px;
+        background: #BF3617; color: #fff; font-weight: 700; font-size: 16px;
+        padding: 0 24px; height: 48px; border-radius: 6px;
+        margin-right: 8px;
+    }
+    .mvp-hdr-r2-home svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .mvp-hdr-r2-home:hover { background: #a82e13; color: #fff; }
+
+    .mvp-hdr-r2-search {
+        flex: 1; display: flex; align-items: center; max-width: 520px;
+        background: #f0f0f0; border: 1px solid #e0e0e0; border-radius: 6px;
+        overflow: hidden; height: 48px;
+    }
+    .mvp-hdr-r2-search input[type="text"] {
+        text-align: center; line-height: 48px;
+        flex: 1; border: none; background: transparent;
+        padding: 0 14px; font-size: 14px; color: #333; height: 100%;
+        outline: none;
+    }
+    .mvp-hdr-r2-search input::placeholder { color: #999; }
+    .mvp-hdr-r2-search button {
+        background: #BF3617; border: none; color: #fff;
+        width: 52px; height: 100%; font-size: 0;
+        cursor: pointer; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .mvp-hdr-r2-search button:hover { background: #a82e13; }
+
+    .mvp-hdr-r2-phone {
+        flex-shrink: 0; display: flex; align-items: center; gap: 10px;
+        margin-left: auto; text-decoration: none; color: #333;
+    }
+    .mvp-hdr-r2-phone svg { display: none !important; }
+    .mvp-hdr-r2-phone-text { line-height: 1.3; }
+    .mvp-hdr-r2-phone-num { font-size: 14px; font-weight: 700; color: #111; display: block; }
+    .mvp-hdr-r2-phone-sub { font-size: 13px; color: #777; display: block; }
+
+    /* ── ROW 3: Nav bar — dark gold, 64px min-height ── */
+    .mvp-hdr-r3 {
+        background: #D18A0C;
+    }
+    .mvp-hdr-r3 .mvp-hdr-wrap {
+        display: flex;
+        align-items: center;
+        min-height: 64px;
+    }
+    .mvp-hdr-r3-nav {
+        display: flex; align-items: center; gap: 0;
+        list-style: none; margin: 0; padding: 0;
+        margin-left: -16px;
+        margin-right: auto;
+    }
+    .mvp-hdr-r3-nav li a {
+        display: block; padding: 22px 16px;
+        color: #fff; font-size: 16px; font-weight: 700;
+        white-space: nowrap; line-height: 1;
+    }
+    .mvp-hdr-r3-nav li a:hover {
+    }
+    .mvp-hdr-r3-nav li.current-menu-item a, .mvp-hdr-r3-nav li:first-child a {
+        text-decoration: underline; text-underline-offset: 4px;
+    /* ── Nav dropdown menu ── */
+    .mvp-hdr-r3-nav .mvp-has-dropdown { position: relative; }
+    .mvp-hdr-r3-nav .mvp-dropdown {
+        display: none !important; position: absolute; top: 100%; left: 0; z-index: 9999;
+        background: #fff; min-width: 260px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        border-radius: 0 0 6px 6px; padding: 8px 0; list-style: none; margin: 0;
+    }
+    .mvp-hdr-r3-nav .mvp-has-dropdown:hover .mvp-dropdown { display: block !important; }
+    .mvp-hdr-r3-nav .mvp-dropdown li a {
+        display: block; padding: 8px 20px; color: #333 !important; font-size: 14px !important;
+        font-weight: 500 !important; white-space: nowrap;
+    }
+    .mvp-hdr-r3-nav .mvp-dropdown li a:hover {
+        background: #f5f5f5; color: #BF3617 !important; text-decoration: none !important;
+    }
+    /* ── Custom scrollbar for vehicle dropdown ── */
+    .mvp-mega::-webkit-scrollbar { display: none; }
+    .mvp-mega { -ms-overflow-style: none; scrollbar-width: none; }
+        text-decoration: underline; text-underline-offset: 4px;
+    }
+    .mvp-hdr-r3-actions {
+        display: flex; align-items: center; gap: 0;
+        margin-left: auto;
+    }
+    .mvp-hdr-r3-actions a {
+        display: flex; align-items: center; gap: 6px;
+        padding: 22px 14px; color: #fff; font-size: 13px; font-weight: 600;
+        white-space: nowrap; line-height: 1;
+    }
+    .mvp-hdr-r3-actions a svg { width: 20px; height: 20px; fill: #fff; }
+    .mvp-hdr-r3-actions a:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .mvp-hdr-r3-actions a.mvp-r3-cart { flex-direction: row; align-items: center; gap: 6px; }
+    .mvp-hdr-r3-actions a.mvp-r3-icon { padding: 22px 12px; gap: 0; } .mvp-hdr-r3-actions a.mvp-r3-icon svg { border-radius: 32px; }
+    .mvp-hdr-r3-actions a.mvp-r3-icon svg { width: 22px; height: 22px; }
+    .mvp-hdr-r3-actions .mvp-r3-myvehicle {
+        background: #BF3617; padding: 0 24px; height: 48px; border-radius: 6px; font-size: 16px;
+        margin-left: 8px; font-weight: 700;
+    }
+    .mvp-hdr-r3-actions .mvp-r3-myvehicle:hover { background: #040404; text-decoration: none; }
+    .mvp-hdr-r3-actions .mvp-cart-badge {
+    .mvp-cart-text { font-size: 16px; font-weight: 700; line-height: 1; width: 100%; }
+    .mvp-cart-stacked { display: flex; flex-direction: column; gap: 1px; }
+    .mvp-cart-sub { font-size: 11px; font-weight: 700; display: block; line-height: 1; margin-top: 2px; }
+    .mvp-cart-sub .mvp-cart-badge { margin-left: 0; margin-right: 2px; }
+        background: #F29F05; color: #000; font-size: 10px; font-weight: 700;
+    .mvp-cart-text { font-size: 16px; font-weight: 700; line-height: 1; width: 100%; }
+    .mvp-cart-stacked { display: flex; flex-direction: column; gap: 1px; }
+    .mvp-cart-sub { font-size: 11px; font-weight: 700; display: block; line-height: 1; margin-top: 2px; }
+    .mvp-cart-sub .mvp-cart-badge { margin-left: 0; margin-right: 2px; }
+        border-radius: 50%; min-width: 18px; height: 18px;
+    .mvp-cart-text { font-size: 16px; font-weight: 700; line-height: 1; width: 100%; }
+    .mvp-cart-stacked { display: flex; flex-direction: column; gap: 1px; }
+    .mvp-cart-sub { font-size: 11px; font-weight: 700; display: block; line-height: 1; margin-top: 2px; }
+    .mvp-cart-sub .mvp-cart-badge { margin-left: 0; margin-right: 2px; }
+        display: inline-flex; align-items: center; justify-content: center;
+    .mvp-cart-text { font-size: 16px; font-weight: 700; line-height: 1; width: 100%; }
+    .mvp-cart-stacked { display: flex; flex-direction: column; gap: 1px; }
+    .mvp-cart-sub { font-size: 11px; font-weight: 700; display: block; line-height: 1; margin-top: 2px; }
+    .mvp-cart-sub .mvp-cart-badge { margin-left: 0; margin-right: 2px; }
+        margin-left: 4px; padding: 0 4px;
+    .mvp-cart-text { font-size: 16px; font-weight: 700; line-height: 1; width: 100%; }
+    .mvp-cart-stacked { display: flex; flex-direction: column; gap: 1px; }
+    .mvp-cart-sub { font-size: 11px; font-weight: 700; display: block; line-height: 1; margin-top: 2px; }
+    .mvp-cart-sub .mvp-cart-badge { margin-left: 0; margin-right: 2px; }
+    }
+    .mvp-cart-text { font-size: 16px; font-weight: 700; line-height: 1; width: 100%; }
+    .mvp-cart-stacked { display: flex; flex-direction: column; gap: 1px; }
+    .mvp-cart-sub { font-size: 11px; font-weight: 700; display: block; line-height: 1; margin-top: 2px; }
+    .mvp-cart-sub .mvp-cart-badge { margin-left: 0; margin-right: 2px; }
+
+    /* ── WooCommerce Add to Cart + View Cart buttons — site red ── */
+    .woocommerce a.added_to_cart,
+    .woocommerce a.button.wc-forward {
+        background-color: #BF3617 !important;
+        color: #fff !important;
+        border-radius: 4px;
+        padding: 8px 16px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+    .woocommerce a.added_to_cart:hover,
+    .woocommerce a.button.wc-forward:hover {
+        background-color: #a02e13 !important;
+    }
+    .woocommerce-message.mvp-cart-notice {
+        background: #f7f6f7;
+        border-top: 3px solid #BF3617; border-bottom: 1px solid #e0e0e0;
+        padding: 14px 20px;
+        margin: 0 0 20px;
+        font-size: 14px;
+        color: #333;
+        line-height: 1.6;
+        overflow: hidden;
+    }
+    .woocommerce ul.products li.product .button.add_to_cart_button {
+        color: #BF3617 !important;
+    }
+    .woocommerce ul.products li.product .button.add_to_cart_button:hover {
+        color: #a02e13 !important;
+    }
+    /* ── WooCommerce Blocks buttons (Cart, Checkout, Place Order) — site red ── */
+    .wc-block-cart__submit-button,
+    .wc-block-components-button.contained,
+    .wp-element-button.wc-block-components-button,
+    .wc-block-components-checkout-place-order-button,
+    .wc-block-checkout__actions_row .wc-block-components-button,
+    .wc-block-components-totals-coupon__button {
+        background-color: #BF3617 !important;
+        color: #fff !important;
+        border: none !important;
+    }
+    .wc-block-cart__submit-button:hover,
+    .wc-block-components-button.contained:hover,
+    .wp-element-button.wc-block-components-button:hover,
+    .wc-block-components-checkout-place-order-button:hover {
+        background-color: #a02e13 !important;
+    }
+    /* Return to cart link */
+    .wc-block-components-checkout-return-to-cart-button {
+        color: #BF3617 !important;
+    }
+    .wc-block-components-checkout-return-to-cart-button:hover {
+    /* ── Worldpay payment form fix for WooCommerce Blocks ── */
+    .wc-block-components-radio-control-accordion-content iframe {
+        height: 44px !important;
+        max-height: 44px !important;
+    }
+    .wc-block-components-radio-control-accordion-content .wc-block-gateway-input.field {
+        height: auto !important;
+        margin-bottom: 12px;
+    }
+    .wc-block-components-radio-control-accordion-content {
+        padding: 16px !important;
+    }
+    #access_worldpay_checkout-card-number,
+    #access_worldpay_checkout-card-expiry,
+    #access_worldpay_checkout-card-cvc {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+        height: 44px !important;
+    }
+    #access_worldpay_checkout-card-expiry,
+    #access_worldpay_checkout-card-cvc {
+        display: inline-block;
+        width: calc(50% - 8px) !important;
+    }
+    #access_worldpay_checkout-card-cvc { margin-left: 12px; }
+    #access_worldpay_checkout-card-holder-name {
+        width: 100% !important;
+        height: 44px;
+        padding: 0 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        margin-top: 12px;
+    }
+        color: #a02e13 !important;
+    /* ── Worldpay payment form fix for WooCommerce Blocks ── */
+    .wc-block-components-radio-control-accordion-content iframe {
+        height: 44px !important;
+        max-height: 44px !important;
+    }
+    .wc-block-components-radio-control-accordion-content .wc-block-gateway-input.field {
+        height: auto !important;
+        margin-bottom: 12px;
+    }
+    .wc-block-components-radio-control-accordion-content {
+        padding: 16px !important;
+    }
+    #access_worldpay_checkout-card-number,
+    #access_worldpay_checkout-card-expiry,
+    #access_worldpay_checkout-card-cvc {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+        height: 44px !important;
+    }
+    #access_worldpay_checkout-card-expiry,
+    #access_worldpay_checkout-card-cvc {
+        display: inline-block;
+        width: calc(50% - 8px) !important;
+    }
+    #access_worldpay_checkout-card-cvc { margin-left: 12px; }
+    #access_worldpay_checkout-card-holder-name {
+        width: 100% !important;
+        height: 44px;
+        padding: 0 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        margin-top: 12px;
+    }
+    }
+    /* ── Worldpay payment form fix for WooCommerce Blocks ── */
+    .wc-block-components-radio-control-accordion-content iframe {
+        height: 44px !important;
+        max-height: 44px !important;
+    }
+    .wc-block-components-radio-control-accordion-content .wc-block-gateway-input.field {
+        height: auto !important;
+        margin-bottom: 12px;
+    }
+    .wc-block-components-radio-control-accordion-content {
+        padding: 16px !important;
+    }
+    #access_worldpay_checkout-card-number,
+    #access_worldpay_checkout-card-expiry,
+    #access_worldpay_checkout-card-cvc {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+        height: 44px !important;
+    }
+    #access_worldpay_checkout-card-expiry,
+    #access_worldpay_checkout-card-cvc {
+        display: inline-block;
+        width: calc(50% - 8px) !important;
+    }
+    #access_worldpay_checkout-card-cvc { margin-left: 12px; }
+    #access_worldpay_checkout-card-holder-name {
+        width: 100% !important;
+        height: 44px;
+        padding: 0 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        margin-top: 12px;
+    }
+    /* ── Pagination — site red for active/hover ── */
+    .woocommerce nav.woocommerce-pagination ul li a:hover,
+    .woocommerce nav.woocommerce-pagination ul li span.current,
+    nav.woocommerce-pagination ul li a:hover,
+    nav.woocommerce-pagination ul li span.current {
+        background: #BF3617 !important;
+        color: #fff !important;
+        border-color: #BF3617 !important;
+    }
+    .woocommerce nav.woocommerce-pagination ul li a,
+    nav.woocommerce-pagination ul li a {
+        border-color: #BF3617 !important;
+        color: #BF3617 !important;
+    }
+    /* ── Hide Archives, Categories sidebar widgets + default Mobex footer ── */
+    .shop-bottom-widgets,
+    #et-footer-default {
+        display: none !important;
+    }
+
+    /* ── Single product page layout ── */
+    body.single-product .summary.entry-summary {
+        display: flex; flex-direction: column; min-height: 450px;
+    }
+    body.single-product .summary .product_title {
+        margin-bottom: 10px; font-size: 24px; font-weight: 700;
+    }
+    body.single-product .summary .price {
+        margin-top: 10px; margin-bottom: 20px; font-size: 1.8em;
+    }
+    body.single-product .summary form.cart {
+        margin-top: 15px; margin-bottom: 20px;
+    }
+    /* Hide default WooCommerce meta (categories/tags) on product pages */
+    body.single-product .product_meta {
+        display: none !important;
+    }
+    /* Hide Callout/Qty text that appears after add to cart */
+    body.single-product .summary .callout-field,
+    body.single-product .summary p:has(> .callout),
+    body.single-product .summary > p[style] {
+        display: none !important;
+    }
+    /* Hide reviews tab */
+    body.single-product .woocommerce-Reviews,
+    body.single-product #tab-reviews,
+    body.single-product li.reviews_tab {
+        display: none !important;
+    }
+    /* Hide WooCommerce tabs - show description inline */
+    body.single-product .woocommerce-tabs {
+        display: none !important;
+    }
+
+    /* SKU / Part No / Weight meta row */
+    .mvp-product-meta-info {
+        margin-bottom: 15px; font-size: 14px; color: #666;
+    }
+    .mvp-product-meta-info .meta-label { color: #888; }
+    .mvp-product-meta-info .meta-value { font-family: monospace; color: #333; font-weight: 600; }
+    .mvp-product-meta-info .meta-sep { margin: 0 12px; color: #ccc; }
+
+    /* Request a Price button */
+    .mvp-price-request-text {
+        font-size: 1.4em; font-weight: 600; color: #888; margin: 10px 0 5px;
+    }
+    .mvp-request-price-btn {
+        display: inline-block; background: #F29F05; color: #fff; border: none;
+        padding: 12px 28px; font-size: 15px; font-weight: 700; border-radius: 4px;
+        cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;
+        text-decoration: none; margin: 10px 0 15px;
+    }
+    .mvp-request-price-btn:hover { background: #F29F05; color: #fff; }
+
+    /* Estimated Delivery */
+    .mvp-delivery-time {
+        margin: 15px 0; padding: 12px 15px;
+        background: #fff8e6; border-radius: 6px; border-left: 4px solid #F29F05;
+    }
+    .mvp-delivery-time .delivery-label { font-weight: 600; color: #333; margin-right: 8px; }
+    .mvp-delivery-time .delivery-value { color: #F29F05; font-weight: 600; }
+
+    /* Compatible Vehicles */
+    .mvp-vehicle-compat {
+        margin-top: auto !important; padding: 15px;
+        background: #f5f5f5; border-radius: 6px; border-left: 4px solid #F29F05;
+    }
+    .mvp-vehicle-compat h4 { margin: 0 0 10px; font-size: 0.95em; color: #333; font-weight: 600; }
+    .mvp-vehicle-compat ul { margin: 0; padding: 0; list-style: none; }
+    .mvp-vehicle-compat li {
+        padding: 5px 0; border-bottom: 1px solid #e0e0e0; font-size: 0.9em;
+    }
+    .mvp-vehicle-compat li:last-child { border-bottom: none; }
+    .mvp-vehicle-compat .v-name { font-weight: 600; color: #333; }
+    .mvp-vehicle-compat .v-year { color: #666; margin-left: 5px; }
+    .mvp-vehicle-compat .v-empty { color: #999; font-style: italic; font-size: 0.9em; }
+
+    /* Hide related products */
+    body.single-product .related.products {
+        display: none !important;
+    }
+
+    /* Hide review form, post navigation (Previous/Next), and any stray borders between description and recently viewed */
+    body.single-product #reviews,
+    body.single-product #review_form_wrapper,
+    body.single-product .woocommerce-Reviews,
+    body.single-product #respond,
+    body.single-product .comment-respond,
+    body.single-product .storefront-product-pagination,
+    body.single-product nav.post-navigation,
+    body.single-product .product-navigation,
+    body.single-product .mobex-product-navigation,
+    body.single-product .product > .summary ~ hr,
+    body.single-product .product > .summary ~ .clear {
+        display: none !important;
+    }
+    /* Remove stray borders/margins/lines from hidden woo sections */
+    body.single-product .woocommerce-tabs,
+    body.single-product .related.products,
+    body.single-product .up-sells,
+    body.single-product .cross-sells {
+        margin: 0 !important; padding: 0 !important; border: none !important;
+        height: 0 !important; overflow: hidden !important;
+    }
+    /* Kill all hr and border lines between description and recently viewed */
+    body.single-product div.product hr,
+    body.single-product div.product > .clear,
+    body.single-product .products-separator,
+    body.single-product .product-separator {
+        display: none !important;
+    }
+    body.single-product div.product > div:not(.mvp-product-description):not(.images):not(.summary):not(.mvp-vehicle-notice):not([class*="recently"]):not([class*="widget"]):not(.mvp-vehicle-compat) {
+        border: none !important;
+    }
+
+    /* Product description section (below image/summary) */
+    .mvp-product-description {
+        padding: 25px 0; border-top: 1px solid #eee; margin-top: 20px;
+        padding-bottom: 0; margin-bottom: 0;
+        clear: both;
+    }
+    .mvp-product-description h3 {
+        font-size: 18px; font-weight: 700; color: #333; margin: 0 0 12px;
+    }
+    .mvp-product-description p, .mvp-product-description div {
+        font-size: 14px; color: #555; line-height: 1.7;
+    }
+
+    /* ── Hide orange vehicle filter bar (Model/Year/Engine/Transmission/Trim) ── */
+    body:not(.home) .widget_product_vehicle_filter_widget,
+    body:not(.home) .product-vehicle-filter,
+    body:not(.home) .vehicle-filter-mobile-toggle {
+        display: none !important;
+    }
+
+    /* ── "Viewing parts for" bar — red background ── */
+    .mvp-vehicle-notice {
+        background: #BF3617 !important;
+    }
+    .mvp-vehicle-notice a {
+        color: #fff !important;
+    }
+    /* Hide "Viewing parts for" bar on cart, checkout, and account pages */
+    body.woocommerce-cart .mvp-vehicle-notice,
+    body.woocommerce-checkout .mvp-vehicle-notice,
+    body.woocommerce-account .mvp-vehicle-notice {
+        display: none !important;
+    }
+
+    /* ── Why Use Us ── */
+    .mvp-why-us {
+        background: #fff;
+        padding: 20px 20px 25px;
+        text-align: center; line-height: 48px;
+    }
+    .mvp-why-us h2 { font-size: 22px; font-weight: 700; color: #333; margin: 0 0 16px; }
+    .mvp-why-grid {
+        display: flex; flex-wrap: nowrap; justify-content: center;
+        gap: 20px; max-width: 1100px; margin: 0 auto;
+    }
+    .mvp-why-card {
+        background: #fff; border-radius: 8px; padding: 18px 14px 16px;
+        flex: 1 1 0; max-width: 170px; text-align: center; line-height: 48px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .mvp-why-card:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+    .mvp-why-icon { width: 48px; height: 48px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; }
+    .mvp-why-icon svg { width: 40px; height: 40px; fill: none; stroke: #034C8C; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .mvp-why-card h3 { font-size: 13px; font-weight: 700; color: #333; margin: 0 0 6px; }
+    .mvp-why-card p { font-size: 11px; color: #888; line-height: 1.4; margin: 0; }
+    @media (max-width: 1024px) {
+        .mvp-why-grid { flex-wrap: wrap; gap: 16px; }
+        .mvp-why-card { flex: 1 1 200px; max-width: 30%; padding: 20px 16px 18px; }
+    }
+    @media (max-width: 768px) {
+        .mvp-why-us { padding: 25px 20px 30px; }
+        .mvp-why-grid { flex-wrap: wrap; gap: 16px; }
+        .mvp-why-card { flex: 1 1 200px; max-width: 45%; padding: 20px 16px 18px; }
+        .mvp-why-card h3 { font-size: 14px; }
+        .mvp-why-card p { font-size: 12px; line-height: 1.5; }
+    }
+    @media (max-width: 480px) {
+        .mvp-why-card { flex: 1 1 130px; max-width: 45%; padding: 14px 10px 12px; }
+    }
+
+    /* ── Custom Footer ── */
+    .mvp-footer * { box-sizing: border-box; }
+    .mvp-footer {
+        background: #1a1a2e; color: #ccc;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 14px; line-height: 1.7; padding: 0; margin: 0; width: 100%;
+    }
+    .mvp-footer-main {
+        max-width: 1300px; margin: 0 auto; padding: 50px 30px 40px;
+        display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr 1fr; gap: 30px;
+    }
+    .mvp-footer-col h4 {
+        color: #fff; font-size: 16px; font-weight: 600; margin: 0 0 18px 0;
+        padding-bottom: 12px; border-bottom: 2px solid #F29F05;
+        text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
+    }
+    .mvp-footer-col ul { list-style: none; margin: 0; padding: 0; }
+    .mvp-footer-col ul li { margin-bottom: 8px; }
+    .mvp-footer-col ul li a { color: #ccc; text-decoration: none; transition: color 0.2s ease; }
+    .mvp-footer-col ul li a:hover { color: #F29F05; }
+    .mvp-footer-company-name { color: #fff; font-size: 20px; font-weight: 700; margin: 0 0 4px 0; }
+    .mvp-footer-trading { font-size: 12px; color: #999; margin-bottom: 16px; }
+    .mvp-footer-contact { margin-bottom: 16px; }
+    .mvp-footer-contact p { margin: 0 0 6px 0; color: #ccc; font-size: 13px; line-height: 1.6; }
+    .mvp-footer-contact a { color: #F29F05; text-decoration: none; }
+    .mvp-footer-contact a:hover { color: #fff; }
+    .mvp-footer-phone { font-size: 16px !important; font-weight: 600; color: #fff !important; }
+    .mvp-footer-reg { font-size: 12px; color: #888; margin-bottom: 16px; }
+    .mvp-footer-reg p { margin: 0 0 2px 0; }
+    .mvp-footer-payments { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .mvp-footer-payments .pay-card { display:block; }
+    .mvp-footer-payments .pay-icon {
+        background: #fff; color: #333; border-radius: 4px; padding: 4px 10px;
+        font-size: 11px; font-weight: 700; letter-spacing: 0.3px;
+        display: inline-flex; align-items: center; height: 28px;
+    }
+    .mvp-footer-bottom { border-top: 1px solid #2a2a3e; background: #151525; }
+    .mvp-footer-bottom-inner {
+        max-width: 1300px; margin: 0 auto; padding: 18px 30px;
+        display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    }
+    .mvp-footer-copyright { color: #888; font-size: 13px; margin: 0; }
+    .mvp-footer-bottom-links { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+    .mvp-footer-bottom-links a { color: #888; text-decoration: none; transition: color 0.2s ease; }
+    .mvp-footer-bottom-links a:hover { color: #F29F05; }
+    .mvp-footer-bottom-links .sep { color: #555; }
+    @media (max-width: 1024px) {
+        .mvp-footer-main { grid-template-columns: 1fr 1fr; gap: 24px 30px; padding: 40px 24px 30px; }
+        .mvp-footer-col:first-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 768px) {
+        .mvp-footer-main { grid-template-columns: 1fr; gap: 20px; padding: 30px 20px 24px; }
+        .mvp-footer-bottom-inner { flex-direction: column; text-align: center; line-height: 48px; padding: 14px 20px; }
+    }
+
+    /* ── Responsive: hide custom header on mobile, show default ── */
+    @media (max-width: 1024px) {
+        .mvp-hdr { display: none !important; }
+        #et-desktop-8543 { display: none !important; background: #F29F05 !important; }
+        #et-desktop-8543 .header-logo .logo { visibility: hidden; width: 0; height: 0; position: absolute; }
+        #et-desktop-8543 .header-logo {
+            display: block;
+            background-image: url('/wp-content/uploads/mpd-logo-original.webp');
+            background-repeat: no-repeat; background-size: contain;
+            background-position: center left;
+            width: 180px; height: 40px; min-width: 180px;
+        }
+        #et-desktop-8543 .header-menu > li > a,
+        #et-desktop-8543 .header-menu > li > a .txt { color: #fff !important; }
+    }
+    

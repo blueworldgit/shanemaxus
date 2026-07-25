@@ -1,0 +1,55 @@
+    @media (max-width: 1024px) {
+        .mvp-mobile-filter {
+            background: #D18A0C;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0 10px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .mvp-mobile-filter select,
+        .mvp-mobile-filter input[type=text] {
+            width: 100%;
+            height: 44px;
+            padding: 0 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #333;
+            background: #fff;
+            box-sizing: border-box;
+            -webkit-appearance: menulist;
+        }
+        .mvp-mobile-filter input[type=text] {
+            -webkit-appearance: none;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .mvp-mobile-filter input[type=text]::placeholder {
+            color: #999;
+            text-transform: uppercase;
+        }
+        .mvp-mobile-filter .mvp-mf-or {
+            color: #fff;
+            font-weight: 700;
+            font-size: 12px;
+            text-align: center;
+        }
+        .mvp-mobile-filter button {
+            width: 100%;
+            height: 48px;
+            background: #BF3617;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .mvp-mobile-filter button:hover { background: #a82e13; }
+    }
+    @media (min-width: 1025px) {
+        .mvp-mobile-filter { display: none !important; }
+    }
+    

@@ -1,0 +1,56 @@
+    .mvp-request-price-btn {
+        display: inline-block;
+        background: #BF3617;
+        color: #fff !important;
+        font-weight: 700;
+        font-size: 15px;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: background 0.2s;
+    }
+    .mvp-request-price-btn:hover { background: #a82e13; color: #fff !important; }
+    .mvp-request-price-loop { background: #BF3617 !important; color: #fff !important; font-weight: 600 !important; border-radius: 6px !important; }
+    .mvp-request-price-loop:hover { background: #a82e13 !important; }
+    .mvp-price-request-text { font-size: 18px; font-weight: 700; color: #BF3617; margin-bottom: 12px; }
+    .mvp-price-modal-overlay {
+        display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.6); z-index: 99999; align-items: center; justify-content: center;
+    }
+    .mvp-price-modal-overlay.active { display: flex; }
+    .mvp-price-modal {
+        background: #fff; border-radius: 12px; padding: 32px; max-width: 480px; width: 90%;
+        max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .mvp-price-modal h3 { font-size: 20px; font-weight: 700; color: #1a1a2e; margin: 0 0 6px; }
+    .mvp-price-modal-close {
+        position: absolute; top: 12px; right: 16px; font-size: 24px; color: #999;
+        cursor: pointer; background: none; border: none; line-height: 1;
+    }
+    .mvp-price-modal-close:hover { color: #333; }
+    .mvp-price-modal-product {
+        background: #f5f5f5; border-radius: 8px; padding: 12px 16px; margin: 16px 0; font-size: 13px; color: #666;
+    }
+    .mvp-price-modal-product strong { color: #333; }
+    .mvp-price-modal label { display: block; font-size: 13px; font-weight: 600; color: #333; margin: 14px 0 4px; }
+    .mvp-price-modal input[type=text],
+    .mvp-price-modal input[type=email],
+    .mvp-price-modal input[type=tel] {
+        width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; box-sizing: border-box;
+    }
+    .mvp-price-modal input:focus { border-color: #F29F05; outline: none; box-shadow: 0 0 0 2px rgba(242,159,5,0.2); }
+    .mvp-price-modal-submit {
+        width: 100%; margin-top: 20px; padding: 14px; background: #BF3617; color: #fff;
+        border: none; border-radius: 6px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.2s;
+    }
+    .mvp-price-modal-submit:hover { background: #a82e13; }
+    .mvp-price-modal-submit:disabled { background: #ccc; cursor: not-allowed; }
+    .mvp-price-modal-msg { margin-top: 12px; padding: 10px 14px; border-radius: 6px; font-size: 14px; display: none; }
+    .mvp-price-modal-msg.success { display: block; background: #e8f5e9; color: #2e7d32; }
+    .mvp-price-modal-msg.error { display: block; background: #fbe9e7; color: #c62828; }
+    @media (max-width: 600px) { .mvp-price-modal { padding: 24px 20px; } }
+    

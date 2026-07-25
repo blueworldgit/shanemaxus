@@ -1,0 +1,16 @@
+    /* Fix department sidebar icon dark backgrounds */
+    .elementor-element-ea2c0ec .icon::before {
+        display: none !important;
+    }
+    .menu-icon.img, .menu-icon.img.lazyloaded {
+        background-color: transparent !important;
+    }
+    /* Hide the "Features products" heading and empty product widget */
+    body.home .elementor-widget-et_products {
+        display: none !important;
+    }
+    body.home .elementor-element-320ce91,
+    body.home .elementor-element-8555cc5 {
+        display: none !important;
+    }
+    

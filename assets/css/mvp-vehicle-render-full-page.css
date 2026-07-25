@@ -1,0 +1,113 @@
+    /* Vehicle Landing Page Styles */
+    .mvp-vehicle-page {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 30px 20px 60px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .mvp-vehicle-header {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        margin-bottom: 35px;
+        padding-bottom: 25px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+    .mvp-vehicle-header-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid #ccc;
+        background: #f8f8f8;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+    .mvp-vehicle-header-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .mvp-vehicle-header-info h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #1a1a2e;
+        margin: 0 0 6px;
+    }
+    .mvp-vehicle-header-info .mvp-vh-years {
+        font-size: 16px;
+        color: #888;
+        margin: 0 0 10px;
+    }
+    .mvp-vehicle-header-info .mvp-vh-breadcrumb {
+        font-size: 14px;
+        color: #aaa;
+    }
+    .mvp-vehicle-header-info .mvp-vh-breadcrumb a {
+        color: #034C8C;
+        text-decoration: none;
+    }
+    .mvp-vehicle-header-info .mvp-vh-breadcrumb a:hover {
+        color: #F29F05;
+    }
+    .mvp-category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+    .mvp-category-card {
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 10px;
+        overflow: hidden;
+        text-decoration: none;
+        color: #333;
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+    }
+    .mvp-category-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .mvp-category-card-img {
+        width: 100%;
+        height: 150px;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .mvp-category-card-img img {
+        max-width: 90%;
+        max-height: 130px;
+        object-fit: contain;
+    }
+    .mvp-category-card-body {
+        padding: 14px 16px;
+        text-align: center; line-height: 48px;
+    }
+    .mvp-category-card-body h3 {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1a1a2e;
+        margin: 0 0 4px;
+    }
+    .mvp-category-card-body .mvp-cat-count {
+        font-size: 12px;
+        color: #999;
+    }
+    @media (max-width: 768px) {
+        .mvp-vehicle-header { flex-direction: column; text-align: center; line-height: 48px; gap: 16px; }
+        .mvp-vehicle-header-img { width: 120px; height: 120px; }
+        .mvp-vehicle-header-info h1 { font-size: 24px; }
+        .mvp-category-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+        .mvp-category-card-img { height: 120px; }
+    }
+    @media (max-width: 480px) {
+        .mvp-category-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+        .mvp-category-card-img { height: 100px; }
+        .mvp-category-card-body { padding: 10px 12px; }
+        .mvp-category-card-body h3 { font-size: 13px; }
+    }
+    
