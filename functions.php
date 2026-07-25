@@ -816,115 +816,8 @@ function mvp_price_request_modal() {
         </div>
     </div>
 
-    <script>
-    function mvpOpenPriceModal(btn) {
-        var modal = document.getElementById('mvpPriceModal');
-        var nameEl = document.querySelector('.product_title, h1.entry-title, .entry-title');
-        var skuEl = document.querySelector('.sku, .meta-value');
-        var productName = nameEl ? nameEl.textContent.trim() : '';
-        var sku = skuEl ? skuEl.textContent.trim() : '';
-        var lr = btn ? (btn.getAttribute('data-lr') || '') : '';
-        var remark = btn ? (btn.getAttribute('data-remark') || '') : '';
-        var metaParts = [];
-        if (lr) metaParts.push('Orientation: ' + lr);
-        if (remark) metaParts.push(remark);
-        var metaText = metaParts.join(' | ');
-        document.getElementById('mvpPriceProductName').textContent = productName;
-        document.getElementById('mvpPriceProductSku').textContent = sku;
-var metaWrap = document.getElementById('mvpPriceMetaWrap');        var metaSpan = document.getElementById('mvpPriceMeta');        if (metaWrap) { if (metaText) { metaSpan.textContent = metaText; metaWrap.style.display = 'inline'; } else { metaWrap.style.display = 'none'; } }
-        document.getElementById('mvpPriceSku').value = sku;
-        document.getElementById('mvpPriceProductNameHidden').value = productName;
-        document.getElementById('mvpPriceProductUrl').value = window.location.href;
-        document.getElementById('mvpPriceForm').reset();
-        document.getElementById('mvpPriceSku').value = sku;
-        document.getElementById('mvpPriceProductNameHidden').value = productName;
-        document.getElementById('mvpPriceProductUrl').value = window.location.href;
-        if (document.getElementById('mvpPriceProductMeta')) document.getElementById('mvpPriceProductMeta').value = metaText || '';
-        document.getElementById('mvpPriceMsg').className = 'mvp-price-modal-msg';
-        document.getElementById('mvpPriceSubmitBtn').disabled = false;
-        document.getElementById('mvpPriceSubmitBtn').textContent = 'Submit Enquiry';
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    function mvpOpenPriceModalFromTable(btn) {
-        var modal = document.getElementById('mvpPriceModal');
-        var sku = btn.getAttribute('data-sku') || '';
-        var productName = btn.getAttribute('data-name') || '';
-        var productUrl = btn.getAttribute('data-url') || '';
-        var lr = btn.getAttribute('data-lr') || '';
-        var remark = btn.getAttribute('data-remark') || '';
-        var metaParts = [];
-        if (lr) metaParts.push('Orientation: ' + lr);
-        if (remark) metaParts.push(remark);
-        var metaText = metaParts.join(' | ');
-        document.getElementById('mvpPriceProductName').textContent = productName;
-        document.getElementById('mvpPriceProductSku').textContent = sku;
-        var metaWrap = document.getElementById('mvpPriceMetaWrap');
-        var metaSpan = document.getElementById('mvpPriceMeta');
-        if (metaWrap) {
-            if (metaText) { metaSpan.textContent = metaText; metaWrap.style.display = 'inline'; }
-            else { metaWrap.style.display = 'none'; }
-        }
-        document.getElementById('mvpPriceForm').reset();
-        document.getElementById('mvpPriceSku').value = sku;
-        document.getElementById('mvpPriceProductNameHidden').value = productName;
-        document.getElementById('mvpPriceProductUrl').value = productUrl;
-        if (document.getElementById('mvpPriceProductMeta')) document.getElementById('mvpPriceProductMeta').value = metaText || '';
-        document.getElementById('mvpPriceMsg').className = 'mvp-price-modal-msg';
-        document.getElementById('mvpPriceSubmitBtn').disabled = false;
-        document.getElementById('mvpPriceSubmitBtn').textContent = 'Submit Enquiry';
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    function mvpClosePriceModal() {
-        document.getElementById('mvpPriceModal').classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    document.getElementById('mvpPriceModal').addEventListener('click', function(e) {
-        if (e.target === this) mvpClosePriceModal();
-    });
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') mvpClosePriceModal(); });
-    function mvpSubmitPriceForm(e) {
-        e.preventDefault();
-        var btn = document.getElementById('mvpPriceSubmitBtn');
-        var msg = document.getElementById('mvpPriceMsg');
-        btn.disabled = true;
-        btn.textContent = 'Sending...';
-        msg.className = 'mvp-price-modal-msg';
-        var fd = new FormData();
-        fd.append('action', 'mvp_price_request');
-        fd.append('nonce', '<?php echo esc_js( $nonce ); ?>');
-        fd.append('name', document.getElementById('mvpPriceName').value);
-        fd.append('email', document.getElementById('mvpPriceEmail').value);
-        fd.append('phone', document.getElementById('mvpPricePhone').value);
-        fd.append('sku', document.getElementById('mvpPriceSku').value);
-        fd.append('product_name', document.getElementById('mvpPriceProductNameHidden').value);
-        fd.append('product_url', document.getElementById('mvpPriceProductUrl').value);
-        fd.append('product_meta', document.getElementById('mvpPriceProductMeta') ? document.getElementById('mvpPriceProductMeta').value : '');
-        fetch('<?php echo esc_url( $ajax_url ); ?>', { method: 'POST', body: fd })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            if (data.success) {
-                msg.className = 'mvp-price-modal-msg success';
-                msg.textContent = data.data;
-                btn.textContent = 'Sent!';
-                setTimeout(mvpClosePriceModal, 3000);
-            } else {
-                msg.className = 'mvp-price-modal-msg error';
-                msg.textContent = data.data || 'Something went wrong.';
-                btn.disabled = false;
-                btn.textContent = 'Submit Enquiry';
-            }
-        })
-        .catch(function() {
-            msg.className = 'mvp-price-modal-msg error';
-            msg.textContent = 'Network error. Please try again.';
-            btn.disabled = false;
-            btn.textContent = 'Submit Enquiry';
-        });
-        return false;
-    }
-    </script>
+    <script id="mvp-price-request-modal-data">window.mvpData=window.mvpData||{};window.mvpData["mvp-price-request-modal"]=[<?php echo json_encode( $nonce ), ",", json_encode( esc_url( $ajax_url ) ); ?>];</script>
+    <script id="mvp-price-request-modal-js" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/js/mvp-price-request-modal.js' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/js/mvp-price-request-modal.js' ); ?>"></script>
     <?php
 }
 
@@ -1892,88 +1785,8 @@ function mvp_reg_search_shortcode() {
         <p style="font-size:13px;color:#999;">UK registration plate number</p>
         <div id="mvp-reg-result" style="margin-top:20px;text-align:left;display:none;"></div>
     </div>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var form = document.getElementById("mvp-reg-form");
-        var input = document.getElementById("mvp-reg-input");
-        var result = document.getElementById("mvp-reg-result");
-        if (!form) return;
-        input.addEventListener("input", function() { this.value = this.value.toUpperCase(); });
-        form.addEventListener("submit", function(e) {
-            e.preventDefault();
-            var reg = input.value.trim().replace(/\s+/g, "");
-            if (reg.length < 2) { showReg("error", "Please enter a valid registration."); return; }
-            showReg("loading", "Looking up " + input.value.trim() + "...");
-            var fd = new FormData();
-            fd.append("action", "maxus_reg_lookup");
-            fd.append("reg", reg);
-            fetch("<?php echo admin_url("admin-ajax.php"); ?>", {method:"POST", body:fd})
-                .then(function(r){return r.json();})
-                .then(function(data) {
-                    if (data.success && data.data) {
-                        // Multiple variants — show picker
-                        if (data.data.variants && data.data.variants.length > 1) {
-                            showVariantPicker(data.data);
-                        } else if (data.data.shop_url) {
-                            window.location.href = data.data.shop_url;
-                        } else {
-                            showReg("error", "Vehicle not found.");
-                        }
-                    } else {
-                        showReg("error", data.data && data.data.error ? data.data.error : "Vehicle not found.");
-                    }
-                }).catch(function(){ showReg("error", "Network error. Please try again."); });
-        });
-        function showReg(type, msg) {
-            result.style.display = "block";
-            result.style.padding = "14px 20px";
-            result.style.borderRadius = "6px";
-            result.style.background = type === "error" ? "#fff5f5" : type === "loading" ? "#f0f0f0" : "#f0fff0";
-            result.style.color = type === "error" ? "#c00" : "#333";
-            result.innerHTML = "";
-            result.textContent = msg;
-        }
-        function showVariantPicker(d) {
-            result.style.display = "block";
-            result.style.padding = "0";
-            result.style.borderRadius = "8px";
-            result.style.background = "#fff";
-            result.style.color = "#333";
-            result.style.border = "1px solid #e0e0e0";
-            result.style.boxShadow = "0 2px 8px rgba(0,0,0,0.08)";
-            var html = '<div style="background:#f8f8f8;padding:16px 20px;border-radius:8px 8px 0 0;border-bottom:1px solid #e0e0e0;">';
-            html += '<div style="font-size:18px;font-weight:700;color:#111;">' + d.vehicle_name + '</div>';
-            html += '<div style="font-size:14px;color:#666;margin-top:4px;">';
-            html += d.customer_year + (d.colour ? ' &middot; ' + d.colour : '') + (d.fuel ? ' &middot; ' + d.fuel : '');
-            html += '</div>';
-            html += '</div>';
-            html += '<div style="padding:16px 20px;">';
-            html += '<p style="font-size:14px;color:#666;margin:0 0 14px;">We found multiple variants for this model. Please select yours:</p>';
-            html += '<div style="display:flex;flex-direction:column;gap:8px;">';
-            d.variants.forEach(function(v) {
-                html += '<a href="' + v.url + '" style="display:flex;align-items:center;gap:14px;padding:12px 16px;border:2px solid #e0e0e0;border-radius:8px;text-decoration:none;color:#111;transition:border-color 0.2s,background 0.2s;" onmouseover="this.style.borderColor=\'#D18A0C\';this.style.background=\'#fffbf0\';" onmouseout="this.style.borderColor=\'#e0e0e0\';this.style.background=\'#fff\';">';
-                if (v.img) {
-                    html += '<img src="' + v.img + '" alt="" style="width:60px;height:40px;object-fit:contain;flex-shrink:0;">';
-                }
-                html += '<div style="flex:1;">';
-                html += '<div style="font-size:16px;font-weight:600;">' + v.name + '</div>';
-                if (v.year) { html += '<div style="font-size:13px;color:#888;">' + v.year + '</div>'; }
-                html += '</div>';
-                html += '<div style="flex-shrink:0;background:#BF3617;color:#fff;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:600;">View Parts</div>';
-                html += '</a>';
-            });
-            html += '</div></div>';
-            result.innerHTML = html;
-        }
-        // Auto-submit if ?reg= parameter is present
-        var urlParams = new URLSearchParams(window.location.search);
-        var autoReg = urlParams.get("reg");
-        if (autoReg) {
-            input.value = autoReg.toUpperCase();
-            form.dispatchEvent(new Event("submit"));
-        }
-    });
-    </script>
+    <script id="mvp-reg-search-shortcode-data">window.mvpData=window.mvpData||{};window.mvpData["mvp-reg-search-shortcode"]=[<?php echo json_encode( admin_url("admin-ajax.php") ); ?>];</script>
+    <script id="mvp-reg-search-shortcode-js" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/js/mvp-reg-search-shortcode.js' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/js/mvp-reg-search-shortcode.js' ); ?>"></script>
     <?php
     return ob_get_clean();
 }
@@ -2671,143 +2484,8 @@ function mvp_render_component_diagram() {
 
     <link rel="stylesheet" id="mvp-render-component-diagram" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-render-component-diagram.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-render-component-diagram.css' ); ?>">
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var wrap = document.getElementById('<?php echo esc_js( $uid ); ?>');
-        if (!wrap) return;
-        var rows   = Array.from(wrap.querySelectorAll('.mvp-cd-row'));
-        // Prefer the diagram SVG inside this widget's container (robust for small
-        // diagrams with <=5 callouts, where the old text-count heuristic failed).
-        var svg = wrap.querySelector('.mvp-cd-svg-inner svg');
-        if (!svg) { document.querySelectorAll('svg').forEach(function(s) { if (!svg && s.querySelectorAll('text').length > 5) svg = s; }); }
-        // Only EXPAND viewBox if content is clipped outside it (never shrink) — uses svg.getBBox for full coverage
-        if (svg) {
-            try {
-                var vb = (svg.getAttribute('viewBox') || '0 0 100 100').split(/\s+/).map(Number);
-                var vbX=vb[0], vbY=vb[1], vbW=vb[2], vbH=vb[3];
-                var bb = svg.getBBox();
-                var mnX = Math.min(vbX, bb.x);
-                var mnY = Math.min(vbY, bb.y);
-                var mxX = Math.max(vbX+vbW, bb.x+bb.width);
-                var mxY = Math.max(vbY+vbH, bb.y+bb.height);
-                var changed = (mnX < vbX || mnY < vbY || mxX > vbX+vbW || mxY > vbY+vbH);
-                if(changed){ var p=15; svg.setAttribute('viewBox',(mnX-p)+' '+(mnY-p)+' '+(mxX-mnX+p*2)+' '+(mxY-mnY+p*2)); }
-            } catch(e) {}
-        }
-        // Save original SVG fills/strokes at init
-        if (svg) {
-            svg.querySelectorAll("text").forEach(function(t) {
-                t.setAttribute("data-orig-fill", t.getAttribute("fill") || "");
-                t.setAttribute("data-orig-size", t.getAttribute("font-size") || "9");
-            });
-        }
-        var inner  = wrap.querySelector('.mvp-cd-svg-inner');
-        var scale  = 1;
-        var STEP   = 0.2;
-        var MIN    = 0.4;
-        var MAX    = 4;
-
-        // ── Zoom controls ────────────────────────────────────────────────
-        wrap.querySelectorAll('.mvp-cd-zoom-btn').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var action = btn.dataset.action;
-                if (action === 'in')    scale = Math.min(MAX, +(scale + STEP).toFixed(2));
-                if (action === 'out')   scale = Math.max(MIN, +(scale - STEP).toFixed(2));
-                if (action === 'reset') scale = 1;
-                if (svg) svg.style.transform = scale === 1 ? '' : 'scale(' + scale + ')';
-                // Expand inner height when zoomed so scrolling works
-                if (inner && svg) {
-                    inner.style.height = scale > 1
-                        ? (svg.getBoundingClientRect().height * scale + 40) + 'px'
-                        : '';
-                }
-            });
-        });
-
-        // ── Callout highlighting ─────────────────────────────────────────
-        function activate(num) {
-            var n = String(num);
-            rows.forEach(function (r) {
-                r.classList.toggle('mvp-cd-active', r.dataset.callout === n);
-            });
-            // Re-resolve the diagram SVG if it wasn't captured at load (guards
-            // against a DOMContentLoaded timing race on large inline SVGs).
-            if (!svg) { svg = wrap.querySelector('.mvp-cd-svg-inner svg'); }
-            if (svg) {
-                svg.querySelectorAll('text').forEach(function (t) {
-                    var orig = t.getAttribute('data-orig-fill') || '';
-                    if (t.textContent.trim() === n) {
-                        t.style.setProperty('fill', '#F29F05', 'important');
-                        t.style.setProperty('font-weight', 'bold', 'important');
-                        t.style.setProperty('font-size', '14px', 'important');
-                    } else {
-                        t.style.removeProperty('fill');
-                        t.style.removeProperty('font-weight');
-                        var os = t.getAttribute('data-orig-size');
-                        t.style.removeProperty('font-size');
-                    }
-                });
-            }
-        }
-
-        function deactivate() {
-            rows.forEach(function (r) { r.classList.remove('mvp-cd-active'); });
-            if (svg) {
-                svg.querySelectorAll('text').forEach(function (t) {
-                    var orig = t.getAttribute('data-orig-fill') || '';
-                    t.style.removeProperty('fill');
-                    t.style.removeProperty('font-weight');
-                    var os = t.getAttribute('data-orig-size');
-                    t.style.removeProperty('font-size');
-                });
-            }
-        }
-
-        // Table row click → highlight SVG callout
-        rows.forEach(function (row) {
-            row.addEventListener('click', function () {
-                activate(row.dataset.callout);
-            });
-            row.addEventListener('mouseenter', function () {
-                activate(row.dataset.callout);
-            });
-            row.addEventListener('mouseleave', function () {
-                deactivate();
-            });
-        });
-
-        // SVG text click → highlight row + scroll into view
-        if (svg) {
-            svg.querySelectorAll('text').forEach(function (t) {
-                var n = t.textContent.trim();
-                if (/^\d+$/.test(n)) {
-                    t.style.cursor = 'pointer';
-                    t.addEventListener('click', function (e) {
-                        e.stopPropagation();
-                        activate(n);
-                        var tableWrap = wrap.querySelector('.mvp-cd-table-wrap');
-                        var match = rows.find(function (r) { return r.dataset.callout === n; });
-                        if (match && tableWrap) match.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    });
-                }
-            });
-        }
-
-        // ── Sync table height to SVG diagram height ──────────────────────
-        var svgWrap = wrap.querySelector('.mvp-cd-svg-wrap');
-        var tableWrap = wrap.querySelector('.mvp-cd-table-wrap');
-        if (svgWrap && tableWrap && window.innerWidth > 700) {
-            function syncTableHeight() {
-                var svgH = svgWrap.offsetHeight;
-                if (svgH > 200) {
-                    tableWrap.style.maxHeight = svgH + 'px';
-                }
-            }
-            syncTableHeight();
-            window.addEventListener('resize', syncTableHeight);
-        }
-    });
-    </script>
+    <script id="mvp-render-component-diagram-data">window.mvpData=window.mvpData||{};window.mvpData["mvp-render-component-diagram"]=[<?php echo json_encode( $uid ); ?>];</script>
+    <script id="mvp-render-component-diagram-js" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/js/mvp-render-component-diagram.js' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/js/mvp-render-component-diagram.js' ); ?>"></script>
     <?php
 }
 
@@ -3416,8 +3094,11 @@ function mvp_midlevel_single_child_redirect() {
     ) );
 
     if ( ! is_wp_error( $children ) && count( $children ) === 1 ) {
-        wp_redirect( get_term_link( $children[0] ), 302 );
-        exit;
+        $mvp_redirect_url = get_term_link( $children[0] );
+        if ( ! is_wp_error( $mvp_redirect_url ) ) {
+            wp_redirect( $mvp_redirect_url, 302 );
+            exit;
+        }
     }
 }
 
@@ -3462,6 +3143,7 @@ function mvp_render_midlevel_subcat_grid() {
     <div class="mvp-subcat-grid">
         <?php foreach ( $children as $child ) :
             $link  = get_term_link( $child );
+            if ( is_wp_error( $link ) ) continue;
             $count = (int) $child->count;
         ?>
         <?php
@@ -3696,133 +3378,8 @@ function mvp_product_svg_gallery() {
     if ( ! $svg_code ) return;
     ?>
     <div id="mvp-pd-svg-source" style="display:none;"><?php echo $svg_code; ?></div>
-    <script>
-    (function(){
-        var callout = '<?php echo esc_js( $callout ); ?>';
-        var source  = document.getElementById('mvp-pd-svg-source');
-        if (!source) return;
-
-        // The real diagram is the SVG with the most text callouts (no fixed
-        // threshold, so small diagrams with only a few callouts still build).
-        var srcSvg = null;
-        source.querySelectorAll('svg').forEach(function(s){
-            if (!srcSvg || s.querySelectorAll('text').length > srcSvg.querySelectorAll('text').length) srcSvg = s;
-        });
-        if (!srcSvg) { source.remove(); return; }
-
-        // Keep the SVG's native viewBox and fit-to-box (centre + clip). We do NOT
-        // expand the viewBox to chase stray off-page geometry, so no whitespace.
-        srcSvg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-        srcSvg.removeAttribute('width');
-        srcSvg.removeAttribute('height');
-        srcSvg.style.width   = '100%';
-        srcSvg.style.height  = '100%';
-        srcSvg.style.display = 'block';
-        srcSvg.style.transformOrigin = 'top left';
-        srcSvg.style.transition = 'transform 0.2s';
-        srcSvg.style.background = '#fff';
-
-        var gallery = document.querySelector('.woocommerce-product-gallery__image')
-                   || document.querySelector('.woocommerce-product-gallery__image--placeholder');
-        if (!gallery) { source.remove(); return; }
-
-        // Build the same widget shell as the category page (zoom controls + inner)
-        var box = document.createElement('div');
-        box.className = 'mvp-cd-svg-wrap mvp-pd-widget';
-
-        var controls = document.createElement('div');
-        controls.className = 'mvp-cd-zoom-controls';
-        controls.innerHTML =
-            '<button type="button" class="mvp-cd-zoom-btn" data-action="out" aria-label="Zoom out">&#8722;</button>' +
-            '<button type="button" class="mvp-cd-zoom-btn" data-action="reset" aria-label="Reset zoom">&#8635;</button>' +
-            '<button type="button" class="mvp-cd-zoom-btn" data-action="in" aria-label="Zoom in">&#43;</button>';
-
-        var inner = document.createElement('div');
-        inner.className = 'mvp-cd-svg-inner';
-        inner.appendChild(srcSvg);
-
-        box.appendChild(controls);
-        box.appendChild(inner);
-        gallery.innerHTML = '';
-        gallery.appendChild(box);
-        gallery.style.cursor = 'default';
-
-        // Highlight this product's callout number in orange and ring it
-        srcSvg.querySelectorAll('text').forEach(function(t){
-            if (t.textContent.trim() === callout) {
-                t.style.setProperty('fill', '#F29F05', 'important');
-                t.style.setProperty('font-weight', 'bold', 'important');
-                try {
-                    var bb = t.getBBox();
-                    var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                    c.setAttribute('cx', bb.x + bb.width / 2);
-                    c.setAttribute('cy', bb.y + bb.height / 2);
-                    c.setAttribute('r', Math.max(bb.width, bb.height) * 0.9 + 5);
-                    c.setAttribute('fill', 'none');
-                    c.setAttribute('stroke', '#F29F05');
-                    c.setAttribute('stroke-width', '2');
-                    // The callout text is positioned by its own transform, which getBBox
-                    // ignores — copy it so the ring lands on the label, not at the origin.
-                    var tf = t.getAttribute('transform');
-                    if ( tf ) { c.setAttribute('transform', tf); }
-                    t.parentNode.insertBefore(c, t);
-                } catch(e) {}
-            }
-        });
-
-        // Zoom: stepped +/-/reset buttons, PLUS hover-to-magnify (loupe) at
-        // default scale — restores the original single-product hover behaviour.
-        var scale = 1, STEP = 0.2, MIN = 0.4, MAX = 4, baseH = 0;
-        var HOVER = 2.5, hovering = false;
-
-        function applyBase(){
-            srcSvg.style.transformOrigin = 'top left';
-            srcSvg.style.transform = scale === 1 ? '' : 'scale(' + scale + ')';
-            inner.style.overflow = scale > 1 ? 'auto' : 'hidden';
-            inner.style.cursor   = scale > 1 ? 'grab' : 'zoom-in';
-            inner.style.height   = scale > 1 ? (baseH * scale) + 'px' : '';
-        }
-        controls.querySelectorAll('.mvp-cd-zoom-btn').forEach(function(btn){
-            btn.addEventListener('click', function(){
-                if (!baseH) baseH = inner.clientHeight;
-                var a = btn.dataset.action;
-                if (a === 'in')    scale = Math.min(MAX, +(scale + STEP).toFixed(2));
-                if (a === 'out')   scale = Math.max(MIN, +(scale - STEP).toFixed(2));
-                if (a === 'reset') scale = 1;
-                hovering = false;
-                applyBase();
-            });
-        });
-        applyBase();
-
-        // Hover magnify — only when not stepped-zoomed via the buttons
-        inner.addEventListener('mouseenter', function(){
-            if (scale !== 1) return;
-            hovering = true;
-            inner.style.overflow = 'hidden';
-        });
-        inner.addEventListener('mousemove', function(e){
-            if (scale !== 1 || !hovering) return;
-            var r = inner.getBoundingClientRect();
-            var x = (e.clientX - r.left) / r.width  * 100;
-            var y = (e.clientY - r.top)  / r.height * 100;
-            srcSvg.style.transformOrigin = x + '% ' + y + '%';
-            srcSvg.style.transform = 'scale(' + HOVER + ')';
-        });
-        inner.addEventListener('mouseleave', function(){
-            if (scale !== 1) return;
-            hovering = false;
-            srcSvg.style.transform = '';
-            srcSvg.style.transformOrigin = 'top left';
-        });
-
-        // Kill the native WooCommerce zoom trigger left over from the gallery
-        var trigger = document.querySelector('.woocommerce-product-gallery__trigger');
-        if (trigger) trigger.style.display = 'none';
-
-        source.remove();
-    })();
-    </script>
+    <script id="mvp-product-svg-gallery-data">window.mvpData=window.mvpData||{};window.mvpData["mvp-product-svg-gallery"]=[<?php echo json_encode( $callout ); ?>];</script>
+    <script id="mvp-product-svg-gallery-js" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/js/mvp-product-svg-gallery.js' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/js/mvp-product-svg-gallery.js' ); ?>"></script>
     <?php
 }
 
@@ -3844,7 +3401,7 @@ add_filter( 'wp_headers', function( $headers ) {
     unset( $headers['X-Powered-By'] );
     return $headers;
 } );
-header_remove( 'X-Powered-By' );
+if ( ! headers_sent() ) { header_remove( 'X-Powered-By' ); }
 
 // ============================================================
 // Performance: Only load CF7 JS/CSS on pages with forms
