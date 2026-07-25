@@ -238,7 +238,6 @@ function mvp_sitewide_header_inject() {
     $shop       = esc_url( home_url( '/shop/' ) );
     $my_account = esc_url( home_url( '/my-account/' ) );
     $contact    = esc_url( home_url( '/contact-us/' ) );
-    $compare    = esc_url( home_url( '/compare' ) );
     $cart       = esc_url( home_url( '/cart/' ) );
     $cart_count = function_exists("WC") && WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
     $logo_url   = esc_url( content_url( '/uploads/mpd-logo-original.webp' ) );
@@ -368,7 +367,6 @@ function mvp_sitewide_header_inject() {
         + '<div class="mvp-hdr-r3"><div class="mvp-hdr-wrap">'
         +   '<ul class="mvp-hdr-r3-nav"><?php echo $nav_html; ?></ul>'
         +   '<div class="mvp-hdr-r3-actions">'
-        +     '<a href="<?php echo $compare; ?>" class="mvp-r3-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a>'
         +     '<a href="<?php echo $cart; ?>" class="mvp-r3-cart"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1" fill="#fff"/><circle cx="20" cy="21" r="1" fill="#fff"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="mvp-cart-stacked"><span class="mvp-cart-text">Cart</span><span class="mvp-cart-sub"><span class="mvp-cart-badge"><?php echo $cart_count; ?></span>items</span></span></a>'
         +     '<a href="#" class="mvp-r3-myvehicle">My Vehicle</a>'
         +   '</div>'
