@@ -574,10 +574,10 @@ function maxus_trade_account_form() {
                 try {
                     var resp = JSON.parse(xhr.responseText);
                     if (resp.success) {
-                        showMessage('success', resp.data.message || 'Your application has been submitted successfully. We will be in touch shortly.');
                         form.reset();
                         document.getElementById('declaration_date').value = '<?php echo esc_js(date('d/m/Y')); ?>';
                         form.style.display = 'none';
+                        showMessage('success', resp.data.message || 'Your application has been submitted successfully. We will be in touch shortly.');
                     } else {
                         showMessage('error', resp.data.message || 'There was an error submitting your application. Please try again.');
                     }
@@ -598,7 +598,12 @@ function maxus_trade_account_form() {
             msgEl.textContent = text;
             msgEl.style.display = text ? 'block' : 'none';
             if (text) {
-                msgEl.scrollIntoView({behavior: 'smooth', block: 'center'});
+                // wait a frame so any layout change (hidden form) is applied, then
+                // scroll the message near the top, offset for the sticky header
+                requestAnimationFrame(function(){
+                    var y = msgEl.getBoundingClientRect().top + window.pageYOffset - 120;
+                    window.scrollTo({top: Math.max(0, y), behavior: 'smooth'});
+                });
             }
         }
     })();
