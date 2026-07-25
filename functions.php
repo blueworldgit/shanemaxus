@@ -2248,6 +2248,19 @@ function mvp_get_component_svg( $term_id ) {
     return get_term_meta( $term_id, 'component_svg_code', true ); // legacy fallback
 }
 
+/**
+ * Public URL for a term's component SVG file (Cloudflare-cacheable),
+ * or '' when the term has no valid stored diagram.
+ */
+function mvp_get_component_svg_url( $term_id ) {
+    $sha = get_term_meta( $term_id, 'component_svg_hash', true );
+    if ( $sha && preg_match( '/^[0-9a-f]{40}$/', $sha )
+         && is_readable( WP_CONTENT_DIR . '/uploads/component-svg/' . $sha . '.svg' ) ) {
+        return content_url( '/uploads/component-svg/' . $sha . '.svg' );
+    }
+    return '';
+}
+
 function mvp_store_component_svg( $term_id, $svg_code ) {
     $sha = sha1( $svg_code );
     $dir = WP_CONTENT_DIR . '/uploads/component-svg';
@@ -2281,9 +2294,9 @@ function mvp_render_component_diagram() {
     $ancestors = get_ancestors( $term->term_id, 'product_cat', 'taxonomy' );
     if ( count( $ancestors ) < 2 || ! in_array( $maxus_id, $ancestors, true ) ) return;
 
-    $svg_code   = mvp_get_component_svg( $term->term_id );
+    $svg_url    = mvp_get_component_svg_url( $term->term_id );
     $parts_json = get_term_meta( $term->term_id, 'component_parts_json', true );
-    if ( ! $svg_code || ! $parts_json ) return;
+    if ( ! $svg_url || ! $parts_json ) return;
 
     $parts = json_decode( $parts_json, true );
     if ( ! is_array( $parts ) || empty( $parts ) ) return;
@@ -2330,13 +2343,9 @@ function mvp_render_component_diagram() {
                 <button class="mvp-cd-zoom-btn" data-action="reset" aria-label="Reset zoom">&#8635;</button>
                 <button class="mvp-cd-zoom-btn" data-action="in" aria-label="Zoom in">&#43;</button>
             </div>
-            <div class="mvp-cd-svg-inner">
-            <?php
-            // SVG originates from the Oscar EPC database via our own import pipeline —
-            // not user-submitted. Direct output is appropriate here.
-            echo $svg_code; // phpcs:ignore WordPress.Security.EscapeOutput
-            ?>
-            </div>
+            <div class="mvp-cd-svg-inner" data-svg-src="<?php echo esc_url( $svg_url ); ?>"></div>
+            <?php // Diagram SVG is fetched client-side from the content-addressed,
+                  // Cloudflare-cached file (phase 2) — no longer inlined in the HTML. ?>
         </div>
 
         <div class="mvp-cd-table-wrap">
@@ -3340,14 +3349,14 @@ function mvp_product_svg_gallery() {
     $cats = wp_get_post_terms( $product->get_id(), 'product_cat', array( 'fields' => 'all' ) );
     if ( is_wp_error( $cats ) || empty( $cats ) ) return;
 
-    $svg_code = '';
+    $svg_url = '';
     foreach ( $cats as $cat ) {
-        $svg = mvp_get_component_svg( $cat->term_id );
-        if ( $svg ) { $svg_code = $svg; break; }
+        $u = mvp_get_component_svg_url( $cat->term_id );
+        if ( $u ) { $svg_url = $u; break; }
     }
-    if ( ! $svg_code ) return;
+    if ( ! $svg_url ) return;
     ?>
-    <div id="mvp-pd-svg-source" style="display:none;"><?php echo $svg_code; ?></div>
+    <div id="mvp-pd-svg-source" style="display:none;" data-svg-src="<?php echo esc_url( $svg_url ); ?>"></div>
     <script id="mvp-product-svg-gallery-data">window.mvpData=window.mvpData||{};window.mvpData["mvp-product-svg-gallery"]=[<?php echo json_encode( $callout ); ?>];</script>
     <script id="mvp-product-svg-gallery-js" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/js/mvp-product-svg-gallery.js' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/js/mvp-product-svg-gallery.js' ); ?>"></script>
     <?php

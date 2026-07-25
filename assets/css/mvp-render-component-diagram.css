@@ -143,3 +143,6 @@
         .mvp-cd-svg-wrap { flex: 0 0 100%; max-height: none; }
     }
     
+
+/* phase 2: reserve space while the diagram file is fetched */
+.mvp-cd-svg-inner:empty { min-height: 320px; }

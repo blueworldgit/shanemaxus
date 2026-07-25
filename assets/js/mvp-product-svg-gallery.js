@@ -2,6 +2,7 @@
         var callout = window.mvpData["mvp-product-svg-gallery"][0];
         var source  = document.getElementById('mvp-pd-svg-source');
         if (!source) return;
+        function mvpPdInit() {
 
         // The real diagram is the SVG with the most text callouts (no fixed
         // threshold, so small diagrams with only a few callouts still build).
@@ -122,4 +123,14 @@
         if (trigger) trigger.style.display = 'none';
 
         source.remove();
+        }
+        // Phase 2: fetch the diagram SVG file into the hidden source, then build.
+        if (source.getAttribute('data-svg-src') && !source.querySelector('svg')) {
+            fetch(source.getAttribute('data-svg-src'))
+                .then(function (r) { return r.ok ? r.text() : ''; })
+                .then(function (t) { if (t) { source.innerHTML = t; } mvpPdInit(); })
+                .catch(function () {});
+        } else {
+            mvpPdInit();
+        }
     })();

@@ -1,6 +1,8 @@
     document.addEventListener("DOMContentLoaded", function () {
         var wrap = document.getElementById(window.mvpData["mvp-render-component-diagram"][0]);
         if (!wrap) return;
+        var inner = wrap.querySelector('.mvp-cd-svg-inner');
+        function mvpCdInit() {
         var rows   = Array.from(wrap.querySelectorAll('.mvp-cd-row'));
         // Prefer the diagram SVG inside this widget's container (robust for small
         // diagrams with <=5 callouts, where the old text-count heuristic failed).
@@ -131,5 +133,15 @@
             }
             syncTableHeight();
             window.addEventListener('resize', syncTableHeight);
+        }
+        }
+        // Phase 2: diagram SVG is fetched from the content-addressed file, then wired.
+        if (inner && inner.getAttribute('data-svg-src') && !inner.querySelector('svg')) {
+            fetch(inner.getAttribute('data-svg-src'))
+                .then(function (r) { return r.ok ? r.text() : ''; })
+                .then(function (t) { if (t) { inner.innerHTML = t; } mvpCdInit(); })
+                .catch(function () { mvpCdInit(); });
+        } else {
+            mvpCdInit();
         }
     });
