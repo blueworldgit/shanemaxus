@@ -2216,6 +2216,43 @@ function mvp_inject_product_seo_meta() {
             ),
             'seller'             => array( '@type' => 'Organization', 'name' => 'Maxus Parts Direct' ),
         );
+
+        // Shopping agents (Google Shopping / AI assistants) read delivery and returns
+        // straight off the offer. Values mirror /shipping-information/ and
+        // /returns-and-exchanges/ - keep all three in step if the policies change.
+        // No shippingRate is published on purpose: carriage is quoted live by FedEx at
+        // checkout from weight, size and destination, so any fixed figure would be wrong.
+        $product_schema['offers']['shippingDetails'] = array(
+            '@type'               => 'OfferShippingDetails',
+            'shippingDestination' => array(
+                '@type'          => 'DefinedRegion',
+                'addressCountry' => 'GB',
+            ),
+            'deliveryTime'        => array(
+                '@type'         => 'ShippingDeliveryTime',
+                'handlingTime'  => array(
+                    '@type'    => 'QuantitativeValue',
+                    'minValue' => 1, 'maxValue' => 3, 'unitCode' => 'DAY',
+                ),
+                'transitTime'   => array(
+                    '@type'    => 'QuantitativeValue',
+                    'minValue' => 2, 'maxValue' => 7, 'unitCode' => 'DAY',
+                ),
+            ),
+        );
+
+        // 14 days from delivery under the Consumer Contracts Regulations 2013.
+        // Return carriage is the customer's for a change of mind (we cover it only when
+        // the part is faulty or wrongly supplied, which this vocabulary cannot express).
+        $product_schema['offers']['hasMerchantReturnPolicy'] = array(
+            '@type'                => 'MerchantReturnPolicy',
+            'applicableCountry'    => 'GB',
+            'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
+            'merchantReturnDays'   => 14,
+            'returnMethod'         => 'https://schema.org/ReturnByMail',
+            'returnFees'           => 'https://schema.org/ReturnShippingFeesCustomerResponsibility',
+            'merchantReturnLink'   => home_url( '/returns-and-exchanges/' ),
+        );
     }
     if ( $model_one ) {
         $veh = array( '@type' => 'Vehicle', 'name' => 'Maxus ' . $model_one );
