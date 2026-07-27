@@ -27,7 +27,7 @@
                 var reg = div.querySelector('.mvp-mf-reg').value.trim();
                 var home = window.location.origin;
                 if (vin.length > 0) {
-                    window.location.href = home + '/vin-search-test/?vin=' + encodeURIComponent(vin);
+                    window.location.href = home + '/vin-lookup/?vin=' + encodeURIComponent(vin);
                 } else if (reg.length > 0) {
                     window.location.href = home + '/registration-lookup/?reg=' + encodeURIComponent(reg);
                 }

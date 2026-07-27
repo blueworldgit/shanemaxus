@@ -292,7 +292,7 @@ function mvp_sitewide_header_inject() {
                 $nav_html .= '<li class="mvp-has-dropdown mvp-dd-vin"><a href="' . esc_url( $item->url ) . '">' . esc_html( $item->title ) . ' <svg width="10" height="6" viewBox="0 0 10 6" style="margin-left:4px;vertical-align:middle;"><path d="M1 1l4 4 4-4" stroke="#fff" stroke-width="1.5" fill="none"/></svg></a>';
                 $nav_html .= '<div class="mvp-dropdown mvp-dd-search" style="display:none;position:absolute;top:100%;left:0;z-index:9999;background:#D18A0C;min-width:400px;box-shadow:0 4px 20px rgba(0,0,0,0.15);border-radius:0 0 6px 6px;padding:16px 20px;">';
                 $nav_html .= '<p style="color:#fff;font-size:14px;font-weight:600;margin:0 0 8px;">Search by VIN Number</p>';
-                $nav_html .= '<form class="mvp-dd-vin-form" style="display:flex;gap:8px;" action="' . home_url( '/vin-search-test/' ) . '">';
+                $nav_html .= '<form class="mvp-dd-vin-form" style="display:flex;gap:8px;" action="' . home_url( '/vin-lookup/' ) . '">';
                 $nav_html .= '<input type="text" name="vin" placeholder="Enter VIN number" style="flex:1;height:40px;padding:0 12px;border:none;border-radius:4px;font-size:14px;">';
                 $nav_html .= '<button type="submit" style="height:40px;padding:0 20px;background:#BF3617;color:#fff;border:none;border-radius:4px;font-weight:600;cursor:pointer;">Search</button>';
                 $nav_html .= '</form></div></li>';

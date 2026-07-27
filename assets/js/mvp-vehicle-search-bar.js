@@ -114,7 +114,7 @@
                         if (data.data.variants && data.data.variants.length > 1) {
                             resultEl.className = 'mvp-sb-result show success';
                             resultEl.innerHTML = '<strong>Multiple variants found</strong> &mdash; Select yours...';
-                            window.location.href = mvpHomeUrl + 'vin-search-test/?vin=' + encodeURIComponent(vin);
+                            window.location.href = mvpHomeUrl + 'vin-lookup/?vin=' + encodeURIComponent(vin);
                         } else if (data.data.shop_url) {
                             resultEl.className = 'mvp-sb-result show success';
                             resultEl.innerHTML = '<strong>' + (data.data.vehicle_name || 'Vehicle found') + '</strong> &mdash; Redirecting...';
