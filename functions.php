@@ -1783,7 +1783,7 @@ function mvp_reg_search_shortcode() {
         <p style="font-size:13px;color:#999;">UK registration plate number</p>
         <div id="mvp-reg-result" style="margin-top:20px;text-align:left;display:none;"></div>
     </div>
-    <script id="mvp-reg-search-shortcode-data">window.mvpData=window.mvpData||{};window.mvpData["mvp-reg-search-shortcode"]=[<?php echo json_encode( admin_url("admin-ajax.php") ); ?>];</script>
+    <script id="mvp-reg-search-shortcode-data">window.mvpData=window.mvpData||{};window.mvpData["mvp-reg-search-shortcode"]=[<?php echo json_encode( admin_url("admin-ajax.php") ); ?>,<?php echo json_encode( wp_create_nonce( 'maxus_lookup' ) ); ?>];</script>
     <script id="mvp-reg-search-shortcode-js" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/js/mvp-reg-search-shortcode.js' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/js/mvp-reg-search-shortcode.js' ); ?>"></script>
     <?php
     return ob_get_clean();
@@ -1793,6 +1793,11 @@ function mvp_reg_search_shortcode() {
 // ============================================================
 add_action( 'wp_ajax_maxus_reg_lookup', 'mvp_reg_lookup' );
 add_action( 'wp_ajax_nopriv_maxus_reg_lookup', 'mvp_reg_lookup' );
+// Registration lookup tunables. The lookup is billed per call, so these cap what a
+// single visitor - or a script pretending to be one - can spend in an hour.
+if ( ! defined( 'MVP_REG_LOOKUP_MAX_PER_HOUR' ) ) { define( 'MVP_REG_LOOKUP_MAX_PER_HOUR', 20 ); }
+if ( ! defined( 'MVP_REG_LOOKUP_CACHE_TTL' ) )    { define( 'MVP_REG_LOOKUP_CACHE_TTL', 30 * DAY_IN_SECONDS ); }
+
 function mvp_reg_lookup() {
     $reg = isset( $_POST['reg'] ) ? sanitize_text_field( $_POST['reg'] ) : '';
     $reg = preg_replace( '/\s+/', '', strtoupper( $reg ) );
@@ -1801,17 +1806,54 @@ function mvp_reg_lookup() {
         wp_send_json_error( array( 'error' => 'Please enter a valid registration number' ) );
     }
 
-    // Call checkcardetails.co.uk API
-    $api_key = 'd54fb43716925ad8f4dc415a4e2f962d';
-    $api_url = 'https://api.checkcardetails.co.uk/vehicledata/vehicleregistration?apikey=' . $api_key . '&vrm=' . urlencode( $reg );
-    $response = wp_remote_get( $api_url, array( 'timeout' => 10 ) );
-
-    if ( is_wp_error( $response ) ) {
-        wp_send_json_error( array( 'error' => 'Could not connect to vehicle lookup service' ) );
+    // ---------------------------------------------------------------------------
+    // Abuse and cost controls. This action is registered for logged-out visitors and
+    // every cache miss costs a per-lookup fee, so nothing reaches the paid API until
+    // the request has proved it came from our own page and is within quota.
+    // ---------------------------------------------------------------------------
+    if ( ! check_ajax_referer( 'maxus_lookup', 'nonce', false ) ) {
+        wp_send_json_error( array( 'error' => 'Your session has expired - please refresh the page and try again.' ) );
     }
 
-    $code = wp_remote_retrieve_response_code( $response );
-    $body = json_decode( wp_remote_retrieve_body( $response ), true );
+    // Call checkcardetails.co.uk API
+    $api_key = defined( 'MAXUS_CCD_API_KEY' ) ? MAXUS_CCD_API_KEY : '';
+    if ( '' === $api_key ) {
+        // Fail closed rather than firing a keyless request at a billed endpoint.
+        wp_send_json_error( array( 'error' => 'Registration lookup is unavailable right now. Please enter your VIN instead.' ) );
+    }
+    // A registration's vehicle does not change, so a cached answer is always valid and
+    // costs nothing. Only a miss is billed - and only a miss counts against the quota.
+    $cache_key = 'mvp_ccd_' . md5( $reg );
+    $cached    = get_transient( $cache_key );
+
+    if ( is_array( $cached ) && isset( $cached['code'], $cached['body'] ) ) {
+        $code = $cached['code'];
+        $body = $cached['body'];
+    } else {
+        $ip     = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : 'unknown';
+        $bucket = 'mvp_reglimit_' . md5( $ip );
+        $used   = (int) get_transient( $bucket );
+        if ( $used >= MVP_REG_LOOKUP_MAX_PER_HOUR ) {
+            wp_send_json_error( array( 'error' => 'Too many lookups from this connection. Please try again shortly, or enter your VIN instead.' ) );
+        }
+        set_transient( $bucket, $used + 1, HOUR_IN_SECONDS );
+
+        $api_url  = 'https://api.checkcardetails.co.uk/vehicledata/vehicleregistration?apikey=' . $api_key . '&vrm=' . urlencode( $reg );
+        $response = wp_remote_get( $api_url, array( 'timeout' => 10 ) );
+
+        if ( is_wp_error( $response ) ) {
+            wp_send_json_error( array( 'error' => 'Could not connect to vehicle lookup service' ) );
+        }
+
+        $code = wp_remote_retrieve_response_code( $response );
+        $body = json_decode( wp_remote_retrieve_body( $response ), true );
+
+        // Cache real answers (found or genuinely not-found) but never transient
+        // failures, which would otherwise pin an outage in place for a month.
+        if ( 200 === $code || 404 === $code ) {
+            set_transient( $cache_key, array( 'code' => $code, 'body' => $body ), MVP_REG_LOOKUP_CACHE_TTL );
+        }
+    }
 
     if ( $code === 404 || empty( $body ) ) {
         wp_send_json_error( array( 'error' => 'No vehicle found for registration: ' . $reg ) );
@@ -1940,7 +1982,7 @@ function mvp_vehicle_search_bar() {
     $ajax_url = admin_url( 'admin-ajax.php' );
     ?>
     <link rel="stylesheet" id="mvp-vehicle-search-bar" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-vehicle-search-bar.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-vehicle-search-bar.css' ); ?>">
-    <script id="mvp-vehicle-search-bar-data">window.mvpData=window.mvpData||{};window.mvpData["mvp-vehicle-search-bar"]=[<?php echo json_encode( $models ); ?>,<?php echo json_encode( $home_url ); ?>,<?php echo json_encode( $ajax_url ); ?>];</script>
+    <script id="mvp-vehicle-search-bar-data">window.mvpData=window.mvpData||{};window.mvpData["mvp-vehicle-search-bar"]=[<?php echo json_encode( $models ); ?>,<?php echo json_encode( $home_url ); ?>,<?php echo json_encode( $ajax_url ); ?>,<?php echo json_encode( wp_create_nonce( 'maxus_lookup' ) ); ?>];</script>
     <script id="mvp-vehicle-search-bar-js" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/js/mvp-vehicle-search-bar.js' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/js/mvp-vehicle-search-bar.js' ); ?>"></script>
     <?php
 }

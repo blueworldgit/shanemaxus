@@ -12,6 +12,7 @@
             var fd = new FormData();
             fd.append("action", "maxus_reg_lookup");
             fd.append("reg", reg);
+            fd.append("nonce", window.mvpData["mvp-reg-search-shortcode"][1]);
             fetch(window.mvpData["mvp-reg-search-shortcode"][0], {method:"POST", body:fd})
                 .then(function(r){return r.json();})
                 .then(function(data) {

@@ -128,7 +128,7 @@
             reg = reg.replace(/\s+/g, '');
             if (reg.length < 2) { resultEl.className = 'mvp-sb-result show error'; resultEl.textContent = 'Please enter a valid registration number'; return; }
             resultEl.className = 'mvp-sb-result show'; resultEl.innerHTML = loaderHtml;
-            var fd = new FormData(); fd.append('action', 'maxus_reg_lookup'); fd.append('reg', reg);
+            var fd = new FormData(); fd.append('action', 'maxus_reg_lookup'); fd.append('reg', reg); fd.append('nonce', window.mvpData["mvp-vehicle-search-bar"][3]);
             fetch(mvpAjaxUrl, { method: 'POST', body: fd })
                 .then(function(r) { return r.json(); })
                 .then(function(data) {
