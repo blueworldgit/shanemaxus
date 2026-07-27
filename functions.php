@@ -2165,7 +2165,12 @@ function mvp_inject_product_seo_meta() {
         }
     }
 
-    $price     = $product->get_price();
+    // Schema price MUST match the price shown on the page and sent in the Meta feed.
+    // The store holds _price EX VAT (prices_include_tax=no) but DISPLAYS inc VAT
+    // (tax_display_shop=incl), so gross it up here too. Bare schema 'price' is read
+    // by Google as the final consumer price, so an ex-VAT value understates it.
+    $price_inc = wc_get_price_including_tax( $product );
+    $price     = ( '' === $price_inc || null === $price_inc ) ? '' : wc_format_decimal( $price_inc, 2 );
     $currency  = get_woocommerce_currency();
     $image_url = wp_get_attachment_image_url( $product->get_image_id(), 'full' );
     $url       = get_permalink( $pid );
@@ -2177,7 +2182,10 @@ function mvp_inject_product_seo_meta() {
     // NOTE: <meta name="description"> is intentionally NOT echoed here.
     // AIOSEO is the single authoritative source (echoing here caused a duplicate-meta bug).
 
-    // --- Product JSON-LD (AIOSEO emits no Product node; this is the only one) ---
+    // --- Product JSON-LD ---
+    // AIOSEO emits no Product node. WooCommerce core DOES emit one at this same @id,
+    // so it is suppressed below (see woocommerce_structured_data_product filter) and
+    // this richer node - brand, mpn, weight, vehicle fitment, FAQ - is the only one.
     $product_schema = array(
         '@type'       => 'Product',
         '@id'         => $url . '#product',
@@ -2191,14 +2199,22 @@ function mvp_inject_product_seo_meta() {
     );
     if ( $image_url ) $product_schema['image'] = $image_url;
     if ( $weight )    $product_schema['weight'] = array( '@type' => 'QuantitativeValue', 'value' => $weight, 'unitCode' => 'KGM' );
-    if ( $price ) {
+    if ( '' !== $price && (float) $price > 0 ) {
         $product_schema['offers'] = array(
-            '@type'         => 'Offer',
-            'price'         => $price,
-            'priceCurrency' => $currency,
-            'availability'  => 'https://schema.org/' . $avail,
-            'url'           => $url,
-            'seller'        => array( '@type' => 'Organization', 'name' => 'Maxus Parts Direct' ),
+            '@type'              => 'Offer',
+            'price'              => $price,
+            'priceCurrency'      => $currency,
+            'itemCondition'      => 'https://schema.org/NewCondition',
+            'availability'       => 'https://schema.org/' . $avail,
+            'url'                => $url,
+            // Explicitly declare VAT-inclusive so Google cannot mistake this for a net price.
+            'priceSpecification' => array(
+                '@type'                 => 'UnitPriceSpecification',
+                'price'                 => $price,
+                'priceCurrency'         => $currency,
+                'valueAddedTaxIncluded' => true,
+            ),
+            'seller'             => array( '@type' => 'Organization', 'name' => 'Maxus Parts Direct' ),
         );
     }
     if ( $model_one ) {
@@ -2225,6 +2241,16 @@ function mvp_inject_product_seo_meta() {
     $graph = array( '@context' => 'https://schema.org', '@graph' => array( $product_schema, $faq ) );
     echo "\n<script type=\"application/ld+json\">" . wp_json_encode( $graph, JSON_UNESCAPED_SLASHES ) . "</script>\n";
 }
+
+/**
+ * WooCommerce core emits its own Product JSON-LD at the SAME @id as ours above,
+ * leaving two competing Product entities on one URL - Google then picks one at
+ * random, which could be the sparser core node. Ours is the richer of the two
+ * (brand, mpn, weight, isAccessoryOrSparePartFor, FAQ), so core's is dropped.
+ * Returning an empty array is safe: WC_Structured_Data::set_data() ignores any
+ * payload with no '@type'.
+ */
+add_filter( 'woocommerce_structured_data_product', '__return_empty_array' );
 
 // ============================================================
 // 13. COMPONENT DIAGRAM — SVG + PARTS TABLE ON LEAF CATEGORY PAGES
