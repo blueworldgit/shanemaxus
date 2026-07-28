@@ -2526,20 +2526,11 @@ function mvp_render_component_diagram() {
                             $wc_product = $entry ? $entry['wc_product'] : null;
                         ?>
                             <div class="mvp-cd-part-line<?php echo $i > 0 ? ' mvp-cd-sep' : ''; ?>">
-                                <?php if ( $prod && $wc_product && $wc_product->is_purchasable() && $wc_product->is_in_stock() ) :
-                                    // Guests get sent to sign in rather than a link that bounces them:
-                                    // this table does not render WooCommerce notices, so a blocked
-                                    // add-to-cart would just look broken. See mu-plugins/maxus-require-login.php.
-                                    $mvp_gated = function_exists( 'maxus_login_gate_active' ) && maxus_login_gate_active();
-                                    $mvp_label = $mvp_gated ? 'Sign in to buy' : 'Add to cart';
-                                    $mvp_href  = $mvp_gated
-                                        ? maxus_login_url( get_permalink( $prod->ID ) )
-                                        : $wc_product->add_to_cart_url();
-                                ?>
-                                    <a href="<?php echo esc_url( $mvp_href ); ?>"
+                                <?php if ( $prod && $wc_product && $wc_product->is_purchasable() && $wc_product->is_in_stock() ) : ?>
+                                    <a href="<?php echo esc_url( $wc_product->add_to_cart_url() ); ?>"
                                        class="mvp-cd-atc-btn"
-                                       aria-label="<?php echo esc_attr( $mvp_label . ' - ' . $part['part_number'] ); ?>">
-                                        <?php echo esc_html( $mvp_label ); ?>
+                                       aria-label="<?php echo esc_attr( 'Add ' . $part['part_number'] . ' to cart' ); ?>">
+                                        Add to cart
                                     </a>
                                 <?php elseif ( $prod && $wc_product && ( $wc_product->get_price() === '' || $wc_product->get_price() === null ) ) :
                                     $lr_val = get_post_meta( $prod->ID, 'lr', true );
