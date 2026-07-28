@@ -296,3 +296,88 @@ add_action( 'rest_api_init', function () {
 		},
 	) );
 } );
+
+/**
+ * Discovery.
+ *
+ * AIOSEO writes llms.txt as a physical file at the web root and regenerates it on a
+ * schedule with no filter to hook, so anything appended there would be overwritten.
+ * Instead the API advertises itself two ways we control: a machine-readable OpenAPI
+ * description, and a pointer in robots.txt (which every crawler already fetches).
+ */
+add_action( 'rest_api_init', function () {
+	register_rest_route( MAXUS_API_NS, '/openapi.json', array(
+		'methods'             => 'GET',
+		'permission_callback' => '__return_true',   // a spec nobody can read is pointless
+		'callback'            => function () {
+			$base = rest_url( MAXUS_API_NS );
+			return rest_ensure_response( array(
+				'openapi' => '3.1.0',
+				'info'    => array(
+					'title'       => 'Maxus Parts Direct fitment API',
+					'version'     => '1.0.0',
+					'description' => 'Identify a Maxus or LDV van and find the genuine SAIC parts that fit it. '
+						. 'Prices include UK VAT and match the product pages. Every part carries a URL you can send a customer to. '
+						. 'Vehicle and parts endpoints are open; registration lookup requires a key because it calls a paid service.',
+					'contact'     => array( 'name' => 'Maxus Parts Direct', 'url' => home_url( '/contact-us/' ) ),
+				),
+				'servers' => array( array( 'url' => $base ) ),
+				'paths'   => array(
+					'/vehicles' => array( 'get' => array(
+						'summary'     => 'List every Maxus/LDV vehicle we hold parts for.',
+						'operationId' => 'listVehicles',
+						'responses'   => array( '200' => array( 'description' => 'Vehicles, each with a slug to use elsewhere.' ) ),
+					) ),
+					'/vehicle' => array( 'get' => array(
+						'summary'     => 'Identify a van from its VIN.',
+						'description' => 'Matches on the first 8 characters. Several variants can share a prefix, so this returns a list rather than guessing.',
+						'operationId' => 'vehicleByVin',
+						'parameters'  => array( array(
+							'name' => 'vin', 'in' => 'query', 'required' => true,
+							'schema' => array( 'type' => 'string', 'minLength' => 8 ),
+						) ),
+						'responses'   => array( '200' => array( 'description' => 'Matching vehicles.' ) ),
+					) ),
+					'/parts' => array( 'get' => array(
+						'summary'     => 'Parts that fit a given vehicle, optionally filtered by search term.',
+						'operationId' => 'partsForVehicle',
+						'parameters'  => array(
+							array( 'name' => 'vehicle', 'in' => 'query', 'required' => true, 'schema' => array( 'type' => 'string' ), 'description' => 'Vehicle slug from /vehicles.' ),
+							array( 'name' => 'q', 'in' => 'query', 'required' => false, 'schema' => array( 'type' => 'string' ), 'description' => 'Free-text filter, e.g. "brake disc".' ),
+							array( 'name' => 'page', 'in' => 'query', 'required' => false, 'schema' => array( 'type' => 'integer', 'minimum' => 1 ) ),
+							array( 'name' => 'per_page', 'in' => 'query', 'required' => false, 'schema' => array( 'type' => 'integer', 'maximum' => MAXUS_API_MAX_PER_PAGE ) ),
+						),
+						'responses'   => array( '200' => array( 'description' => 'Paginated parts, each with an inc-VAT price and product URL.' ) ),
+					) ),
+					'/part/{oem}' => array( 'get' => array(
+						'summary'     => 'One part by its genuine OEM number, plus every vehicle it fits.',
+						'operationId' => 'partByOem',
+						'parameters'  => array( array(
+							'name' => 'oem', 'in' => 'path', 'required' => true, 'schema' => array( 'type' => 'string' ),
+						) ),
+						'responses'   => array( '200' => array( 'description' => 'Part listings and fitment.' ) ),
+					) ),
+					'/vehicle-by-reg' => array( 'get' => array(
+						'summary'     => 'Identify a van from a UK registration. Requires a key.',
+						'description' => 'Calls a per-lookup billed service, so it is authenticated. Ask us for a key.',
+						'operationId' => 'vehicleByReg',
+						'parameters'  => array( array(
+							'name' => 'reg', 'in' => 'query', 'required' => true, 'schema' => array( 'type' => 'string' ),
+						) ),
+						'responses'   => array(
+							'200' => array( 'description' => 'Vehicle details.' ),
+							'401' => array( 'description' => 'No or invalid key.' ),
+						),
+					) ),
+				),
+			) );
+		},
+	) );
+} );
+
+// Point crawlers at the spec. Harmless to robots that do not understand it.
+add_filter( 'robots_txt', function ( $output ) {
+	$line = "\n# Machine-readable parts fitment API (find which parts fit a given Maxus/LDV van):\n"
+		. '# ' . rest_url( MAXUS_API_NS . '/openapi.json' ) . "\n";
+	return $output . $line;
+}, 999 );
