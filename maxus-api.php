@@ -53,13 +53,18 @@ function maxus_api_product_payload( $product_id ) {
 		return null;
 	}
 	$inc = wc_get_price_including_tax( $p );
+	// Some parts carry no price and show "Request a price" on the site. Those must come
+	// back as null with an explicit flag - an assistant that quotes "£0" for them would
+	// be worse than one that says nothing.
+	$has_price = ( '' !== $inc && null !== $inc && (float) $inc > 0 );
 	return array(
 		'id'            => (int) $product_id,
 		'name'          => $p->get_name(),
 		'oem_part_number' => (string) get_post_meta( $product_id, 'original_sku', true ),
 		'sku'           => $p->get_sku(),
 		'side'          => (string) get_post_meta( $product_id, 'lr', true ),
-		'price'         => ( '' === $inc || null === $inc ) ? null : (float) wc_format_decimal( $inc, 2 ),
+		'price'         => $has_price ? (float) wc_format_decimal( $inc, 2 ) : null,
+		'price_on_request' => ! $has_price,
 		'currency'      => get_woocommerce_currency(),
 		'price_includes_vat' => true,
 		'in_stock'      => $p->is_in_stock(),
