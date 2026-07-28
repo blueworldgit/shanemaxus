@@ -49,6 +49,7 @@ function mvp_fix_page_titles_aioseo( $title ) {
     return $custom ? $custom : $title;
 }
 require_once get_stylesheet_directory() . "/trade-account-form.php";
+require_once get_stylesheet_directory() . "/maxus-api.php";
 
 function mobex_enovathemes_child_scripts() {
     wp_enqueue_style( 'mobex_enovathemes-parent-style', get_template_directory_uri(). '/style.css' );
