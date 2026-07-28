@@ -571,7 +571,7 @@ function mvp_facelift_footer() {
                 <div class="mvp-footer-contact">
                     <p>Unit 1-10, Cherry Tree Road,<br>Tibenham, NR16 1PH</p>
                     <p class="mvp-footer-phone"><a href="tel:01953528800">01953 528 800</a></p>
-                    <p><a href="mailto:accounts@vanparts-direct.co.uk">accounts@vanparts-direct.co.uk</a></p>
+                    <p><a href="mailto:parts@vanparts-direct.co.uk">parts@vanparts-direct.co.uk</a></p>
                 </div>
                 <div class="mvp-footer-reg">
                     <p>Company Reg: 16322863</p>
