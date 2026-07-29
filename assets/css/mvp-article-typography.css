@@ -1,0 +1,52 @@
+/* Article typography — added 29 Jul 2026.
+ *
+ * The parent theme rendered in-article H2 at 40px against 14px body text: a 2.9x
+ * jump, and the same size as the post title itself, so every subheading read like
+ * a new page. H3 was 32px. Jason asked for headings only a little larger than the
+ * text beneath them.
+ *
+ * Scale below is relative to the 14px body: h2 1.57x, h3 1.29x, h4 1.14x — enough
+ * to establish hierarchy, not enough to shout. Scoped to .post-content so product,
+ * category and landing pages are untouched.
+ */
+
+.post-content h2,
+.entry-content h2 {
+    font-size: 22px;
+    line-height: 1.35;
+    font-weight: 700;
+    margin: 28px 0 10px;
+}
+
+.post-content h3,
+.entry-content h3 {
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: 700;
+    margin: 22px 0 8px;
+}
+
+.post-content h4,
+.entry-content h4 {
+    font-size: 16px;
+    line-height: 1.45;
+    font-weight: 600;
+    margin: 18px 0 6px;
+}
+
+/* First heading should not push a big gap under the featured image / title. */
+.post-content > h2:first-child,
+.entry-content > h2:first-child {
+    margin-top: 8px;
+}
+
+/* Body copy was a little tight against the new heading sizes. */
+.post-content p,
+.entry-content p {
+    line-height: 1.65;
+}
+
+@media (max-width: 640px) {
+    .post-content h2, .entry-content h2 { font-size: 20px; }
+    .post-content h3, .entry-content h3 { font-size: 17px; }
+}

@@ -228,6 +228,7 @@ add_action( 'wp_head', 'mvp_sitewide_header_css', 998 );
 function mvp_sitewide_header_css() {
     ?>
     <link rel="stylesheet" id="mvp-sitewide-header" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-sitewide-header.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-sitewide-header.css' ); ?>">
+    <link rel="stylesheet" id="mvp-article-typography" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/mvp-article-typography.css' ); ?>?v=<?php echo filemtime( get_stylesheet_directory() . '/assets/css/mvp-article-typography.css' ); ?>">
     <?php
 }
 
