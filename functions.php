@@ -1,6 +1,6 @@
 <?php
 // ============================================================
-// FIX: Vehicle & Department page titles (override AIOSEO)
+// FIX: Vehicle and Department page titles (override AIOSEO)
 // ============================================================
 add_filter( 'pre_get_document_title', 'mvp_fix_page_titles', 999 );
 add_filter( 'aioseo_title', 'mvp_fix_page_titles_aioseo', 999 );
@@ -243,7 +243,7 @@ function mvp_sitewide_header_inject() {
     $contact    = esc_url( home_url( '/contact-us/' ) );
     $cart       = esc_url( home_url( '/cart/' ) );
     $cart_count = function_exists("WC") && WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
-    $logo_url   = esc_url( content_url( '/uploads/mpd-logo-original.webp' ) );
+    $logo_url   = esc_url( content_url( '/uploads/mpd-logo-original.webp?v=20260807' ) );
     $ajax_url   = esc_url( admin_url( 'admin-ajax.php' ) );
 
     // Read nav menu items from the existing Mobex header menu (slug: header-menu-1, term_id: 505)

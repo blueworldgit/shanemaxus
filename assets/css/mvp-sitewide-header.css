@@ -15,7 +15,7 @@
     }
     #et-mobile-435 .header-logo {
         display: block;
-        background-image: url('/wp-content/uploads/mpd-logo-original.webp');
+        background-image: url('/wp-content/uploads/mpd-logo-original.webp?v=20260807');
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center left;
@@ -718,7 +718,7 @@
         #et-desktop-8543 .header-logo .logo { visibility: hidden; width: 0; height: 0; position: absolute; }
         #et-desktop-8543 .header-logo {
             display: block;
-            background-image: url('/wp-content/uploads/mpd-logo-original.webp');
+            background-image: url('/wp-content/uploads/mpd-logo-original.webp?v=20260807');
             background-repeat: no-repeat; background-size: contain;
             background-position: center left;
             width: 180px; height: 40px; min-width: 180px;
